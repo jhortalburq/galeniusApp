@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
                 title: 'Ingreso Correcto',
                 text: 'Espere unos segundos estamos redirigiendolo al ingreso',
                 icon: 'success',
+                confirmButtonColor: "#59698d",
                 // onClose: () => {
                 //   clearInterval(timerInterval);
                 //      if (this.last_modulo) {
@@ -63,9 +64,12 @@ export class LoginComponent implements OnInit {
                 //     }
                 // }
               }).then((result) => {
-                if (result.dismiss === Swal.DismissReason.timer) {
-                  console.log('I was closed by the timer')
-                }
+                  if (this.last_modulo) {
+                      this.router.navigate(['/' + this.last_modulo, 'menu']);
+                  } else {
+                    console.log('xx')
+                      this.router.navigate(['/menu']);
+                  }
               });
             },
             err => {

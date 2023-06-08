@@ -34,7 +34,7 @@ Login register and recover password Page
 .logo-img{
   width: 50%;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 20%;
 }
 
 .forget_password{
@@ -84,6 +84,10 @@ button{
 
   .login-description{
     display: none;
+  }
+  
+  .logo-img{
+    margin-bottom: 20%!important;
   }
 }
 

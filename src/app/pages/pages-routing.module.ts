@@ -4,13 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { PagesComponent } from './pages.component';
 
-import { AuthService } from '../services/services.index';
+import { AuthGuard } from '../services/auth.guard';
 
 const routes: Routes = [
     {
       path: '',
       component: PagesComponent,
-      canActivate: [AuthService],
+      canActivate: [AuthGuard],
       children: [
         {
           path: 'menu',

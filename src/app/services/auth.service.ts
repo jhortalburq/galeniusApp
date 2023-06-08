@@ -5,8 +5,7 @@ import { Location } from '@angular/common';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import {  Router, Route, CanActivate, CanActivateChild, CanLoad,
-          ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {  Router, Route, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { User } from '../models/user';
 
@@ -14,7 +13,7 @@ import { environment } from '../../environments/environment';
 
 
 @Injectable()
-export class AuthService implements CanActivate, CanActivateChild, CanLoad {
+export class AuthService {
   token: string;
 
   public usuario: any = {empresa: '', nombre: ''};
@@ -23,7 +22,6 @@ export class AuthService implements CanActivate, CanActivateChild, CanLoad {
 
   private code: string;
   private cachedURL: string | null;
-  public accountUrl = environment.apiUrl + '/api/v1/login/';
 
   httpOptions = {
     headers: new HttpHeaders(
@@ -42,24 +40,10 @@ export class AuthService implements CanActivate, CanActivateChild, CanLoad {
     return localStorage.getItem('token');
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const url: string = state.url;
-    return this.verifyLogin(url);
-  }
-
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.canActivate(route, state);
-  }
-
-  canLoad(route: Route): boolean {
-    const url = `/${route.path}`;
-
-    return this.verifyLogin(url);
-  }
-
   login(user: User){
-    return this.http.post(this.accountUrl, JSON.stringify(user), this.httpOptions).pipe(
+    return this.http.post(`${environment.apiUrl}/api/v1/token`, JSON.stringify(user)).pipe(
                         map((res: any) => {
+                          console.log(res)
                                   localStorage.setItem('token', res.token);
                                   localStorage.setItem('username', user.username);
                                   return res;
@@ -67,16 +51,6 @@ export class AuthService implements CanActivate, CanActivateChild, CanLoad {
                           catchError(this.handleError),
       );
   }
-
-  // getUsuario(){
-  //   return this._http.get(this.appConfig.apiUrl + '/api/v1/empresas/usuario').pipe(
-  //                       map((res:any) => {
-  //                             this.usuario = res
-  //                                 return res
-  //                         }),
-  //                         catchError(this.handleError),);
-  // }
-
 
   private handleError(error: any): Promise<any> {
     return Promise.reject(

@@ -1,4 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+  
+html, body { height: 100%; }
+
+body{
+  background-color: #ececec;
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+body::before {
+  background:url('/assets/img/galenius_small.png');
+  content: "";
+  position: absolute;
+  background-size: 25%;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  top: 0;
+  bottom: 2%;
+  right: 2%;
+  left: 0;
+  z-index: -1;
+  opacity: 0.2;
+}
+
 
 .modal-dialog.modal-notify .heading{
     font-weight: bold;
@@ -13,15 +36,19 @@
   }
   
   .md-form label{
-    font-size: 0.7rem!important;
+    font-size: 0.75rem!important;
   }
   
   .md-form input[type=text]{
+    font-size: 0.6rem!important;
+  }
+
+  .form-control-sm{
     font-size: 0.7rem!important;
   }
   
   .form-check-label {
-      font-size: 0.7rem!important;
+      font-size: 0.6rem!important;
   }
   
   mdb-select > div > div.single > div.placeholder {
@@ -36,9 +63,7 @@
   mdb-select-dropdown .dropdown-content li > a, mdb-select-dropdown .dropdown-content li > span {
     font-size: 0.6rem!important;
   }
-  
-  html, body { height: 100%; }
-  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
   //
   //
   //.mat-header-row, .mat-row{
