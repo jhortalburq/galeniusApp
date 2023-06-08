@@ -1,0 +1,116 @@
+<mdb-side-nav #sidenav class="side-nav-light white fixed" [fixed]="true">
+  <!-- Sidebar navigation -->
+    <mdb-navbar-brand>
+      <!-- Logo -->
+      <li>
+        <div class="logo-wrapper waves-light">
+            <a><img src="/assets/img/enlace.png" class="img-fluid flex-center"></a>
+        </div>
+      </li>
+      <!--/. Logo -->
+    </mdb-navbar-brand>
+
+    <links>
+
+      <!--Search Form-->
+      <li>
+        <button type="button" class="btn danger-color-dark btn-block btn-sm white-text" (click)="openModal()">
+          <b>{{ breadcrumbService.modulo }}</b>
+        </button>
+      </li>
+      <!--/.Search Form-->
+      <!-- Side navigation links -->
+      <li>
+        <ul class="collapsible collapsible-accordion">
+          <mdb-accordion [multiple]="false" aria-multiselectable="false">
+
+            <mdb-accordion-item *ngFor="let item of sidebarService.menu">
+              <mdb-accordion-item-head mdbWavesEffect routerLinkActive="active"><mdb-icon fas icon="chevron-right"></mdb-icon> {{ item.titulo }}
+              </mdb-accordion-item-head>
+              <mdb-accordion-item-body>
+                  <ul *ngFor="let seccion of item.secciones">
+                    <li class="seccion_titulo" *ngIf="seccion.submenu">{{ seccion.titulo }}</li>
+                    <li class="seccion_menu" *ngIf="!seccion.submenu"><a  (click)="sidenav.hide()" [routerLink]="seccion.url" routerLinkActive="active" >{{ seccion.titulo }}</a></li>
+                    <li class="seccion_menu" *ngFor="let submenu of seccion.submenu"><a  (click)="sidenav.hide()" [routerLink]="submenu.url" routerLinkActive="active" >{{ submenu.titulo }}</a></li>
+                  </ul>
+                  <ul>
+                    <li class="seccion_menu" *ngFor="let submenu of item.submenu"><a  (click)="sidenav.hide()" [routerLink]="submenu.url" routerLinkActive="active">{{ submenu.titulo }}</a></li>
+                  </ul>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+          </mdb-accordion>
+        </ul>
+      </li>
+      <!--/. Side navigation links -->
+    </links>
+
+    <div class="sidenav-bg mask-strong"></div>
+  <!--/. Sidebar navigation -->
+</mdb-side-nav>
+
+<!-- Navbar -->
+<mdb-navbar SideClass="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav navbar-dark red darken-2 "
+            [containerInside]="false">
+
+    <navlinks class="navbar-container">
+      <!-- SideNav slide-out button -->
+      <div class="float-left">
+        <a (click)="sidenav.show()" class="button-collapse"><mdb-icon fas icon="bars"></mdb-icon></a>
+      </div>
+      <!--/. SideNav slide-out button -->
+    </navlinks>
+
+    <mdb-navbar-brand><a class="navbar-brand">{{ breadcrumbService.modulo | uppercase}}</a></mdb-navbar-brand>
+
+    <navlinks>
+      <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
+
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="empresaService.empresa_seleccionada.id">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="sucursalService.sucursal_seleccionada.id; else elseBlockSucursal">
+             {{ sucursalService.sucursal_seleccionada.nombre_sucursal }}
+          </a>
+
+          <ng-template #elseBlockSucursal>
+            <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+               <--Seleccione Sucursal -->
+            </a>
+          </ng-template>
+
+          <div class="dropdown-menu dropdown-danger dropdown-menu-right">
+            <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of sucursalService.sucursales">{{ sucursal.nombre_sucursal }}</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="empresaService.empresas.length > 0">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.empresa_seleccionada.id; else elseBlock">
+             {{ empresaService.empresa_seleccionada.razon_social }} ({{ empresaService.empresa_seleccionada.no_documento }})
+          </a>
+
+          <ng-template #elseBlock>
+            <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              < --Seleccione Empresa --> 
+            </a>
+          </ng-template>
+
+          <div class="dropdown-menu dropdown-danger dropdown-menu-right">
+            <a class="dropdown-item" (click)="setEmpresa(empresa)" *ngFor="let empresa of empresaService.empresas">{{ empresa.razon_social }} ({{ empresa.no_documento }})</a>
+          </div>
+        </li>
+
+
+        <li class="nav-item dropdown dropdown-sucursal btn-group" dropdown>
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            <i class="fa fa-user"></i> {{ username }}
+          </a>
+          <div class="dropdown-menu dropdown-danger dropdown-menu-right" role="menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+
+      </ul>
+    </navlinks>
+</mdb-navbar>
+<!--/. Navbar -->

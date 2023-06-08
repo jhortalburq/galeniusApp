@@ -1,0 +1,41 @@
+    <div class="modal-content">
+
+      <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <div class="modal-header text-center">
+          <p class="heading lead"><mdb-icon fas icon="plus"></mdb-icon> Característica</p>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+
+              <div class="form-row ">
+
+                  <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="md-form form-sm form-group mt-1">
+                          <input type="text" id="nombre" formControlName="nombre" class="form-control"
+                                 mdbInput mdbValidate>
+                          <label for="nombre"  class="font-weight-bold">Característica (*)</label>
+
+                        </div>
+                   </div>
+
+                  <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="md-form form-sm form-group mt-1">
+                          <input type="text" id="identificador" formControlName="identificador" class="form-control"
+                                 mdbInput mdbValidate>
+                          <label for="identificador" >Identificador</label>
+
+                        </div>
+                   </div>
+
+              </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid" color="danger" class="waves-light" mdbWavesEffect>Grabar</button>
+        </div>
+
+      </form>
+
+    </div>

@@ -1,0 +1,59 @@
+      <!--Content-->
+    <div class="modal-content">
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+        <!-- Tab panels -->
+        <mdb-tabset
+          #staticTabs
+          [buttonClass]="'nav md-tabs tabs-3 red darken-1'"
+          [contentClass]="''"
+          class="tab-content"
+        >
+          <!--Panel 7-->
+          <mdb-tab
+            class="tab-pane fade in show active"
+            id="panel7"
+            role="tabpanel"
+            heading="<i class='fas fa-edit'></i> Editar"
+          >
+            <!--Body-->
+            <div class="modal-body mb-1">
+
+              <app-editar-empresa [empresa]="content.empresa" (submitChange)="onEditEmpresa($event)"></app-editar-empresa>
+
+            </div>
+          </mdb-tab>
+          <!--/.Panel 7-->
+
+          <!--Panel 8-->
+          <mdb-tab
+            class="tab-pane fade"
+            id="panel8"
+            role="tabpanel"
+            heading="<i class='fas fa-users'></i> Usuarios"
+          >
+            <!--Body-->
+            <div class="modal-body">
+              <app-usuarios-empresa [empresa]="content.empresa" (submitChange)="onEditEmpresa($event)"></app-usuarios-empresa>
+            </div>
+          </mdb-tab>
+          <!--/.Panel 8-->
+
+           <!--Panel 9-->
+          <mdb-tab
+            class="tab-pane fade"
+            id="panel9"
+            role="tabpanel"
+            heading="<i class='fas fa-image'></i> Logotipo"
+          >
+            <!--Body-->
+            <div class="modal-body">
+              <app-logo-empresa [empresa]="content.empresa" (submitChange)="onEditEmpresa($event)"></app-logo-empresa>
+            </div>
+          </mdb-tab>
+          <!--/.Panel 9-->
+
+        </mdb-tabset>
+      </div>
+    </div>
+    <!--/.Content-->

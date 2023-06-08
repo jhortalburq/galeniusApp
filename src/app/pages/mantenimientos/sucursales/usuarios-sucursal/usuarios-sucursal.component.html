@@ -1,0 +1,13 @@
+
+<ul class="list-group"  style="overflow: auto; height: 50vh">
+    <li class="list-group-item" *ngFor="let user of usuarios">
+      <mdb-checkbox [default]="true" [(ngModel)]="user.boolean" (change)="changeAsignacion(user)"></mdb-checkbox> {{ user.first_name }} {{ user.last_name }} ({{ user.email }})
+    </li>
+</ul>
+
+
+    <hr>
+
+  <div class="text-center form-sm">
+      <button mdbBtn size="sm" (click)="cerrarModal()" color="danger" class="waves-light" mdbWavesEffect>Cerrar</button>
+  </div>

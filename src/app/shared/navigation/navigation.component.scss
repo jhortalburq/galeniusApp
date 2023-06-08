@@ -1,0 +1,87 @@
+.dropdown-sucursal{
+  background-color: #ffffff;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.dropdown-sucursal .nav-link{
+  color: black!important;
+  font-size: 0.7rem;
+  margin-top: 1px;
+}
+
+.dropdown-sucursal .dropdown-menu a{
+  font-size: 0.7rem;
+}
+
+.dropdown-sucursal .dropdown-item.active{
+  color: #ffffff!important;
+}
+
+.nav-link {
+    padding: .2rem 1rem;
+}
+
+.side-nav .logo-wrapper img {
+    height: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 100%!important;
+}
+
+.nav-item-custom a{
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin-left: -10px;
+  margin-top: -10px;
+  margin-bottom: -20px;
+  color: #000000;
+}
+
+.nav-item-seccion a{
+  margin-left: -1.5rem;
+  //font-size: 0.7rem;
+  font-weight: bold;
+  //margin-top: -20px;
+  //margin-bottom: -20px;
+  color: #000000;
+}
+
+.side-nav2 .collapsible a {
+  height: 32px!important;
+}
+
+.side-nav .collapsible a{
+  color: #000000!important;
+}
+
+.item-seccion {
+    //margin-left: 1.2rem;
+    font-size: 0.7rem!important;
+}
+
+.item-submenu {
+    //margin-left: 0.8rem;
+    font-size: 0.7rem!important;
+}
+
+//li .active{
+//  background-color: #ff3547;
+//}
+
+.side-nav .collapsible .active a {
+  color: #ffffff!important;
+  font-weight: bold;
+}
+
+.navbar-brand{
+  color: #ffffff!important;
+  font-weight: bold;
+}
+
+
+.seccion_menu a.active {
+    color: #ffffff!important;
+    background: #CC0000!important;
+    font-weight: bold;
+}

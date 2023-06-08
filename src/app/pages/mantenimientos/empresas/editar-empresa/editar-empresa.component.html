@@ -1,0 +1,115 @@
+
+<form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-row ">
+         <div class="col-md-3 col-sm-5 col-xs-12">
+
+              <div class="md-form form-sm form-group mt-1">
+                <input type="text" id="no_documento" formControlName="no_documento" class="form-control"
+                                 mdbInput mdbValidate (keyup)="searchRuc()" (keydown)="onKeydownRUC($event)">
+                <label for="no_documento"  class="font-weight-bold">R.U.C. (*)</label>
+              </div>
+
+         </div>
+
+
+        <div class="col-md-9 col-sm-7 col-xs-12">
+              <div class="md-form form-sm form-group mt-1">
+                <input type="text" id="razon_social" formControlName="razon_social" class="form-control"
+                       mdbInput mdbValidate>
+                <label for="razon_social" class="font-weight-bold">Razon Social (*)</label>
+
+              </div>
+         </div>
+
+    <div class="clearfix" *ngIf="loading">
+                  <div class="spinner-border float-right" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+    </div>
+
+  <div class="form-row ">
+         <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="md-form form-sm form-group mt-1">
+                <input type="text" id="nombre_comercial" formControlName="nombre_comercial" class="form-control"
+                       mdbInput>
+                <label for="razon_social">Nombre Comercial</label>
+
+              </div>
+         </div>
+
+    </div>
+
+  <div class="form-row">
+         <div class="col-md-7 col-sm-12 col-xs-12">
+              <div class="md-form form-sm form-group mt-1">
+                <input type="text" id="direccion" formControlName="direccion" class="form-control"
+                       mdbInput>
+                <label for="direccion">Dirección</label>
+              </div>
+         </div>
+
+         <div class="col-md-5 col-sm-12 col-xs-12">
+              <div class="md-form form-sm form-group mt-1">
+                <input
+                  formControlName="locacion"
+                  type="text"
+                  class="completer-input form-control mdb-autocomplete mb-0"
+                  [mdbAutoCompleter]="auto"
+                  placeholder="Dep/Distr/Prov"
+                  (keydown)="onKeydown($event)"
+                  (keyup)="buscarUbigeo($event)"
+                />
+                <mdb-auto-completer #auto="mdbAutoCompleter" textNoResults="No se encontraron resultados" [clearButton]="false">
+                  <mdb-option *ngFor="let item of filteredUbigeo | async" [value]="item.nombre" (onSelectionChange)="selectUbigeo(item)">
+                    {{ item.nombre }}
+                  </mdb-option>
+                </mdb-auto-completer>
+              </div>
+         </div>
+
+
+
+    </div>
+
+  <div class="form-row ">
+
+         <div class="col-md-3  col-sm-6 col-xs-12">
+
+              <div class="md-form form-sm form-group mt-1">
+                <input type="text" id="telefono" formControlName="telefono" class="form-control"
+                       mdbInput>
+                <label for="telefono">Telefono</label>
+              </div>
+
+         </div>
+
+
+        <div class="col-md-4  col-sm-6 col-xs-12">
+
+              <div class="md-form form-sm form-group mt-1">
+                <input type="text" id="correo" formControlName="correo" class="form-control"
+                       mdbInput mdbValidate>
+                <label for="correo">Correo Electrónico</label>
+
+              </div>
+
+         </div>
+
+        <div class="col-md-2 col-sm-6 col-xs-12">
+            <mdb-checkbox formControlName="test">Test</mdb-checkbox>
+        </div>
+
+        <div class="col-md-2 col-sm-6 col-xs-12">
+            <mdb-checkbox formControlName="predeterminado">Predeterminado</mdb-checkbox>
+        </div>-
+
+    </div>
+
+  <hr>
+
+  <div class="text-center form-sm">
+      <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid" color="danger" class="waves-light" mdbWavesEffect>Grabar</button>
+  </div>
+</form>

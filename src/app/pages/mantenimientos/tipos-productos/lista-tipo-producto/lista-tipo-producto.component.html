@@ -1,0 +1,95 @@
+
+<div class="row">
+      <div class="col-md-12 col-lg-12">
+          <mdb-card>
+            <mdb-card-body>
+                      <div class="row mt-n2">
+                        <div class="col-md-12">
+                          <div class="md-form form-sm">
+                            <input
+                              type="text"
+                              class="form-control"
+                              mdbInput
+                              [(ngModel)]="filter"
+                              (keyup)="applyFilter($event)"
+                            />
+                            <label for="search">Buscar Tipo Producto</label>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="flex-row">
+                      <div class="table-responsive">
+                        <table mdbTable [responsive]="true" [bordered]="true" [small]="true" [hover]="true" scrollY="true" style="overflow: auto; height: 50vh">
+                          <thead>
+                            <tr class="danger-color-dark white-text">
+                              <th *ngFor="let head of displayedColumns" scope="col">{{head}} </th>
+                            </tr>
+                          </thead>
+                          <tbody *ngIf="registros">
+                            <tr mdbTableCol *ngFor="let registro of registros">
+                              <td style="width: 60%">{{ registro.nombre }}</td>
+                              <td style="width: 20%" class="text-center">{{ registro.abreviado }}</td>
+                              <td style="width: 20%" class="text-center">{{ registro.codigo_tributario }}</td>
+                            
+                               <td style="width: 10%" class="text-center">
+                                    <mdb-checkbox [default]="true"  [(ngModel)]="registro.activo" (change)="changeStatus(registro)"></mdb-checkbox>
+                               </td>
+
+                              <td style="width: 10%" class="text-center">
+                                  <mdb-badge [danger]="true" (click)="editModal( registro )" style="cursor: pointer">
+                                    <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
+                                  </mdb-badge>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                          <tbody *ngIf="!registros.length">
+                            <tr mdbTableCol >
+                              <td colspan="5" style="width: 115%">No se encontraros registros</td>
+                            </tr>
+                          </tbody>
+
+                        </table>
+                      </div>
+                    </div>
+
+            </mdb-card-body>
+
+            <mdb-card-footer class="text-muted mt-n5">
+
+                  <button mdbBtn [outline]="true" [rounded]="true" size="sm" type="button" class="float-left btn-white" mdbWavesEffect (click)="openModal()">
+                    <mdb-icon fas icon="plus"></mdb-icon> Agregar
+                  </button>
+
+                  <nav>
+                    <ul class="pagination pagination-circle pg-white float-right">
+                      <!--<li class="page-item disabled"><a class="page-link" mdbWavesEffect>1 - 10 de 15</a></li>-->
+                      <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous" mdbWavesEffect>
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+                      <li class="page-item active"><a class="page-link" mdbWavesEffect>1</a></li>
+                      <li class="page-item">
+                        <a class="page-link" aria-label="Next" mdbWavesEffect>
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+
+
+            </mdb-card-footer>
+
+          </mdb-card>
+      </div>
+</div>
+
+
+
+
+
+
