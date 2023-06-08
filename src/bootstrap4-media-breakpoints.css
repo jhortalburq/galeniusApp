@@ -1,0 +1,81 @@
+/**
+ * Bootstrap 4 all media queries #wMQ
+ * https://getbootstrap.com/docs/4.5/layout/overview/
+ * up       >     sm, md, lg, xl
+ * down     <     sm, md, lg
+ * only     =     xs, sm, lg, xl
+ * between  <>    sm-lg, sm-xl, md-xl
+ */
+
+
+/* .xs = | Extra Small devices only (portrait phones) less than 576px */
+@media (max-width: 575.98px) {
+
+}
+
+
+
+/* .sm > | Small devices and up (landscape, phones) 576px and up */
+@media (min-width: 576px) {
+
+}
+/* .sm < | Small devices and down (landscape, phones) less than 768px */
+@media (max-width: 767.98px) {
+
+}
+/* .sm = | Small devices only (landscape, phones) upper 576px and less than 768px */
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+}
+
+
+
+/* .md > | Medium devices and up (tablets) 768px and up */
+@media (min-width: 768px) {
+
+}
+/* .md < | Medium devices and down (tablets) less than 992px */
+@media (max-width: 991.98px) {
+
+}
+/* .md = | Medium devices only (tablets) upper 768px and less than 992px */
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+}
+
+
+
+/* .lg > | Large devices and up (desktops) 992px and up */
+@media (min-width: 992px) {
+
+}
+/* .lg < | Large devices and down (desktops) less than 1200px */
+@media (min-width: 1199.98px) {
+
+}
+/* .lg = | Large devices only (desktops) upper 992px and less than 1200px */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+}
+
+
+
+/* .xl = | Large devices only (desktops, TV) 1200px and up */
+@media (min-width: 1200px) {
+
+}
+
+
+/* Between <> .sm-lg, .sm-xl, .md-xl */
+/* .sm <> .lg | From Small to Large devices only (landscape, phones, tablet, desktops) upper 576px and less than 1200px */
+@media (min-width: 576px) and (max-width: 991.98px) {
+
+}
+/* .sm <> .xl | From Small to Extra Large devices only (landscape, phones, tablet, desktops, TV) upper 576px and less than 1200px */
+@media (min-width: 576px) and (max-width: 1199.98px) {
+
+}
+/* .md <> .xl | From Medium to Extra Large devices only (tablet, desktops, TV) upper 768px and less than 1200px */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+
+}

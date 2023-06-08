@@ -1,24 +1,14 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(/assets/img/enlace.jpg);">
+    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(/assets/img/background1.jpg);">
         <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="row mt-4 pb-5">
                       <div class="col-12 mx-auto text-center">
-                          <img class="logo-img" src="/assets/img/enlace.png"/>
+                          <img class="logo-img" src="/assets/img/galenius_small.png"/>
                       </div>
                     </div>
-                    <!--<div class="form-group mt-5">-->
-                        <!--<div class="col-xs-12">-->
-                            <!--<input class="form-control" type="text" required="" placeholder="Username">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<div class="col-xs-12">-->
-                            <!--<input class="form-control" type="password" required="" placeholder="Password">-->
-                        <!--</div>-->
-                    <!--</div>-->
 
                     <div class="md-form form-sm">
                       <input type="email" id="username" formControlName="username" class="form-control" mdbInput>
@@ -34,7 +24,7 @@
                     <div class="d-flex justify-content-around">
                       <div>
                         <!-- Remember me -->
-                        <mdb-checkbox>Recordar</mdb-checkbox>
+                        <mdb-checkbox [rounded]="true">Recordar</mdb-checkbox>
                       </div>
                       <div>
                         <!-- Forgot password -->
@@ -42,7 +32,7 @@
                       </div>
                     </div>
 
-                    <button mdbBtn color="danger" [rounded]="true" [block]="true" class="my-4 waves-effect z-depth-0 mt-5" mdbWavesEffect
+                    <button mdbBtn color="mdb-color" [rounded]="true" [block]="true" class="my-4 waves-effect z-depth-0 mt-5" mdbWavesEffect
                       type="submit" [disabled]="!loginForm.valid">Ingresar
                     </button>
 

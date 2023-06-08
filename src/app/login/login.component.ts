@@ -69,12 +69,12 @@ export class LoginComponent implements OnInit {
               });
             },
             err => {
-            console.log(err)
                 Swal.fire({
                   title: 'Error!',
                   text: 'El usuario o contraseña ingresada es incorrecta',
                   icon: 'error',
-                  confirmButtonText: 'Cerrar'
+                  confirmButtonText: 'Cerrar',
+                  confirmButtonColor: "#59698d",
                 });
                   // swal("Login Incorrecto!", err.error.non_field_errors[0], "error");
             }

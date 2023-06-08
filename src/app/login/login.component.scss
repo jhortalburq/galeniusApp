@@ -2,16 +2,15 @@
 Login register and recover password Page
 ******************/
 .login-register {
-  background-size: cover;
+  background-size: 80%;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: left center;
   height: 100%;
   width: 100%;
-  padding: 10% 0;
   position: fixed; }
 
 .login-box {
-  width: 400px;
+  width: 30%;
   margin: 0 auto; }
   .login-box .footer {
     width: 100%;
@@ -33,9 +32,15 @@ Login register and recover password Page
     height: 100%; }
 
 .logo-img{
-  width: 80%;
+  width: 50%;
 }
 
 .forget_password{
   font-size: 0.8rem;
+}
+
+@media (max-width: 575.98px) {
+  .login-box {
+    width: 100%;
+  }
 }

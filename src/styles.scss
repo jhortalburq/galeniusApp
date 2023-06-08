@@ -114,3 +114,12 @@
   .custom-select {
     font-size: 0.8rem;
   }
+
+  .form-check-input[type=checkbox].filled-in:checked + label:after, label.btn input[type=checkbox].filled-in:checked + label:after {
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #59698d!important;
+    background-color: #59698d!important;
+    z-index: 0;
+}
