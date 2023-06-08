@@ -1,1 +1,116 @@
 /* You can add global styles to this file, and also import other style files */
+
+.modal-dialog.modal-notify .heading{
+    font-weight: bold;
+  }
+  
+  .heading i {
+    color: white!important;
+  }
+  
+  .button-collapse{
+    color: #ffffff!important;
+  }
+  
+  .md-form label{
+    font-size: 0.7rem!important;
+  }
+  
+  .md-form input[type=text]{
+    font-size: 0.7rem!important;
+  }
+  
+  .form-check-label {
+      font-size: 0.7rem!important;
+  }
+  
+  mdb-select > div > div.single > div.placeholder {
+    font-size: 0.7rem!important;
+  }
+  
+  
+  mdb-select > div > div.single > div.value {
+    font-size: 0.7rem!important;
+  }
+  
+  mdb-select-dropdown .dropdown-content li > a, mdb-select-dropdown .dropdown-content li > span {
+    font-size: 0.6rem!important;
+  }
+  
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  //
+  //
+  //.mat-header-row, .mat-row{
+  //  min-height: 38px!important;
+  //}
+  //
+  //.mat-cell{
+  //  font-size: 0.7rem;
+  //  padding-left: 10px;
+  //  color: dimgrey;
+  //}
+  //
+  //.mat-header-cell{
+  //  color: white!important;
+  //  text-align: center;
+  //  background-color: #ff3547!important;
+  //}
+  //
+  //mat-header-cell {
+  //    display: flex;
+  //    justify-content: center;
+  //}
+  
+  table.table-sm th{
+    text-align: center;
+    font-size: 0.7rem;
+    padding: 0.2rem!important;
+  }
+  
+  table.table-sm td{
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem !important;
+  }
+  
+  mdb-card {
+    height: 80vh
+  }
+  
+  .card-footer {
+    //margin-top: -15px;
+  }
+  
+  
+  .card-footer{
+    background-color: #CC0000!important;
+    padding: 5px 10px;
+  }
+  
+  
+  .pagination.pg-white .page-item.active .page-link {
+      background-color: #fff;
+      color: #000000!important;
+  }
+  
+  .pagination .page-item .page-link{
+    color: #ffffff;
+    margin-top: 5px;
+  }
+  
+  .completer-dropdown .completer-row {
+      padding: 5px 10px !important;
+      font-size: 0.7rem !important;
+  }
+  
+  .modal-dialog.cascading-modal .modal-c-tabs .md-tabs {
+      margin: -2.5rem 1rem 0 1rem!important;
+  }
+  
+  .cascading-modal {
+    top: -10%!important;
+  }
+  
+  .custom-select {
+    font-size: 0.8rem;
+  }
