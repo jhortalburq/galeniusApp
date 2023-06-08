@@ -68,7 +68,7 @@ export class ListaUnidadesComponent implements OnInit {
                     focus: true,
                     show: false,
                     ignoreBackdropClick: false,
-                    class: 'modal-lg modal-dialog modal-notify modal-danger ',
+                    class: 'modal-lg modal-dialog modal-notify modal-primary ',
                     animated: true,
                     data: {
                         content: { registro: registro}

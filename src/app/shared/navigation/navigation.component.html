@@ -77,7 +77,7 @@
             </a>
           </ng-template>
 
-          <div class="dropdown-menu dropdown-danger dropdown-menu-right">
+          <div class="dropdown-menu dropdown-dark dropdown-menu-right">
             <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of sucursalService.sucursales">{{ sucursal.nombre_sucursal }}</a>
           </div>
         </li>
@@ -93,7 +93,7 @@
             </a>
           </ng-template>
 
-          <div class="dropdown-menu dropdown-danger dropdown-menu-right">
+          <div class="dropdown-menu dropdown-dark dropdown-menu-right">
             <a class="dropdown-item" (click)="setEmpresa(empresa)" *ngFor="let empresa of empresaService.empresas">{{ empresa.razon_social }} ({{ empresa.no_documento }})</a>
           </div>
         </li>
@@ -103,7 +103,7 @@
           <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
             <i class="fa fa-user"></i> {{ username }}
           </a>
-          <div class="dropdown-menu dropdown-danger dropdown-menu-right" role="menu">
+          <div class="dropdown-menu dropdown-dark dropdown-menu-right" role="menu">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>

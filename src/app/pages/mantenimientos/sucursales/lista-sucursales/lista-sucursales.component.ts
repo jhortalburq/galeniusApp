@@ -67,7 +67,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-lg modal-dialog modal-notify modal-danger ',
+                  class: 'modal-lg modal-dialog modal-notify modal-primary',
                   animated: true,
               });
 
