@@ -17,6 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rxjs-compat",
+              "validator",
+              "sweetalert2"
+            ],
             "outputPath": "dist/galenius-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -36,12 +41,10 @@
               "ng-uikit-pro-standard/assets/scss/bootstrap/bootstrap.scss",
               "ng-uikit-pro-standard/assets/scss/mdb.scss",
               "node_modules/animate.css/animate.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/media-breakpoints.scss"
             ],
             "scripts": [
-              "node_modules/chart.js/dist/chart.js",
-              "node_modules/easy-pie-chart/dist/easypiechart.js",
-              "node_modules/screenfull/index.js",
               "node_modules/hammerjs/hammer.min.js"
             ]
           },
