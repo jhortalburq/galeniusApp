@@ -10,10 +10,16 @@
 
 /* .xs = | Extra Small devices only (portrait phones) less than 576px */
 @media (max-width: 575.98px) {
+    .btn-filter{
+        top: -0.25rem
+    }
 }
 
 /* .sm > | Small devices and up (landscape, phones) 576px and up */
 @media (min-width: 576px) {
+    .btn-filter{
+        top: 1rem
+    }
 }
 /* .sm < | Small devices and down (landscape, phones) less than 768px */
 @media (max-width: 767.98px) {
@@ -40,6 +46,10 @@
 
 /* .lg < | Large devices and down (desktops) less than 1200px */
 @media (min-width: 1199.98px) {
+    .fixed-sn main, .fixed-sn .page-footer .container-fluid {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
 }
 
 /* .lg = | Large devices only (desktops) upper 992px and less than 1200px */

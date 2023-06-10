@@ -1,0 +1,66 @@
+<form class="form-horizontal form-material">
+    
+    <div class="row">
+        <div class="col-sm-3 col-xs-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="form1" class="form-control">
+                <label for="form1" class="">Busqueda de Paciente</label>
+              </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-2" style="margin-top: 1.2rem">
+            <select class="browser-default custom-select">
+                <option value='' selected disabled>Estado</option>
+                <!-- <option value="{{ option.value }}" *ngFor="let option of optionTipoMovimiento">{{ option.label }}</option> -->
+            </select>
+        </div>
+
+
+        <div class="col-sm-2 col-xs-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="form1" class="form-control">
+                <label for="form1" class="">Fecha Inicio</label>
+            </div>
+        </div>
+
+        <div class="col-sm-2 col-xs-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="form1" class="form-control">
+                <label for="form1" class="">Fecha Fin</label>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 btn-filter">
+            <a href="" class="btn btn-danger btn-sm btn-rounded"> <i class="fas fa-times"></i> Quitar</a>
+            <button mdbBtn size="sm" type="submit" color="mdb-color" [rounded]="true" class="waves-light" mdbWavesEffect>
+                <mdb-icon fas icon="search"></mdb-icon> Buscar
+            </button>
+        </div>
+    
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-xs-12 col-sm-3" style="margin-top: -0.8rem">
+            <select class="browser-default custom-select">
+                <option value='' selected disabled>Especialidad</option>
+                <!-- <option value="{{ option.value }}" *ngFor="let option of optionTipoMovimiento">{{ option.label }}</option> -->
+            </select>
+        </div>
+
+        <div class="col-xs-6 col-sm-5" style="margin-top: -0.8rem">
+            <select class="browser-default custom-select">
+                <option value='' selected disabled>Especialista</option>
+                <!-- <option value="{{ option.value }}" *ngFor="let option of optionTipoMovimiento">{{ option.label }}</option> -->
+            </select>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-2" style="margin-top: -0.8rem">
+            <select class="browser-default custom-select">
+                <option value='' selected disabled>Tipo de Cita</option>
+                <!-- <option value="{{ option.value }}" *ngFor="let option of optionTipoMovimiento">{{ option.label }}</option> -->
+            </select>
+        </div>
+
+    </div>
+</form>

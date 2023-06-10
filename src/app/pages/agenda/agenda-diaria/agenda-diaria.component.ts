@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { CalendarOptions } from '@fullcalendar/core';
 
+import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -52,7 +53,7 @@ export class AgendaDiariaComponent implements OnInit {
       //   }
       // },
       initialView: 'listDay',
-      plugins: [listPlugin, interactionPlugin, timeGridPlugin],
+      plugins: [listPlugin, interactionPlugin, timeGridPlugin, dayGridPlugin],
       height: 480,
       locale: esLocale,
       allDaySlot: false,
@@ -62,7 +63,7 @@ export class AgendaDiariaComponent implements OnInit {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'listDay,timeGridWeek'
+        right: 'listDay,timeGridWeek,dayGridMonth'
       },
       events: [
         { title: 'event 1', start: '2023-06-08T14:30:00', end: '2023-06-08T15:00:00'},

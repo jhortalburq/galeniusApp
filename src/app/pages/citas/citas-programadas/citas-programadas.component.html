@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <mdb-card class="mdb-card-80">
+            <mdb-card-body>
+                <div class="row">
+                    <div class="col-12">
+                        <app-citas-filtro></app-citas-filtro>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="flex-row">
+                    <div class="table-responsive text-nowrap">
+                      <table mdbTable [responsive]="true" [bordered]="true" [small]="true" [hover]="true" scrollY="true" style="overflow: auto; height: 50vh">
+                        <thead>
+                          <tr class="mdb-color darken-3 white-text">
+                            <th *ngFor="let head of displayedColumns" scope="col">{{head}} </th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="registros">
+                          <tr mdbTableCol *ngFor="let registro of registros">
+
+                            
+                            <td >{{ registro.descripcion }}</td>
+                            <td class="text-center">{{ registro.tipo_movimiento }}</td>
+
+                           <td class="text-center">
+                                  <mdb-checkbox [default]="true"  [(ngModel)]="registro.activo" ></mdb-checkbox>
+                             </td>
+
+                              <td style="width: 10%" class="text-center">
+                                <mdb-badge [danger]="true"  style="cursor: pointer">
+                                  <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
+                                </mdb-badge>
+                            </td>
+
+                  
+                          </tr>
+                        </tbody>
+
+                        <tbody *ngIf="!registros.length">
+                          <tr mdbTableCol >
+                            <td style="width: 115%" colspan="12">No se encontraros registros</td>
+                          </tr>
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>

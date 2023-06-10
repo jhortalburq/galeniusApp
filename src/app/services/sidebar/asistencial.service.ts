@@ -10,51 +10,37 @@ export class AsistencialService {
     {
       titulo: 'AGENDA',
       submenu: [
-          { titulo: 'AGENDA DIARIA', url: '/asistencial/agenda/diaria' },
-      ]
+                { titulo: 'AGENDA DIARIA', url: '/asistencial/agenda/diaria' },
+                { titulo: 'CITAS PROGRAMADAS', url: '/asistencial/citas/citas-programadas' },
+               ]
    },
-    // { titulo: 'AGENDA DIARIA', url: '/asistencial/agenda/diaria', status: 'active', class: 'no-collase'},
-    {
-      titulo: 'DOCUMENTOS',
-      class: '',
-      secciones: [
-        {
-          titulo: 'Pedidos',
-          submenu: [
-              { titulo: 'Registro de Pedidos', url: '/usuarios', status: 'active'},
-              { titulo: 'Aprobación de Pedidos', url: '/usuarios' },
-          ]
-        },
-        {
-          titulo: 'Facturación',
-          submenu: [
-              { titulo: 'Lista de Ventas', url: '/usuarios' },
-              { titulo: 'Registro Facturas', url: '/usuarios' },
-              { titulo: 'Registro Boletas', url: '/usuarios' },
-              { titulo: 'Registro Notas de Crédito', url: '/usuarios' },
-              { titulo: 'Registro Notas de Débito', url: '/usuarios' },
-              { titulo: 'Registro Notas de Venta', url: '/usuarios' },
-              { titulo: 'Registro Percepciones', url: '/usuarios' },
-              { titulo: 'Registro Letras por Cobrar', url: '/usuarios' },
-          ]
-       },
-        {
-          titulo: 'Cobranza y Transferencia',
-          submenu: [
-              { titulo: 'Cobranza', url: '/usuarios' },
-              { titulo: 'Cobranza por Documento', url: '/usuarios' },
-              { titulo: 'Transferencia Bancos', url: '/usuarios' },
-          ]
-       },
-         {
-          titulo: 'Consignaciones',
-          submenu: [
-              { titulo: 'Registro de Consignaciones', url: '/usuarios' },
-              { titulo: 'Entregas Diferidas', url: '/usuarios' },
-          ]
-       },
-      ]
-    },
+   {
+    titulo: 'CONSULTAS MÉDICAS',
+    submenu: [
+                  { titulo: 'REGISTRO DE CONSULTAS', url: '/asistencial/agenda/diaria' },
+             ]
+   },
+   {
+    titulo: 'PACIENTES',
+    submenu: [
+                  { titulo: 'REGISTROS DE PACIENTES', url: '/asistencial/agenda/diaria' },
+             ]
+   },
+   {
+    titulo: 'ESPECIALISTAS',
+    submenu: [  
+              { titulo: 'REGISTROS DE ESPECIALISTA', url: '/asistencial/agenda/diaria' },
+              { titulo: 'NUEVO ESPECIALISTA', url: '/asistencial/agenda/diaria' },
+             ]
+   },
+   {
+    titulo: 'REGISTRO DE HORARIOS',
+    submenu: [
+                  { titulo: 'HORARIOS POR ESPECIALISTA', url: '/asistencial/agenda/diaria' },
+                  { titulo: 'TABLERO GENERAL', url: '/asistencial/agenda/diaria' },
+                  { titulo: 'INGRESAR HORARIO', url: '/asistencial/agenda/diaria' },
+             ]
+   },
     {
       titulo: 'MANTENIMIENTOS',
       class: '',
