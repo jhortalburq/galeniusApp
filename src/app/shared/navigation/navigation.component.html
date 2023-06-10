@@ -4,7 +4,7 @@
       <!-- Logo -->
       <li>
         <div class="logo-wrapper waves-light">
-            <a><img src="/assets/img/enlace.png" class="img-fluid flex-center"></a>
+            <a><img src="https://sistemaunlimited.com/logos.jpeg" class="img-fluid flex-center"></a>
         </div>
       </li>
       <!--/. Logo -->
@@ -24,8 +24,9 @@
         <ul class="collapsible collapsible-accordion">
           <mdb-accordion [multiple]="false" aria-multiselectable="false">
 
-            <mdb-accordion-item *ngFor="let item of sidebarService.menu">
-              <mdb-accordion-item-head mdbWavesEffect routerLinkActive="active"><mdb-icon fas icon="chevron-right"></mdb-icon> {{ item.titulo }}
+            <mdb-accordion-item *ngFor="let item of sidebarService.menu" [class]="item.class">
+              <mdb-accordion-item-head mdbWavesEffect routerLinkActive="active">
+                <mdb-icon fas icon="chevron-right"></mdb-icon> {{ item.titulo }}
               </mdb-accordion-item-head>
               <mdb-accordion-item-body>
                   <ul *ngFor="let seccion of item.secciones">
@@ -61,7 +62,9 @@
       <!--/. SideNav slide-out button -->
     </navlinks>
 
-    <mdb-navbar-brand><a class="navbar-brand">{{ breadcrumbService.modulo | uppercase}}</a></mdb-navbar-brand>
+    <mdb-navbar-brand>
+      <a class="navbar-brand">{{ breadcrumbService.modulo | uppercase}}</a>
+    </mdb-navbar-brand>
 
     <navlinks>
       <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">

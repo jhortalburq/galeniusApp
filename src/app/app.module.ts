@@ -16,6 +16,8 @@ import { ServicesModule } from './services/services.module';
 
 import { LoginComponent } from './login/login.component';
 
+import { MaterialModule } from './material.module';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     MDBBootstrapModulesPro.forRoot(),
+    MaterialModule,
     ToastModule.forRoot({
                                     timeOut: 2500,
                                     positionClass: 'md-toast-bottom-right',

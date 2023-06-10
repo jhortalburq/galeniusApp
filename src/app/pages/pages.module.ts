@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { MDBBootstrapModulesPro } from '../../../ng-uikit-pro-standard/src/lib/mdb.module';
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 @NgModule({
   declarations: [
     PagesComponent,
@@ -17,6 +19,7 @@ import { MDBBootstrapModulesPro } from '../../../ng-uikit-pro-standard/src/lib/m
     CommonModule,
     MDBBootstrapModulesPro.forRoot(),
     SharedModule,
+    FullCalendarModule,
     PageRoutingModule,
   ]
 })

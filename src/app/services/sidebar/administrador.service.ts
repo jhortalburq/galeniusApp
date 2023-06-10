@@ -41,7 +41,7 @@ export class AdministradorService {
         submenu: [
             { titulo: 'Registro de Almacenes',  url: '/administrador/almacenes/' },
             { titulo: 'Movimientos de Almacén', url: '/administrador/movimientos-almacen/' },
-            { titulo: 's de Precios', url: '/usuarios' },
+            { titulo: 'Listas de Precios', url: '/usuarios' },
             { titulo: 'Cierre de Almacén por Fecha', url: '/usuarios' },
             { titulo: 'Cierre de Almacén por Periodo', url: '/usuarios' },
             { titulo: 'Stock de Seguridad', url: '/hospitales' },

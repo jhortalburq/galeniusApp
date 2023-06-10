@@ -22,6 +22,12 @@ body::before {
   opacity: 0.2;
 }
 
+@media (min-width: 1200px) {
+  .fixed-sn main, .fixed-sn .page-footer .container-fluid {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
 
 .modal-dialog.modal-notify .heading{
     font-weight: bold;
@@ -98,7 +104,7 @@ body::before {
     padding: 0.2rem 0.5rem !important;
   }
   
-  mdb-card {
+  .mdb-card-80 {
     height: 80vh
   }
   

@@ -1,6 +1,6 @@
 // material.module.ts
 import { ModuleWithProviders, NgModule} from "@angular/core";
-// import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 // import { MatIconRegistry } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 // import { MatBadgeModule } from '@angular/material/badge';
@@ -10,7 +10,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 // import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { MatChipsModule } from '@angular/material/chips';
 // import { MatStepperModule } from '@angular/material/stepper';
-// import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 // import { MatDialogModule } from '@angular/material/dialog';
 // import { MatExpansionModule } from '@angular/material/expansion';
 // import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,7 +24,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 // import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatRadioModule } from '@angular/material/radio';
 // import { MatRippleModule } from '@angular/material/core';
-// import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 // import { MatSidenavModule } from '@angular/material/sidenav';
 // import { MatSliderModule } from '@angular/material/slider';
 // import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -45,7 +45,7 @@ const mm = [
   // MatCheckboxModule,
   // MatChipsModule,
   // MatStepperModule,
-  // MatDatepickerModule,
+  MatDatepickerModule,
   // MatDialogModule,
   // MatExpansionModule,
   // MatFormFieldModule,
@@ -59,7 +59,7 @@ const mm = [
   // MatProgressSpinnerModule,
   // MatRadioModule,
   // MatRippleModule,
-  // MatSelectModule,
+  MatSelectModule,
   // MatSidenavModule,
   // MatSliderModule,
   // MatSlideToggleModule,
@@ -70,7 +70,7 @@ const mm = [
   // MatToolbarModule,
   // MatTooltipModule,
   // MatTreeModule,
-  // MatNativeDateModule
+  MatNativeDateModule
 ]
 
 @NgModule({
@@ -78,6 +78,7 @@ const mm = [
     exports: [...mm
     ],
     providers: [
+      {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
     ]
 })
 export class MaterialModule {
