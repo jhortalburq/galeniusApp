@@ -10,7 +10,7 @@ import { MDBModalService } from './modal.service';
 @NgModule({
   declarations: [ModalBackdropComponent, ModalDirective, ModalContainerComponent],
   exports: [ModalBackdropComponent, ModalDirective],
-  entryComponents: [ModalBackdropComponent, ModalContainerComponent],
+  // entryComponents: [ModalBackdropComponent, ModalContainerComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class ModalModule {

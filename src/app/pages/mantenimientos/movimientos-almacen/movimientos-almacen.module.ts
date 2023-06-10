@@ -23,6 +23,6 @@ import { MovimientosAlmacenRoutingModule } from './movimientos-almacen.routing';
     ReactiveFormsModule,
     MovimientosAlmacenRoutingModule
   ],
-  entryComponents: [AgregarMovimientoComponent, EditarMovimientoComponent]
+  // entryComponents: [AgregarMovimientoComponent, EditarMovimientoComponent]
 })
 export class MovimientosAlmacenModule { }

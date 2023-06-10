@@ -19,6 +19,6 @@ import { UnidadMedidaRoutingModule } from './unidad-medida.routing';
     FormsModule,
     ReactiveFormsModule,
     UnidadMedidaRoutingModule],
-  entryComponents: [AgregarUnidadComponent, EditarUnidadComponent]  
+    // entryComponents: [AgregarUnidadComponent, EditarUnidadComponent]  
 })
 export class UnidadMedidaModule { }

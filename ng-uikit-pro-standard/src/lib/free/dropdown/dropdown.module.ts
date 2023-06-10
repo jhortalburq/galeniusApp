@@ -22,7 +22,7 @@ import { BsDropdownState } from './dropdown.state';
   BsDropdownToggleDirective,
   BsDropdownDirective
   ],
-  entryComponents: [BsDropdownContainerComponent]
+  // entryComponents: [BsDropdownContainerComponent]
 })
 export class DropdownModule {
   public static forRoot(config?: any): ModuleWithProviders<DropdownModule> {

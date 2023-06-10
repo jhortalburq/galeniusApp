@@ -18,7 +18,7 @@ import { Overlay } from '../overlay/overlay';
   imports: [CommonModule],
   exports: [ToastComponent],
   declarations: [ToastComponent],
-  entryComponents: [ToastComponent],
+  // entryComponents: [ToastComponent],
 })
 export class ToastModule {
   static forRoot(config?: GlobalConfig): ModuleWithProviders<ToastModule> {

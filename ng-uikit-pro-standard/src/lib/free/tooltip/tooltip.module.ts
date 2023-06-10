@@ -10,7 +10,7 @@ import { PositioningService } from '../utils/positioning/positioning.service';
   imports: [CommonModule],
   declarations: [TooltipDirective, TooltipContainerComponent],
   exports: [TooltipDirective],
-  entryComponents: [TooltipContainerComponent]
+  // entryComponents: [TooltipContainerComponent]
 })
 export class TooltipModule {
   public static forRoot(): ModuleWithProviders<TooltipModule> {

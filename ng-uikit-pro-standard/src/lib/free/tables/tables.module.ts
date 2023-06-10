@@ -23,7 +23,7 @@ import { MdbTablePaginationComponent } from './components/mdb-table-pagination.c
     MdbTableSortDirective,
     MdbTableDirective,
   ],
-  entryComponents: [MdbTablePaginationComponent],
+  // entryComponents: [MdbTablePaginationComponent],
   providers: [MdbTableService],
 })
 export class TableModule {}

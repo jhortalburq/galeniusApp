@@ -20,7 +20,7 @@ import { FamiliaRoutingModule } from './familias-producto.routing';
     ReactiveFormsModule,
     FamiliaRoutingModule
   ],
-  entryComponents: [AgregarFamiliaComponent, EditarFamiliaComponent]
+  // entryComponents: [AgregarFamiliaComponent, EditarFamiliaComponent]
 })
 
 export class FamiliasProductosModule { }

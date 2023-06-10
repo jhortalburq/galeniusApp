@@ -26,6 +26,6 @@ import { ModulosComponent } from '../modals/modulos/modulos.component';
     RouterModule,
     MDBBootstrapModulesPro.forRoot(),
   ],
-  entryComponents: [ ModulosComponent ]
+  // entryComponents: [ ModulosComponent ]
 })
 export class SharedModule { }

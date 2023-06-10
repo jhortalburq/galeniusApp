@@ -21,6 +21,6 @@ import { ListaVendedoresComponent } from './lista-vendedores/lista-vendedores.co
     ReactiveFormsModule,
     VendedoresRoutingModule
   ],
-  entryComponents: [ AgregarVendedorComponent, EditarVendedorComponent]
+  // entryComponents: [ AgregarVendedorComponent, EditarVendedorComponent]
 })
 export class VendedoresModule { }

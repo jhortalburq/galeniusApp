@@ -20,7 +20,7 @@ import { ProveedorRoutingModule } from './proveedores.routing';
     ReactiveFormsModule,
     ProveedorRoutingModule
   ],
-  entryComponents: [ AgregarProveedorComponent, EditarProveedorComponent]
+  // entryComponents: [ AgregarProveedorComponent, EditarProveedorComponent]
 
 })
 export class ProveedoresModule { }

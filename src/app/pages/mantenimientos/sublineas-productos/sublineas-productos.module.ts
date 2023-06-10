@@ -19,6 +19,6 @@ import { EditarSublineasComponent } from './editar-sublineas/editar-sublineas.co
     FormsModule,
     ReactiveFormsModule,
     SubLineasProductoRoutingModule],
-  entryComponents: [AgregarSublineasComponent, EditarSublineasComponent]  
+    // entryComponents: [AgregarSublineasComponent, EditarSublineasComponent]  
 })
 export class SublineasProductosModule { }

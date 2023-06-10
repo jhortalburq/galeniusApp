@@ -11,7 +11,7 @@ import { PopoverContainerComponent } from './popover-container.component';
   imports: [CommonModule],
   declarations: [PopoverDirective, PopoverContainerComponent],
   exports: [PopoverDirective],
-  entryComponents: [PopoverContainerComponent]
+  // entryComponents: [PopoverContainerComponent]
 })
 export class PopoverModule {
   public static forRoot(): ModuleWithProviders<PopoverModule> {

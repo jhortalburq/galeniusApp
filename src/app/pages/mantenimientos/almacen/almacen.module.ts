@@ -33,6 +33,6 @@ import { AgregarAlmacenComponent,
     ReactiveFormsModule,
     AlmacenRoutingModule
   ],
-  entryComponents: [AgregarAlmacenComponent, EditarAlmacenComponent]
+  // entryComponents: [AgregarAlmacenComponent, EditarAlmacenComponent]
 })
 export class AlmacenModule { }

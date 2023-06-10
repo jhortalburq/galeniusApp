@@ -20,6 +20,6 @@ import { MarcasRoutingModule } from './marca.routing';
     ReactiveFormsModule,
     MarcasRoutingModule
   ],
-  entryComponents: [AgregarMarcaComponent, EditarMarcaComponent],
+  // entryComponents: [AgregarMarcaComponent, EditarMarcaComponent],
 })
 export class MarcaModule { }

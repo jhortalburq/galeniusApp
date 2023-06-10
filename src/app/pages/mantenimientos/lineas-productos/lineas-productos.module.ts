@@ -20,6 +20,6 @@ import { LineasProductoRoutingModule } from './lineas-productos.routing';
     ReactiveFormsModule,
     LineasProductoRoutingModule
   ],
-  entryComponents: [AgregarLineasComponent, EditarLineasComponent]
+  // entryComponents: [AgregarLineasComponent, EditarLineasComponent]
 })
 export class LineasProductosModule { }

@@ -31,6 +31,6 @@ import { UsuariosSucursalComponent } from './usuarios-sucursal/usuarios-sucursal
     ReactiveFormsModule,
     SucursalesRoutingModule
   ],
-  entryComponents: [ AgregarSucursalComponent, EditarSucursalComponent, DetalleSucursalComponent]
+  // entryComponents: [ AgregarSucursalComponent, EditarSucursalComponent, DetalleSucursalComponent]
 })
 export class SucursalesModule { }

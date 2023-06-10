@@ -32,6 +32,6 @@ import {
     ReactiveFormsModule,
     EmpresaRoutingModule
   ],
-  entryComponents: [ AgregarEmpresaComponent, EditarEmpresaComponent]
+  // entryComponents: [ AgregarEmpresaComponent, EditarEmpresaComponent]
 })
 export class EmpresasModule { }

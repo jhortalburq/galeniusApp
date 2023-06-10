@@ -20,7 +20,7 @@ import { EditarClienteComponent } from './editar-cliente/editar-cliente.componen
     ReactiveFormsModule,
     ClientesRoutingModule
   ],
-  entryComponents: [ AgregarClienteComponent, EditarClienteComponent]
+  // entryComponents: [ AgregarClienteComponent, EditarClienteComponent]
 
 })
 export class ClientesModule { }

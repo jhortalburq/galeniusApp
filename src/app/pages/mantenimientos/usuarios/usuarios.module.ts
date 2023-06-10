@@ -25,6 +25,6 @@ registerLocaleData(localeEsPe, 'es');
     UsuarioRoutingModule
   ],
   providers: [ { provide: LOCALE_ID, useValue: 'es-Pe' } ],
-  entryComponents: [ AgregarUsuariosComponent]
+  // entryComponents: [ AgregarUsuariosComponent]
 })
 export class UsuariosModule { }
