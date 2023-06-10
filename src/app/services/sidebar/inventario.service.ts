@@ -12,6 +12,7 @@ export class InventarioService {
       titulo: 'MOVIMIENTOS',
       icono: 'fa-user',
       secciones: [
+        { titulo: 'Con Orden de Compra', url: '/usuarios' },
         {
           titulo: 'Entradas',
           submenu: [
@@ -20,6 +21,7 @@ export class InventarioService {
               { titulo: 'Recepción de Despachos', url: '/usuarios' },
           ]
         },
+        { titulo: 'Con Orden de Compra', url: '/usuarios' },
         {
           titulo: 'Salidas',
           submenu: [
