@@ -29,8 +29,8 @@ export class AsistencialService {
    {
     titulo: 'ESPECIALISTAS',
     submenu: [  
-              { titulo: 'Registro de Especialistas', url: '/asistencial/agenda/diaria' },
-              { titulo: 'Nuevo Especialista', url: '/asistencial/agenda/diaria' },
+              { titulo: 'Registro de Especialistas', url: '/asistencial/especialistas/lista' },
+              { titulo: 'Nuevo Especialista', url: '/asistencial/especialistas/nuevo' },
              ]
    },
    {

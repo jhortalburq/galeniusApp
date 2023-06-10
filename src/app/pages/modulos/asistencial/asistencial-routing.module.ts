@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'horarios',
         loadChildren: () => import('../../horarios/horarios.module').then( m => m.HorariosModule)
       },
+      {
+        path: 'especialistas',
+        loadChildren: () => import('../../especialistas/especialistas.module').then( m => m.EspecialistasModule)
+      },
 ];
 
 @NgModule({

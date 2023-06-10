@@ -1,0 +1,30 @@
+<form class="form-horizontal form-material">
+    
+    <div class="row mt-n3">
+        <div class="col-sm-4 col-xs-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="form1" class="form-control">
+                <label for="form1" class="">Busqueda del Especialista</label>
+              </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <label class="mdb-main-label">Especialidad</label>
+            <select2 [data]="data" (update)="searchEspecialista($event)">
+            </select2>
+        </div>
+
+        <div class="col-sm-2">
+            <label class="mdb-main-label">Lugar</label>
+            <select2 [data]="data" (update)="searchEspecialista($event)">
+            </select2>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 btn-filter">
+            <a href="" class="btn btn-danger btn-sm btn-rounded"> <i class="fas fa-times"></i> Quitar</a>
+            <button mdbBtn size="sm" type="submit" color="mdb-color" [rounded]="true" class="waves-light" mdbWavesEffect>
+                <mdb-icon fas icon="search"></mdb-icon> Buscar
+            </button>
+        </div>
+    </div>
+</form>
