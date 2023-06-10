@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -10,7 +10,6 @@ import { HorariosRoutingModule } from './horararios-routing.module';
 
 import { MDBBootstrapModulesPro } from '../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../material.module';
-import { Select2Module } from 'ng-select2-component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -24,10 +23,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     MDBBootstrapModulesPro,
     MaterialModule,
     FullCalendarModule,
-    Select2Module,
     FormsModule,
     ReactiveFormsModule,
     HorariosRoutingModule
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class HorariosModule { }
