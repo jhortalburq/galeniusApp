@@ -17,7 +17,6 @@ import { ServicesModule } from './services/services.module';
 import { LoginComponent } from './login/login.component';
 
 import { MaterialModule } from './material.module';
-import { Select2Module } from 'ng-select2-component';
 
 
 @NgModule({
@@ -29,7 +28,6 @@ import { Select2Module } from 'ng-select2-component';
     BrowserModule,
     MDBBootstrapModulesPro.forRoot(),
     MaterialModule,
-    Select2Module,
     ToastModule.forRoot({
                                     timeOut: 2500,
                                     positionClass: 'md-toast-bottom-right',

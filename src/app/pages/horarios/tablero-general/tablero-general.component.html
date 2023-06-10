@@ -1,4 +1,12 @@
 <div class="row">
+    <div class="col-sm-12 col-md-9">
+        <mdb-card>
+            <mdb-card-body>
+                <full-calendar [options]="calendarOptions"></full-calendar>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+
     <div class="col-sm-12 col-md-3">
         <div class="row">
             <div class="col-12">
@@ -10,7 +18,6 @@
         <div class="row mt-3">
             <div class="col-12">
                 <mdb-card>
-
                         <mat-form-field class="mt-2 col-12">
                             <mat-label>Especialidad</mat-label>
                             <mat-select>
@@ -32,33 +39,9 @@
                             <mat-option *ngFor="let topping of toppingList" [value]="topping.value">{{topping.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-
-                        <mat-form-field class="col-12 mt-n3">
-                            <mat-label>Estados</mat-label>
-                            <mat-select>
-                            <mat-option *ngFor="let food of foods" [value]="food.value">
-                                {{food.viewValue}}
-                            </mat-option>
-                            </mat-select>
-                        </mat-form-field>
                 </mdb-card>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-12 col-md-9">
-        <mdb-card>
-            <mdb-card-body>
-                <full-calendar [options]="calendarOptions"></full-calendar>
-            </mdb-card-body>
-        </mdb-card>
-    </div>
-</div>
-
-
-
-<div class="fixed-action-btn" style="bottom: 5px; right: 24px;">
-    <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="openModal()">
-      <mdb-icon fas icon="plus" ></mdb-icon>
-    </a>
 </div>

@@ -18,8 +18,7 @@ import {
   FormBuilder
 } from '@angular/forms';
 
-import { NuevaCitaComponent } from '../../citas/nueva-cita/nueva-cita.component';
-
+import { IngresarHorarioComponent } from '../ingresar-horario/ingresar-horario.component';
 
 interface Food {
   value: string;
@@ -27,11 +26,12 @@ interface Food {
 }
 
 @Component({
-  selector: 'app-agenda-diaria',
-  templateUrl: './agenda-diaria.component.html',
-  styleUrls: ['./agenda-diaria.component.scss'],
+  selector: 'app-horario-detalle',
+  templateUrl: './horario-detalle.component.html',
+  styleUrls: ['./horario-detalle.component.scss']
 })
-export class AgendaDiariaComponent implements OnInit {
+
+export class HorarioDetalleComponent {
   selected = new Date();
   toppings = new FormControl('');
   modalRef: MDBModalRef;
@@ -80,7 +80,7 @@ export class AgendaDiariaComponent implements OnInit {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'listDay,timeGridWeek,dayGridMonth'
+        right: 'listDay'
       },
       events: [
         { title: 'event 1', start: '2023-06-08T14:30:00', end: '2023-06-08T15:00:00'},
@@ -89,7 +89,7 @@ export class AgendaDiariaComponent implements OnInit {
   };
 
   openModal() {
-    this.modalRef = this.modalService.show(NuevaCitaComponent, {
+    this.modalRef = this.modalService.show(IngresarHorarioComponent, {
                   backdrop: true,
                   keyboard: true,
                   focus: true,
@@ -108,5 +108,4 @@ export class AgendaDiariaComponent implements OnInit {
       }
     });
   }
-
 }

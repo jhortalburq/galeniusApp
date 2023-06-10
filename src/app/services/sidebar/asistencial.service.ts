@@ -10,35 +10,34 @@ export class AsistencialService {
     {
       titulo: 'AGENDA',
       submenu: [
-                { titulo: 'AGENDA DIARIA', url: '/asistencial/agenda/diaria' },
-                { titulo: 'CITAS PROGRAMADAS', url: '/asistencial/citas/citas-programadas' },
+                { titulo: 'Agenda Diaria', url: '/asistencial/agenda/diaria' },
+                { titulo: 'Citas Programadas', url: '/asistencial/citas/citas-programadas' },
                ]
    },
    {
     titulo: 'CONSULTAS MÉDICAS',
     submenu: [
-                  { titulo: 'REGISTRO DE CONSULTAS', url: '/asistencial/agenda/diaria' },
+                  { titulo: 'Registro de Consultas', url: '/asistencial/agenda/diaria' },
              ]
    },
    {
     titulo: 'PACIENTES',
     submenu: [
-                  { titulo: 'REGISTROS DE PACIENTES', url: '/asistencial/agenda/diaria' },
+                  { titulo: 'Registro de Pacientes', url: '/asistencial/agenda/diaria' },
              ]
    },
    {
     titulo: 'ESPECIALISTAS',
     submenu: [  
-              { titulo: 'REGISTROS DE ESPECIALISTA', url: '/asistencial/agenda/diaria' },
-              { titulo: 'NUEVO ESPECIALISTA', url: '/asistencial/agenda/diaria' },
+              { titulo: 'Registro de Especialistas', url: '/asistencial/agenda/diaria' },
+              { titulo: 'Nuevo Especialista', url: '/asistencial/agenda/diaria' },
              ]
    },
    {
     titulo: 'REGISTRO DE HORARIOS',
     submenu: [
-                  { titulo: 'HORARIOS POR ESPECIALISTA', url: '/asistencial/agenda/diaria' },
-                  { titulo: 'TABLERO GENERAL', url: '/asistencial/agenda/diaria' },
-                  { titulo: 'INGRESAR HORARIO', url: '/asistencial/agenda/diaria' },
+                  { titulo: 'Tablero General', url: '/asistencial/horarios/tablero-general' },
+                  { titulo: 'Horarios por Especialistas', url: '/asistencial/horarios/detalle' },
              ]
    },
     {

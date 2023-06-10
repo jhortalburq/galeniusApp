@@ -2,7 +2,8 @@
 import { ModuleWithProviders, NgModule} from "@angular/core";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 // import { MatIconRegistry } from '@angular/material/icon';
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+// import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
 // import { MatBadgeModule } from '@angular/material/badge';
 // import { MatButtonModule } from '@angular/material/button';
 // import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -19,18 +20,20 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 // import { MatInputModule } from '@angular/material/input';
 // import { MatListModule } from '@angular/material/list';
 // import { MatMenuModule } from '@angular/material/menu';
-import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
+import {MatPaginatorModule} from '@angular/material/paginator';
+// import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
 // import { MatProgressBarModule } from '@angular/material/progress-bar';
 // import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatRadioModule } from '@angular/material/radio';
 // import { MatRippleModule } from '@angular/material/core';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import {MatSelectModule} from '@angular/material/select';
+
 // import { MatSidenavModule } from '@angular/material/sidenav';
 // import { MatSliderModule } from '@angular/material/slider';
 // import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { MatSortModule } from '@angular/material/sort';
-import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
+// import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
 // import { MatTabsModule } from '@angular/material/tabs';
 // import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatTooltipModule } from '@angular/material/tooltip';
@@ -65,7 +68,7 @@ const mm = [
   // MatSlideToggleModule,
   // MatSnackBarModule,
   // MatSortModule,
-  MatTableModule,
+  // MatTableModule,
   // MatTabsModule,
   // MatToolbarModule,
   // MatTooltipModule,

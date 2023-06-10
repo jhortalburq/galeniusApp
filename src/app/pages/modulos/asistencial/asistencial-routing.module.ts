@@ -18,6 +18,10 @@ const routes: Routes = [
         path: 'citas',
         loadChildren: () => import('../../citas/citas.module').then( m => m.CitasModule)
       },
+      {
+        path: 'horarios',
+        loadChildren: () => import('../../horarios/horarios.module').then( m => m.HorariosModule)
+      },
 ];
 
 @NgModule({

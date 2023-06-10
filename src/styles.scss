@@ -179,3 +179,22 @@ body::before {
 .select2-search__field{
   font-size: 0.7rem;
 }
+
+
+/// MATERIAL
+mat-label{
+  font-size: 0.8rem;
+}
+
+.mat-mdc-select-trigger {
+  font-size: 0.8rem;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #ffffff!important;
+}
+
+.mat-mdc-option {
+  font-size: 0.8rem;
+  min-height: 36px!important;
+}
