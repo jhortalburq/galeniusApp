@@ -46,7 +46,7 @@ body::before {
   }
   
   .md-form input[type=text]{
-    font-size: 0.6rem!important;
+    font-size: 0.7rem!important;
   }
 
   .form-control-sm{
@@ -107,13 +107,12 @@ body::before {
   .mdb-card-80 {
     height: 80vh!important
   }
-  
-  .card-footer {
-    //margin-top: -15px;
+ 
+  .card-footer nav ul{
+    margin: -5px 0!important;
   }
   
-  
-  .card-footer{
+    .card-footer{
     background-color: #1c2331!important;
     padding: 5px 10px;
   }
@@ -153,4 +152,30 @@ body::before {
     border: 2px solid #59698d!important;
     background-color: #59698d!important;
     z-index: 0;
+}
+
+.mdb-main-label{
+  font-size: 0.6rem!important;
+  color: #757575
+}
+
+.select-wrapper>label.mdb-main-label.active,
+.select-wrapper>label.mdb-main-label{
+    font-size: 0.7rem;
+}
+
+.select2-results__option{
+  font-size: 0.7rem;
+}
+
+.select2-selection__rendered {
+  font-size: 0.7rem;
+}
+
+.select2-container--default .select2-results__option--highlighted{
+  background: #59698d!important;
+}
+
+.select2-search__field{
+  font-size: 0.7rem;
 }
