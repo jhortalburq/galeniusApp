@@ -3,21 +3,24 @@ import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standa
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-lista-especialistas',
-  templateUrl: './lista-especialistas.component.html',
-  styleUrls: ['./lista-especialistas.component.scss']
+  selector: 'app-lista-consultas',
+  templateUrl: './lista-consultas.component.html',
+  styleUrls: ['./lista-consultas.component.scss'],
 })
-export class ListaEspecialistasComponent {
+export class ListaConsultasComponent {
   registros: any = [];
   modalRef: MDBModalRef;
 
   displayedColumns = [
-    'Nombre Completo', 
-    'N° Documento',
-    'Edad', 
-    'Lugar',
-    'Especialidades',
+    'N° Consulta', 
+    'Paciente',
+    'Especialista', 
+    'Especialidad',
+    'Fecha Atención',
+    'Tipo de Cita',
+    'Estado',
     'Creado',
+    'Triaje',
     ''
   ];
 

@@ -26,6 +26,14 @@ const routes: Routes = [
         path: 'especialistas',
         loadChildren: () => import('../../especialistas/especialistas.module').then( m => m.EspecialistasModule)
       },
+      {
+        path: 'consultas',
+        loadChildren: () => import('../../consultas/consultas.module').then( m => m.ConsultasModule)
+      },
+      {
+        path: 'pacientes',
+        loadChildren: () => import('../../pacientes/pacientes.module').then( m => m.PacientesModule)
+      },
 ];
 
 @NgModule({

@@ -17,13 +17,14 @@ export class AsistencialService {
    {
     titulo: 'CONSULTAS MÉDICAS',
     submenu: [
-                  { titulo: 'Registro de Consultas', url: '/asistencial/agenda/diaria' },
+                  { titulo: 'Registro de Consultas', url: '/asistencial/consultas/consultas-medicas' },
              ]
    },
    {
     titulo: 'PACIENTES',
     submenu: [
-                  { titulo: 'Registro de Pacientes', url: '/asistencial/agenda/diaria' },
+                  { titulo: 'Registro de Pacientes', url: '/asistencial/pacientes/lista' },
+                  { titulo: 'Nuevo Paciente', url: '/asistencial/pacientes/nuevo' },
              ]
    },
    {

@@ -3,33 +3,30 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CitasRoutingModule } from './citas-routing.module';
-
 import { MDBBootstrapModulesPro } from '../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../material.module';
 import { Select2Module } from 'ng-select2-component';
 
-import { CitasProgramadasComponent } from './citas-programadas/citas-programadas.component';
-import { CitasFiltroComponent } from './citas-filtro/citas-filtro.component';
-import { NuevaCitaComponent } from './nueva-cita/nueva-cita.component';
+import { ListaConsultasComponent } from './lista-consultas/lista-consultas.component';
 
+import { ConsultasRoutingModule } from './consultas-routing.module';
+
+import { CitasModule } from '../citas/citas.module';
 
 @NgModule({
   declarations: [
-    CitasProgramadasComponent,
-    CitasFiltroComponent,
-    NuevaCitaComponent,
+    ListaConsultasComponent,
   ],
   imports: [
     CommonModule,
     MDBBootstrapModulesPro,
     MaterialModule,
     Select2Module,
+    CitasModule,
     FormsModule,
     ReactiveFormsModule,
-    CitasRoutingModule
+    ConsultasRoutingModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  exports: [CitasFiltroComponent]
 })
-export class CitasModule { }
+export class ConsultasModule { }
