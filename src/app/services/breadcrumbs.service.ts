@@ -8,18 +8,21 @@ import { NotificationsService } from './notifications.service';
 })
 export class BreadcrumbsService {
 
-  public modulo: string | null;
+  public modulo: string = 'SELECCIONE MODULO';
 
   constructor(
         public notificationService: NotificationsService
   ) {
-    this.modulo = localStorage.getItem('modulo');
+    // this.modulo = localStorage.getItem('modulo');
   }
 
-  setModuloName(modulo: string, modulo_rl: string) {
-    localStorage.setItem('last_modulo', modulo_rl);
-    localStorage.setItem('modulo', modulo);
-    this.notificationService.showWarning('Se Ingresó al modulo' , modulo);
-    this.modulo = modulo;
+  setModuloName(modulo: string, notification: boolean, modulo_rl?: string) {
+      // localStorage.setItem('last_modulo', modulo_rl);
+      // localStorage.setItem('modulo', modulo);
+      if (notification){
+        this.notificationService.showWarning('Se Ingresó al modulo' , modulo);
+      };
+      
+      this.modulo = modulo;
   }
 }

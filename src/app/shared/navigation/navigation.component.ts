@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModulosComponent } from '../../modals/modulos/modulos.component';
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
+
+import { AuthService, AlertService} from '../../services/services.index';
+
 import Swal from 'sweetalert2'
 import {map} from 'rxjs/operators';
 
@@ -20,7 +23,10 @@ import {
 export class NavigationComponent implements OnInit {
   modalRef: MDBModalRef;
 
-  username: string | null;
+  public currentUser: any;
+
+  empresa_seleccionada: any = {};
+  sucursal_seleccionada: any = {};
 
   modalOptions = {
       backdrop: true,
@@ -37,42 +43,27 @@ export class NavigationComponent implements OnInit {
           public sidebarService: SidebarService,
           private modalService: MDBModalService,
           public empresaService: EmpresaService,
-          public sucursalService: AlmacenService,
+          public alertService: AlertService,
           public route: ActivatedRoute,
+          public authService: AuthService,
           public router: Router
   ) { }
 
   ngOnInit(): void {
-    this.username = localStorage.getItem('username');
+    this.currentUser = this.authService.currentUserValue;
 
     this.empresaService.getEmpresasUsuario().subscribe();
+    this.empresa_seleccionada = this.empresaService.getEmpresaActivaUsuario();
 
-    this.empresaService.getEmpresaActivaUsuario().subscribe((res: any) => {
-      this.empresaService.empresa_seleccionada = res;
-      
-      if (res.id) {
-        this.sucursalService.getSucursalesUsuario(res.id).subscribe();
+    if (this.empresa_seleccionada.id) {
+      this.empresaService.getSucursalesEmpresa(this.empresa_seleccionada.id).subscribe();
+      this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
 
-        this.sucursalService.getSucursalActivaUsuario(res.id).subscribe((suc: any) => {
-            this.sucursalService.sucursal_seleccionada = suc;
-        });
+      // this.empresaService.getSucursalActivaUsuario(this.empresa_seleccionada.id).subscribe((suc: any) => {
+      //     this.empresaService.sucursal_seleccionada = suc;
+      // });
 
-      }
-
-    });
-
-
-    // if (JSON.parse(localStorage.getItem('empresa'))) {
-    //   console.log('json');
-    //   this.empresaService.empresa_seleccionada = JSON.parse(localStorage.getItem('empresa'));
-
-    // };
-
-
-    // if (JSON.parse(localStorage.getItem('sucursal'))) {
-    //   this.sucursalService.sucursal_seleccionada = JSON.parse(localStorage.getItem('sucursal'));
-    // }
-
+    }
   }
 
 
@@ -80,52 +71,23 @@ export class NavigationComponent implements OnInit {
     this.modalRef = this.modalService.show(ModulosComponent, this.modalOptions);
   }
 
-  setEmpresa( empresa: any) {
-    this.empresaService.setEmpresaActivaUsuario(empresa).subscribe();
-
+  setEmpresa( empresa: any ) {
+    localStorage.setItem('empresa', JSON.stringify(empresa));
     this.empresaService.empresa_seleccionada = empresa;
-    // localStorage.setItem('empresa', JSON.stringify(empresa));
+    this.empresa_seleccionada = empresa;
 
-    Swal.fire({
-        title: 'Cambio de Empresa',
-        text: 'Se ingreso a la Empresa ' + this.empresaService.empresa_seleccionada.razon_social,
-        icon: 'success',
-        confirmButtonText: 'Cerrar'
-    });
-
-    this.sucursalService.getSucursalesUsuario(empresa.id).subscribe(response => {
-      // localStorage.removeItem('sucursal');
-        this.sucursalService.sucursal_seleccionada = {
-                  nombre_sucursal: null,
+    this.empresaService.getSucursalesEmpresa(empresa.id).subscribe(response => {
+        this.empresaService.sucursal_seleccionada = {
+                  razon_social: null,
                   id: null
         };
     });
-
-     if (localStorage.getItem('last_modulo')) {
-          this.router.navigate(['/' + localStorage.getItem('last_modulo'), 'menu']);
-      } else {
-          this.router.navigate(['/menu']);
-      }
   }
 
-  setSucursal( sucursal: any) {
-    this.sucursalService.setSucursalActivaUsuario(sucursal, this.empresaService.empresa_seleccionada.id).subscribe();
-
-    this.sucursalService.sucursal_seleccionada = sucursal;
-    // localStorage.setItem('sucursal', JSON.stringify(sucursal));
-
-    Swal.fire({
-        title: 'Cambio de Sucursal',
-        text: 'Se ingreso a la Sucursal ' + this.sucursalService.sucursal_seleccionada.nombre_sucursal,
-        icon: 'success',
-        confirmButtonText: 'Cerrar'
-    });
-
-
-     if (localStorage.getItem('last_modulo')) {
-          this.router.navigate(['/' + localStorage.getItem('last_modulo'), 'menu']);
-      } else {
-          this.router.navigate(['/menu']);
-      }
+  setSucursal( sucursal: any ) {
+    localStorage.setItem('cm', JSON.stringify(sucursal));
+    this.empresaService.sucursal_seleccionada = sucursal;
+    this.sucursal_seleccionada = sucursal;
+    this.alertService.successSwalToast(`${this.sucursal_seleccionada.razon_social}`, 1000)
   }
 }

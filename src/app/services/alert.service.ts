@@ -11,7 +11,16 @@ export class AlertService {
 
   constructor(public router: Router) { }
 
-  errorSwal(message, title) {
+  successSwal(message: string, title: string) {
+      Swal.fire({
+          title: title,
+          text: message,
+          icon: 'success',
+          confirmButtonText: 'Cerrar'
+      });
+  }
+
+  errorSwal(message: string, title: string) {
         Swal.fire({
             title: title,
             text: message,
@@ -21,21 +30,16 @@ export class AlertService {
       });
   }
 
-  successSwalToast(title: string, url: any) {
+  successSwalToast(title: string, time: number) {
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000,
+        timer: time,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
           toast.addEventListener('mouseleave', Swal.resumeTimer)
-          
-          setTimeout(() => {
-              this.router.navigate(url);
-           }, 1500)
-
         }
     });
       

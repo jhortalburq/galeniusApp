@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.breadcrumbService.setModuloName(this.modulo, 'administrador');
+    this.breadcrumbService.setModuloName(this.modulo, true, 'administrador');
   }
 
 }

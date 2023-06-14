@@ -17,7 +17,7 @@ export class MenuComponent {
 
   ngOnInit() {
     this.sidebarService.menu = this.mantenimientosService.menu;
-    this.breadcrumbService.setModuloName(this.modulo, 'mantenimientos');
+    this.breadcrumbService.setModuloName(this.modulo, true, 'mantenimientos');
   }
 }
 

@@ -1,8 +1,6 @@
 
 import {catchError, map} from 'rxjs/operators';
 import { Injectable, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {  Router, Route, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -11,6 +9,8 @@ import { User } from '../models/user';
 
 import { environment } from '../../environments/environment';
 
+import { BehaviorSubject, Observable } from 'rxjs';
+
 
 @Injectable()
 export class AuthService {
@@ -18,11 +18,12 @@ export class AuthService {
 
   public usuario: any = {empresa: '', nombre: ''};
 
-  userIsloggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
+  //public
+  public currentUser: Observable<any>;
 
-  private code: string;
-  private cachedURL: string | null;
-
+  //private
+  private currentUserSubject: BehaviorSubject<any>;
+  
   httpOptions = {
     headers: new HttpHeaders(
             {
@@ -32,23 +33,26 @@ export class AuthService {
       };
 
   constructor(private router: Router,
-              private location: Location,
-              private http: HttpClient) {}
+              private http: HttpClient) {
+        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}' ));
+        this.currentUser = this.currentUserSubject.asObservable();                
+  }
 
 
   getToken(): string | null{
-    return localStorage.getItem('token');
+    return this.currentUserValue.access;
   }
 
   login(user: User){
     return this.http.post(`${environment.apiUrl}/api/v1/token`, JSON.stringify(user)).pipe(
                         map((res: any) => {
-                          console.log(res)
-                                  localStorage.setItem('token', res.token);
-                                  localStorage.setItem('username', user.username);
-                                  return res;
-                          }),
-                          catchError(this.handleError),
+                            if (res && res.access) {
+                              localStorage.setItem('currentUser', JSON.stringify(res));
+                              this.currentUserSubject.next(res);
+                            }
+                            return res;
+                        }),
+                        catchError(this.handleError),
       );
   }
 
@@ -65,35 +69,32 @@ export class AuthService {
       });
   }
 
-  verifyLogin(url: any): boolean{
-    if (!this.isLoggedIn() && this.code == null){
-      this.router.navigate(['/login']);
-      return false;
-    }
-    else if (this.isLoggedIn()){
-      return true;
-    }
-    else if (!this.isLoggedIn() && this.code != null){
-       const params = new URLSearchParams(this.location.path(false).split('?')[1]);
-       if (params.get('code') && (localStorage.getItem('cachedurl') === '' || localStorage.getItem('cachedurl') === undefined)){
-          localStorage.setItem('cachedurl', this.location.path(false).split('?')[0]);
-       }
-       if (this.cachedURL != null || this.cachedURL !== ''){
-          this.cachedURL = localStorage.getItem('cachedurl');
-       }
-    }
-    return false
+  public get currentUserValue(): any {
+    return this.currentUserSubject.value;
   }
 
-  public isLoggedIn(): boolean{
-    let status = false;
-
-    if ( this.getToken() != null ){
-      status = true;
+  get is_expirate() {
+    let now = new Date().getTime();
+    let expiration = new Date(this.currentUserSubject.value?.expiration).getTime();
+    if ( (expiration - now) > 0 ) {
+      return false
+    } else {
+      return true
     }
-    else{
-      status = false;
-    }
-    return status;
   }
+
+  // /**
+  //  *  Confirms if user is admin
+  //  */
+  // get isAdmin() {
+  //   return this.currentUser && this.currentUserSubject.value.role === Role.Admin;
+  // }
+
+  // /**
+  //  *  Confirms if user is client
+  //  */
+  // get isClient() {
+  //   return this.currentUser && this.currentUserSubject.value.role === Role.Client;
+  // }
+
 }

@@ -21,7 +21,7 @@ import {
 
 export class LoginComponent implements OnInit {
 
-  public last_modulo: string | null = '';
+  // public last_modulo: string | null = '';
   loginForm: FormGroup;
 
   constructor(
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.last_modulo = localStorage.getItem('last_modulo');
+    // this.last_modulo = localStorage.getItem('last_modulo');
     this.createForm();
   }
 
@@ -49,15 +49,15 @@ export class LoginComponent implements OnInit {
 
         this.authService.login(this.loginForm.value).subscribe({
             next: (response) => {
-                let url: any;
+                // if (this.last_modulo) {
+                //     url = this.router.navigate(['/' + this.last_modulo, 'menu']);
+                // } else {
+                // }
+                this.alertService.successSwalToast('Ingreso Correcto', 2000);
 
-                if (this.last_modulo) {
-                    url = this.router.navigate(['/' + this.last_modulo, 'menu']);
-                } else {
-                    url =this.router.navigate(['/menu']);
-                }
-
-                this.alertService.successSwalToast('Ingreso Correcto', url)
+                setTimeout(() => {
+                    this.router.navigate(['/menu']);
+                }, 500)
             },
             error: (e: any) => {
                 this.loginForm.reset();

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { NotificationsService } from './notifications.service';
 
 import {
   BreadcrumbsService,
@@ -39,7 +39,8 @@ import {
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   declarations: []
 })

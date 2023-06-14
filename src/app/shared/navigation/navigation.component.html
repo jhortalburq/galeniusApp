@@ -69,42 +69,41 @@
     <navlinks>
       <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
 
-        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="empresaService.empresa_seleccionada.id">
-          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="sucursalService.sucursal_seleccionada.id; else elseBlockSucursal">
-             {{ sucursalService.sucursal_seleccionada.nombre_sucursal }}
-          </a>
-
-          <ng-template #elseBlockSucursal>
-            <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-               <--Seleccione Sucursal -->
-            </a>
-          </ng-template>
-
-          <div class="dropdown-menu dropdown-dark dropdown-menu-right">
-            <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of sucursalService.sucursales">{{ sucursal.nombre_sucursal }}</a>
-          </div>
-        </li>
-
         <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="empresaService.empresas.length > 0">
           <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.empresa_seleccionada.id; else elseBlock">
-             {{ empresaService.empresa_seleccionada.razon_social }} ({{ empresaService.empresa_seleccionada.no_documento }})
+             {{ empresaService.empresa_seleccionada.nombre }}
           </a>
 
           <ng-template #elseBlock>
             <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              < --Seleccione Empresa --> 
+              <-- Seleccione Empresa --> 
             </a>
           </ng-template>
 
           <div class="dropdown-menu dropdown-dark dropdown-menu-right">
-            <a class="dropdown-item" (click)="setEmpresa(empresa)" *ngFor="let empresa of empresaService.empresas">{{ empresa.razon_social }} ({{ empresa.no_documento }})</a>
+            <a class="dropdown-item" (click)="setEmpresa(empresa)" *ngFor="let empresa of empresaService.empresas">{{ empresa.nombre }}</a>
           </div>
         </li>
 
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="empresaService.empresa_seleccionada.id">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.sucursal_seleccionada.id; else elseBlockSucursal">
+             {{ empresaService.sucursal_seleccionada.razon_social }}
+          </a>
+
+          <ng-template #elseBlockSucursal>
+            <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+               <-- Seleccione Sucursal -->
+            </a>
+          </ng-template>
+
+          <div class="dropdown-menu dropdown-dark dropdown-menu-right">
+            <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of empresaService.sucursales">{{ sucursal.razon_social }}</a>
+          </div>
+        </li>
 
         <li class="nav-item dropdown dropdown-sucursal btn-group" dropdown>
           <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-            <i class="fa fa-user"></i> {{ username }}
+            <i class="fa fa-user"></i> {{ currentUser.first_name }}
           </a>
           <div class="dropdown-menu dropdown-dark dropdown-menu-right" role="menu">
             <a class="dropdown-item" href="#">Action</a>

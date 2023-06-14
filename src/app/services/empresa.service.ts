@@ -14,12 +14,10 @@ import { SharedService } from './shared.service'
 export class EmpresaService {
 
   public empresas: Array<any> = [];
+  public sucursales: Array<any> = [];
 
-  public empresa_seleccionada = {
-    razon_social: null,
-    no_documento: null,
-    id: null
-  };
+  public empresa_seleccionada: any = {};
+  public sucursal_seleccionada: any = {};
 
   constructor(private http: HttpClient,
               private sharedService: SharedService) {
@@ -27,7 +25,7 @@ export class EmpresaService {
 
   getEmpresasUsuario(params?: string) {
     if (params && params.length > 2) {
-      return this.http.get(`${environment.apiUrl}/api/v1/empresas/`, {params: { 'search': params }})
+      return this.http.get(`${environment.apiUrl}/api/v1/organizaciones`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           this.empresas = res.results;
                           return res;
@@ -35,7 +33,7 @@ export class EmpresaService {
                     catchError(this.sharedService.handleError)
                   );
     } else {
-      return this.http.get(`${environment.apiUrl}/api/v1/empresas/`)
+      return this.http.get(`${environment.apiUrl}/api/v1/organizaciones`)
                       .pipe(map( (res: any) => {
                             this.empresas = res.results.filter( (item: any) => item.activo === true)
                             return res;
@@ -45,16 +43,11 @@ export class EmpresaService {
     }
   }
 
-  // setEmpresaSeleccionada(empresa_seleccionada: any){
-  //     this.empresa_seleccionada = this.empresa_seleccionada;
-  // }
-
   getEmpresaActivaUsuario() {
-    return this.http.get(`${environment.apiUrl}/api/v1/empresas/seleccionado/`);
-  }
-
-  setEmpresaActivaUsuario(empresa: any) {
-    return this.http.post(`${environment.apiUrl}/api/v1/empresas/${empresa.id}/seleccionar/`, {}, {});
+    if (!this.empresa_seleccionada.id) {
+        this.empresa_seleccionada = JSON.parse(localStorage.getItem('empresa'));
+    }
+    return this.empresa_seleccionada;
   }
 
   addEmpresa(empresa: any) {
@@ -63,6 +56,35 @@ export class EmpresaService {
 
   editEmpresa(empresa: any, id: number) {
     return this.http.put(`${environment.apiUrl}/api/v1/empresas/${id}/`, JSON.stringify(empresa), {});
+  }
+
+  getSucursalesEmpresa(id: any, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(`${environment.apiUrl}/api/v1/organizaciones/${id}/sucursales`, {params: { 'search': params }})
+                    .pipe(
+                      map( (res: any) => {
+                          this.sucursales = res.results;
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(`${environment.apiUrl}/api/v1/organizaciones/${id}/sucursales` )
+                      .pipe(
+                        map( (res: any) => {
+                            this.sucursales = res.filter( (item: any) => item.activo === true);
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
+  getSucursalActivo() {
+    if (!this.sucursal_seleccionada.id) {
+        this.sucursal_seleccionada = JSON.parse(localStorage.getItem('cm'));
+    }
+    return this.sucursal_seleccionada;
   }
 
   subirLogotipo( archivo: File, id: number) {

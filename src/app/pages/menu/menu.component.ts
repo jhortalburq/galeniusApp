@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { SidebarService, BreadcrumbsService } from '../../services/services.index';
 
 @Component({
   selector: 'app-menu',
@@ -7,20 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  public modulo = 'SELECCIONE MÓDULO';
 
-  public last_modulo: string | null = '';
+  // public last_modulo: string | null = '';
 
   constructor(
-        public router: Router,
+        public sidebarService: SidebarService,
+        public breadcrumbService: BreadcrumbsService
   ) { }
 
   ngOnInit() {
-    this.last_modulo = localStorage.getItem('last_modulo');
-
-    if (this.last_modulo) {
-        this.router.navigate(['/' + this.last_modulo, 'menu']);
-    } else {
-        this.router.navigate(['/administrador/menu']);
-    }
+    this.sidebarService.menu = [];
+    this.breadcrumbService.setModuloName(this.modulo, false);
   }
 }
