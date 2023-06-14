@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/services.index';
-import Swal from 'sweetalert2';
+
+import { AlertService } from '../services/alert.service';
 
 import {
     FormGroup,
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
         public router: Router,
         public authService: AuthService,
         public fb: FormBuilder,
+        public alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -45,44 +47,25 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
 
-        this.authService.login( this.loginForm.value ).subscribe(
-          (response) => {
+        this.authService.login(this.loginForm.value).subscribe({
+            next: (response) => {
+                let url: any;
 
-              let timerInterval;
+                if (this.last_modulo) {
+                    url = this.router.navigate(['/' + this.last_modulo, 'menu']);
+                } else {
+                    url =this.router.navigate(['/menu']);
+                }
 
-              Swal.fire({
-                title: 'Ingreso Correcto',
-                text: 'Espere unos segundos estamos redirigiendolo al ingreso',
-                icon: 'success',
-                confirmButtonColor: "#59698d",
-                // onClose: () => {
-                //   clearInterval(timerInterval);
-                //      if (this.last_modulo) {
-                //         this.router.navigate(['/' + this.last_modulo, 'menu']);
-                //     } else {
-                //         this.router.navigate(['/menu']);
-                //     }
-                // }
-              }).then((result) => {
-                  if (this.last_modulo) {
-                      this.router.navigate(['/' + this.last_modulo, 'menu']);
-                  } else {
-                    console.log('xx')
-                      this.router.navigate(['/menu']);
-                  }
-              });
+                this.alertService.successSwalToast('Ingreso Correcto', url)
             },
-            err => {
-                Swal.fire({
-                  title: 'Error!',
-                  text: 'El usuario o contraseña ingresada es incorrecta',
-                  icon: 'error',
-                  confirmButtonText: 'Cerrar',
-                  confirmButtonColor: "#59698d",
-                });
-                  // swal("Login Incorrecto!", err.error.non_field_errors[0], "error");
+            error: (e: any) => {
+                this.loginForm.reset();
+                this.alertService.errorSwal(e.error.detail, 'Error');
             }
-        );
+        })
+
     }
   }
 }
+

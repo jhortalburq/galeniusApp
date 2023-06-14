@@ -10,9 +10,9 @@ import { DetalleEspecialistaComponent } from './detalle-especialista/detalle-esp
 import { MDBBootstrapModulesPro } from '../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../material.module';
 import { Select2Module } from 'ng-select2-component';
+import { SharedModule } from '../../shared/shared.module';
 
 import { EspecialistasRoutingModule } from './especialistas-routing.module';
-import { FiltroEspecialistaComponent } from './filtro-especialista/filtro-especialista.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +20,12 @@ import { FiltroEspecialistaComponent } from './filtro-especialista/filtro-especi
     NuevoEspecialistaComponent,
     EditarEspecialistaComponent,
     DetalleEspecialistaComponent,
-    FiltroEspecialistaComponent
   ],
   imports: [
     CommonModule,
     MDBBootstrapModulesPro,
     Select2Module,
+    SharedModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,

@@ -10,9 +10,9 @@ import { DetallePacienteComponent } from './detalle-paciente/detalle-paciente.co
 import { MDBBootstrapModulesPro } from '../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../material.module';
 import { Select2Module } from 'ng-select2-component';
+import { SharedModule } from '../../shared/shared.module';
 
 import { PacientesRoutingModule } from './pacientes-routing.module';
-import { FiltrosPacientesComponent } from './filtros-pacientes/filtros-pacientes.component';
 
 
 @NgModule({
@@ -21,12 +21,12 @@ import { FiltrosPacientesComponent } from './filtros-pacientes/filtros-pacientes
     NuevoPacienteComponent,
     EditarPacienteComponent,
     DetallePacienteComponent,
-    FiltrosPacientesComponent
   ],
   imports: [
     CommonModule,
     MDBBootstrapModulesPro,
     Select2Module,
+    SharedModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,

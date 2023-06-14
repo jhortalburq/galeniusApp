@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./nuevo-paciente.component.scss']
 })
 export class NuevoPacienteComponent {
-
+  data = []
 }

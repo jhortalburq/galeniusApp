@@ -18,3 +18,5 @@ export { EmpresaService } from './empresa.service';
 export { UsuariosService } from './usuarios.service';
 export { AlmacenService } from './almacen.service';
 export { MantenimientoService } from './mantenimiento.service';
+
+export { AlertService } from './alert.service';
