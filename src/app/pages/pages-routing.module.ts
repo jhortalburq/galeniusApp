@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MenuComponent } from './menu/menu.component';
 import { PagesComponent } from './pages.component';
+import { SeleccionarModuloComponent } from './seleccionar-modulo/seleccionar-modulo.component';
+import { SeleccionarSucursalComponent } from './seleccionar-sucursal/seleccionar-sucursal.component';
+import { MenuComponent } from './menu/menu.component';
 
 import { AuthGuard } from '../services/auth.guard';
 
@@ -15,6 +17,18 @@ const routes: Routes = [
         {
           path: 'menu',
           component: MenuComponent
+        },
+        {
+          path: 'seleccionar-sucursal',
+          component: SeleccionarSucursalComponent
+        },
+        {
+          path: 'seleccionar-modulo',
+          component: SeleccionarModuloComponent
+        },
+        {
+          path: 'organizaciones',
+          loadChildren: () => import('./organizaciones/organizaciones.module').then( m => m.OrganizacionesModule)
         },
         {
           path: 'comercial',

@@ -9,6 +9,11 @@ import { NotificationsService } from './notifications.service';
 export class BreadcrumbsService {
 
   public modulo: string = 'SELECCIONE MODULO';
+  public title: string = '';
+
+  public flag_dropdown_empresa: boolean = true;
+  public flag_dropdown_sucursal: boolean = true;
+  public flag_sidebar: boolean = true;
 
   constructor(
         public notificationService: NotificationsService

@@ -12,12 +12,12 @@ import { SharedService } from './shared.service'
 })
 
 export class EmpresaService {
-
+ 
   public empresas: Array<any> = [];
   public sucursales: Array<any> = [];
 
-  public empresa_seleccionada: any = {};
-  public sucursal_seleccionada: any = {};
+  public empresa_seleccionada: any = {id: null};
+  public sucursal_seleccionada: any = {id: null};
 
   constructor(private http: HttpClient,
               private sharedService: SharedService) {
@@ -43,15 +43,20 @@ export class EmpresaService {
     }
   }
 
+  quitarEmpresaActivaUsuario() {
+    localStorage.removeItem('empresa');
+    this.empresa_seleccionada = {};
+  }
+
   getEmpresaActivaUsuario() {
-    if (!this.empresa_seleccionada.id) {
+    if (this.empresa_seleccionada && !this.empresa_seleccionada.id) {
         this.empresa_seleccionada = JSON.parse(localStorage.getItem('empresa'));
     }
     return this.empresa_seleccionada;
   }
 
   addEmpresa(empresa: any) {
-    return this.http.post(`${environment.apiUrl}/api/v1/empresas/`, JSON.stringify(empresa), {});
+    return this.http.post(`${environment.apiUrl}/api/v1/organizaciones`, JSON.stringify(empresa));
   }
 
   editEmpresa(empresa: any, id: number) {
@@ -81,10 +86,15 @@ export class EmpresaService {
   }
 
   getSucursalActivo() {
-    if (!this.sucursal_seleccionada.id) {
+    if (this.sucursal_seleccionada && !this.sucursal_seleccionada.id) {
         this.sucursal_seleccionada = JSON.parse(localStorage.getItem('cm'));
     }
     return this.sucursal_seleccionada;
+  }
+
+  quitarSucursalActivo() {
+    localStorage.removeItem('cm');
+    this.sucursal_seleccionada = {};
   }
 
   subirLogotipo( archivo: File, id: number) {

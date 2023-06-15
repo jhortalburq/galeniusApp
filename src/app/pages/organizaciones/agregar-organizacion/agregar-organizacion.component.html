@@ -1,0 +1,48 @@
+<div class="modal-content">
+
+    <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <div class="modal-header text-center">
+        <p class="heading lead"><mdb-icon fas icon="plus"></mdb-icon> Organización</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+
+            <div class="row ">
+                <div class="col-sm-12 col-xs-12">
+                      <div class="md-form form-sm form-group mt-1">
+                        <input type="text" id="razon_social" formControlName="nombre" class="form-control"
+                               mdbInput mdbValidate>
+                        <label for="razon_social"  class="font-weight-bold">Nombre Organización (*)</label>
+
+                      </div>
+                 </div>
+            </div>
+
+            <div class="row ">
+
+                <div class="col-sm-12 col-xs-12">
+                    <mdb-checkbox formControlName="flag_cm_multiples">Multiples Sucursales</mdb-checkbox>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row mt-3">
+                    <app-checkbox-modulos [item]="item"
+                                          (selectItem)="changeCheckbox($event)" 
+                                          *ngFor="let item of _modulos; let i = index">
+                    </app-checkbox-modulos>
+            </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="danger" class="waves-light" mdbWavesEffect>Grabar</button>
+      </div>
+
+    </form>
+
+  </div>

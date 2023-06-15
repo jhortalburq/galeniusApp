@@ -18,6 +18,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.sidebarService.menu = this.pedidoService.menu;
     this.breadcrumbService.setModuloName(this.modulo, true, 'pedidos');
+    this.breadcrumbService.flag_sidebar = true;
   }
 
 }

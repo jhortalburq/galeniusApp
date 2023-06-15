@@ -55,14 +55,9 @@ export class NavigationComponent implements OnInit {
     this.empresaService.getEmpresasUsuario().subscribe();
     this.empresa_seleccionada = this.empresaService.getEmpresaActivaUsuario();
 
-    if (this.empresa_seleccionada.id) {
+    if (this.empresa_seleccionada) {
       this.empresaService.getSucursalesEmpresa(this.empresa_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
-
-      // this.empresaService.getSucursalActivaUsuario(this.empresa_seleccionada.id).subscribe((suc: any) => {
-      //     this.empresaService.sucursal_seleccionada = suc;
-      // });
-
     }
   }
 
@@ -88,6 +83,8 @@ export class NavigationComponent implements OnInit {
     localStorage.setItem('cm', JSON.stringify(sucursal));
     this.empresaService.sucursal_seleccionada = sucursal;
     this.sucursal_seleccionada = sucursal;
-    this.alertService.successSwalToast(`${this.sucursal_seleccionada.razon_social}`, 1000)
+    this.alertService.successSwalToast(`${this.sucursal_seleccionada.razon_social}`, 1000);
+
+    this.router.navigate(['/seleccionar-modulo']);
   }
 }

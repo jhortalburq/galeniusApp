@@ -19,6 +19,14 @@ export class MantenimientoService {
     private sharedService: SharedService) {
   }
 
+  getDataModulos() {
+      return this.http.get(`${environment.apiUrl}/api/v1/modulos`)
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+  }
 
   getQueryset(tipo: string, params?: string) {
     if (params && params.length > 2) {

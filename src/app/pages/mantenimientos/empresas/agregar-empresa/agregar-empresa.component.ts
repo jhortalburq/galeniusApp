@@ -25,6 +25,7 @@ import { NotificationsService } from '../../../../services/notifications.service
 })
 export class AgregarEmpresaComponent implements OnInit {
 
+  
   registerForm: FormGroup;
 
   razon_social: FormControl;

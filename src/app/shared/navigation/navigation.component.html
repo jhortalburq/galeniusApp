@@ -56,21 +56,21 @@
 
     <navlinks class="navbar-container">
       <!-- SideNav slide-out button -->
-      <div class="float-left">
+      <div class="float-left" *ngIf="breadcrumbService.flag_sidebar">
         <a (click)="sidenav.show()" class="button-collapse"><mdb-icon fas icon="bars"></mdb-icon></a>
       </div>
       <!--/. SideNav slide-out button -->
     </navlinks>
 
     <mdb-navbar-brand>
-      <a class="navbar-brand">{{ breadcrumbService.modulo | uppercase}}</a>
+      <a class="navbar-brand">{{ breadcrumbService.title | uppercase}}</a>
     </mdb-navbar-brand>
 
     <navlinks>
       <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
 
-        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="empresaService.empresas.length > 0">
-          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.empresa_seleccionada.id; else elseBlock">
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_empresa && empresaService.empresas.length > 0">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.empresa_seleccionada; else elseBlock">
              {{ empresaService.empresa_seleccionada.nombre }}
           </a>
 
@@ -85,9 +85,9 @@
           </div>
         </li>
 
-        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="empresaService.empresa_seleccionada.id">
-          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.sucursal_seleccionada.id; else elseBlockSucursal">
-             {{ empresaService.sucursal_seleccionada.razon_social }}
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_sucursal && empresaService.empresa_seleccionada">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.sucursal_seleccionada; else elseBlockSucursal">
+             {{ empresaService.sucursal_seleccionada.razon_social | uppercase }}
           </a>
 
           <ng-template #elseBlockSucursal>
@@ -97,7 +97,9 @@
           </ng-template>
 
           <div class="dropdown-menu dropdown-dark dropdown-menu-right">
-            <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of empresaService.sucursales">{{ sucursal.razon_social }}</a>
+            <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of empresaService.sucursales">
+              {{ sucursal.razon_social | uppercase }}
+            </a>
           </div>
         </li>
 

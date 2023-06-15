@@ -16,7 +16,6 @@ export class AdministradorComponent implements OnInit {
 
   ngOnInit() {
     this.sidebarService.menu = this.administradorService.menu;
-
   }
 
 }

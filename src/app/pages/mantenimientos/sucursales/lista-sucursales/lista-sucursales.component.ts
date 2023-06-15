@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef, Renderer2, DoCheck } from '@angular/core';
-import { AlmacenService, EmpresaService } from '../../../../services/services.index';
+import { AlmacenService, EmpresaService, BreadcrumbsService} from '../../../../services/services.index';
 
 import { MDBModalRef, MDBModalService } from '../../../../../../ng-uikit-pro-standard/src/public_api';
 import { NotificationsService } from '../../../../services/notifications.service';
@@ -29,13 +29,15 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
           public empresaService: EmpresaService,
           public almacenService: AlmacenService,
           private modalService: MDBModalService,
+          public breadcrumbService: BreadcrumbsService,
           private renderer: Renderer2,
           public notificationService: NotificationsService,
           private router: Router
   ) { }
 
   ngOnInit(): void {
-   
+    this.breadcrumbService.title = 'SUCURSALES';
+
   }
 
   ngDoCheck() {
