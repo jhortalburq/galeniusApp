@@ -6,7 +6,6 @@ import {
     FormControl,
     FormArray,
     Validators,
-    FormBuilder
 } from '@angular/forms';
 
 import { Observable } from 'rxjs';
@@ -36,7 +35,6 @@ export class AgregarOrganizacionComponent {
 
   constructor(
         public modalRef: MDBModalRef,
-        public fb: FormBuilder,
         public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,

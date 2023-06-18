@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MDBBootstrapModulesPro } from '../../../../../ng-uikit-pro-standard/src/lib/mdb.module';
+import { SharedModule } from '../../../shared/shared.module';
 
 import { SucursalesRoutingModule } from './sucursales.routing';
 
@@ -22,14 +23,15 @@ import { UsuariosSucursalComponent } from './usuarios-sucursal/usuarios-sucursal
       AgregarSucursalComponent,
       EditarSucursalComponent,
       DetalleSucursalComponent,
-      UsuariosSucursalComponent
+      UsuariosSucursalComponent,
   ],
   imports: [
     CommonModule,
     MDBBootstrapModulesPro.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    SucursalesRoutingModule
+    SucursalesRoutingModule,
+    SharedModule
   ],
   // entryComponents: [ AgregarSucursalComponent, EditarSucursalComponent, DetalleSucursalComponent]
 })

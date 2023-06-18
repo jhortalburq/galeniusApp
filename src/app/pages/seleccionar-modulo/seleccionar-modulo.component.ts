@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { SidebarService, BreadcrumbsService, EmpresaService } from '../../services/services.index';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./seleccionar-modulo.component.scss']
 })
 export class SeleccionarModuloComponent {
+
   empresa_seleccionada: any = {};
   sucursal_seleccionada: any = {};
 
@@ -27,11 +28,10 @@ export class SeleccionarModuloComponent {
 
     this.empresaService.getEmpresasUsuario().subscribe();
     this.empresa_seleccionada = this.empresaService.getEmpresaActivaUsuario();
-    console.log('xxxxx')
+
     if (this.empresa_seleccionada) {
       this.empresaService.getSucursalesEmpresa(this.empresa_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
-      console.log('aquiiiiii', this.sucursal_seleccionada)
     }
   }
 

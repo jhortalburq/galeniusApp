@@ -11,9 +11,11 @@ import { Select2Module } from 'ng-select2-component';
 
 import { ModulosComponent } from '../modals/modulos/modulos.component';
 
-import { FiltroEspecialistaComponent } from './filtros/filtro-especialista/filtro-especialista.component';
-import { CitasFiltroComponent } from './filtros/citas-filtro/citas-filtro.component';
+import { CheckboxModulosComponent } from './components/checkbox-modulos/checkbox-modulos.component';
+
 import { FiltrosPacientesComponent } from './filtros/filtros-pacientes/filtros-pacientes.component';
+import { CitasFiltroComponent } from './filtros/citas-filtro/citas-filtro.component';
+import { FiltroEspecialistaComponent } from './filtros/filtro-especialista/filtro-especialista.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { FiltrosPacientesComponent } from './filtros/filtros-pacientes/filtros-p
     FiltroEspecialistaComponent,
     CitasFiltroComponent,
     FiltrosPacientesComponent,
+    CheckboxModulosComponent,
   ],
   exports: [
     NavigationComponent,
@@ -32,6 +35,7 @@ import { FiltrosPacientesComponent } from './filtros/filtros-pacientes/filtros-p
     FiltroEspecialistaComponent,
     CitasFiltroComponent,
     FiltrosPacientesComponent,
+    CheckboxModulosComponent,
   ],
   imports: [
     CommonModule,

@@ -51,7 +51,7 @@ export class AlmacenService {
     return this.http.post(`${environment.apiUrl}/api/v1/empresa/${empresa_id}/sucursales/${sucursal.id}/seleccionar/`, {}, {});
   }
 
-  addSucursal(sucursal: any, empresa_id: string) {
+  addSucursal(sucursal: any, empresa_id: number) {
     return this.http.post(`${environment.apiUrl}/api/v1/empresa/${empresa_id}/sucursales/`, JSON.stringify(sucursal), {});
   }
 

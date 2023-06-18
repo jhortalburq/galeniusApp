@@ -96,8 +96,7 @@ export class MantenimientoService {
                       }),
                     catchError(this.sharedService.handleError)
                   );
-}
-
+  }
 
   getSubLineaProductoLineas(idFamilia: number, idLinea: number) {
     return this.http.get(`${environment.apiUrl}/api/v1/sublineas-productos/?familia=${idFamilia}&linea=${idLinea}`)
@@ -120,6 +119,5 @@ export class MantenimientoService {
   addRegistroCaracteristica(registro: any, caracteristica_id: number) {
     return this.http.post(`${environment.apiUrl}/api/v1/caracteristicas/${caracteristica_id}/registros/`, JSON.stringify(registro), {})
   }
-
  
 }

@@ -91,7 +91,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-lg modal-dialog cascading-modal ',
+                  class: 'modal-dialog cascading-modal ',
                   animated: true,
                   data: {
                       content: { sucursal: sucursal}

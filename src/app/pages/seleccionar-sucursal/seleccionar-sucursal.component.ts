@@ -27,11 +27,10 @@ export class SeleccionarSucursalComponent {
 
     this.empresaService.getEmpresasUsuario().subscribe();
     this.empresa_seleccionada = this.empresaService.getEmpresaActivaUsuario();
-    console.log('xxxxx')
+    
     if (this.empresa_seleccionada) {
       this.empresaService.getSucursalesEmpresa(this.empresa_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
-      console.log('aquiiiiii', this.sucursal_seleccionada)
     }
   }
 }

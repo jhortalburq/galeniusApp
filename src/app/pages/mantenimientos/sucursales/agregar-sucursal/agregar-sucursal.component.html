@@ -10,115 +10,88 @@
         </div>
         <div class="modal-body mx-3">
 
-              <div class="form-row ">
-                   <div class="col-md-7 col-sm-12 col-xs-12">
-                        <div class="md-form form-sm form-group mt-1">
-                          <input type="text" id="nombre_sucursal" formControlName="nombre_sucursal" class="form-control"
-                                 mdbInput mdbValidate>
-                          <label for="nombre_sucursal"  class="font-weight-bold">Nombre Sucursal (*)</label>
-
-                        </div>
-                   </div>
-
-                  <div class="col-md-5 col-sm-12 col-xs-12">
-
-                      <select class="browser-default custom-select" formControlName="almacen" >
-                        <option value='' selected disabled>Almacén</option>
-                        <option value="{{ option.value }}" *ngFor="let option of optionsAlmacenes">{{ option.label }}</option>
-                      </select>
-
-                <!--     
-                        <mdb-select mdbValidate [options]="optionsAlmacenes" formControlName="almacen"  placeholder="Seleccione Almacén (*)"></mdb-select>
---> 
-                   </div>
-
-              </div>
-
             <div class="form-row ">
-                   <div class="col-md-8 col-sm-6 col-xs-12">
-                        <div class="md-form form-sm form-group mt-1">
-                          <input type="text" id="abreviado" formControlName="abreviado" class="form-control"
-                                 mdbInput>
-                          <label for="abreviado">Nombre Abreviado</label>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="md-form form-sm form-group mt-1">
+                          <input type="text" id="id_ruc" formControlName="ruc" class="form-control"
+                                mdbInput mdbValidate>
+                          <label for="id_ruc"  class="font-weight-bold">R.U.C (*)</label>
 
                         </div>
-                   </div>
+                  </div>
 
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                      <div class="md-form form-sm form-group mt-1">
+                        <input type="text" id="id_clave" formControlName="clave" class="form-control"
+                                mdbInput mdbValidate>
+                        <label for="id_clave"  class="font-weight-bold">Clave (*)</label>
 
-                    <div class="col-md-4  col-sm-6 col-xs-12">
+                      </div>
+                </div>
 
-                      <select class="browser-default custom-select" formControlName="tipo_tienda" >
-                        <option value='' selected disabled>Tipo Tienda</option>
-                        <option value="{{ option.value }}" *ngFor="let option of optionsSelect">{{ option.label }}</option>
-                      </select>
-<!--                        <mdb-select mdbValidate [options]="optionsSelect" formControlName="tipo_tienda"  placeholder="Seleccione Tipo Tienda (*)"></mdb-select>
--->
+            </div>
 
-                   </div>
+            <div class="form-row mt-n2">
+              <div class="col-sm-12 col-xs-12">
+                  <div class="md-form form-sm form-group mt-1">
+                    <input type="text" id="id_razon_social" formControlName="razon_social" class="form-control"
+                            mdbInput mdbValidate>
+                    <label for="id_razon_social" class="font-weight-bold">Razon Social (*)</label>
 
-
+                  </div>
               </div>
+            </div>
 
+            <div class="form-row mt-n2">
+              <div class="col-sm-12 col-xs-12">
+                  <div class="md-form form-sm form-group mt-1">
+                      <input type="text" id="id_nombre_comercial" formControlName="nombre_comercial" class="form-control"
+                              mdbInput>
+                      <label for="id_nombre_comercial">Nombre Comercial</label>
 
-              <div class="form-row">
-                   <div class="col-md-7 col-sm-12 col-xs-12">
-                        <div class="md-form form-sm form-group mt-1">
-                          <input type="text" id="direccion" formControlName="direccion" class="form-control"
-                                 mdbInput>
-                          <label for="direccion">Dirección</label>
-                        </div>
-                   </div>
+                    </div>
+                </div>
+          </div>
 
-                   <div class="col-md-5 col-sm-12 col-xs-12">
-                        <div class="md-form form-sm form-group mt-1">
-                          <input
-                            formControlName="locacion"
-                            type="text"
-                            class="completer-input form-control mdb-autocomplete mb-0"
-                            [mdbAutoCompleter]="auto"
-                            placeholder="Dep/Distr/Prov"
-                            (keydown)="onKeydown($event)"
-                            (keyup)="buscarUbigeo($event)"
-                          />
-                          <mdb-auto-completer #auto="mdbAutoCompleter" textNoResults="No se encontraron resultados" [clearButton]="false">
-                            <mdb-option *ngFor="let item of filteredUbigeo | async" [value]="item.nombre" (onSelectionChange)="selectUbigeo(item)">
-                              {{ item.nombre }}
-                            </mdb-option>
-                          </mdb-auto-completer>
-                        </div>
-                   </div>
+          <div class="form-row mt-n2">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="md-form form-sm form-group mt-1">
+                      <input type="text" id="direccion" formControlName="direccion" class="form-control"
+                              mdbInput>
+                      <label for="direccion">Dirección</label>
+                    </div>
+                </div>
+            </div>
 
+            <div class="form-row mt-n2">
 
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="md-form form-sm form-group mt-1">
+                      <input
+                        formControlName="locacion"
+                        type="text"
+                        class="completer-input form-control mdb-autocomplete mb-0"
+                        [mdbAutoCompleter]="auto"
+                        placeholder="Dep/Distr/Prov"
+                        (keydown)="onKeydown($event)"
+                        (keyup)="buscarUbigeo($event)"
+                      />
+                      <mdb-auto-completer #auto="mdbAutoCompleter" textNoResults="No se encontraron resultados" [clearButton]="false">
+                        <mdb-option *ngFor="let item of filteredUbigeo | async" [value]="item.nombre" (onSelectionChange)="selectUbigeo(item)">
+                          {{ item.nombre }}
+                        </mdb-option>
+                      </mdb-auto-completer>
+                    </div>
+                </div>
+            </div>
 
-              </div>
+            <div class="row">
+                    <app-checkbox-modulos [item]="item"
+                                          (selectItem)="changeCheckbox($event)" 
+                                          *ngFor="let item of _modulos; let i = index">
+                    </app-checkbox-modulos>
+            </div>
 
-              <div class="form-row ">
-
-                   <div class="col-md-4  col-sm-6 col-xs-12">
-
-                        <div class="md-form form-sm form-group mt-1">
-                          <input type="text" id="telefono" formControlName="telefono" class="form-control"
-                                 mdbInput>
-                          <label for="telefono">Telefono</label>
-                        </div>
-
-                   </div>
-
-
-                  <div class="col-md-6  col-sm-6 col-xs-12">
-
-                        <div class="md-form form-sm form-group mt-1">
-                          <input type="text" id="correo" formControlName="correo" class="form-control"
-                                 mdbInput mdbValidate>
-                          <label for="correo">Correo Electrónico</label>
-
-                        </div>
-
-                   </div>
-
-               
-
-              </div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid" color="danger" class="waves-light" mdbWavesEffect>Grabar</button>

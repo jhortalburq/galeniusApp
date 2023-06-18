@@ -5,11 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MDBBootstrapModulesPro } from '../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../material.module';
 import { OrganizacionesRoutingModule } from './organizaciones-routing.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { OrganizacionesComponent } from './organizaciones.component';
 import { AgregarOrganizacionComponent } from './agregar-organizacion/agregar-organizacion.component';
 import { DetalleOrganizacionComponent } from './detalle-organizacion/detalle-organizacion.component';
-import { CheckboxModulosComponent } from './checkbox-modulos/checkbox-modulos.component';
 
 
 @NgModule({
@@ -17,7 +17,6 @@ import { CheckboxModulosComponent } from './checkbox-modulos/checkbox-modulos.co
     OrganizacionesComponent,
     AgregarOrganizacionComponent,
     DetalleOrganizacionComponent,
-    CheckboxModulosComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +24,8 @@ import { CheckboxModulosComponent } from './checkbox-modulos/checkbox-modulos.co
     ReactiveFormsModule,
     MDBBootstrapModulesPro,
     MaterialModule,
-    OrganizacionesRoutingModule
+    OrganizacionesRoutingModule,
+    SharedModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

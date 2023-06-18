@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef, Renderer2 } from '@angular/core';
-import { EmpresaService } from '../../services/services.index';
+import { Router } from '@angular/router';
 
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
+
+import { EmpresaService, NotificationsService, BreadcrumbsService } from '../../services/services.index';
 
 import { AgregarOrganizacionComponent } from './agregar-organizacion/agregar-organizacion.component';
 import { DetalleOrganizacionComponent } from './detalle-organizacion/detalle-organizacion.component';
 
-import { NotificationsService, BreadcrumbsService } from '../../services/services.index';
+import { AgregarSucursalComponent } from '../mantenimientos/sucursales/agregar-sucursal/agregar-sucursal.component';
 
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-organizaciones',
@@ -145,6 +146,39 @@ export class OrganizacionesComponent {
   setOrganizacion( empresa: any ) {
     localStorage.setItem('empresa', JSON.stringify(empresa));
     this.empresaService.empresa_seleccionada = empresa;
-    this.router.navigate(['/seleccionar-sucursal'])
+
+    this.empresaService.getSucursalesEmpresa(empresa.id).subscribe({
+      next: (res: any) => {
+        if(!res.length) {
+          this.crearSucursal(empresa.id);
+        } else {
+          this.router.navigate(['/seleccionar-sucursal'])
+        }
+      }
+    });
+  }
+
+  crearSucursal( empresa_id: number ) {
+    console.log('ss', empresa_id)
+    this.modalRef = this.modalService.show(AgregarSucursalComponent, {
+          backdrop: true,
+          keyboard: true,
+          focus: true,
+          show: false,
+          ignoreBackdropClick: false,
+          class: 'modal-dialog modal-notify modal-primary',
+          animated: true,
+          data: {
+             empresa_id: empresa_id
+          }
+      });
+
+    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
+
+    this.modalRef.content.action.subscribe( (result: any) => {
+        if (result) {
+          this.router.navigate(['/seleccionar-sucursal'])
+        }
+    });
   }
 }

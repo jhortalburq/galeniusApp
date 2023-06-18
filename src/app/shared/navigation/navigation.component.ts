@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModulosComponent } from '../../modals/modulos/modulos.component';
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
@@ -21,6 +21,8 @@ import {
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  @ViewChild('sidenav', { static: true }) public el: any;
+
   modalRef: MDBModalRef;
 
   public currentUser: any;
@@ -86,5 +88,7 @@ export class NavigationComponent implements OnInit {
     this.alertService.successSwalToast(`${this.sucursal_seleccionada.razon_social}`, 1000);
 
     this.router.navigate(['/seleccionar-modulo']);
+    this.el.hide();
+
   }
 }

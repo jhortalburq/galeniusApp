@@ -97,6 +97,12 @@ export class EmpresaService {
     this.sucursal_seleccionada = {};
   }
 
+  addSucursal(sucursal: any, empresa_id: number) {
+    sucursal['organizacion'] = empresa_id;
+    let data = JSON.stringify(sucursal);
+    return this.http.post(`${environment.apiUrl}/api/v1/sucursales`, data, {});
+  }
+
   subirLogotipo( archivo: File, id: number) {
 
     return new Promise ( ( resolve, reject ) => {

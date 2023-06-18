@@ -38,7 +38,7 @@ export class SharedService {
 
   getOptionsUbigeo(params) {
     if (params.length > 2) {
-      return this.http.get(`${environment.apiUrl}/api/v1/ubigeo/`, { params: { 'search': params } })
+      return this.http.get(`${environment.apiUrl}/api/v1/ubigeo`, { params: { 'search': params } })
                     .pipe(map( (res: any) => {
                               return res['results'];
                           }),

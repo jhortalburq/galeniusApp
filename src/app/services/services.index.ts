@@ -21,3 +21,5 @@ export { MantenimientoService } from './mantenimiento.service';
 
 export { AlertService } from './alert.service';
 export { NotificationsService } from './notifications.service';
+
+export { ProfileService } from './profile.service';
