@@ -103,6 +103,34 @@ export class EmpresaService {
     return this.http.post(`${environment.apiUrl}/api/v1/sucursales`, data, {});
   }
 
+  editSucursal(sucursal: any, id: number, empresa_id: any) {
+    sucursal['organizacion'] = empresa_id;
+    let data = JSON.stringify(sucursal);
+    return this.http.put(`${environment.apiUrl}/api/v1/empresa/sucursales/${id}`, data, {});
+  }
+  
+  getSucursalesUsuario(id: any, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(`${environment.apiUrl}/api/v1/empresa/${id}/sucursales/`, {params: { 'search': params }})
+                    .pipe(
+                      map( (res: any) => {
+                          this.sucursales = res.results;
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(`${environment.apiUrl}/api/v1/sucursales`, {params: { 'empresa': `${id}` }})
+                      .pipe(
+                        map( (res: any) => {
+                            this.sucursales = res.results.filter( (item: any) => item.activo === true);
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
   subirLogotipo( archivo: File, id: number) {
 
     return new Promise ( ( resolve, reject ) => {

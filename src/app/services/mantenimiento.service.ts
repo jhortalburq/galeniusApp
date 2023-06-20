@@ -120,4 +120,31 @@ export class MantenimientoService {
     return this.http.post(`${environment.apiUrl}/api/v1/caracteristicas/${caracteristica_id}/registros/`, JSON.stringify(registro), {})
   }
  
+  getEspecialidades(empresa_id: number|null, cm: number|null, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(`${environment.apiUrl}/api/v1/empresa/${empresa_id}/vendedores/`, {params: { 'search': params }})
+                    .pipe(map( (res: any) => {
+                          // this.empresas = res.results;
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(`${environment.apiUrl}/api/v1/especialidades`, {params: { 'empresa': empresa_id, 'cm': cm }})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
+  getEspecialistas(empresa_id: number|null, cm: number|null, especialidad: number|null) {
+    return this.http.get(`${environment.apiUrl}/api/v1/especialidades/${especialidad}/especialistas`, {params: { 'empresa': empresa_id, 'cm': cm }})
+      .pipe(map( (res: any) => {
+            return res;
+        }),
+      catchError(this.sharedService.handleError)
+    );
+  }
 }

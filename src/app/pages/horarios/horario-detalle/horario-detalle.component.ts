@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, signal, ChangeDetectorRef, Renderer2, ViewChild } from '@angular/core';
 import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standard/src/public_api';
 import { Router } from '@angular/router';
 
 import { CalendarOptions } from '@fullcalendar/core';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
@@ -10,6 +11,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
 import esLocale from '@fullcalendar/core/locales/es';
+
+import { BreadcrumbsService, MantenimientoService, HorariosService, EmpresaService } from '../../../services/services.index';
 
 import {
   FormGroup,
@@ -32,43 +35,23 @@ interface Food {
 })
 
 export class HorarioDetalleComponent {
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent; 
+  private calendarApi
+
   selected = new Date();
   toppings = new FormControl('');
   modalRef: MDBModalRef;
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+  especialidad_id: number = 0;
+  especialista_id: number = 0;
 
-  toppingList: Array<any> = [
-      {value: '1', name: 'First Group Option 1'},
-      {value: '2', name: 'First Group Option 2'},
-      {value: '3', name: 'Second Group Option 1'},
-      {value: '4', name: 'Second Group Option 2'},
-  ];
+  especialidades: any = [];
+  especialistas: any = [];
+  fecha: string = '';
 
-  constructor(public changeDetector: ChangeDetectorRef,
-              private modalService: MDBModalService,
-              private renderer: Renderer2,
-              private router: Router) {
-  }
-
-  ngOnInit() {
-  }
+  events: any = [];
 
   calendarOptions: CalendarOptions = {
-      // customButtons: {
-      //   myCustomButton1: {
-      //     text: 'DIA',
-      //     click: () => this.router.navigate(['/asistencial/agenda/diaria'])
-      //   },
-      //   myCustomButton2: {
-      //     text: 'SEMANA',
-      //     click: () => this.router.navigate(['/asistencial/agenda/semanal'])
-      //   }
-      // },
       initialView: 'listDay',
       plugins: [listPlugin, interactionPlugin, timeGridPlugin, dayGridPlugin],
       height: 480,
@@ -82,11 +65,77 @@ export class HorarioDetalleComponent {
         center: 'title',
         right: 'listDay'
       },
-      events: [
-        { title: 'event 1', start: '2023-06-08T14:30:00', end: '2023-06-08T15:00:00'},
-        { title: 'event 2', start: '2023-06-08T16:30:00', end: '2023-06-08T17:00:00'},
-      ]
+      datesSet: (data => {
+          this.fecha = data.startStr.split('T')[0];
+          this.loadEvents(this.fecha);
+          this.selected = new Date(data.startStr);
+      }),
   };
+
+  constructor(public changeDetector: ChangeDetectorRef,
+              private modalService: MDBModalService,
+              public breadcrumbService: BreadcrumbsService,
+              public mantenimientoService: MantenimientoService,
+              public horariosService: HorariosService,
+              public empresaService: EmpresaService,
+              private renderer: Renderer2,
+              private router: Router) {
+  }
+
+  ngOnInit() {
+    this.breadcrumbService.title = 'HORARIOS POR ESPECIALISTAS';
+    this.getEspecialidades();
+  }
+
+  // ngAfterViewInit(){
+  //   this.calendarApi = this.calendarComponent.getApi();
+  //   let currentDate = this.calendarApi.view.activeStart;
+  
+  //   console.log(currentDate); // result: current calendar start date
+  // }
+
+  getEspecialidades() {
+    this.mantenimientoService.getEspecialidades(this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+                             .subscribe((response: any) => {
+                                 this.especialidades = response.results;
+                              });
+  }
+
+  getEspecialistas(especialidad: number) {
+    this.mantenimientoService.getEspecialistas(this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, especialidad)
+                             .subscribe((response: any) => {
+                                 this.especialistas = response;
+                              });
+  }
+
+  onSelectEspecialidad(item: any) {
+    this.especialidad_id = item.value;
+    this.getEspecialistas(item.value);
+  }
+
+  onSelectEspecialista(item: any) {
+    this.especialista_id = item.value;
+    this.loadEvents(this.fecha);
+  }
+
+  onSelectDate(item: any) {
+    let setDate = item.toISOString();
+    this.calendarApi = this.calendarComponent.getApi();
+    this.calendarApi.gotoDate(setDate);
+  }
+
+  loadEvents(fecha: string) {
+    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, fecha)
+                        .subscribe({
+                          next: (res: any) => {
+                            this.events = res.results;
+                            this.calendarOptions.events = this.events;
+                          },
+                          error: (err: any) => {
+                            console.log(err)
+                          }
+                        })
+  }
 
   openModal() {
     this.modalRef = this.modalService.show(IngresarHorarioComponent, {

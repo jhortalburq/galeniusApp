@@ -9,15 +9,6 @@ export class MantenimientosService {
 
   menu: any = [
     {
-      titulo: 'ORGANIZACIONES',
-      icono: 'fa-user',
-      submenu: [
-        { titulo: 'Usuarios', url: '/administrador/usuarios/' },
-        { titulo : 'Permisos', url: '/progress' },
-        { titulo : 'Grupos', url: '/progress' },
-      ]
-    },
-    {
       titulo: 'SUCURSALES',
       icono: 'fa-user',
       submenu: [

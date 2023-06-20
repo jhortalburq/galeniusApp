@@ -10,6 +10,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
 import esLocale from '@fullcalendar/core/locales/es';
+import { BreadcrumbsService } from '../../../services/breadcrumbs.service';
 
 import {
   FormGroup,
@@ -51,11 +52,13 @@ export class TableroGeneralComponent {
 
   constructor(public changeDetector: ChangeDetectorRef,
               private modalService: MDBModalService,
+              public breadcrumbService: BreadcrumbsService,
               private renderer: Renderer2,
               private router: Router) {
   }
 
   ngOnInit() {
+    this.breadcrumbService.title = 'TABLERO GENERAL';
   }
 
   calendarOptions: CalendarOptions = {

@@ -5,16 +5,16 @@ import {
     FormGroup,
     FormControl,
     Validators,
-    FormBuilder
+    FormArray
 } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
 import { Opcion } from '../../../../interfaces/option';
 
-import { SharedService, AlmacenService, EmpresaService } from '../../../../services/services.index';
+import { SharedService, NotificationsService, MantenimientoService, EmpresaService } from '../../../../services/services.index';
 
-import { NotificationsService } from '../../../../services/notifications.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-editar-sucursal',
@@ -25,89 +25,107 @@ import { NotificationsService } from '../../../../services/notifications.service
 export class EditarSucursalComponent implements OnInit {
   @Input() sucursal;
   @Output() submitChange = new EventEmitter();
+  @Input() empresa_id: number;
 
   registerForm: FormGroup;
 
-  optionsSelect = [
-    { value: 1, label: 'VENTA RAPIDA' },
-    { value: 2, label: 'COMERCIAL' }
-  ];
-
-  nombre_sucursal: FormControl;
-  abreviado: FormControl;
-  telefono: FormControl;
-  correo: FormControl;
+  razon_social: FormControl;
+  nombre_comercial: FormControl;
+  ruc: FormControl;
   direccion: FormControl;
+  correo: FormControl;
+  telefono: FormControl;
+  clave: FormControl;
   locacion: FormControl;
-  tipo_tienda: FormControl;
-  almacen: FormControl;
+  organizacion_id: FormControl;
+
+  modulos_id: FormArray;
 
   ubigeosOptions: Opcion[];
   filteredUbigeo: Observable<any[]>;
-  optionsAlmacenes: any = [];
 
-  content: any;
+  action: Subject<any> = new Subject();
+
+  _modulos: any = [];
 
   constructor(
         public modalRef: MDBModalRef,
-        public fb: FormBuilder,
         public empresaService: EmpresaService,
-        public almacenService: AlmacenService,
         public sharedService: SharedService,
+        public mantenimientoService: MantenimientoService,
         public notificationService: NotificationsService
   ) { }
 
   ngOnInit(): void {
-    this.updateOptionAlmacenes();
+    this.getModulos();
     this.createFormControls();
     this.createForm();
   }
 
   createFormControls() {
-    this.nombre_sucursal = new FormControl(this.sucursal.nombre_sucursal, Validators.required);
-    this.abreviado = new FormControl(this.sucursal.abreviado);
-    this.telefono = new FormControl(this.sucursal.telefono);
-    this.correo = new FormControl(this.sucursal.correo, Validators.email);
-    this.direccion = new FormControl(this.sucursal.direccion);
-    this.locacion = new FormControl(this.sucursal.nombre_locacion);
-    this.tipo_tienda = new FormControl(this.sucursal.tipo_tienda, Validators.required);
-    this.almacen = new FormControl(this.sucursal.almacen, Validators.required);
+    this.razon_social = new FormControl(this.sucursal.razon_social, Validators.required);
+    this.nombre_comercial = new FormControl(this.sucursal.nombre_comercial);
+    this.ruc = new FormControl(this.ruc, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]);
+    this.clave = new FormControl(this.clave, Validators.required);
+    this.organizacion_id = new FormControl(this.empresa_id, Validators.required);
+    this.correo = new FormControl(this.correo);
+    this.telefono = new FormControl(this.telefono);
+    this.direccion = new FormControl(this.direccion);
+    this.locacion = new FormControl(this.locacion);
+    this.modulos_id = new FormArray([]);
   }
 
   createForm() {
      this.registerForm = new FormGroup({
-      nombre_sucursal: this.nombre_sucursal,
-      abreviado: this.abreviado,
-      direccion: this.direccion,
+      razon_social: this.razon_social,
+      nombre_comercial: this.nombre_comercial,
+      ruc: this.ruc,
+      clave: this.clave,
       telefono: this.telefono,
       correo: this.correo,
       locacion: this.locacion,
-      tipo_tienda: this.tipo_tienda,
-      almacen: this.almacen,
+      direccion: this.direccion,
+      organizacion_id: this.organizacion_id,
+      modulos_id: this.modulos_id
      });
 
   }
 
-  updateOptionAlmacenes() {
-    this.almacenService.getAlmacenesEmpresa(this.empresaService.empresa_seleccionada.id).subscribe((res: any) => {
-        this.optionsAlmacenes = res
-    })
+  getModulos() {
+    this.mantenimientoService.getDataModulos().subscribe((response: any) => {
+      this._modulos = response.results;
+    });
+  }
+
+  changeCheckbox(item: any) {
+    if (item.boolean) {
+      this.modulos_id.push(new FormControl(item.id))
+    } else {
+      let i: number = 0;
+      this.modulos_id.controls.forEach((ctrl: FormControl) => {
+        if(ctrl.value == item.id) {
+          this.modulos_id.removeAt(i);
+          return;
+        }
+        i++;
+      });  
+    }
   }
 
   onSubmit(){
 
-    if (this.registerForm.valid && this.empresaService.empresa_seleccionada.id) {
+    if (this.registerForm.valid && this.empresa_id) {
 
-        this.almacenService.editSucursal( this.registerForm.value, this.sucursal.id, this.empresaService.empresa_seleccionada.id ).subscribe(
-          (response) => {
-                this.submitChange.emit(true);
-                this.notificationService.showSuccess('Se editó el resitro correctamente' , 'Sucursal');
-            },
-            err => {
-                  console.log(err);
-                  this.submitChange.emit(false);
-                }
-        );
+        this.empresaService.editSucursal( this.registerForm.value, this.sucursal.id, this.empresa_id ).subscribe({
+          next: (response: any) => {
+            this.action.next( true );
+            this.notificationService.showSuccess('Se editó el registro correctamente' , 'Sucursal');
+            this.modalRef.hide();
+          },
+          error: (err: any) =>{
+            console.log(err);
+          }
+        })
 
     }
   }

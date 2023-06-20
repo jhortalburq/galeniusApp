@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 export class ListaSucursalesComponent implements OnInit, DoCheck {
   modalRef: MDBModalRef;
 
-  displayedColumns = ['Nombre Sucursal', 'Tipo Tienda', 'Direccion', 'Ubigeo',  'Almacén', 'Activo', ''];
+  displayedColumns = ['Nombre Sucursal', 'Clave', 'R.U.C', 'Direccion', 'Ubigeo',  'Activo', ''];
 
   public sucursales: any = [];
 
@@ -50,16 +50,17 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
   }
 
   getData(url?) {
-    this.almacenService.getSucursalesUsuario(this.empresaService.empresa_seleccionada.id).subscribe(
-      (response: any) => {
+    this.empresaService.getSucursalesUsuario(this.empresaService.empresa_seleccionada.id).subscribe({
+      next: (response: any) => {
         this.sucursales = response.results;
       },
-      (error: any) => {
+      error: (error: any) => {
         if (error.status === 401) {
           localStorage.removeItem('token');
           this.router.navigate(['/login']);
         }
-      });
+      }
+    });
   }
 
   openModal() {
@@ -69,8 +70,11 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-lg modal-dialog modal-notify modal-primary',
+                  class: 'modal-dialog modal-notify modal-primary',
                   animated: true,
+                  data: {
+                    empresa_id: this.empresaService.empresa_seleccionada.id
+                  }
               });
 
     this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
@@ -91,10 +95,11 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-dialog cascading-modal ',
+                  class: 'modal-dialog modal-notify modal-primary',
                   animated: true,
                   data: {
-                      content: { sucursal: sucursal}
+                      empresa_id: this.empresaService.empresa_seleccionada.id,
+                      sucursal: sucursal
                   }
               }
     );
