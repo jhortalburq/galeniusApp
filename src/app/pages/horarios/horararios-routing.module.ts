@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TableroGeneralComponent } from './tablero-general/tablero-general.component';
 import { IngresarHorarioComponent } from './ingresar-horario/ingresar-horario.component';
 import { HorarioDetalleComponent } from './horario-detalle/horario-detalle.component';
+import { HorariosComponent } from './horarios/horarios.component';
 
 const routes: Routes = [
       {
@@ -13,9 +14,10 @@ const routes: Routes = [
       {
         path: 'ingresar-horario',
         component: IngresarHorarioComponent
-      },      {
-        path: 'detalle',
-        component: HorarioDetalleComponent
+      },      
+      {
+        path: 'horarios-especialistas',
+        component: HorariosComponent
       },
 ];
 

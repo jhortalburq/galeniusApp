@@ -11,12 +11,15 @@ import { HorariosRoutingModule } from './horararios-routing.module';
 import { MDBBootstrapModulesPro } from '../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../material.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HorariosComponent } from './horarios/horarios.component';
+
 
 @NgModule({
   declarations: [
     TableroGeneralComponent,
     IngresarHorarioComponent,
-    HorarioDetalleComponent
+    HorarioDetalleComponent,
+    HorariosComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,4 @@
-import { Component, OnInit, signal, ChangeDetectorRef, Renderer2, ViewChild } from '@angular/core';
-import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standard/src/public_api';
+import { Component, Input, Output, EventEmitter, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CalendarOptions } from '@fullcalendar/core';
@@ -14,19 +13,6 @@ import esLocale from '@fullcalendar/core/locales/es';
 
 import { BreadcrumbsService, MantenimientoService, HorariosService, EmpresaService } from '../../../services/services.index';
 
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-
-import { IngresarHorarioComponent } from '../ingresar-horario/ingresar-horario.component';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-horario-detalle',
@@ -35,15 +21,16 @@ interface Food {
 })
 
 export class HorarioDetalleComponent {
+  @Input('changeDate') changeDate: string;
+  @Input('especialidad_id') especialidad_id: number;
+  @Input('especialista_id') especialista_id: number;
+
+  @Output() changeDateCalendar = new EventEmitter<string>();
+
   @ViewChild('calendar') calendarComponent: FullCalendarComponent; 
   private calendarApi
 
   selected = new Date();
-  toppings = new FormControl('');
-  modalRef: MDBModalRef;
-
-  especialidad_id: number = 0;
-  especialista_id: number = 0;
 
   especialidades: any = [];
   especialistas: any = [];
@@ -68,23 +55,30 @@ export class HorarioDetalleComponent {
       datesSet: (data => {
           this.fecha = data.startStr.split('T')[0];
           this.loadEvents(this.fecha);
-          this.selected = new Date(data.startStr);
+          this.changeDateEmit(new Date(data.startStr));
       }),
   };
 
-  constructor(public changeDetector: ChangeDetectorRef,
-              private modalService: MDBModalService,
-              public breadcrumbService: BreadcrumbsService,
+  constructor(public breadcrumbService: BreadcrumbsService,
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
               public empresaService: EmpresaService,
-              private renderer: Renderer2,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.breadcrumbService.title = 'HORARIOS POR ESPECIALISTAS';
-    this.getEspecialidades();
+  }
+
+  changeDateEmit(value: any) {
+    console.log(value)
+    this.changeDateCalendar.emit(value);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.calendarComponent) {
+      this.calendarApi = this.calendarComponent.getApi();
+      this.calendarApi.gotoDate(this.changeDate);
+    }
   }
 
   // ngAfterViewInit(){
@@ -93,36 +87,6 @@ export class HorarioDetalleComponent {
   
   //   console.log(currentDate); // result: current calendar start date
   // }
-
-  getEspecialidades() {
-    this.mantenimientoService.getEspecialidades(this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
-                             .subscribe((response: any) => {
-                                 this.especialidades = response.results;
-                              });
-  }
-
-  getEspecialistas(especialidad: number) {
-    this.mantenimientoService.getEspecialistas(this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, especialidad)
-                             .subscribe((response: any) => {
-                                 this.especialistas = response;
-                              });
-  }
-
-  onSelectEspecialidad(item: any) {
-    this.especialidad_id = item.value;
-    this.getEspecialistas(item.value);
-  }
-
-  onSelectEspecialista(item: any) {
-    this.especialista_id = item.value;
-    this.loadEvents(this.fecha);
-  }
-
-  onSelectDate(item: any) {
-    let setDate = item.toISOString();
-    this.calendarApi = this.calendarComponent.getApi();
-    this.calendarApi.gotoDate(setDate);
-  }
 
   loadEvents(fecha: string) {
     this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, fecha)
@@ -135,26 +99,5 @@ export class HorarioDetalleComponent {
                             console.log(err)
                           }
                         })
-  }
-
-  openModal() {
-    this.modalRef = this.modalService.show(IngresarHorarioComponent, {
-                  backdrop: true,
-                  keyboard: true,
-                  focus: true,
-                  show: false,
-                  ignoreBackdropClick: false,
-                  class: 'modal-lg modal-dialog modal-notify modal-primary',
-                  animated: true,
-              });
-
-    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
-
-    this.modalRef.content.action.subscribe( (result: any) => {
-      if (result) {
-        // this.getData();
-        // this.filter = '';
-      }
-    });
   }
 }

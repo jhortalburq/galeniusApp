@@ -1,1 +1,119 @@
-<p>ingresar-horario works!</p>
+<div class="row">
+    <div class="col-12">
+        <mdb-card>
+            <mdb-card-title>
+                <h5>Ingresar Horario</h5>
+            </mdb-card-title>
+            <mdb-card-body>
+                <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row mt-3">
+
+                        <div class="col-md-4 col-xs-12 text-center">
+                            <span class="hour_label">Hora de Inicio</span>
+                        </div>
+
+                        <div class="offset-2 col-md-4 col-xs-12 text-center">
+                            <span class="hour_label">Hora Fin</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row ">
+
+                        <div class="col-md-2 col-xs-12">
+    
+                            <mat-form-field class="mt-2 col-12">
+                                <mat-label>Hora </mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let item of _horas" [value]="item">
+                                        {{item}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+    
+                       </div>
+
+                       <div class="col-md-2 col-xs-12">
+            
+                                <mat-form-field class="mt-2 col-12">
+                                    <mat-label>Minuto </mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let item of _minutos" [value]="item">
+                                            {{item}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                        </div>
+
+                        <div class="offset-2 col-md-2 col-xs-12">
+    
+                            <mat-form-field class="mt-2 col-12">
+                                <mat-label>Hora </mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let item of _horas" [value]="item">
+                                        {{item}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+    
+                       </div>
+
+                       <div class="col-md-2 col-xs-12">
+            
+                                <mat-form-field class="mt-2 col-12">
+                                    <mat-label>Minuto </mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let item of _minutos" [value]="item">
+                                            {{item}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-3">
+
+                        <div class="col-sm-12 col-xs-12">
+                            <mdb-checkbox (change)="updateRepetitivo()" formControlName="repetitivo">Es Repetitivo ?</mdb-checkbox>
+                        </div>
+        
+                    </div>
+
+                    <div class="row mt-5" *ngIf="is_repetivo">
+                        <div class="col-3">
+                            <mat-form-field class="col-12 mt-n1">
+                                <mat-label>Dias de Semana</mat-label>
+                                <mat-select formControlName="dias" multiple>
+                                <mat-select-trigger>
+                                    {{dias.value?.[0] || ''}}
+                                    <span *ngIf="(dias.value?.length || 0) > 1" class="example-additional-selection">
+                                    (+{{(dias.value?.length || 0) - 1}} {{dias.value?.length === 2 ? 'dia' : 'dias'}})
+                                    </span>
+                                </mat-select-trigger>
+                                <mat-option *ngFor="let item of _diasList" [value]="item.value">{{item.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-6">
+                            <mat-form-field>
+                                <mat-label>Fecha Límite</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="fecha_limit">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-sm-12 d-flex justify-content-center">
+                            <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Registrar</button>
+                        </div>
+                    </div>
+        
+                </form>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>

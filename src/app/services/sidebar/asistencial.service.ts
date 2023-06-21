@@ -38,7 +38,7 @@ export class AsistencialService {
     titulo: 'REGISTRO DE HORARIOS',
     submenu: [
                   { titulo: 'Tablero General', url: '/asistencial/horarios/tablero-general' },
-                  { titulo: 'Horarios por Especialistas', url: '/asistencial/horarios/detalle' },
+                  { titulo: 'Horarios por Especialistas', url: '/asistencial/horarios/horarios-especialistas' },
              ]
    },
     {

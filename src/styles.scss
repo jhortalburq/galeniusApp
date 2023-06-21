@@ -54,7 +54,7 @@ body::before {
   }
   
   .form-check-label {
-      font-size: 0.6rem!important;
+      font-size: 0.7rem!important;
   }
   
   mdb-select > div > div.single > div.placeholder {
@@ -180,14 +180,13 @@ body::before {
   font-size: 0.7rem;
 }
 
-
 /// MATERIAL
 mat-label{
   font-size: 0.8rem;
 }
 
 .mat-mdc-select-trigger {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -197,4 +196,15 @@ mat-label{
 .mat-mdc-option {
   font-size: 0.8rem;
   min-height: 36px!important;
+}
+
+mdb-card-title{
+  background-color: #1c2a48;
+}
+
+mdb-card-title h5{
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
