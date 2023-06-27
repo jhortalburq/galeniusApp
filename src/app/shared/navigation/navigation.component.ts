@@ -53,6 +53,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
+    this.breadcrumbService.modulo = localStorage.getItem('last_modulo');
 
     this.empresaService.getEmpresasUsuario().subscribe();
     this.empresa_seleccionada = this.empresaService.getEmpresaActivaUsuario();

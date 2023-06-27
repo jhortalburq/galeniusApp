@@ -36,6 +36,7 @@ export class SeleccionarModuloComponent {
   }
 
   irModulo(modulo: string) {
+    localStorage.setItem('last_modulo', modulo);
     this.router.navigate(['/' + modulo, 'menu']);
   }
 }

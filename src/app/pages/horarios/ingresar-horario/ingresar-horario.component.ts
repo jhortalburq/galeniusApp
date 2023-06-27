@@ -26,6 +26,7 @@ export class IngresarHorarioComponent {
   hora_fin: FormControl;
   dias: FormControl;
   fecha_limit: FormControl;
+  consultorio: FormControl;
 
   repetitivo: FormControl;
 
@@ -37,6 +38,11 @@ export class IngresarHorarioComponent {
     {value: 5, name: 'Viernes'},
     {value: 6, name: 'Sábado'},
     {value: 7, name: 'Domingo'},
+  ]
+
+  consultorioOptions: Array <any> = [
+    {value: 1, name: 'Consultorio 01'},
+    {value: 2, name: 'Consultorio 02'},
   ]
 
   disabled: boolean = false;
@@ -70,6 +76,7 @@ export class IngresarHorarioComponent {
     this.dias = new FormControl('');
     this.fecha_limit = new FormControl('');
     this.repetitivo = new FormControl(false);
+    this.consultorio = new FormControl('', Validators.required);
   }
 
   createForm() {
@@ -78,7 +85,8 @@ export class IngresarHorarioComponent {
         hora_fin: this.hora_inicio,
         fecha_limit: this.fecha_limit,
         dias: this.dias,
-        repetitivo: this.repetitivo
+        repetitivo: this.repetitivo,
+        consultorio: this.consultorio,
      });
   }
 
