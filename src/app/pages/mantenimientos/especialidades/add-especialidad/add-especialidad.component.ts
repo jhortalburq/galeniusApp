@@ -15,19 +15,19 @@ import { SharedService, EmpresaService, NotificationsService, MantenimientoServi
 
 
 @Component({
-  selector: 'app-add-diagnostico',
-  templateUrl: './add-diagnostico.component.html',
-  styleUrls: ['./add-diagnostico.component.scss']
+  selector: 'app-add-especialidad',
+  templateUrl: './add-especialidad.component.html',
+  styleUrls: ['./add-especialidad.component.scss']
 })
-export class AddDiagnosticoComponent {
+export class AddEspecialidadComponent {
   action: Subject<any> = new Subject();
   disabled: boolean = false;
 
   registerForm: FormGroup;
   nombre: FormControl;
-  recomendacion: FormControl;
-  conclusion: FormControl;
-  cie: FormControl;
+  ficha: FormControl;
+
+  tipos_fichas: any = [];
 
   constructor(
         public modalRef: MDBModalRef,
@@ -38,23 +38,29 @@ export class AddDiagnosticoComponent {
   ) {}
 
   ngOnInit(): void {
+    this.getTiposFichas();
     this.createFormControls();
     this.createForm();
   }
 
+  getTiposFichas() {
+    this.mantenimientoService.getFichasExamenes()
+                             .subscribe((response: any) => {
+                                for (let i = 0; i < response.results.length; i++) {
+                                  this.tipos_fichas.push({value: response.results[i].id, label: response.results[i].nombre})
+                                }
+                              });
+  }
+
   createFormControls() {
     this.nombre = new FormControl('', Validators.required);
-    this.conclusion = new FormControl('');
-    this.recomendacion = new FormControl('');
-    this.cie = new FormControl('');
+    this.ficha = new FormControl('');
   }
 
   createForm() {
      this.registerForm = new FormGroup({
         nombre: this.nombre,
-        cie: this.cie,
-        recomendacion: this.recomendacion,
-        conclusion: this.conclusion
+        ficha: this.ficha
      });
   }
 
@@ -62,11 +68,11 @@ export class AddDiagnosticoComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addObjectMantenimiento('maestros/diagnosticos', this.registerForm.value, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.addEspecialidad(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Diagnóstico');
+                                      this.notificationService.showSuccess('Registro creado' , 'Especialidad');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {

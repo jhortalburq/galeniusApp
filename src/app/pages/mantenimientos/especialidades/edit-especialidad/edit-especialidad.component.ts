@@ -15,11 +15,11 @@ import { SharedService, EmpresaService, NotificationsService, MantenimientoServi
 
 
 @Component({
-  selector: 'app-edit-diagnostico',
-  templateUrl: './edit-diagnostico.component.html',
-  styleUrls: ['./edit-diagnostico.component.scss']
+  selector: 'app-edit-especialidad',
+  templateUrl: './edit-especialidad.component.html',
+  styleUrls: ['./edit-especialidad.component.scss']
 })
-export class EditDiagnosticoComponent {
+export class EditEspecialidadComponent {
   @Input() registro;
   @Output() submitChange = new EventEmitter();
 
@@ -28,9 +28,9 @@ export class EditDiagnosticoComponent {
 
   registerForm: FormGroup;
   nombre: FormControl;
-  recomendacion: FormControl;
-  conclusion: FormControl;
-  cie: FormControl;
+  ficha: FormControl;
+
+  tipos_fichas: any = [];
 
   constructor(
         public modalRef: MDBModalRef,
@@ -41,23 +41,29 @@ export class EditDiagnosticoComponent {
   ) {}
 
   ngOnInit(): void {
+    this.getTiposFichas();
     this.createFormControls();
     this.createForm();
   }
 
   createFormControls() {
     this.nombre = new FormControl(this.registro.nombre, Validators.required);
-    this.conclusion = new FormControl(this.registro.conclusion);
-    this.recomendacion = new FormControl(this.registro.recomendacion);
-    this.cie = new FormControl(this.registro.cie);
+    this.ficha = new FormControl(this.registro.ficha);
+  }
+
+  getTiposFichas() {
+    this.mantenimientoService.getFichasExamenes()
+                             .subscribe((response: any) => {
+                                for (let i = 0; i < response.results.length; i++) {
+                                  this.tipos_fichas.push({value: response.results[i].id, label: response.results[i].nombre})
+                                }
+                              });
   }
 
   createForm() {
      this.registerForm = new FormGroup({
         nombre: this.nombre,
-        cie: this.cie,
-        recomendacion: this.recomendacion,
-        conclusion: this.conclusion
+        ficha: this.ficha
      });
   }
 
@@ -65,11 +71,11 @@ export class EditDiagnosticoComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.editObjectMantenimiento('maestros/diagnosticos', this.registerForm.value, this.registro.id, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.editEspecialidad(this.registerForm.value, this.registro.id, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Diagnóstico');
+                                  this.notificationService.showSuccess('Registro editado' , 'Especialidad');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

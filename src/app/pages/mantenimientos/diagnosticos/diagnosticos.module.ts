@@ -7,8 +7,6 @@ import { EditDiagnosticoComponent } from './edit-diagnostico/edit-diagnostico.co
 
 import { DiagnosticosRoutingModule } from './diagnosticos-routing.module';
 
-import { MantenimientoRoutingModule } from '../mantenimientos-routing.module';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MDBBootstrapModulesPro } from '../../../../../ng-uikit-pro-standard/src/lib/mdb.module';

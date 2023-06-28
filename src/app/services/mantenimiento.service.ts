@@ -28,17 +28,16 @@ export class MantenimientoService {
                     );
   }
 
-  getQueryset(tipo: string, params?: string) {
+  getQueryset(tipo: string, org: number, cm: number, params?: string) {
     if (params && params.length > 2) {
-      return this.http.get(`${environment.apiUrl}/api/v1/${tipo}/`, {params: { 'search': params }})
+      return this.http.get(`${environment.apiUrl}/api/v1/${tipo}`, {params: { 'empresa': org, 'cm': cm, 'search': params }})
                     .pipe(map( (res: any) => {
-                          // this.empresas = res.results;
                           return res;
                       }),
                     catchError(this.sharedService.handleError)
                   );
     } else {
-      return this.http.get(`${environment.apiUrl}/api/v1/${tipo}/`)
+      return this.http.get(`${environment.apiUrl}/api/v1/${tipo}`, {params: { 'empresa': org, 'cm': cm }})
                       .pipe(map( (res: any) => {
                             return res;
                         }),
@@ -47,6 +46,14 @@ export class MantenimientoService {
     }
   }
 
+  getFichasExamenes() {
+      return this.http.get(`${environment.apiUrl}/api/v1/maestros/fichas`, {})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+  }
   
   getEspecialidades(empresa_id: number|null, cm: number|null, params?: string) {
     if (params && params.length > 2) {
@@ -204,11 +211,22 @@ export class MantenimientoService {
 
   addObjectMantenimiento(tipo: string, registro: any, org: number) {
     registro['organizacion'] = org
-    return this.http.post(`${environment.apiUrl}/api/v1/maestros/${tipo}`, JSON.stringify(registro), {params: {'organizacion': org}});
+    return this.http.post(`${environment.apiUrl}/api/v1/${tipo}`, JSON.stringify(registro), {params: {'organizacion': org}});
   }
 
   editObjectMantenimiento(tipo: string, registro: any, id: number, org: number) {
-    return this.http.put(`${environment.apiUrl}/api/v1/maestros/${tipo}/${id}`, JSON.stringify(registro), {params: {'organizacion': org}});
+    return this.http.put(`${environment.apiUrl}/api/v1/${tipo}/${id}`, JSON.stringify(registro), {params: {'organizacion': org}});
+  }
+
+  addEspecialidad(registro: any, org: number, cm: number) {
+    registro['organizacion'] = org
+    registro['sucursal'] = [cm]
+    return this.http.post(`${environment.apiUrl}/api/v1/especialidades`, JSON.stringify(registro), {params: {'empresa': org, 'cm': cm}});
+  }
+
+  editEspecialidad(registro: any, id: number, org: number, cm: number) {
+    registro['sucursal'] = [cm]
+    return this.http.put(`${environment.apiUrl}/api/v1/especialidades/${id}`, JSON.stringify(registro), {params: {'empresa': org, 'cm': cm}});
   }
 
 }
