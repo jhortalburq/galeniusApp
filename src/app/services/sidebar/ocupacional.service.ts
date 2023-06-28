@@ -50,6 +50,22 @@ export class OcupacionalService {
       ]
     },
     {
+      titulo: 'EMPRESAS',
+      submenu: [
+                    { titulo: 'Registro de Empresas', url: '/ocupacional/pacientes/lista' },
+                    { titulo: 'Nueva Empresa', url: '/ocupacional/pacientes/nuevo' },
+                    { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
+               ]
+     },
+    {
+      titulo: 'PACIENTES',
+      submenu: [
+                    { titulo: 'Registro de Pacientes', url: '/ocupacional/pacientes/lista' },
+                    { titulo: 'Nuevo Paciente', url: '/ocupacional/pacientes/nuevo' },
+                    { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
+               ]
+     },
+    {
       titulo: 'PROMOCIONES',
       icono: 'fa-user',
       secciones: [

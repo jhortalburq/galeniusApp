@@ -10,6 +10,10 @@ const routes: Routes = [
         path: 'menu',
         component: MenuComponent
       },
+      {
+        path: 'pacientes',
+        loadChildren: () => import('../../pacientes/pacientes.module').then( m => m.PacientesModule)
+      },
 ];
 
 @NgModule({

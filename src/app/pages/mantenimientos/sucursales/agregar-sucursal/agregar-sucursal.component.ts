@@ -89,7 +89,6 @@ export class AgregarSucursalComponent implements OnInit {
     });
   }
 
-
   changeCheckbox(item: any) {
     if (item.boolean) {
       this.modulos_id.push(new FormControl(item.id))

@@ -96,7 +96,7 @@ export class NuevoPacienteComponent {
     this.email = new FormControl('');
     this.telefono = new FormControl('');
     this.ocupacion = new FormControl('');
-    this.nacionalidad = new FormControl('');
+    this.nacionalidad = new FormControl('PERUANA');
     this.domicilio = new FormControl('');
     this.estado_civil = new FormControl('');
     this.grado_instruccion = new FormControl('');
@@ -227,7 +227,7 @@ export class NuevoPacienteComponent {
                                         this.alertService.successSwalToast('Paciente Registrado', 5000);
 
                                         setTimeout(() => {
-                                            this.router.navigate(['/asistencial', 'pacientes', res.slug, 'editar']);
+                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
                                         }, 500)
                                       },
                                       error: (err: any) => {

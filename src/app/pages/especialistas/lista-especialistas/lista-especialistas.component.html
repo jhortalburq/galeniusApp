@@ -19,16 +19,22 @@
                         <tbody *ngIf="registros">
                           <tr mdbTableCol *ngFor="let registro of registros">
 
-                            
-                            <td >{{ registro.descripcion }}</td>
-                            <td class="text-center">{{ registro.tipo_movimiento }}</td>
+                            <td class="text-center">{{ registro.colegiatura }}</td>
 
-                           <td class="text-center">
-                                  <mdb-checkbox [default]="true"  [(ngModel)]="registro.activo" ></mdb-checkbox>
-                             </td>
+                            <td style="width: 50%">{{ registro.full_name }}</td>
+                            <td class="text-center">{{ registro.tipo_documento_name }}</td>
+
+                            <td class="text-center">{{ registro.no_documento }}</td>
+                            <td class="text-center">{{ registro.edad }} años</td>
+                            <td class="text-center">{{ registro.nacionalidad }} </td>
+                            <td class="text-center">
+                              <span class="badge badge-pill badge-primary">{{ registro.especialidad.length }}</span>
+                            </td>
+                            <td class="text-center">{{ registro.created|date:'medium' }}</td>
+
 
                               <td style="width: 10%" class="text-center">
-                                <mdb-badge [danger]="true"  style="cursor: pointer">
+                                <mdb-badge [danger]="true"  style="cursor: pointer" (click)="editarRegistro(registro.slug)">
                                   <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
                                 </mdb-badge>
                             </td>
@@ -39,7 +45,7 @@
 
                         <tbody *ngIf="!registros.length">
                           <tr mdbTableCol >
-                            <td style="width: 115%" colspan="7">No se encontraros registros</td>
+                            <td style="width: 115%" colspan="9">No se encontraros registros</td>
                           </tr>
                         </tbody>
 

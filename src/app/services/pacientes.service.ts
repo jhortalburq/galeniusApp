@@ -19,7 +19,10 @@ export class PacientesService {
   addPaciente(paciente: any, empresa_id: any, sucursal_id: any) {
     paciente['cm'] = sucursal_id;
     paciente['organizacion'] = empresa_id;
-    paciente['fecha_nacimiento'] = paciente.fecha_nacimiento.toISOString().split('T')[0];
+    try {
+      paciente['fecha_nacimiento'] = paciente.fecha_nacimiento.toISOString().split('T')[0];
+    } catch {
+    }
     return this.http.post(`${environment.apiUrl}/api/v1/pacientes`, JSON.stringify(paciente));
   }
 
