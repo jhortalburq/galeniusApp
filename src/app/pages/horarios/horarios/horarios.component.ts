@@ -81,7 +81,6 @@ export class HorariosComponent {
   }
 
   setNewDate(event: any) {
-    console.log('ssss', event);
     this.selected = event;
   }
 }

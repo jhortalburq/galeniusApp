@@ -113,7 +113,7 @@
                         <div class="col-6">
                             <mat-form-field>
                                 <mat-label>Fecha Límite</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName="fecha_limit">
+                                <input matInput [matDatepicker]="picker" formControlName="fecha_limit" (click)="picker.open()" readonly>
                                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>

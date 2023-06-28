@@ -1,6 +1,5 @@
 // material.module.ts
 import { NgModule} from "@angular/core";
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 // import { MatIconRegistry } from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 // import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
@@ -27,10 +26,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 // import { MatRadioModule } from '@angular/material/radio';
 // import { MatRippleModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
-
 // import { MatSidenavModule } from '@angular/material/sidenav';
 // import { MatSliderModule } from '@angular/material/slider';
-// import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+// import { MatSlideToggleModule } from '@angular/material/slide-to     ggle';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { MatSortModule } from '@angular/material/sort';
 // import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
@@ -38,6 +36,9 @@ import {MatSelectModule} from '@angular/material/select';
 // import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatTooltipModule } from '@angular/material/tooltip';
 // import { MatTreeModule } from '@angular/material/tree';
+
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 
 const mm = [
   MatAutocompleteModule,
@@ -81,6 +82,8 @@ const mm = [
     exports: [...mm
     ],
     providers: [
+      {provide: DateAdapter, useClass: AppDateAdapter},
+      {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS},
       {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
     ],
 })

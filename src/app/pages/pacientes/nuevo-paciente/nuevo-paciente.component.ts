@@ -8,13 +8,18 @@ import {
   FormBuilder
 } from '@angular/forms';
 
-import { BreadcrumbsService, MantenimientoService } from '../../../services/services.index';
+import { BreadcrumbsService, 
+        MantenimientoService, 
+        PacientesService,
+        EmpresaService,
+        AlertService
+} from '../../../services/services.index';
 
 
 @Component({
   selector: 'app-nuevo-paciente',
   templateUrl: './nuevo-paciente.component.html',
-  styleUrls: ['./nuevo-paciente.component.scss']
+  styleUrls: ['./nuevo-paciente.component.scss'],
 })
 export class NuevoPacienteComponent {
   registerForm: FormGroup;
@@ -60,9 +65,12 @@ export class NuevoPacienteComponent {
   distrito_default: string = '';
 
   constructor(
-    public breadcrumbService: BreadcrumbsService,
-    public mantenimientoService: MantenimientoService,
-    private router: Router
+      public breadcrumbService: BreadcrumbsService,
+      public mantenimientoService: MantenimientoService,
+      public pacienteService: PacientesService,
+      public empresaService: EmpresaService,
+      public alertService: AlertService,
+      private router: Router
   ) { 
     this.breadcrumbService.title = 'NUEVO PACIENTE';
   }
@@ -166,9 +174,7 @@ export class NuevoPacienteComponent {
   getTiposDepartamentos() {
     this.mantenimientoService.getTiposDepartamento()
                              .subscribe((response: any) => {
-                                for (let i = 0; i < response.results.length; i++) {
-                                  this.tipos_departamentos.push({value: response.results[i].cod_depart, label: response.results[i].nom_depart})
-                                }
+                                  this.tipos_departamentos = response.results
                               });
   }
 
@@ -190,20 +196,14 @@ export class NuevoPacienteComponent {
 
     this.mantenimientoService.getTiposProvincia(cod_depart)
                              .subscribe((response: any) => {
-                                this.tipos_provincias = [];
+                                this.tipos_provincias = response.results
                                 this.tipos_distritos = [];
-
-                                this.provincia_default = '';
-                                this.distrito_default = '';
 
                                 this.registerForm.patchValue({
                                   ubigeo: '',
                                   provincia: ''
                                 })
 
-                                for (let i = 0; i < response.results.length; i++) {
-                                  this.tipos_provincias.push({value: response.results[i].cod_provin, label: response.results[i].nom_provin})
-                                }
                               });
   }
 
@@ -211,22 +211,29 @@ export class NuevoPacienteComponent {
 
     this.mantenimientoService.getTiposDistritos(cod_depart, cod_provin)
                              .subscribe((response: any) => {
-                                this.tipos_distritos = [];
-                                this.distrito_default = '';
+                                this.tipos_distritos = response.results
  
                                 this.registerForm.patchValue({
                                   ubigeo: '',
                                 })
-                                
-                                for (let i = 0; i < response.results.length; i++) {
-                                  this.tipos_distritos.push({value: response.results[i].id, label: response.results[i].nom_distri})
-                                }
                               });
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value)
+      this.pacienteService.addPaciente(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+                          .subscribe({
+                                      next: (res: any) => {
+                                        this.alertService.successSwalToast('Paciente Registrado', 5000);
+
+                                        setTimeout(() => {
+                                            this.router.navigate(['/asistencial', 'pacientes', res.slug, 'editar']);
+                                        }, 500)
+                                      },
+                                      error: (err: any) => {
+                                        console.log('error')
+                                      }
+                                    })
     }
   }
 
