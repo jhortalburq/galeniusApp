@@ -31,13 +31,10 @@ const routes: Routes = [
         loadChildren: () => import('../../mantenimientos/clientes/clientes.module').then( m => m.ClientesModule)
       },
       {
-        path: 'estudios-gabinete',
-        loadChildren: () => import('../../mantenimientos/estudios-gabinete/estudios-gabinete.module').then( m => m.EstudiosGabineteModule)
+        path: 'mantenimientos',
+        loadChildren: () => import('../../mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
       },
-      {
-        path: 'analisis-clinicos',
-        loadChildren: () => import('../../mantenimientos/analisis-clinicos/analisis-clinicos.module').then( m => m.AnalisisClinicosModule)
-      },
+
 
       {
           path: '',

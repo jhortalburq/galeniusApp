@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { EspecialidadesRoutingModule } from './especialidades-routing.module';
 
+import { EspecialidadesComponent } from './especialidades.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    EspecialidadesComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    EspecialidadesRoutingModule
   ]
 })
 export class EspecialidadesModule { }

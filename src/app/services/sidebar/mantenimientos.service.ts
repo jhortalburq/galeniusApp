@@ -12,7 +12,7 @@ export class MantenimientosService {
       titulo: 'SUCURSALES',
       icono: 'fa-user',
       submenu: [
-        { titulo: 'Sucursales', url: '/mantenimientos/sucursales/' },
+        { titulo: 'Sucursales', url: '/administrador/sucursales/' },
         { titulo : 'Permisos', url: '/progress' },
         { titulo : 'Grupos', url: '/progress' },
       ]
@@ -57,28 +57,16 @@ export class MantenimientosService {
       titulo: 'MANTENIMIENTOS',
       icono: 'fa-user',
       secciones: [
-        { titulo: 'Diagnósticos', url: '/administrador/empresas/' },
-        { titulo: 'Especialidades', url: '/administrador/sucursales/' },
-        { titulo: 'Indicaciones Médicas',  url: '/administrador/clientes/' },
-        { titulo: 'Medicamentos', url: '/administrador/vendedores/' },
-        { titulo: 'Tipos de Citas', url: '/administrador/proveedores/' },
-        { titulo: 'Tipos de Evaluaciones', url: '/usuarios' },
-        {
-          titulo: 'Análisis Clínicos',
-          submenu: [
-              { titulo: 'Con Orden de Compra', url: '/usuarios' },
-              { titulo: 'Parte de Entrada', url: '/usuarios' },
-              { titulo: 'Recepción de Despachos', url: '/usuarios' },
-          ]
-        },
-        {
-          titulo: 'Estudios de Gabinete',
-          submenu: [
-              { titulo: 'Guía de Remisión', url: '/usuarios' },
-              { titulo: 'Parte de Salida', url: '/usuarios' },
-              { titulo: 'Parte Salida con Requerimiento', url: '/usuarios' },
-          ]
-       },
+        { titulo: 'Análisis', url: '/administrador/mantenimientos/analisis-clinicos' },
+        { titulo: 'Diagnósticos', url: '/administrador/mantenimientos/diagnosticos' },
+        { titulo: 'Especialidades', url: '/administrador/mantenimientos/especialidades' },
+        { titulo: 'Estudios de Gabinete', url: '/administrador/mantenimientos/estudios-gabinete' },
+        { titulo: 'Exámenes de Laboratorio', url: '/administrador/mantenimientos/examenes-laboratorio' },
+        { titulo: 'Grupos de Laboratorio', url: '/administrador/mantenimientos/grupos-laboratorio' },
+        { titulo: 'Indicaciones Médicas', url: '/administrador/mantenimientos/indicaciones-medicas' },
+        { titulo: 'Medicamentos', url: '/administrador/mantenimientos/medicamentos' },
+        { titulo: 'Tipos de Citas', url: '/administrador/mantenimientos/tipos-citas' },
+        { titulo: 'Tipos de Evaluaciones', url: '/administrador/mantenimientos/tipos-evaluaciones' },
       ]
     },
   ];

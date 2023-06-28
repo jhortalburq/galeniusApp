@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { DiagnosticosComponent } from './diagnosticos/diagnosticos.component';
+
+import { DiagnosticosRoutingModule } from './diagnosticos-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DiagnosticosComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    DiagnosticosRoutingModule
   ]
 })
 export class DiagnosticosModule { }

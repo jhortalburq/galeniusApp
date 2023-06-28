@@ -7,7 +7,7 @@ import { MantenimientosService, SidebarService, BreadcrumbsService } from '../..
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-  public modulo = 'Mantenimientos';
+  public modulo = 'Administrador';
 
   constructor(
         public sidebarService: SidebarService,
@@ -17,9 +17,9 @@ export class MenuComponent {
 
   ngOnInit() {
     this.sidebarService.menu = this.mantenimientosService.menu;
-    this.breadcrumbService.setModuloName(this.modulo, true, 'mantenimientos');
+    this.breadcrumbService.setModuloName(this.modulo, true, 'administrador');
     this.breadcrumbService.flag_sidebar = true;
-    this.breadcrumbService.title = 'MANTENIMIENTO';
+    this.breadcrumbService.title = 'ADMINISTRADOR';
   }
 }
 

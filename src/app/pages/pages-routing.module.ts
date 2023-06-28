@@ -48,10 +48,6 @@ const routes: Routes = [
         },
         {
           path: 'administrador',
-          loadChildren: () => import('./modulos/administrador/administrador.module').then( m => m.AdministradorModule)
-        },
-        {
-          path: 'mantenimientos',
           loadChildren: () => import('./modulos/mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
         },
         {

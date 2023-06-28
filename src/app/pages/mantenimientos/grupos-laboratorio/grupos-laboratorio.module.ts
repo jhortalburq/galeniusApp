@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GrupoLaboratorioComponent } from './grupo-laboratorio/grupo-laboratorio.component';
 
-import { EstudiosGabineteComponent } from './estudios-gabinete.component';
 
 
 @NgModule({
   declarations: [
-    EstudiosGabineteComponent
+    GrupoLaboratorioComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class EstudiosGabineteModule { }
+export class GruposLaboratorioModule { }

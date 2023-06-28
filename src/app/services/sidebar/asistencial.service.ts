@@ -41,27 +41,20 @@ export class AsistencialService {
                   { titulo: 'Horarios por Especialistas', url: '/asistencial/horarios/horarios-especialistas' },
              ]
    },
-    {
-      titulo: 'MANTENIMIENTOS',
-      class: '',
-      submenu: [
-          { titulo: 'Clientes', url: '/usuarios' },
-          { titulo: 'Vendedores', url: '/usuarios' },
-          // { titulo: 'Afiliados Tipo', url: '/usuarios' },
-          { titulo: 'Registro de Productos', url: '/usuarios' },
-          { titulo: 'Familias de Productos', url: '/usuarios' },
-          { titulo: 'Documentos Series', url: '/usuarios' },
-          // { titulo: 'Condiciones Pago', url: '/usuarios' },
-          // { titulo: 'Formas de Pago Cobranza', url: '/usuarios' },
-          // { titulo: 'Registro de Cajas', url: '/usuarios' },
-          // { titulo: 'Registro de Cajas Registradoras', url: '/usuarios' },
-          // { titulo: 'Canales de Venta', url: '/usuarios' },
-          // { titulo: 'Tipo de Precio', url: '/usuarios' },
-          { titulo: 'Lista de Precio', url: '/usuarios' },
-          { titulo: 'Tipo de Cambio', url: '/usuarios' },
-          // { titulo: 'Parametros', url: '/usuarios' },
-      ]
-    },
+   {
+    titulo: 'MANTENIMIENTOS',
+    secciones: [
+      { titulo: 'Análisis', url: '/asistencial/mantenimientos/analisis-clinicos' },
+      { titulo: 'Diagnósticos', url: '/asistencial/mantenimientos/diagnosticos' },
+      { titulo: 'Especialidades', url: '/asistencial/mantenimientos/especialidades' },
+      { titulo: 'Estudios de Gabinete', url: '/asistencial/mantenimientos/estudios-gabinete' },
+      { titulo: 'Exámenes de Laboratorio', url: '/asistencial/mantenimientos/examenes-laboratorio' },
+      { titulo: 'Grupos de Laboratorio', url: '/asistencial/mantenimientos/grupos-laboratorio' },
+      { titulo: 'Indicaciones Médicas', url: '/asistencial/mantenimientos/indicaciones-medicas' },
+      { titulo: 'Medicamentos', url: '/asistencial/mantenimientos/medicamentos' },
+      { titulo: 'Tipos de Citas', url: '/asistencial/mantenimientos/tipos-citas' },
+    ]
+  },
   ];
 
 }
