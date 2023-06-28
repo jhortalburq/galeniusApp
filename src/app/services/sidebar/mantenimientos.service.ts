@@ -27,25 +27,7 @@ export class MantenimientosService {
       ]
     },
     {
-      titulo: 'PACIENTES',
-      icono: 'fa-user',
-      submenu: [
-        { titulo: 'Usuarios', url: '/administrador/usuarios/' },
-        { titulo : 'Permisos', url: '/progress' },
-        { titulo : 'Grupos', url: '/progress' },
-      ]
-    },
-    {
       titulo: 'ESPECIALISTAS',
-      icono: 'fa-user',
-      submenu: [
-        { titulo: 'Usuarios', url: '/administrador/usuarios/' },
-        { titulo : 'Permisos', url: '/progress' },
-        { titulo : 'Grupos', url: '/progress' },
-      ]
-    },
-    {
-      titulo: 'EMPRESAS',
       icono: 'fa-user',
       submenu: [
         { titulo: 'Usuarios', url: '/administrador/usuarios/' },

@@ -159,7 +159,6 @@ export class OrganizacionesComponent {
   }
 
   crearSucursal( empresa_id: number ) {
-    console.log('ss', empresa_id)
     this.modalRef = this.modalService.show(AgregarSucursalComponent, {
           backdrop: true,
           keyboard: true,

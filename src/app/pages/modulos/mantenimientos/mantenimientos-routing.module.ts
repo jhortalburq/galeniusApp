@@ -11,10 +11,6 @@ const routes: Routes = [
         component: MenuComponent,
       },
       {
-        path: 'organizaciones',
-        loadChildren: () => import('../../mantenimientos/organizaciones/organizaciones.module').then( m => m.OrganizacionesModule)
-      },       
-      {
         path: 'sucursales',
         loadChildren: () => import('../../mantenimientos/sucursales/sucursales.module').then( m => m.SucursalesModule)
       },
@@ -27,14 +23,9 @@ const routes: Routes = [
         loadChildren: () => import('../../mantenimientos/empresas/empresas.module').then( m => m.EmpresasModule)
       },
       {
-        path: 'clientes',
-        loadChildren: () => import('../../mantenimientos/clientes/clientes.module').then( m => m.ClientesModule)
-      },
-      {
         path: 'mantenimientos',
         loadChildren: () => import('../../mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
       },
-
 
       {
           path: '',

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExamenesLaboratorioComponent } from './examenes-laboratorio/examenes-laboratorio.component';
 
+import { ExamenesLaboratorioRoutingModule } from './examenes-laboratorio-routing.module';
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import { ExamenesLaboratorioComponent } from './examenes-laboratorio/examenes-la
     ExamenesLaboratorioComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ExamenesLaboratorioRoutingModule
   ]
 })
 export class ExamenesLaboratorioModule { }
