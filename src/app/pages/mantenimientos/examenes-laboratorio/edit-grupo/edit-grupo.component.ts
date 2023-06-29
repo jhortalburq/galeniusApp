@@ -33,8 +33,6 @@ export class EditGrupoComponent {
   nombre: FormControl;
   examen: FormControl;
 
-  itemsCopy: Array<any>;
-
   public analisis: any = [];
 
   constructor(
@@ -55,8 +53,15 @@ export class EditGrupoComponent {
   getAnalisis(url?) {
     this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.empresa_seleccionada.id).subscribe({
       next: (response: any) => {
-        this.analisis = response.results;
-        this.itemsCopy = response.results;
+        // this.analisis = response.results.map( (item) => {
+        //   return {...item, checked: false}
+        // })
+
+        this.analisis = response.results.map(item => {
+            return {...item, checked: this.analisis_registrados.some(o2 => item.id === o2.id)}
+
+        })
+
       },
       error: (error: any) => {
         if (error.status === 401) {
@@ -101,6 +106,7 @@ export class EditGrupoComponent {
   }
 
   addItem( item: any ) {
+    item.checked = true;
     this.analisis_registrados.push(item)
   }
   
@@ -108,8 +114,13 @@ export class EditGrupoComponent {
     let i: number = 0;
     this.analisis_registrados.forEach((element,index) => {
       if(element==item) this.analisis_registrados.splice(index, 1);
+    });
+
+    this.analisis.forEach((element,index) => {
+      if(element.id==item.id) element.checked = false;
     });  
   }
+
 
   applyFilter(event: any) {
     let filterValue = event.target.value;

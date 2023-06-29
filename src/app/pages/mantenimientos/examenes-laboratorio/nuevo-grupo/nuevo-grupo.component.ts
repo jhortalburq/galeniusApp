@@ -50,7 +50,9 @@ export class NuevoGrupoComponent {
   getAnalisis(url?) {
     this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.empresa_seleccionada.id).subscribe({
       next: (response: any) => {
-        this.analisis = response.results;
+          this.analisis = response.results.map( (item) => {
+            return {...item, checked: false}
+          })
       },
       error: (error: any) => {
         if (error.status === 401) {
@@ -94,6 +96,7 @@ export class NuevoGrupoComponent {
   }
 
   addItem( item: any ) {
+    item.checked = true;
     this.analisis_registrados.push(item)
   }
   
@@ -101,6 +104,10 @@ export class NuevoGrupoComponent {
     let i: number = 0;
     this.analisis_registrados.forEach((element,index) => {
       if(element==item) this.analisis_registrados.splice(index, 1);
+    });
+
+    this.analisis.forEach((element,index) => {
+      if(element.id==item.id) element.checked = false;
     });  
   }
 
