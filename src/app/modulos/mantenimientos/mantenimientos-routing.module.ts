@@ -11,23 +11,23 @@ const routes: Routes = [
       },
       {
         path: 'sucursales',
-        loadChildren: () => import('../../sucursales/sucursales.module').then( m => m.SucursalesModule)
+        loadChildren: () => import('../../pages/sucursales/sucursales.module').then( m => m.SucursalesModule)
       },
       {
         path: 'usuarios',
-        loadChildren: () => import('../../usuarios/usuarios.module').then( m => m.UsuariosModule)
+        loadChildren: () => import('../../pages/usuarios/usuarios.module').then( m => m.UsuariosModule)
       },
       {
         path: 'empresas',
-        loadChildren: () => import('../../empresas/empresas.module').then( m => m.EmpresasModule)
+        loadChildren: () => import('../../pages/empresas/empresas.module').then( m => m.EmpresasModule)
       },
       {
         path: 'mantenimientos',
-        loadChildren: () => import('../../mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
+        loadChildren: () => import('../../pages/mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
       },
       {
         path: 'especialistas',
-        loadChildren: () => import('../../especialistas/especialistas.module').then( m => m.EspecialistasModule)
+        loadChildren: () => import('../../pages/especialistas/especialistas.module').then( m => m.EspecialistasModule)
       },
       {
           path: '',

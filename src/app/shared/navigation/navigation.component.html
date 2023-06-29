@@ -70,8 +70,8 @@
       <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
 
         <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_empresa && empresaService.empresas.length > 0">
-          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.empresa_seleccionada; else elseBlock">
-             {{ empresaService.empresa_seleccionada.nombre }}
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.organizacion_seleccionada; else elseBlock">
+             {{ empresaService.organizacion_seleccionada.nombre }}
           </a>
 
           <ng-template #elseBlock>
@@ -85,7 +85,7 @@
           </div>
         </li>
 
-        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_sucursal && empresaService.empresa_seleccionada">
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_sucursal && empresaService.organizacion_seleccionada">
           <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.sucursal_seleccionada; else elseBlockSucursal">
              {{ empresaService.sucursal_seleccionada.razon_social | uppercase }}
           </a>

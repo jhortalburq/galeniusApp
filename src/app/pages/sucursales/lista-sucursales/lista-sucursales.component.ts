@@ -42,15 +42,15 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (!this.changeDetected) {
-      if(this.empresaService.empresa_seleccionada.id) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+      if(this.empresaService.organizacion_seleccionada.id) {
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.empresaService.getSucursalesUsuario(this.empresaService.empresa_seleccionada.id).subscribe({
+    this.empresaService.getSucursalesUsuario(this.empresaService.organizacion_seleccionada.id).subscribe({
       next: (response: any) => {
         this.sucursales = response.results;
       },
@@ -73,7 +73,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
                   class: 'modal-dialog modal-notify modal-primary',
                   animated: true,
                   data: {
-                    empresa_id: this.empresaService.empresa_seleccionada.id
+                    empresa_id: this.empresaService.organizacion_seleccionada.id
                   }
               });
 
@@ -81,7 +81,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -98,7 +98,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
                   class: 'modal-dialog modal-notify modal-primary',
                   animated: true,
                   data: {
-                      empresa_id: this.empresaService.empresa_seleccionada.id,
+                      empresa_id: this.empresaService.organizacion_seleccionada.id,
                       sucursal: sucursal
                   }
               }
@@ -110,7 +110,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
       console.log(result);
 
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -121,14 +121,14 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.almacenService.getSucursalesUsuario(this.empresaService.empresa_seleccionada.id, filterValue).subscribe((response: any) => {
+    this.almacenService.getSucursalesUsuario(this.empresaService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
       this.sucursales = response.results;
     });
   }
 
   changeStatus(sucursal: any) {
 
-     this.almacenService.editSucursal( sucursal, sucursal.id, this.empresaService.empresa_seleccionada.id ).subscribe(
+     this.almacenService.editSucursal( sucursal, sucursal.id, this.empresaService.organizacion_seleccionada.id ).subscribe(
           (response) => {
 
                if (sucursal.activo) {
@@ -137,7 +137,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
                   this.notificationService.showInfo('Se cambio el estado de la Sucursal', 'Sucursal Inactivo')
                 }
 
-                this.almacenService.getSucursalesUsuario(this.empresaService.empresa_seleccionada.id).subscribe();
+                this.almacenService.getSucursalesUsuario(this.empresaService.organizacion_seleccionada.id).subscribe();
             },
             err => {
                   console.log(err);

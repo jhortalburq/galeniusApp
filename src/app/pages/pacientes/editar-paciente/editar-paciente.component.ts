@@ -286,7 +286,7 @@ export class EditarPacienteComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.pacienteService.editPaciente(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, this.paciente.slug)
+      this.pacienteService.editPaciente(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, this.paciente.slug)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Paciente Editado', 5000);

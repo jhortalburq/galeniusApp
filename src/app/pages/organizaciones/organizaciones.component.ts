@@ -145,7 +145,7 @@ export class OrganizacionesComponent {
 
   setOrganizacion( empresa: any ) {
     localStorage.setItem('empresa', JSON.stringify(empresa));
-    this.empresaService.empresa_seleccionada = empresa;
+    this.empresaService.organizacion_seleccionada = empresa;
 
     this.empresaService.getSucursalesEmpresa(empresa.id).subscribe({
       next: (res: any) => {

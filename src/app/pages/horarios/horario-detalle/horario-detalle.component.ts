@@ -89,7 +89,7 @@ export class HorarioDetalleComponent {
   // }
 
   loadEvents(fecha: string) {
-    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, fecha)
+    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, fecha)
                         .subscribe({
                           next: (res: any) => {
                             this.events = res.results;

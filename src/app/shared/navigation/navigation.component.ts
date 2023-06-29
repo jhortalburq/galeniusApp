@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ModulosComponent } from '../../modals/modulos/modulos.component';
+import { ModulosComponent } from '../modulos/modulos.component';
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
 
 import { AuthService, AlertService} from '../../services/services.index';
@@ -27,7 +27,7 @@ export class NavigationComponent implements OnInit {
 
   public currentUser: any;
 
-  empresa_seleccionada: any = {};
+  organizacion_seleccionada: any = {};
   sucursal_seleccionada: any = {};
 
   modalOptions = {
@@ -56,10 +56,10 @@ export class NavigationComponent implements OnInit {
     this.breadcrumbService.modulo = localStorage.getItem('last_modulo');
 
     this.empresaService.getEmpresasUsuario().subscribe();
-    this.empresa_seleccionada = this.empresaService.getEmpresaActivaUsuario();
+    this.organizacion_seleccionada = this.empresaService.getEmpresaActivaUsuario();
 
-    if (this.empresa_seleccionada) {
-      this.empresaService.getSucursalesEmpresa(this.empresa_seleccionada.id).subscribe();
+    if (this.organizacion_seleccionada) {
+      this.empresaService.getSucursalesEmpresa(this.organizacion_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
     }
   }
@@ -71,8 +71,8 @@ export class NavigationComponent implements OnInit {
 
   setEmpresa( empresa: any ) {
     localStorage.setItem('empresa', JSON.stringify(empresa));
-    this.empresaService.empresa_seleccionada = empresa;
-    this.empresa_seleccionada = empresa;
+    this.empresaService.organizacion_seleccionada = empresa;
+    this.organizacion_seleccionada = empresa;
 
     this.empresaService.getSucursalesEmpresa(empresa.id).subscribe(response => {
         this.empresaService.sucursal_seleccionada = {

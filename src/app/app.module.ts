@@ -29,13 +29,13 @@ import { MaterialModule } from './material.module';
     MDBBootstrapModulesPro.forRoot(),
     MaterialModule,
     ToastModule.forRoot({
-                                    timeOut: 2500,
-                                    positionClass: 'md-toast-bottom-right',
-                                    closeButton: true,
-                                    iconClasses: {
-                                      warning: 'md-toast-red',
-                                    }
-                                }),
+                        timeOut: 2500,
+                        positionClass: 'md-toast-bottom-right',
+                        closeButton: true,
+                        iconClasses: {
+                          warning: 'md-toast-red',
+                        }
+                    }),
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

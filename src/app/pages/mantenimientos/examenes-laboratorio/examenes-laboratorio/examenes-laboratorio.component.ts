@@ -42,15 +42,15 @@ export class ExamenesLaboratorioComponent {
 
   ngDoCheck() {
     if (!this.changeDetected) {
-      if(this.empresaService.empresa_seleccionada.id) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+      if(this.empresaService.organizacion_seleccionada.id) {
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.mantenimientoService.getDataMantenimiento('examenes-laboratorio', this.empresaService.empresa_seleccionada.id).subscribe({
+    this.mantenimientoService.getDataMantenimiento('examenes-laboratorio', this.empresaService.organizacion_seleccionada.id).subscribe({
       next: (response: any) => {
         this.registros = response.results;
       },
@@ -80,7 +80,7 @@ export class ExamenesLaboratorioComponent {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -108,7 +108,7 @@ export class ExamenesLaboratorioComponent {
       console.log(result);
 
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -119,7 +119,7 @@ export class ExamenesLaboratorioComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.mantenimientoService.getDataMantenimiento('examenes-laboratorio', this.empresaService.empresa_seleccionada.id, filterValue).subscribe((response: any) => {
+    this.mantenimientoService.getDataMantenimiento('examenes-laboratorio', this.empresaService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
       this.registros = response.results;
     });
   }

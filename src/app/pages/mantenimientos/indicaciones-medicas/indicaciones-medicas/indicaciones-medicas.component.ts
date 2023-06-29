@@ -41,15 +41,15 @@ export class IndicacionesMedicasComponent {
 
   ngDoCheck() {
     if (!this.changeDetected) {
-      if(this.empresaService.empresa_seleccionada.id) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+      if(this.empresaService.organizacion_seleccionada.id) {
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.mantenimientoService.getDataMantenimiento('indicaciones-medicas', this.empresaService.empresa_seleccionada.id).subscribe({
+    this.mantenimientoService.getDataMantenimiento('indicaciones-medicas', this.empresaService.organizacion_seleccionada.id).subscribe({
       next: (response: any) => {
         this.registros = response.results;
       },
@@ -79,7 +79,7 @@ export class IndicacionesMedicasComponent {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -107,7 +107,7 @@ export class IndicacionesMedicasComponent {
       console.log(result);
 
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -118,7 +118,7 @@ export class IndicacionesMedicasComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.mantenimientoService.getDataMantenimiento('indicaciones-medicas', this.empresaService.empresa_seleccionada.id, filterValue).subscribe((response: any) => {
+    this.mantenimientoService.getDataMantenimiento('indicaciones-medicas', this.empresaService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
       this.registros = response.results;
     });
   }

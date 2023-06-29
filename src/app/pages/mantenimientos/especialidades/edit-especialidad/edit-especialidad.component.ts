@@ -71,7 +71,7 @@ export class EditEspecialidadComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.editEspecialidad(this.registerForm.value, this.registro.id, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+      this.mantenimientoService.editEspecialidad(this.registerForm.value, this.registro.id, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);

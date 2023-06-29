@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./seleccionar-sucursal.component.scss']
 })
 export class SeleccionarSucursalComponent {
-  empresa_seleccionada: any = {};
+  organizacion_seleccionada: any = {};
   sucursal_seleccionada: any = {};
 
   constructor(
@@ -26,10 +26,10 @@ export class SeleccionarSucursalComponent {
     this.breadcrumbService.flag_sidebar = false;
 
     this.empresaService.getEmpresasUsuario().subscribe();
-    this.empresa_seleccionada = this.empresaService.getEmpresaActivaUsuario();
+    this.organizacion_seleccionada = this.empresaService.getEmpresaActivaUsuario();
     
-    if (this.empresa_seleccionada) {
-      this.empresaService.getSucursalesEmpresa(this.empresa_seleccionada.id).subscribe();
+    if (this.organizacion_seleccionada) {
+      this.empresaService.getSucursalesEmpresa(this.organizacion_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
     }
   }

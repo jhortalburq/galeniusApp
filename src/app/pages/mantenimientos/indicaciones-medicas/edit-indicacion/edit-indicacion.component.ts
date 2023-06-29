@@ -55,7 +55,7 @@ export class EditIndicacionComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.editObjectMantenimiento('maestros/indicaciones-medicas', this.registerForm.value, this.registro.id, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.editObjectMantenimiento('maestros/indicaciones-medicas', this.registerForm.value, this.registro.id, this.empresaService.organizacion_seleccionada.id)
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);

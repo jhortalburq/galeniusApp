@@ -53,7 +53,7 @@ export class AddTipoCitaComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addObjectMantenimiento('maestros/tipos-citas', this.registerForm.value, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.addObjectMantenimiento('maestros/tipos-citas', this.registerForm.value, this.empresaService.organizacion_seleccionada.id)
                                   .subscribe({
                                     next: (response: any) => {
                                       this.action.next(true);

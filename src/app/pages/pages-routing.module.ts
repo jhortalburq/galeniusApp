@@ -32,15 +32,15 @@ const routes: Routes = [
         },
         {
           path: 'administrador',
-          loadChildren: () => import('./modulos/mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
+          loadChildren: () => import('../modulos/mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
         },
         {
           path: 'asistencial',
-          loadChildren: () => import('./modulos/asistencial/asistencial.module').then( m => m.AsistencialModule)
+          loadChildren: () => import('../modulos/asistencial/asistencial.module').then( m => m.AsistencialModule)
         },
         {
           path: 'ocupacional',
-          loadChildren: () => import('./modulos/ocupacional/ocupacional.module').then( m => m.OcupacionalModule)
+          loadChildren: () => import('../modulos/ocupacional/ocupacional.module').then( m => m.OcupacionalModule)
         },
          {
           path: '',

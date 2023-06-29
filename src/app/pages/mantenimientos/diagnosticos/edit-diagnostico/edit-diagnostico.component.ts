@@ -65,7 +65,7 @@ export class EditDiagnosticoComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.editObjectMantenimiento('maestros/diagnosticos', this.registerForm.value, this.registro.id, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.editObjectMantenimiento('maestros/diagnosticos', this.registerForm.value, this.registro.id, this.empresaService.organizacion_seleccionada.id)
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);

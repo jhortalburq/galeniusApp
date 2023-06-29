@@ -72,7 +72,7 @@ export class AddEstudioGabineteComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addEstudioGabinete(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.procedimientos)
+      this.mantenimientoService.addEstudioGabinete(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.procedimientos)
                                   .subscribe({
                                     next: (response: any) => {
                                       this.action.next(true);
@@ -89,7 +89,7 @@ export class AddEstudioGabineteComponent {
   }
 
   buscarItem(e){
-    this.filteredItem = this.mantenimientoService.getOptionsItems(this.empresaService.empresa_seleccionada.id, e.target.value);
+    this.filteredItem = this.mantenimientoService.getOptionsItems(this.empresaService.organizacion_seleccionada.id, e.target.value);
   }
 
   selectItem(item: any){

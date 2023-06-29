@@ -41,15 +41,15 @@ export class EspecialidadesComponent {
 
   ngDoCheck() {
     if (!this.changeDetected) {
-      if(this.empresaService.empresa_seleccionada.id) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+      if(this.empresaService.organizacion_seleccionada.id) {
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.mantenimientoService.getQueryset('especialidades', this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+    this.mantenimientoService.getQueryset('especialidades', this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                       .subscribe({
                         next: (response: any) => {
                           this.registros = response.results;
@@ -80,7 +80,7 @@ export class EspecialidadesComponent {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -108,7 +108,7 @@ export class EspecialidadesComponent {
       console.log(result);
 
       if (result) {
-        this.getData(this.empresaService.empresa_seleccionada.id);
+        this.getData(this.empresaService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -119,7 +119,7 @@ export class EspecialidadesComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.mantenimientoService.getQueryset('especialidades', this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, filterValue)
+    this.mantenimientoService.getQueryset('especialidades', this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, filterValue)
                               .subscribe((response: any) => {
                                   this.registros = response.results;
                               });

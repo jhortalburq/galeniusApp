@@ -9,7 +9,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { MDBBootstrapModulesPro } from '../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { Select2Module } from 'ng-select2-component';
 
-import { ModulosComponent } from '../modals/modulos/modulos.component';
+import { ModulosComponent } from './modulos/modulos.component';
 
 import { CheckboxModulosComponent } from './components/checkbox-modulos/checkbox-modulos.component';
 

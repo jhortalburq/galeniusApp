@@ -52,7 +52,7 @@ export class AddIndicacionComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addObjectMantenimiento('maestros/indicaciones-medicas', this.registerForm.value, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.addObjectMantenimiento('maestros/indicaciones-medicas', this.registerForm.value, this.empresaService.organizacion_seleccionada.id)
                                   .subscribe({
                                     next: (response: any) => {
                                       this.action.next(true);

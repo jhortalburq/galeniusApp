@@ -68,7 +68,7 @@ export class AddEspecialidadComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addEspecialidad(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+      this.mantenimientoService.addEspecialidad(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                                   .subscribe({
                                     next: (response: any) => {
                                       this.action.next(true);

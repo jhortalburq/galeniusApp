@@ -24,14 +24,14 @@ export class UsuariosSucursalComponent implements OnInit {
 
 
   getUsuarios(url?) {
-    this.usuarioService.getUsuariosActivos(this.empresaService.empresa_seleccionada.id).subscribe((response: any) => {
+    this.usuarioService.getUsuariosActivos(this.empresaService.organizacion_seleccionada.id).subscribe((response: any) => {
       this.usuarios = response;
       this.getUsuariosSucursal();
     });
   }
 
   getUsuariosSucursal(url?) {
-    this.usuarioService.getUsuariosActivosSucursal(this.sucursal.id, this.empresaService.empresa_seleccionada.id).subscribe((response: any) => {
+    this.usuarioService.getUsuariosActivosSucursal(this.sucursal.id, this.empresaService.organizacion_seleccionada.id).subscribe((response: any) => {
        for (let i = 0; i < response.length; i++) {
          let index = this.usuarios.findIndex(x => x.id === response[i].id);
 
@@ -44,7 +44,7 @@ export class UsuariosSucursalComponent implements OnInit {
   }
 
   changeAsignacion(user: any) {
-    this.usuarioService.asignarUsuarioSucursal(this.sucursal, this.empresaService.empresa_seleccionada.id, user).subscribe((response: any) => {
+    this.usuarioService.asignarUsuarioSucursal(this.sucursal, this.empresaService.organizacion_seleccionada.id, user).subscribe((response: any) => {
 
     });
   }

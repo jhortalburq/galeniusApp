@@ -16,7 +16,7 @@ export class EmpresaService {
   public empresas: Array<any> = [];
   public sucursales: Array<any> = [];
 
-  public empresa_seleccionada: any = {id: null};
+  public organizacion_seleccionada: any = {id: null};
   public sucursal_seleccionada: any = {id: null};
 
   constructor(private http: HttpClient,
@@ -45,14 +45,14 @@ export class EmpresaService {
 
   quitarEmpresaActivaUsuario() {
     localStorage.removeItem('empresa');
-    this.empresa_seleccionada = {};
+    this.organizacion_seleccionada = {};
   }
 
   getEmpresaActivaUsuario() {
-    if (this.empresa_seleccionada && !this.empresa_seleccionada.id) {
-        this.empresa_seleccionada = JSON.parse(localStorage.getItem('empresa'));
+    if (this.organizacion_seleccionada && !this.organizacion_seleccionada.id) {
+        this.organizacion_seleccionada = JSON.parse(localStorage.getItem('empresa'));
     }
-    return this.empresa_seleccionada;
+    return this.organizacion_seleccionada;
   }
 
   addEmpresa(empresa: any) {

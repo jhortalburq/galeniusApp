@@ -46,14 +46,14 @@ export class HorariosComponent {
   // }
 
   getEspecialidades() {
-    this.mantenimientoService.getEspecialidades(this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+    this.mantenimientoService.getEspecialidades(this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                              .subscribe((response: any) => {
                                  this.especialidades = response.results;
                               });
   }
 
   getEspecialistas(especialidad: number) {
-    this.mantenimientoService.getEspecialistas(this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, especialidad)
+    this.mantenimientoService.getEspecialistas(this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, especialidad)
                              .subscribe((response: any) => {
                                  this.especialistas = response;
                               });

@@ -18,7 +18,6 @@ export class BreadcrumbsService {
   constructor(
         public notificationService: NotificationsService
   ) {
-    // this.modulo = localStorage.getItem('modulo');
   }
 
   setModuloName(modulo: string, notification: boolean, modulo_rl?: string) {

@@ -19,7 +19,10 @@ export class ModulosComponent implements OnInit {
   }
 
   irModulo(modulo: string) {
+      localStorage.setItem('last_modulo', modulo);
       this.router.navigate(['/' + modulo, 'menu']);
       this.modalRef.hide();
   }
+
+
 }

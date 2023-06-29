@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OcupacionalService, SidebarService, BreadcrumbsService } from '../../../../services/services.index';
+import { OcupacionalService, SidebarService, BreadcrumbsService } from '../../../services/services.index';
 
 @Component({
   selector: 'app-menu',

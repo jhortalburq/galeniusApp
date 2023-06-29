@@ -192,7 +192,7 @@ export class EditarEspecialistaComponent {
   }
 
   getModulos() {
-    this.mantenimientoService.getEspecialidades(this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+    this.mantenimientoService.getEspecialidades(this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                              .subscribe((response: any) => {
                                           this._especialidades = response.results;
     });
@@ -297,7 +297,7 @@ export class EditarEspecialistaComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.especialistaService.editEspecialista(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id, this.slug)
+      this.especialistaService.editEspecialista(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, this.slug)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Especialista Editado', 5000);
