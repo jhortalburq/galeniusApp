@@ -24,6 +24,7 @@ export class EditEstudioGabineteComponent {
 
   action: Subject<any> = new Subject();
   disabled: boolean = false;
+  filteredItem: Observable<any[]>;
 
   registerForm: FormGroup;
   nombre: FormControl;
@@ -91,6 +92,23 @@ export class EditEstudioGabineteComponent {
 
                                 }
                               })
+    }
+  }
+
+  buscarItem(e){
+    this.filteredItem = this.mantenimientoService.getOptionsItems(this.empresaService.empresa_seleccionada.id, e.target.value);
+  }
+
+  selectItem(item: any){
+    this.procedimientos.push(item.nombre);
+    this.registerForm.patchValue({
+        procedimiento: ''
+    })
+  } 
+
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.addItem();
     }
   }
 }

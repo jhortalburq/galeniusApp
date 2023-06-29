@@ -23,12 +23,23 @@
 
             <div class="row mt-n3">
                 <div class="col-sm-8 col-xs-12">
-                      <div class="md-form form-sm ">
-                        <input type="text" id="procedimiento" formControlName="procedimiento" class="form-control form-control-sm"
-                               mdbInput >
-                        <label for="procedimiento"  class="font-weight-bold">Añadir Procedimiento</label>
-
+                      <div class="md-form form-sm form-group">
+                        <input
+                          formControlName="procedimiento"
+                          type="text"
+                          class="completer-input form-control mdb-autocomplete mb-0"
+                          [mdbAutoCompleter]="auto"
+                          placeholder="Ingrese un procedimiento"
+                          (keyup)="buscarItem($event)"
+                          (keydown)="onKeydown($event)"
+                          />
+                        <mdb-auto-completer #auto="mdbAutoCompleter" [clearButton]="false">
+                            <mdb-option *ngFor="let item of filteredItem | async" [value]="item.nombre" (click)="selectItem(item)">
+                                {{ item.nombre }}
+                          </mdb-option>
+                        </mdb-auto-completer>
                       </div>
+
                  </div>
                  <div class="col-sm-2 col-xs-12">
                     <a mdbBtn [floating]="true" size="sm" mdbWavesEffect (click)="addItem()">

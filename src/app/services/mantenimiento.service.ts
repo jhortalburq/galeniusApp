@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
+import { EMPTY } from 'rxjs'
 
 import {catchError, map} from 'rxjs/operators';
 import { SharedService } from './shared.service'
@@ -257,6 +258,19 @@ export class MantenimientoService {
     registro['organizacion'] = org
     registro['procedimientos'] = items;
     return this.http.put(`${environment.apiUrl}/api/v1/maestros/estudios-gabinete/${id}`, JSON.stringify(registro), {params: {'organizacion': org}});
+  }
+
+  getOptionsItems(org: number, params: string) {
+    if (params.length > 2) {
+      return this.http.get(`${environment.apiUrl}/api/v1/maestros/items-estudios-gabinete`, { params: { 'search': params , 'organizacion': org} })
+                    .pipe(map( (res: any) => {
+                              return res['results'];
+                          }),
+                          catchError(this.sharedService.handleError)
+                          );
+    } else {
+      return EMPTY;
+    }
   }
 
 }
