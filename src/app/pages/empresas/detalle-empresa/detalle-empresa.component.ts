@@ -22,7 +22,7 @@ export class DetalleEmpresaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onEditEmpresa(submit: boolean) {
+  onedirOrganizacion(submit: boolean) {
     if (submit) {
         this.action.next( true );
         this.modalRef.hide();

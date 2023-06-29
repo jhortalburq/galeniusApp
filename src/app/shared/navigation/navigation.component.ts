@@ -55,11 +55,11 @@ export class NavigationComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.breadcrumbService.modulo = localStorage.getItem('last_modulo');
 
-    this.empresaService.getEmpresasUsuario().subscribe();
-    this.organizacion_seleccionada = this.empresaService.getEmpresaActivaUsuario();
+    this.empresaService.getOrganizacionesUsuario().subscribe();
+    this.organizacion_seleccionada = this.empresaService.getOrganizacionActivaUsuario();
 
     if (this.organizacion_seleccionada) {
-      this.empresaService.getSucursalesEmpresa(this.organizacion_seleccionada.id).subscribe();
+      this.empresaService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
     }
   }
@@ -74,7 +74,7 @@ export class NavigationComponent implements OnInit {
     this.empresaService.organizacion_seleccionada = empresa;
     this.organizacion_seleccionada = empresa;
 
-    this.empresaService.getSucursalesEmpresa(empresa.id).subscribe(response => {
+    this.empresaService.getSucursalesOrganizacion(empresa.id).subscribe(response => {
         this.empresaService.sucursal_seleccionada = {
                   razon_social: null,
                   id: null

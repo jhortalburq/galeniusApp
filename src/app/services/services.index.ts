@@ -1,10 +1,10 @@
 export { BreadcrumbsService } from './breadcrumbs.service';
 
-export { MantenimientosService } from './sidebar/mantenimientos.service';
-export { OcupacionalService } from './sidebar/ocupacional.service';
-export { AsistencialService } from './sidebar/asistencial.service';
+export { MantenimientosService } from '../modulos/sidebar/mantenimientos.service';
+export { OcupacionalService } from '../modulos/sidebar/ocupacional.service';
+export { AsistencialService } from '../modulos/sidebar/asistencial.service';
 
-export { SidebarService } from './sidebar/sidebar.service';
+export { SidebarService } from '../modulos/sidebar/sidebar.service';
 export { AuthService } from './auth.service';
 export { AuthInterceptor } from './auth.interceptor';
 export { SharedService } from './shared.service';

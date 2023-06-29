@@ -23,7 +23,7 @@ export class EmpresaService {
               private sharedService: SharedService) {
   }
 
-  getEmpresasUsuario(params?: string) {
+  getOrganizacionesUsuario(params?: string) {
     if (params && params.length > 2) {
       return this.http.get(`${environment.apiUrl}/api/v1/organizaciones`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
@@ -43,27 +43,27 @@ export class EmpresaService {
     }
   }
 
-  quitarEmpresaActivaUsuario() {
+  quitarOrganizacionActivaUsuario() {
     localStorage.removeItem('empresa');
     this.organizacion_seleccionada = {};
   }
 
-  getEmpresaActivaUsuario() {
+  getOrganizacionActivaUsuario() {
     if (this.organizacion_seleccionada && !this.organizacion_seleccionada.id) {
         this.organizacion_seleccionada = JSON.parse(localStorage.getItem('empresa'));
     }
     return this.organizacion_seleccionada;
   }
 
-  addEmpresa(empresa: any) {
+  addOrganizacion(empresa: any) {
     return this.http.post(`${environment.apiUrl}/api/v1/organizaciones`, JSON.stringify(empresa));
   }
 
-  editEmpresa(empresa: any, id: number) {
+  edirOrganizacion(empresa: any, id: number) {
     return this.http.put(`${environment.apiUrl}/api/v1/empresas/${id}/`, JSON.stringify(empresa), {});
   }
 
-  getSucursalesEmpresa(id: any, params?: string) {
+  getSucursalesOrganizacion(id: any, params?: string) {
     if (params && params.length > 2) {
       return this.http.get(`${environment.apiUrl}/api/v1/organizaciones/${id}/sucursales`, {params: { 'search': params }})
                     .pipe(

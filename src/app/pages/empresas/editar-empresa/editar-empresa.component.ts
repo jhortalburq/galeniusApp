@@ -93,7 +93,7 @@ export class EditarEmpresaComponent implements OnInit {
 
     if (this.registerForm.valid) {
 
-        this.empresaService.editEmpresa( this.registerForm.value, this.empresa.id ).subscribe(
+        this.empresaService.edirOrganizacion( this.registerForm.value, this.empresa.id ).subscribe(
           (response) => {
               this.submitChange.emit(true);
               this.notificationService.showInfo('Se editó el registro correctamente' , 'Empresa');

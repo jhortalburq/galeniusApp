@@ -33,25 +33,22 @@ export class ListaEmpresasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-
-    // this.modalService.open.subscribe(() => console.log('open'));
-    // this.modalService.opened.subscribe(() => console.log('opened'));
-    // this.modalService.close.subscribe(() => console.log('close'));
-    // this.modalService.closed.subscribe(() => console.log('closed'));
-
   }
 
   getData(url?) {
-    this.empresaService.getEmpresasUsuario().subscribe(
-      (response: any) => {
+    this.empresaService.getOrganizacionesUsuario().subscribe({
+      next: (response: any) => {
         this.empresas = response.results;
+        console.log(this.empresas)
       },
-      (error: any) => {
-        if (error.status === 401) {
-          localStorage.removeItem('token');
-          this.router.navigate(['/login']);
-        }
-      });
+      error: (error: any) => {
+          if (error.status === 401) {
+            localStorage.removeItem('token');
+            this.router.navigate(['/login']);
+          }
+      }
+
+    })
   }
 
   openModal() {
@@ -106,14 +103,14 @@ export class ListaEmpresasComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.empresaService.getEmpresasUsuario(filterValue).subscribe((response: any) => {
+    this.empresaService.getOrganizacionesUsuario(filterValue).subscribe((response: any) => {
       this.empresas = response.results;
     });
   }
 
   changeStatus(empresa: any) {
 
-     this.empresaService.editEmpresa( empresa, empresa.id ).subscribe(
+     this.empresaService.edirOrganizacion( empresa, empresa.id ).subscribe(
           (response) => {
             if (empresa.activo) {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Activa');
@@ -121,7 +118,7 @@ export class ListaEmpresasComponent implements OnInit {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Inactiva');
                 }
 
-            this.empresaService.getEmpresasUsuario().subscribe();
+            this.empresaService.getOrganizacionesUsuario().subscribe();
 
             },
             err => {

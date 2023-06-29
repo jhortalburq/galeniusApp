@@ -19,7 +19,7 @@
             <!--Body-->
             <div class="modal-body mb-1">
 
-              <app-editar-empresa [empresa]="content.empresa" (submitChange)="onEditEmpresa($event)"></app-editar-empresa>
+              <app-editar-empresa [empresa]="content.empresa" (submitChange)="onedirOrganizacion($event)"></app-editar-empresa>
 
             </div>
           </mdb-tab>
@@ -34,7 +34,7 @@
           >
             <!--Body-->
             <div class="modal-body">
-              <app-usuarios-empresa [empresa]="content.empresa" (submitChange)="onEditEmpresa($event)"></app-usuarios-empresa>
+              <app-usuarios-empresa [empresa]="content.empresa" (submitChange)="onedirOrganizacion($event)"></app-usuarios-empresa>
             </div>
           </mdb-tab>
           <!--/.Panel 8-->
@@ -48,7 +48,7 @@
           >
             <!--Body-->
             <div class="modal-body">
-              <app-logo-empresa [empresa]="content.empresa" (submitChange)="onEditEmpresa($event)"></app-logo-empresa>
+              <app-logo-empresa [empresa]="content.empresa" (submitChange)="onedirOrganizacion($event)"></app-logo-empresa>
             </div>
           </mdb-tab>
           <!--/.Panel 9-->

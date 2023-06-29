@@ -25,11 +25,11 @@ export class SeleccionarSucursalComponent {
     this.breadcrumbService.flag_dropdown_sucursal = true;
     this.breadcrumbService.flag_sidebar = false;
 
-    this.empresaService.getEmpresasUsuario().subscribe();
-    this.organizacion_seleccionada = this.empresaService.getEmpresaActivaUsuario();
+    this.empresaService.getOrganizacionesUsuario().subscribe();
+    this.organizacion_seleccionada = this.empresaService.getOrganizacionActivaUsuario();
     
     if (this.organizacion_seleccionada) {
-      this.empresaService.getSucursalesEmpresa(this.organizacion_seleccionada.id).subscribe();
+      this.empresaService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
     }
   }

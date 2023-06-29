@@ -22,7 +22,7 @@ export class MenuComponent {
     this.breadcrumbService.flag_dropdown_sucursal = false;
     this.breadcrumbService.flag_sidebar = false;
 
-    this.empresaService.quitarEmpresaActivaUsuario();
+    this.empresaService.quitarOrganizacionActivaUsuario();
     this.empresaService.quitarSucursalActivo();
 
     this.checkProfile();

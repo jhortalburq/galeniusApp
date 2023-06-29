@@ -42,7 +42,7 @@ export class OrganizacionesComponent {
     this.breadcrumbService.flag_dropdown_sucursal = false;
     this.breadcrumbService.flag_sidebar = false;
 
-    this.empresaService.quitarEmpresaActivaUsuario();
+    this.empresaService.quitarOrganizacionActivaUsuario();
     this.empresaService.quitarSucursalActivo();
 
     // this.modalService.open.subscribe(() => console.log('open'));
@@ -53,7 +53,7 @@ export class OrganizacionesComponent {
   }
 
   getData(url?) {
-    this.empresaService.getEmpresasUsuario().subscribe({
+    this.empresaService.getOrganizacionesUsuario().subscribe({
         next: (response: any) => {
           console.log(response.results)
               this.empresas = response.results;
@@ -119,14 +119,14 @@ export class OrganizacionesComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.empresaService.getEmpresasUsuario(filterValue).subscribe((response: any) => {
+    this.empresaService.getOrganizacionesUsuario(filterValue).subscribe((response: any) => {
       this.empresas = response.results;
     });
   }
 
   changeStatus(empresa: any) {
 
-     this.empresaService.editEmpresa( empresa, empresa.id ).subscribe(
+     this.empresaService.edirOrganizacion( empresa, empresa.id ).subscribe(
           (response) => {
             if (empresa.activo) {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Activa');
@@ -134,7 +134,7 @@ export class OrganizacionesComponent {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Inactiva');
                 }
 
-            this.empresaService.getEmpresasUsuario().subscribe();
+            this.empresaService.getOrganizacionesUsuario().subscribe();
 
             },
             err => {
@@ -147,7 +147,7 @@ export class OrganizacionesComponent {
     localStorage.setItem('empresa', JSON.stringify(empresa));
     this.empresaService.organizacion_seleccionada = empresa;
 
-    this.empresaService.getSucursalesEmpresa(empresa.id).subscribe({
+    this.empresaService.getSucursalesOrganizacion(empresa.id).subscribe({
       next: (res: any) => {
         if(!res.length) {
           this.crearSucursal(empresa.id);

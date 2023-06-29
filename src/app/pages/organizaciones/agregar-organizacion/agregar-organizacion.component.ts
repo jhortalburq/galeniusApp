@@ -80,7 +80,7 @@ export class AgregarOrganizacionComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.empresaService.addEmpresa(this.registerForm.value).subscribe({
+      this.empresaService.addOrganizacion(this.registerForm.value).subscribe({
         next: (response) => {
           this.action.next(true);
           this.notificationService.showInfo('Registro creado' , 'Organización');
