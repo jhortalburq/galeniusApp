@@ -69,7 +69,7 @@ export class EditDiagnosticoComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showInfo('Registro editado' , 'Diagnóstico');
+                                  this.notificationService.showInfo('Registro editado' , this.registro.nombre);
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

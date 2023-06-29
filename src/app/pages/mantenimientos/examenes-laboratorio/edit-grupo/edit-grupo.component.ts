@@ -93,7 +93,7 @@ export class EditGrupoComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showInfo('Registro editado' , 'Grupos de Laboratorio');
+                                  this.notificationService.showInfo('Registro editado' , this.registro.nombre);
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

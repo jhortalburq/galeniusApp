@@ -70,7 +70,7 @@ export class EstudiosGabineteComponent {
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-dialog modal-notify modal-primary',
+                  class: 'modal-dialog modal-notify modal-primary modal-lg',
                   animated: true,
                   data: {
                   }
@@ -94,7 +94,7 @@ export class EstudiosGabineteComponent {
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-dialog modal-notify modal-primary',
+                  class: 'modal-dialog modal-notify modal-primary modal-lg',
                   animated: true,
                   data: {
                       registro: registro

@@ -314,8 +314,7 @@ export class EditarEspecialistaComponent {
   }
 
   regresar() {
-    let url = this.router.url;
-    url = url.replace('nuevo', 'lista');
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/especialistas/lista`;
     this.router.navigate([url]);
   }
 }

@@ -69,9 +69,9 @@ export class AddMedicamentoComponent {
 
       this.mantenimientoService.addObjectMantenimiento('maestros/medicamentos', this.registerForm.value, this.empresaService.empresa_seleccionada.id)
                                   .subscribe({
-                                    next: (response) => {
+                                    next: (response: any) => {
                                       this.action.next(true);
-                                      this.notificationService.showInfo('Registro creado' , 'Medicamento');
+                                      this.notificationService.showInfo('Registro creado' , response.nombre);
                                       this.modalRef.hide();
                                     },
                                     error:  err => {

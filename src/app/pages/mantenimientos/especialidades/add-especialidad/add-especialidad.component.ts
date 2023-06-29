@@ -70,9 +70,9 @@ export class AddEspecialidadComponent {
 
       this.mantenimientoService.addEspecialidad(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
                                   .subscribe({
-                                    next: (response) => {
+                                    next: (response: any) => {
                                       this.action.next(true);
-                                      this.notificationService.showInfo('Registro creado' , 'Especialidad');
+                                      this.notificationService.showInfo('Registro creado', response.nombre);
                                       this.modalRef.hide();
                                     },
                                     error:  err => {
