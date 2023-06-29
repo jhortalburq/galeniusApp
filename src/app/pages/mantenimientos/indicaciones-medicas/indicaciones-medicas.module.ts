@@ -7,7 +7,6 @@ import { IndicacionesMedicasRoutingModule } from './indicaciones-medicas-routing
 import { AddIndicacionComponent } from './add-indicacion/add-indicacion.component';
 import { EditIndicacionComponent } from './edit-indicacion/edit-indicacion.component';
 
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MDBBootstrapModulesPro } from '../../../../../ng-uikit-pro-standard/src/lib/mdb.module';

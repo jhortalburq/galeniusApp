@@ -12,7 +12,7 @@
                             mdbInput
                             (keyup)="applyFilter($event)"
                           />
-                          <label for="search">Buscar Especialidad</label>
+                          <label for="search">Buscar Estudios de Gabinete</label>
                         </div>
                       </div>
                     </div>
@@ -28,10 +28,14 @@
                         <tbody *ngIf="registros">
                           <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                             
-                            <td class="text-center">{{ i + 1 }}</td>
-                            <td style="width:70%">{{ registro.nombre }}</td>
-                            <td class="text-center" style="width:30%">{{ registro.nombre_ficha }}</td>
+                            <td class="text-center">{{  i + 1 }}</td>
+                            <td style="width:50%">{{ registro.nombre }}</td>
 
+                            <td class="text-center" style="width:50%">
+                                <mdb-badge class="badge-item" [primary]="true" style="cursor: pointer" *ngFor="let item of registro.items">
+                                    {{ item.nombre }}
+                                </mdb-badge>
+                            </td>
 
                             <td style="width: 10%" class="text-center">
                                 <mdb-badge [danger]="true" (click)="editModal(registro)" style="cursor: pointer">
@@ -43,7 +47,7 @@
 
                         <tbody *ngIf="!registros.length">
                           <tr mdbTableCol >
-                            <td colspan="4" style="width: 115%">No se encontraron registros</td>
+                            <td colspan="5" style="width: 115%">No se encontraron registros</td>
                           </tr>
                         </tbody>
 

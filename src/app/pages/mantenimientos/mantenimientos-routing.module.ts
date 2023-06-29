@@ -9,7 +9,7 @@ const routes: Routes = [
       },
       {
         path: 'estudios-gabinete',
-        loadChildren: () => import('./estudios-gabinete/estudios-gabinete-routing.module').then( m => m.EstudiosGabineteRoutingModule)
+        loadChildren: () => import('./estudios-gabinete/estudios-gabinete.module').then( m => m.EstudiosGabineteModule)
       },
       {
         path: 'diagnosticos',

@@ -247,4 +247,16 @@ export class MantenimientoService {
     }
   }
 
+  addEstudioGabinete(registro: any, org: number, items: any) {
+    registro['organizacion'] = org
+    registro['procedimientos'] = items;
+    return this.http.post(`${environment.apiUrl}/api/v1/maestros/estudios-gabinete`, JSON.stringify(registro), {params: {'organizacion': org}});
+  }
+
+  editEstudioGabinete(registro: any, id: number, org: number, items: any) {
+    registro['organizacion'] = org
+    registro['procedimientos'] = items;
+    return this.http.put(`${environment.apiUrl}/api/v1/maestros/estudios-gabinete/${id}`, JSON.stringify(registro), {params: {'organizacion': org}});
+  }
+
 }
