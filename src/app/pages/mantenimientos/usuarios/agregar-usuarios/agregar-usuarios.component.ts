@@ -79,7 +79,7 @@ export class AgregarUsuariosComponent implements OnInit {
         this.usuarioService.addUsuario( this.registerForm.value ).subscribe(
           (response) => {
               this.action.next( true );
-              this.notificationService.showSuccess('Se creó el registro correctamente' , 'Usuario');
+              this.notificationService.showInfo('Se creó el registro correctamente' , 'Usuario');
               this.modalRef.hide();
             },
           (err: any) => {

@@ -119,7 +119,7 @@ export class EditarSucursalComponent implements OnInit {
         this.empresaService.editSucursal( this.registerForm.value, this.sucursal.id, this.empresa_id ).subscribe({
           next: (response: any) => {
             this.action.next( true );
-            this.notificationService.showSuccess('Se editó el registro correctamente' , 'Sucursal');
+            this.notificationService.showInfo('Se editó el registro correctamente' , 'Sucursal');
             this.modalRef.hide();
           },
           error: (err: any) =>{

@@ -62,7 +62,7 @@ export class EditTipoEvaluacionComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Tipo de Evaluación');
+                                  this.notificationService.showInfo('Registro editado' , 'Tipo de Evaluación');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

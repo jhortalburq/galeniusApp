@@ -59,7 +59,7 @@ export class AddExamenLaboratorioComponent {
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Examen de Laboratorio');
+                                      this.notificationService.showInfo('Registro creado' , 'Examen de Laboratorio');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {
@@ -70,4 +70,5 @@ export class AddExamenLaboratorioComponent {
                                   })
     }
   }
+
 }

@@ -59,7 +59,7 @@ export class EditIndicacionComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Indicación');
+                                  this.notificationService.showInfo('Registro editado' , 'Indicación');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

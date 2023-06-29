@@ -260,6 +260,18 @@ export class MantenimientoService {
     return this.http.put(`${environment.apiUrl}/api/v1/maestros/estudios-gabinete/${id}`, JSON.stringify(registro), {params: {'organizacion': org}});
   }
 
+  addGrupoAnalisis(registro: any, org: number, analisis: any) {
+    registro['organizacion'] = org
+    registro['analisis'] = analisis.map(({id})=> id);;
+    return this.http.post(`${environment.apiUrl}/api/v1/maestros/grupos-laboratorio`, JSON.stringify(registro), {params: {'organizacion': org}});
+  }
+
+  editGrupoAnalisis(registro: any, id: number, org: number, analisis: any) {
+    registro['organizacion'] = org
+    registro['analisis'] = analisis.map(({id})=> id);;
+    return this.http.put(`${environment.apiUrl}/api/v1/maestros/grupos-laboratorio/${id}`, JSON.stringify(registro), {params: {'organizacion': org}});
+  }
+
   getOptionsItems(org: number, params: string) {
     if (params.length > 2) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/items-estudios-gabinete`, { params: { 'search': params , 'organizacion': org} })

@@ -57,7 +57,7 @@ export class LogoEmpresaComponent implements OnInit {
           (response:any) => {
                 this.empresa.url_logo = response.logotipo;
                 this.submitChange.emit(true);
-                this.notificationService.showSuccess('Se editó el Logotipo de la Empresa' , 'Logo Actualizado');
+                this.notificationService.showInfo('Se editó el Logotipo de la Empresa' , 'Logo Actualizado');
             },
             err => {
                   console.log(err);

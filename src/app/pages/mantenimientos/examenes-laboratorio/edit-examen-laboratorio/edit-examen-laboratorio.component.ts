@@ -62,7 +62,7 @@ export class EditExamenLaboratorioComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Examen de Laboratorio');
+                                  this.notificationService.showInfo('Registro editado' , 'Examen de Laboratorio');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

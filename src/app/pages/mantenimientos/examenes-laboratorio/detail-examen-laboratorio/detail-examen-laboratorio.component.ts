@@ -80,11 +80,12 @@ export class DetailExamenLaboratorioComponent {
                   keyboard: true,
                   focus: true,
                   show: false,
-                  ignoreBackdropClick: false,
+                  ignoreBackdropClick: true,
                   class: 'modal-dialog modal-notify modal-primary modal-lg',
                   animated: true,
                   data: {
-                      examen_id: this.id
+                      examen_id: this.id,
+                      analisis_registrados: []
                   } 
               });
 
@@ -104,12 +105,13 @@ export class DetailExamenLaboratorioComponent {
                   keyboard: true,
                   focus: true,
                   show: false,
-                  ignoreBackdropClick: false,
+                  ignoreBackdropClick: true,
                   class: 'modal-dialog modal-notify modal-primary modal-lg',
                   animated: true,
                   data: {
                       registro: registro,
-                      examen_id: this.id
+                      examen_id: this.id,
+                      analisis_registrados: registro.analisis
                   }
               }
     );
@@ -117,6 +119,7 @@ export class DetailExamenLaboratorioComponent {
     this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
 
     this.modalRef.content.action.subscribe( (result: any) => {
+      console.log('sii')
       console.log(result);
 
       if (result) {

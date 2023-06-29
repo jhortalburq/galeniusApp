@@ -59,7 +59,7 @@ export class EditTipoCitaComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Tipo de Cita');
+                                  this.notificationService.showInfo('Registro editado' , 'Tipo de Cita');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

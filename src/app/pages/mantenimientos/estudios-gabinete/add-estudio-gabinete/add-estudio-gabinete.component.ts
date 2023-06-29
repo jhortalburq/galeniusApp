@@ -76,7 +76,7 @@ export class AddEstudioGabineteComponent {
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Estudios Gabinete');
+                                      this.notificationService.showInfo('Registro creado' , 'Estudios Gabinete');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {

@@ -19,7 +19,66 @@
 
                       </div>
                  </div>
+            </div>
 
+            <div class="row mt-n4">
+                <div class="col-md-6">
+                  <div class="md-form form-sm">
+                    <input
+                      type="text"
+                      class="form-control"
+                      mdbInput
+                      (keyup)="applyFilter($event)"
+                    />
+                    <label for="search">Buscar Análisis</label>
+                  </div>
+                </div>
+              </div>
+
+            <div class="row">
+                <div class="col-sm-6"  style="height:40vh; overflow:auto;">
+                    <table class="table table-sm table-bordered text-nowrap">
+                        <thead>
+                            <tr class="mdb-color darken-5 white-text">
+                                <th colspan="3">Lista de Análisis</th>
+                            </tr>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th>Análisis</th>
+                                <th>Unidad</th>
+                                <th>Rango</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of analisis">
+                                <td><a (click)="addItem(item)">{{ item.nombre }}</a></td>
+                                <td class="text-center">{{ item.um }}</td>
+                                <td class="text-center">{{ item.rango }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-sm-6"  style="height:40vh; overflow:auto;">
+                    <table class="table table-sm table-bordered text-nowrap">
+                        <thead>
+                            <tr class="mdb-color darken-5 white-text">
+                                <th colspan="3">Análisis Registrados</th>
+                            </tr>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th>Análisis</th>
+                                <th>Unidad</th>
+                                <th>Rango</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of analisis_registrados">
+                                <td><a (click)="quitarItem(item)">{{ item.nombre }}</a></td>
+                                <td class="text-center">{{ item.um }}</td>
+                                <td class="text-center">{{ item.rango }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
             

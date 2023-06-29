@@ -72,7 +72,7 @@ export class AddEspecialidadComponent {
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Especialidad');
+                                      this.notificationService.showInfo('Registro creado' , 'Especialidad');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {

@@ -83,7 +83,7 @@ export class EditEstudioGabineteComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Estudio Gabinete');
+                                  this.notificationService.showInfo('Registro editado' , 'Estudio Gabinete');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

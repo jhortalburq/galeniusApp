@@ -57,7 +57,7 @@ export class AddTipoCitaComponent {
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Tipo de Cita');
+                                      this.notificationService.showInfo('Registro creado' , 'Tipo de Cita');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {

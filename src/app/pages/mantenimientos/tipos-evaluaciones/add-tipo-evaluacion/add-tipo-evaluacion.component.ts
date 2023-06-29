@@ -59,7 +59,7 @@ export class AddTipoEvaluacionComponent {
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Tipo de Evaluación');
+                                      this.notificationService.showInfo('Registro creado' , 'Tipo de Evaluación');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {

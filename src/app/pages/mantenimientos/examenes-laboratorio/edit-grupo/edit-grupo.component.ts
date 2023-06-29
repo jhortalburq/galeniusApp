@@ -7,6 +7,7 @@ import {
     FormArray,
     Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
@@ -21,6 +22,7 @@ import { SharedService, EmpresaService, NotificationsService, MantenimientoServi
 export class EditGrupoComponent {
   @Input() registro;
   @Input() examen_id;
+  @Input() analisis_registrados: Array<any>;
 
   @Output() submitChange = new EventEmitter();
 
@@ -31,18 +33,40 @@ export class EditGrupoComponent {
   nombre: FormControl;
   examen: FormControl;
 
+  itemsCopy: Array<any>;
+
+  public analisis: any = [];
+
   constructor(
         public modalRef: MDBModalRef,
         public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
+        private router: Router,
         public notificationService: NotificationsService
   ) {}
 
   ngOnInit(): void {
+    this.getAnalisis();
     this.createFormControls();
     this.createForm();
   }
+
+  getAnalisis(url?) {
+    this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.empresa_seleccionada.id).subscribe({
+      next: (response: any) => {
+        this.analisis = response.results;
+        this.itemsCopy = response.results;
+      },
+      error: (error: any) => {
+        if (error.status === 401) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
+        }
+      }
+    });
+  }
+
 
   createFormControls() {
     this.nombre = new FormControl(this.registro.nombre, Validators.required);
@@ -60,11 +84,11 @@ export class EditGrupoComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.editObjectMantenimiento('maestros/grupos-laboratorio', this.registerForm.value, this.registro.id, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.editGrupoAnalisis(this.registerForm.value, this.registro.id, this.empresaService.empresa_seleccionada.id, this.analisis_registrados)
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Grupos de Laboratorio');
+                                  this.notificationService.showInfo('Registro editado' , 'Grupos de Laboratorio');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {
@@ -75,4 +99,27 @@ export class EditGrupoComponent {
                               })
     }
   }
+
+  addItem( item: any ) {
+    this.analisis_registrados.push(item)
+  }
+  
+  quitarItem( item: any) {
+    let i: number = 0;
+    this.analisis_registrados.forEach((element,index) => {
+      if(element==item) this.analisis_registrados.splice(index, 1);
+    });  
+  }
+
+  applyFilter(event: any) {
+    let filterValue = event.target.value;
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+
+    this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.empresa_seleccionada.id, filterValue).subscribe((response: any) => {
+      this.analisis = response.results;
+    });
+  }
+
+
 }

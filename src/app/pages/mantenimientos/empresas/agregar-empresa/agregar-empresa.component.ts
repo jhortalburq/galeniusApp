@@ -102,7 +102,7 @@ export class AgregarEmpresaComponent implements OnInit {
         this.empresaService.addEmpresa( this.registerForm.value ).subscribe(
           (response) => {
               this.action.next( true );
-              this.notificationService.showSuccess('Se creó el registro correctamente' , 'Empresa');
+              this.notificationService.showInfo('Se creó el registro correctamente' , 'Empresa');
               this.modalRef.hide();
             },
             err => {

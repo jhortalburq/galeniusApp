@@ -111,7 +111,7 @@ export class AgregarSucursalComponent implements OnInit {
         this.empresaService.addSucursal(this.registerForm.value, this.empresa_id).subscribe({
           next: (response: any) => {
             this.action.next( true );
-            this.notificationService.showSuccess('Se creó el registro correctamente' , 'Sucursal');
+            this.notificationService.showInfo('Se creó el registro correctamente' , 'Sucursal');
             this.modalRef.hide();
           },
           error: (err: any) =>{

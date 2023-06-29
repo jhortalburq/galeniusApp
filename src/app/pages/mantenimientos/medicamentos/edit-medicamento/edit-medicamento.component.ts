@@ -84,7 +84,7 @@ export class EditMedicamentoComponent {
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);
-                                  this.notificationService.showSuccess('Registro editado' , 'Medicamento');
+                                  this.notificationService.showInfo('Registro editado' , 'Medicamento');
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

@@ -71,7 +71,7 @@ export class AddMedicamentoComponent {
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Medicamento');
+                                      this.notificationService.showInfo('Registro creado' , 'Medicamento');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {

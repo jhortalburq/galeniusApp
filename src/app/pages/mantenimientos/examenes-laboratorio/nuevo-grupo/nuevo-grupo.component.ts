@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MDBModalRef } from '../../../../../../ng-uikit-pro-standard/src/public_api';
+import { Router } from '@angular/router';
 
 import {
     FormGroup,
@@ -20,6 +21,7 @@ import { SharedService, EmpresaService, NotificationsService, MantenimientoServi
 })
 export class NuevoGrupoComponent {
   @Input() examen_id;
+  @Input() analisis_registrados: Array<any>;
 
   action: Subject<any> = new Subject();
   disabled: boolean = false;
@@ -28,17 +30,35 @@ export class NuevoGrupoComponent {
   nombre: FormControl;
   examen: FormControl;
 
+  public analisis: any = [];
+
   constructor(
         public modalRef: MDBModalRef,
         public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
-        public notificationService: NotificationsService
+        public notificationService: NotificationsService,
+        private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.getAnalisis();
     this.createFormControls();
     this.createForm();
+  }
+
+  getAnalisis(url?) {
+    this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.empresa_seleccionada.id).subscribe({
+      next: (response: any) => {
+        this.analisis = response.results;
+      },
+      error: (error: any) => {
+        if (error.status === 401) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
+        }
+      }
+    });
   }
 
   createFormControls() {
@@ -57,11 +77,11 @@ export class NuevoGrupoComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addObjectMantenimiento('maestros/grupos-laboratorio', this.registerForm.value, this.empresaService.empresa_seleccionada.id)
+      this.mantenimientoService.addGrupoAnalisis(this.registerForm.value, this.empresaService.empresa_seleccionada.id, this.analisis_registrados)
                                   .subscribe({
                                     next: (response) => {
                                       this.action.next(true);
-                                      this.notificationService.showSuccess('Registro creado' , 'Grupo de Laboratorio');
+                                      this.notificationService.showInfo('Registro creado' , 'Grupo de Laboratorio');
                                       this.modalRef.hide();
                                     },
                                     error:  err => {
@@ -71,5 +91,26 @@ export class NuevoGrupoComponent {
                                     }
                                   })
     }
+  }
+
+  addItem( item: any ) {
+    this.analisis_registrados.push(item)
+  }
+  
+  quitarItem( item: any) {
+    let i: number = 0;
+    this.analisis_registrados.forEach((element,index) => {
+      if(element==item) this.analisis_registrados.splice(index, 1);
+    });  
+  }
+
+  applyFilter(event: any) {
+    let filterValue = event.target.value;
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+
+    this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.empresa_seleccionada.id, filterValue).subscribe((response: any) => {
+      this.analisis = response.results;
+    });
   }
 }
