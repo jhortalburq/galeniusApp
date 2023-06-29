@@ -1,25 +1,23 @@
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef, Renderer2 } from '@angular/core';
+import { EmpresaService } from '../../../services/services.index';
+
+import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standard/src/public_api';
+import { NotificationsService } from '../../../services/notifications.service';
+
+import { AgregarEmpresaComponent } from '../agregar-empresa/agregar-empresa.component';
+import { DetalleEmpresaComponent } from '../detalle-empresa/detalle-empresa.component';
 import { Router } from '@angular/router';
 
-import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
-
-import { EmpresaService, NotificationsService, BreadcrumbsService } from '../../services/services.index';
-
-import { AgregarOrganizacionComponent } from './agregar-organizacion/agregar-organizacion.component';
-import { DetalleOrganizacionComponent } from './detalle-organizacion/detalle-organizacion.component';
-
-import { AgregarSucursalComponent } from '../sucursales/agregar-sucursal/agregar-sucursal.component';
-
-
 @Component({
-  selector: 'app-organizaciones',
-  templateUrl: './organizaciones.component.html',
-  styleUrls: ['./organizaciones.component.scss']
+  selector: 'app-lista-empresas',
+  templateUrl: './lista-empresas.component.html',
+  styleUrls: ['./lista-empresas.component.scss']
 })
-export class OrganizacionesComponent {
+
+export class ListaEmpresasComponent implements OnInit {
   modalRef: MDBModalRef;
 
-  displayedColumns = ['', 'Nombre', 'Módulos', 'Sucursales Multiples', 'Activo', ''];
+  displayedColumns = ['Razón Social', 'RUC', 'Dirección', 'Ubigeo', 'Activo', ''];
 
   public empresas: any = [];
 
@@ -27,7 +25,6 @@ export class OrganizacionesComponent {
 
   constructor(
           public empresaService: EmpresaService,
-          public breadcrumbService: BreadcrumbsService,
           private modalService: MDBModalService,
           private renderer: Renderer2,
           public notificationService: NotificationsService,
@@ -37,14 +34,6 @@ export class OrganizacionesComponent {
   ngOnInit(): void {
     this.getData();
 
-    this.breadcrumbService.title = 'ORGANIZACIONES';
-    this.breadcrumbService.flag_dropdown_empresa = false;
-    this.breadcrumbService.flag_dropdown_sucursal = false;
-    this.breadcrumbService.flag_sidebar = false;
-
-    this.empresaService.quitarEmpresaActivaUsuario();
-    this.empresaService.quitarSucursalActivo();
-
     // this.modalService.open.subscribe(() => console.log('open'));
     // this.modalService.opened.subscribe(() => console.log('opened'));
     // this.modalService.close.subscribe(() => console.log('close'));
@@ -53,28 +42,26 @@ export class OrganizacionesComponent {
   }
 
   getData(url?) {
-    this.empresaService.getEmpresasUsuario().subscribe({
-        next: (response: any) => {
-          console.log(response.results)
-              this.empresas = response.results;
-        },
-        error: (e: any) => {
-          if (e.status === 401) {
-            localStorage.removeItem('token');
-            this.router.navigate(['/login']);
-          }
+    this.empresaService.getEmpresasUsuario().subscribe(
+      (response: any) => {
+        this.empresas = response.results;
+      },
+      (error: any) => {
+        if (error.status === 401) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
         }
-    });
+      });
   }
 
   openModal() {
-    this.modalRef = this.modalService.show(AgregarOrganizacionComponent, {
+    this.modalRef = this.modalService.show(AgregarEmpresaComponent, {
                   backdrop: true,
                   keyboard: true,
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-dialog modal-notify modal-primary',
+                  class: 'modal-lg modal-dialog modal-notify modal-primary ',
                   animated: true,
               });
 
@@ -90,7 +77,7 @@ export class OrganizacionesComponent {
 
   editModal(empresa: any): void {
 
-    this.modalRef = this.modalService.show(DetalleOrganizacionComponent, {
+    this.modalRef = this.modalService.show(DetalleEmpresaComponent, {
                   backdrop: true,
                   keyboard: true,
                   focus: true,
@@ -141,43 +128,8 @@ export class OrganizacionesComponent {
                   console.log(err);
             }
         );
+
+
   }
 
-  setOrganizacion( empresa: any ) {
-    localStorage.setItem('empresa', JSON.stringify(empresa));
-    this.empresaService.empresa_seleccionada = empresa;
-
-    this.empresaService.getSucursalesEmpresa(empresa.id).subscribe({
-      next: (res: any) => {
-        if(!res.length) {
-          this.crearSucursal(empresa.id);
-        } else {
-          this.router.navigate(['/seleccionar-sucursal'])
-        }
-      }
-    });
-  }
-
-  crearSucursal( empresa_id: number ) {
-    this.modalRef = this.modalService.show(AgregarSucursalComponent, {
-          backdrop: true,
-          keyboard: true,
-          focus: true,
-          show: false,
-          ignoreBackdropClick: false,
-          class: 'modal-dialog modal-notify modal-primary',
-          animated: true,
-          data: {
-             empresa_id: empresa_id
-          }
-      });
-
-    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
-
-    this.modalRef.content.action.subscribe( (result: any) => {
-        if (result) {
-          this.router.navigate(['/seleccionar-sucursal'])
-        }
-    });
-  }
 }
