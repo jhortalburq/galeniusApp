@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef, Renderer2 } from '@angular/core';
-import { EmpresaService } from '../../../services/services.index';
+import { SharedService } from '../../../services/services.index';
 
 import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standard/src/public_api';
 import { NotificationsService } from '../../../services/notifications.service';
@@ -24,7 +24,7 @@ export class ListaEmpresasComponent implements OnInit {
   filter: string;
 
   constructor(
-          public empresaService: EmpresaService,
+          public sharedService: SharedService,
           private modalService: MDBModalService,
           private renderer: Renderer2,
           public notificationService: NotificationsService,
@@ -36,7 +36,7 @@ export class ListaEmpresasComponent implements OnInit {
   }
 
   getData(url?) {
-    this.empresaService.getOrganizacionesUsuario().subscribe({
+    this.sharedService.getOrganizacionesUsuario().subscribe({
       next: (response: any) => {
         this.empresas = response.results;
         console.log(this.empresas)
@@ -103,14 +103,14 @@ export class ListaEmpresasComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.empresaService.getOrganizacionesUsuario(filterValue).subscribe((response: any) => {
+    this.sharedService.getOrganizacionesUsuario(filterValue).subscribe((response: any) => {
       this.empresas = response.results;
     });
   }
 
   changeStatus(empresa: any) {
 
-     this.empresaService.edirOrganizacion( empresa, empresa.id ).subscribe(
+     this.sharedService.editOrganizacion( empresa, empresa.id ).subscribe(
           (response) => {
             if (empresa.activo) {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Activa');
@@ -118,7 +118,7 @@ export class ListaEmpresasComponent implements OnInit {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Inactiva');
                 }
 
-            this.empresaService.getOrganizacionesUsuario().subscribe();
+            this.sharedService.getOrganizacionesUsuario().subscribe();
 
             },
             err => {

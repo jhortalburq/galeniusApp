@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 
 import { Opcion } from '../../../interfaces/option';
 
-import { SharedService, EmpresaService } from '../../../services/services.index';
+import { SharedService } from '../../../services/services.index';
 import { NotificationsService } from '../../../services/notifications.service';
 
 
@@ -45,7 +45,6 @@ export class EditarEmpresaComponent implements OnInit {
 
   constructor(
         public fb: FormBuilder,
-        public empresaService: EmpresaService,
         public sharedService: SharedService,
         public notificationService: NotificationsService
   ) {
@@ -93,7 +92,7 @@ export class EditarEmpresaComponent implements OnInit {
 
     if (this.registerForm.valid) {
 
-        this.empresaService.edirOrganizacion( this.registerForm.value, this.empresa.id ).subscribe(
+        this.sharedService.editOrganizacion( this.registerForm.value, this.empresa.id ).subscribe(
           (response) => {
               this.submitChange.emit(true);
               this.notificationService.showInfo('Se editó el registro correctamente' , 'Empresa');
@@ -140,7 +139,7 @@ export class EditarEmpresaComponent implements OnInit {
   async searchRuc() {
     if (this.registerForm.value.no_documento.length === 11 && this.intentos < 6) {
           this.loading = true;
-          await this.empresaService.getValidarDocumento(6, this.registerForm.value.no_documento).subscribe((response: any) => {
+          await this.sharedService.getValidarDocumento(6, this.registerForm.value.no_documento).subscribe((response: any) => {
 
               if( response.razonSocial ) {
 

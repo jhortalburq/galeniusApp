@@ -9,7 +9,6 @@ export { AuthService } from './auth.service';
 export { AuthInterceptor } from './auth.interceptor';
 export { SharedService } from './shared.service';
 
-export { EmpresaService } from './empresa.service';
 export { UsuariosService } from './usuarios.service';
 export { AlmacenService } from './almacen.service';
 export { MantenimientoService } from './mantenimiento.service';
@@ -22,3 +21,4 @@ export { HorariosService } from './horarios.service';
 export { EspecialistasService } from './especialistas.service';
 
 export { PacientesService } from './pacientes.service';
+export { EmpresasService } from './empresas.service';

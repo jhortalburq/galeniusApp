@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 import { Opcion } from '../../../interfaces/option';
 
-import { SharedService, EmpresaService } from '../../../services/services.index';
+import { SharedService } from '../../../services/services.index';
 
 import { Subject } from 'rxjs';
 import { NotificationsService } from '../../../services/notifications.service';
@@ -50,7 +50,6 @@ export class AgregarEmpresaComponent implements OnInit {
   constructor(
         public modalRef: MDBModalRef,
         public fb: FormBuilder,
-        public empresaService: EmpresaService,
         public sharedService: SharedService,
         public notificationService: NotificationsService
   ) {
@@ -99,7 +98,7 @@ export class AgregarEmpresaComponent implements OnInit {
 
     if (this.registerForm.valid) {
 
-        this.empresaService.addOrganizacion( this.registerForm.value ).subscribe(
+        this.sharedService.addOrganizacion( this.registerForm.value ).subscribe(
           (response) => {
               this.action.next( true );
               this.notificationService.showInfo('Se creó el registro correctamente' , 'Empresa');
@@ -153,7 +152,7 @@ export class AgregarEmpresaComponent implements OnInit {
   async searchRuc() {
     if (this.registerForm.value.no_documento.length === 11 && this.intentos < 6) {
           this.loading = true;
-          await this.empresaService.getValidarDocumento(6, this.registerForm.value.no_documento).subscribe((response: any) => {
+          await this.sharedService.getValidarDocumento(6, this.registerForm.value.no_documento).subscribe((response: any) => {
 
               if( response.razonSocial ) {
 

@@ -3,16 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ModulosComponent } from '../modulos/modulos.component';
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
 
-import { AuthService, AlertService} from '../../services/services.index';
-
-import Swal from 'sweetalert2'
-import {map} from 'rxjs/operators';
-
 import {
   SidebarService,
-  EmpresaService,
+  AuthService,
+  AlertService,
+  SharedService,
   BreadcrumbsService,
-  AlmacenService
 } from '../../services/services.index';
 
 @Component({
@@ -44,7 +40,7 @@ export class NavigationComponent implements OnInit {
           public breadcrumbService: BreadcrumbsService,
           public sidebarService: SidebarService,
           private modalService: MDBModalService,
-          public empresaService: EmpresaService,
+          public sharedService: SharedService,
           public alertService: AlertService,
           public route: ActivatedRoute,
           public authService: AuthService,
@@ -55,12 +51,12 @@ export class NavigationComponent implements OnInit {
     this.currentUser = this.authService.currentUserValue;
     this.breadcrumbService.modulo = localStorage.getItem('last_modulo');
 
-    this.empresaService.getOrganizacionesUsuario().subscribe();
-    this.organizacion_seleccionada = this.empresaService.getOrganizacionActivaUsuario();
+    this.sharedService.getOrganizacionesUsuario().subscribe();
+    this.organizacion_seleccionada = this.sharedService.getOrganizacionActivaUsuario();
 
     if (this.organizacion_seleccionada) {
-      this.empresaService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
-      this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
+      this.sharedService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
+      this.sucursal_seleccionada = this.sharedService.getSucursalActivo();
     }
   }
 
@@ -71,11 +67,11 @@ export class NavigationComponent implements OnInit {
 
   setEmpresa( empresa: any ) {
     localStorage.setItem('empresa', JSON.stringify(empresa));
-    this.empresaService.organizacion_seleccionada = empresa;
+    this.sharedService.organizacion_seleccionada = empresa;
     this.organizacion_seleccionada = empresa;
 
-    this.empresaService.getSucursalesOrganizacion(empresa.id).subscribe(response => {
-        this.empresaService.sucursal_seleccionada = {
+    this.sharedService.getSucursalesOrganizacion(empresa.id).subscribe(response => {
+        this.sharedService.sucursal_seleccionada = {
                   razon_social: null,
                   id: null
         };
@@ -84,7 +80,7 @@ export class NavigationComponent implements OnInit {
 
   setSucursal( sucursal: any ) {
     localStorage.setItem('cm', JSON.stringify(sucursal));
-    this.empresaService.sucursal_seleccionada = sucursal;
+    this.sharedService.sucursal_seleccionada = sucursal;
     this.sucursal_seleccionada = sucursal;
     this.alertService.successSwalToast(`${this.sucursal_seleccionada.razon_social}`, 1000);
 

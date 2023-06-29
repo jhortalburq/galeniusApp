@@ -6,7 +6,7 @@ import { MDBModalRef, MDBModalService } from '../../../../../../ng-uikit-pro-sta
 import { BreadcrumbsService, 
   MantenimientoService, 
   PacientesService,
-  EmpresaService,
+  SharedService,
   AlertService
 } from '../../../../services/services.index';
 
@@ -33,7 +33,7 @@ export class DetailExamenLaboratorioComponent {
     public mantenimientoService: MantenimientoService,
     public pacienteService: PacientesService,
     private modalService: MDBModalService,
-    public empresaService: EmpresaService,
+    public sharedService: SharedService,
     public alertService: AlertService,
     private renderer: Renderer2,
     private router: Router,
@@ -43,7 +43,7 @@ export class DetailExamenLaboratorioComponent {
 
   ngDoCheck() {
     if (!this.changeDetected) {
-      if(this.empresaService.organizacion_seleccionada.id) {
+      if(this.sharedService.organizacion_seleccionada.id) {
         this.id = this.route.snapshot.paramMap.get('id');
         this.getRegistro();
         this.changeDetected = true;
@@ -52,7 +52,7 @@ export class DetailExamenLaboratorioComponent {
   }
 
   getRegistro() {
-    this.mantenimientoService.getExamenLaboratorio(this.id, this.empresaService.organizacion_seleccionada.id).subscribe({
+    this.mantenimientoService.getExamenLaboratorio(this.id, this.sharedService.organizacion_seleccionada.id).subscribe({
       next: (res: any) => {
         this.examen = res;
         this.registros = res.grupos;

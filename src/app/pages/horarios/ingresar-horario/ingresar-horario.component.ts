@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { BreadcrumbsService, MantenimientoService, HorariosService, EmpresaService } from '../../../services/services.index';
+import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService } from '../../../services/services.index';
 
 import {
   FormGroup,
@@ -58,7 +58,7 @@ export class IngresarHorarioComponent {
   constructor(public breadcrumbService: BreadcrumbsService,
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
-              public empresaService: EmpresaService,
+              public sharedService: SharedService,
   ) {}
 
   ngOnInit() {

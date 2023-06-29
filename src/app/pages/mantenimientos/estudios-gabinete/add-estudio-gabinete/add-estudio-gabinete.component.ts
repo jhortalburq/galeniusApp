@@ -11,7 +11,7 @@ import {
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 
-import { SharedService, EmpresaService, NotificationsService, MantenimientoService } from '../../../../services/services.index';
+import { SharedService, NotificationsService, MantenimientoService } from '../../../../services/services.index';
 
 @Component({
   selector: 'app-add-estudio-gabinete',
@@ -31,7 +31,6 @@ export class AddEstudioGabineteComponent {
 
   constructor(
         public modalRef: MDBModalRef,
-        public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
         public notificationService: NotificationsService
@@ -72,7 +71,7 @@ export class AddEstudioGabineteComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addEstudioGabinete(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.procedimientos)
+      this.mantenimientoService.addEstudioGabinete(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.procedimientos)
                                   .subscribe({
                                     next: (response: any) => {
                                       this.action.next(true);
@@ -89,7 +88,7 @@ export class AddEstudioGabineteComponent {
   }
 
   buscarItem(e){
-    this.filteredItem = this.mantenimientoService.getOptionsItems(this.empresaService.organizacion_seleccionada.id, e.target.value);
+    this.filteredItem = this.mantenimientoService.getOptionsItems(this.sharedService.organizacion_seleccionada.id, e.target.value);
   }
 
   selectItem(item: any){

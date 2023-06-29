@@ -11,7 +11,6 @@ import {
   SidebarService,
   AuthService,
   AuthInterceptor,
-  EmpresaService,
   SharedService
 } from './services.index';
 
@@ -21,7 +20,6 @@ import {
     BreadcrumbsService,
     SidebarService,
     AuthService,
-    EmpresaService,
     SharedService,
     {
       provide: HTTP_INTERCEPTORS,

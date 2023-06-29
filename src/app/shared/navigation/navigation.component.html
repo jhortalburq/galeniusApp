@@ -69,9 +69,9 @@
     <navlinks>
       <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
 
-        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_empresa && empresaService.empresas.length > 0">
-          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.organizacion_seleccionada; else elseBlock">
-             {{ empresaService.organizacion_seleccionada.nombre }}
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_empresa && sharedService.empresas.length > 0">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="sharedService.organizacion_seleccionada; else elseBlock">
+             {{ sharedService.organizacion_seleccionada.nombre }}
           </a>
 
           <ng-template #elseBlock>
@@ -81,13 +81,13 @@
           </ng-template>
 
           <div class="dropdown-menu dropdown-dark dropdown-menu-right">
-            <a class="dropdown-item" (click)="setEmpresa(empresa)" *ngFor="let empresa of empresaService.empresas">{{ empresa.nombre }}</a>
+            <a class="dropdown-item" (click)="setEmpresa(empresa)" *ngFor="let empresa of sharedService.empresas">{{ empresa.nombre }}</a>
           </div>
         </li>
 
-        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_sucursal && empresaService.organizacion_seleccionada">
-          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="empresaService.sucursal_seleccionada; else elseBlockSucursal">
-             {{ empresaService.sucursal_seleccionada.razon_social | uppercase }}
+        <li class="nav-item dropdown  dropdown-sucursal" dropdown *ngIf="breadcrumbService.flag_dropdown_sucursal && sharedService.organizacion_seleccionada">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect *ngIf="sharedService.sucursal_seleccionada; else elseBlockSucursal">
+             {{ sharedService.sucursal_seleccionada.razon_social | uppercase }}
           </a>
 
           <ng-template #elseBlockSucursal>
@@ -97,7 +97,7 @@
           </ng-template>
 
           <div class="dropdown-menu dropdown-dark dropdown-menu-right">
-            <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of empresaService.sucursales">
+            <a class="dropdown-item" (click)="setSucursal(sucursal)" *ngFor="let sucursal of sharedService.sucursales">
               {{ sucursal.razon_social | uppercase }}
             </a>
           </div>

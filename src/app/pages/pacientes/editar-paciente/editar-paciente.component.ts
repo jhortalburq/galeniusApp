@@ -11,7 +11,7 @@ import {
 import { BreadcrumbsService, 
         MantenimientoService, 
         PacientesService,
-        EmpresaService,
+        SharedService,
         AlertService
 } from '../../../services/services.index';
 
@@ -74,7 +74,7 @@ export class EditarPacienteComponent {
       public breadcrumbService: BreadcrumbsService,
       public mantenimientoService: MantenimientoService,
       public pacienteService: PacientesService,
-      public empresaService: EmpresaService,
+      public sharedService: SharedService,
       public alertService: AlertService,
       private router: Router,
       private route: ActivatedRoute,
@@ -286,7 +286,7 @@ export class EditarPacienteComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.pacienteService.editPaciente(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, this.paciente.slug)
+      this.pacienteService.editPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.paciente.slug)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Paciente Editado', 5000);

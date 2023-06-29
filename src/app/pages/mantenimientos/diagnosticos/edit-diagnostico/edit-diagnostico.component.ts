@@ -11,7 +11,7 @@ import {
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 
-import { SharedService, EmpresaService, NotificationsService, MantenimientoService } from '../../../../services/services.index';
+import { SharedService, NotificationsService, MantenimientoService } from '../../../../services/services.index';
 
 
 @Component({
@@ -34,7 +34,6 @@ export class EditDiagnosticoComponent {
 
   constructor(
         public modalRef: MDBModalRef,
-        public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
         public notificationService: NotificationsService
@@ -65,7 +64,7 @@ export class EditDiagnosticoComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.editObjectMantenimiento('maestros/diagnosticos', this.registerForm.value, this.registro.id, this.empresaService.organizacion_seleccionada.id)
+      this.mantenimientoService.editObjectMantenimiento('maestros/diagnosticos', this.registerForm.value, this.registro.id, this.sharedService.organizacion_seleccionada.id)
                               .subscribe({
                                 next: (response) => {
                                   this.action.next(true);

@@ -12,7 +12,7 @@ import {
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 
-import { SharedService, EmpresaService, NotificationsService, MantenimientoService } from '../../../../services/services.index';
+import { SharedService, NotificationsService, MantenimientoService } from '../../../../services/services.index';
 
 @Component({
   selector: 'app-nuevo-grupo',
@@ -34,7 +34,6 @@ export class NuevoGrupoComponent {
 
   constructor(
         public modalRef: MDBModalRef,
-        public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
         public notificationService: NotificationsService,
@@ -48,7 +47,7 @@ export class NuevoGrupoComponent {
   }
 
   getAnalisis(url?) {
-    this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.organizacion_seleccionada.id).subscribe({
+    this.mantenimientoService.getDataMantenimiento('analisis-options', this.sharedService.organizacion_seleccionada.id).subscribe({
       next: (response: any) => {
           this.analisis = response.results.map( (item) => {
             return {...item, checked: false}
@@ -79,7 +78,7 @@ export class NuevoGrupoComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.mantenimientoService.addGrupoAnalisis(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.analisis_registrados)
+      this.mantenimientoService.addGrupoAnalisis(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.analisis_registrados)
                                   .subscribe({
                                     next: (response: any) => {
                                       this.action.next(true);
@@ -116,7 +115,7 @@ export class NuevoGrupoComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.mantenimientoService.getDataMantenimiento('analisis-options', this.empresaService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
+    this.mantenimientoService.getDataMantenimiento('analisis-options', this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
       this.analisis = response.results;
     });
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SharedService, UsuariosService, EmpresaService } from '../../../services/services.index';
+import { SharedService, UsuariosService } from '../../../services/services.index';
 
 @Component({
   selector: 'app-usuarios-sucursal',
@@ -15,7 +15,7 @@ export class UsuariosSucursalComponent implements OnInit {
 
   constructor(
           public usuarioService: UsuariosService,
-          public empresaService: EmpresaService,
+          public sharedService: SharedService,
   ) { }
 
   ngOnInit(): void {
@@ -24,14 +24,14 @@ export class UsuariosSucursalComponent implements OnInit {
 
 
   getUsuarios(url?) {
-    this.usuarioService.getUsuariosActivos(this.empresaService.organizacion_seleccionada.id).subscribe((response: any) => {
+    this.usuarioService.getUsuariosActivos(this.sharedService.organizacion_seleccionada.id).subscribe((response: any) => {
       this.usuarios = response;
       this.getUsuariosSucursal();
     });
   }
 
   getUsuariosSucursal(url?) {
-    this.usuarioService.getUsuariosActivosSucursal(this.sucursal.id, this.empresaService.organizacion_seleccionada.id).subscribe((response: any) => {
+    this.usuarioService.getUsuariosActivosSucursal(this.sucursal.id, this.sharedService.organizacion_seleccionada.id).subscribe((response: any) => {
        for (let i = 0; i < response.length; i++) {
          let index = this.usuarios.findIndex(x => x.id === response[i].id);
 
@@ -44,7 +44,7 @@ export class UsuariosSucursalComponent implements OnInit {
   }
 
   changeAsignacion(user: any) {
-    this.usuarioService.asignarUsuarioSucursal(this.sucursal, this.empresaService.organizacion_seleccionada.id, user).subscribe((response: any) => {
+    this.usuarioService.asignarUsuarioSucursal(this.sucursal, this.sharedService.organizacion_seleccionada.id, user).subscribe((response: any) => {
 
     });
   }

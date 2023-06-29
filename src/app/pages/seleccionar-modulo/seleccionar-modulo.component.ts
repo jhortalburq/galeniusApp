@@ -1,5 +1,5 @@
 import { Component, OnInit,  } from '@angular/core';
-import { SidebarService, BreadcrumbsService, EmpresaService } from '../../services/services.index';
+import { SidebarService, BreadcrumbsService, SharedService } from '../../services/services.index';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class SeleccionarModuloComponent {
   constructor(
         public sidebarService: SidebarService,
         public breadcrumbService: BreadcrumbsService,
-        public empresaService: EmpresaService,
+        public sharedService: SharedService,
         public router: Router,
   ) { }
 
@@ -26,12 +26,12 @@ export class SeleccionarModuloComponent {
     this.breadcrumbService.flag_dropdown_sucursal = true;
     this.breadcrumbService.flag_sidebar = false;
 
-    this.empresaService.getOrganizacionesUsuario().subscribe();
-    this.organizacion_seleccionada = this.empresaService.getOrganizacionActivaUsuario();
+    this.sharedService.getOrganizacionesUsuario().subscribe();
+    this.organizacion_seleccionada = this.sharedService.getOrganizacionActivaUsuario();
 
     if (this.organizacion_seleccionada) {
-      this.empresaService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
-      this.sucursal_seleccionada = this.empresaService.getSucursalActivo();
+      this.sharedService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
+      this.sucursal_seleccionada = this.sharedService.getSucursalActivo();
     }
   }
 

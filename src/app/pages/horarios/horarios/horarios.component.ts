@@ -1,7 +1,7 @@
 import { Component, OnInit,  Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BreadcrumbsService, MantenimientoService, HorariosService, EmpresaService } from '../../../services/services.index';
+import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService } from '../../../services/services.index';
 
 
 
@@ -28,7 +28,7 @@ export class HorariosComponent {
   constructor(public breadcrumbService: BreadcrumbsService,
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
-              public empresaService: EmpresaService,
+              public sharedService: SharedService,
               private renderer: Renderer2,
               private router: Router) {
   }
@@ -46,14 +46,14 @@ export class HorariosComponent {
   // }
 
   getEspecialidades() {
-    this.mantenimientoService.getEspecialidades(this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+    this.mantenimientoService.getEspecialidades(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                              .subscribe((response: any) => {
                                  this.especialidades = response.results;
                               });
   }
 
   getEspecialistas(especialidad: number) {
-    this.mantenimientoService.getEspecialistas(this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, especialidad)
+    this.mantenimientoService.getEspecialistas(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, especialidad)
                              .subscribe((response: any) => {
                                  this.especialistas = response;
                               });

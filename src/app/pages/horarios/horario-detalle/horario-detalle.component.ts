@@ -11,7 +11,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import esLocale from '@fullcalendar/core/locales/es';
 
-import { BreadcrumbsService, MantenimientoService, HorariosService, EmpresaService } from '../../../services/services.index';
+import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService } from '../../../services/services.index';
 
 
 @Component({
@@ -62,7 +62,7 @@ export class HorarioDetalleComponent {
   constructor(public breadcrumbService: BreadcrumbsService,
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
-              public empresaService: EmpresaService,
+              public sharedService: SharedService,
               private router: Router) {
   }
 
@@ -89,7 +89,7 @@ export class HorarioDetalleComponent {
   // }
 
   loadEvents(fecha: string) {
-    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id, fecha)
+    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha)
                         .subscribe({
                           next: (res: any) => {
                             this.events = res.results;

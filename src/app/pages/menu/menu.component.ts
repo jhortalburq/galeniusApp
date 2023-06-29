@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { EmpresaService, BreadcrumbsService, ProfileService } from '../../services/services.index';
+import { SharedService, BreadcrumbsService, ProfileService } from '../../services/services.index';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class MenuComponent {
 
   constructor(
-    public empresaService: EmpresaService,
+    public sharedService: SharedService,
     public breadcrumbService: BreadcrumbsService,
     public profileService: ProfileService,
     private router: Router
@@ -22,8 +22,8 @@ export class MenuComponent {
     this.breadcrumbService.flag_dropdown_sucursal = false;
     this.breadcrumbService.flag_sidebar = false;
 
-    this.empresaService.quitarOrganizacionActivaUsuario();
-    this.empresaService.quitarSucursalActivo();
+    this.sharedService.quitarOrganizacionActivaUsuario();
+    this.sharedService.quitarSucursalActivo();
 
     this.checkProfile();
   }

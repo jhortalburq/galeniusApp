@@ -12,7 +12,7 @@ import {
 import { BreadcrumbsService, 
         MantenimientoService, 
         EspecialistasService,
-        EmpresaService,
+        SharedService,
         AlertService
 } from '../../../services/services.index';
 
@@ -69,7 +69,7 @@ export class NuevoEspecialistaComponent {
       public breadcrumbService: BreadcrumbsService,
       public mantenimientoService: MantenimientoService,
       public especialistaService: EspecialistasService,
-      public empresaService: EmpresaService,
+      public sharedService: SharedService,
       public alertService: AlertService,
       private router: Router
   ) { 
@@ -146,7 +146,7 @@ export class NuevoEspecialistaComponent {
   }
 
   getModulos() {
-    this.mantenimientoService.getEspecialidades(this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+    this.mantenimientoService.getEspecialidades(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                              .subscribe((response: any) => {
                                           this._especialidades = response.results;
     });
@@ -235,7 +235,7 @@ export class NuevoEspecialistaComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.especialistaService.addEspecialista(this.registerForm.value, this.empresaService.organizacion_seleccionada.id, this.empresaService.sucursal_seleccionada.id)
+      this.especialistaService.addEspecialista(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Especialista Registrado', 5000);

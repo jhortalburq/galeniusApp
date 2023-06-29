@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 
 import { Opcion } from '../../../interfaces/option';
 
-import { SharedService, EmpresaService, NotificationsService, MantenimientoService } from '../../../services/services.index';
+import { SharedService, NotificationsService, MantenimientoService } from '../../../services/services.index';
 
 
 
@@ -35,7 +35,6 @@ export class AgregarOrganizacionComponent {
 
   constructor(
         public modalRef: MDBModalRef,
-        public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
         public notificationService: NotificationsService
@@ -80,7 +79,7 @@ export class AgregarOrganizacionComponent {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-      this.empresaService.addOrganizacion(this.registerForm.value).subscribe({
+      this.sharedService.addOrganizacion(this.registerForm.value).subscribe({
         next: (response) => {
           this.action.next(true);
           this.notificationService.showInfo('Registro creado' , 'Organización');

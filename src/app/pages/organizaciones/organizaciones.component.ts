@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
 
-import { EmpresaService, NotificationsService, BreadcrumbsService } from '../../services/services.index';
+import { SharedService, NotificationsService, BreadcrumbsService } from '../../services/services.index';
 
 import { AgregarOrganizacionComponent } from './agregar-organizacion/agregar-organizacion.component';
 import { DetalleOrganizacionComponent } from './detalle-organizacion/detalle-organizacion.component';
@@ -26,7 +26,7 @@ export class OrganizacionesComponent {
   filter: string;
 
   constructor(
-          public empresaService: EmpresaService,
+          public sharedService: SharedService,
           public breadcrumbService: BreadcrumbsService,
           private modalService: MDBModalService,
           private renderer: Renderer2,
@@ -42,8 +42,8 @@ export class OrganizacionesComponent {
     this.breadcrumbService.flag_dropdown_sucursal = false;
     this.breadcrumbService.flag_sidebar = false;
 
-    this.empresaService.quitarOrganizacionActivaUsuario();
-    this.empresaService.quitarSucursalActivo();
+    this.sharedService.quitarOrganizacionActivaUsuario();
+    this.sharedService.quitarSucursalActivo();
 
     // this.modalService.open.subscribe(() => console.log('open'));
     // this.modalService.opened.subscribe(() => console.log('opened'));
@@ -53,7 +53,7 @@ export class OrganizacionesComponent {
   }
 
   getData(url?) {
-    this.empresaService.getOrganizacionesUsuario().subscribe({
+    this.sharedService.getOrganizacionesUsuario().subscribe({
         next: (response: any) => {
           console.log(response.results)
               this.empresas = response.results;
@@ -119,14 +119,14 @@ export class OrganizacionesComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.empresaService.getOrganizacionesUsuario(filterValue).subscribe((response: any) => {
+    this.sharedService.getOrganizacionesUsuario(filterValue).subscribe((response: any) => {
       this.empresas = response.results;
     });
   }
 
   changeStatus(empresa: any) {
 
-     this.empresaService.edirOrganizacion( empresa, empresa.id ).subscribe(
+     this.sharedService.editOrganizacion( empresa, empresa.id ).subscribe(
           (response) => {
             if (empresa.activo) {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Activa');
@@ -134,7 +134,7 @@ export class OrganizacionesComponent {
                   this.notificationService.showInfo('Se cambio el estado ', 'Empresa Inactiva');
                 }
 
-            this.empresaService.getOrganizacionesUsuario().subscribe();
+            this.sharedService.getOrganizacionesUsuario().subscribe();
 
             },
             err => {
@@ -145,9 +145,9 @@ export class OrganizacionesComponent {
 
   setOrganizacion( empresa: any ) {
     localStorage.setItem('empresa', JSON.stringify(empresa));
-    this.empresaService.organizacion_seleccionada = empresa;
+    this.sharedService.organizacion_seleccionada = empresa;
 
-    this.empresaService.getSucursalesOrganizacion(empresa.id).subscribe({
+    this.sharedService.getSucursalesOrganizacion(empresa.id).subscribe({
       next: (res: any) => {
         if(!res.length) {
           this.crearSucursal(empresa.id);

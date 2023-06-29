@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 import { Opcion } from '../../../interfaces/option';
 
-import { SharedService, EmpresaService, NotificationsService, MantenimientoService } from '../../../services/services.index';
+import { SharedService, NotificationsService, MantenimientoService } from '../../../services/services.index';
 
 import { Subject } from 'rxjs';
 
@@ -49,7 +49,6 @@ export class AgregarSucursalComponent implements OnInit {
 
   constructor(
         public modalRef: MDBModalRef,
-        public empresaService: EmpresaService,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
         public notificationService: NotificationsService
@@ -108,7 +107,7 @@ export class AgregarSucursalComponent implements OnInit {
 
     if (this.registerForm.valid && this.empresa_id) {
 
-        this.empresaService.addSucursal(this.registerForm.value, this.empresa_id).subscribe({
+        this.sharedService.addSucursal(this.registerForm.value, this.empresa_id).subscribe({
           next: (response: any) => {
             this.action.next( true );
             this.notificationService.showInfo('Se creó el registro correctamente' , 'Sucursal');

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { EmpresaService } from '../../../services/services.index';
+import { SharedService } from '../../../services/services.index';
 import { NotificationsService } from '../../../services/notifications.service';
 
 
@@ -20,7 +20,7 @@ export class LogoEmpresaComponent implements OnInit {
   imageUrl: string | ArrayBuffer = "https://bulma.io/images/placeholders/480x480.png";
 
   constructor(
-        public empresaService: EmpresaService,
+        public sharedService: SharedService,
         public notificationService: NotificationsService
   ) {}
 
@@ -53,7 +53,7 @@ export class LogoEmpresaComponent implements OnInit {
   };
 
   cambiarImagen () {
-      this.empresaService.subirLogotipo( this.imagenSubir, this.empresa.id).then(
+      this.sharedService.subirLogotipo( this.imagenSubir, this.empresa.id).then(
           (response:any) => {
                 this.empresa.url_logo = response.logotipo;
                 this.submitChange.emit(true);

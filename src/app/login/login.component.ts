@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
                 setTimeout(() => {
                     this.router.navigate(['/menu']);
-                }, 500)
+                }, 200)
             },
             error: (e: any) => {
                 this.loginForm.reset();

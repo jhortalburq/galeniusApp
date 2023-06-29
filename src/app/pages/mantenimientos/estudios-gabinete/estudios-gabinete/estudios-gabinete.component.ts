@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef, Renderer2, DoCheck } from '@angular/core';
-import { MantenimientoService, EmpresaService, BreadcrumbsService, NotificationsService} from '../../../../services/services.index';
+import { MantenimientoService, SharedService, BreadcrumbsService, NotificationsService} from '../../../../services/services.index';
 
 import { MDBModalRef, MDBModalService } from '../../../../../../ng-uikit-pro-standard/src/public_api';
 
@@ -26,7 +26,7 @@ export class EstudiosGabineteComponent {
   changeDetected: boolean = false;
 
   constructor(
-          public empresaService: EmpresaService,
+          public sharedService: SharedService,
           public mantenimientoService: MantenimientoService,
           private modalService: MDBModalService,
           public breadcrumbService: BreadcrumbsService,
@@ -42,15 +42,15 @@ export class EstudiosGabineteComponent {
 
   ngDoCheck() {
     if (!this.changeDetected) {
-      if(this.empresaService.organizacion_seleccionada.id) {
-        this.getData(this.empresaService.organizacion_seleccionada.id);
+      if(this.sharedService.organizacion_seleccionada.id) {
+        this.getData(this.sharedService.organizacion_seleccionada.id);
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.mantenimientoService.getDataMantenimiento('estudios-gabinete', this.empresaService.organizacion_seleccionada.id).subscribe({
+    this.mantenimientoService.getDataMantenimiento('estudios-gabinete', this.sharedService.organizacion_seleccionada.id).subscribe({
       next: (response: any) => {
         this.registros = response.results;
       },
@@ -80,7 +80,7 @@ export class EstudiosGabineteComponent {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.empresaService.organizacion_seleccionada.id);
+        this.getData(this.sharedService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -108,7 +108,7 @@ export class EstudiosGabineteComponent {
       console.log(result);
 
       if (result) {
-        this.getData(this.empresaService.organizacion_seleccionada.id);
+        this.getData(this.sharedService.organizacion_seleccionada.id);
         this.filter = '';
       }
     });
@@ -119,7 +119,7 @@ export class EstudiosGabineteComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.mantenimientoService.getDataMantenimiento('estudios-gabinete', this.empresaService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
+    this.mantenimientoService.getDataMantenimiento('estudios-gabinete', this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
       this.registros = response.results;
     });
   }
