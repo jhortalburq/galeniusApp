@@ -3,7 +3,7 @@
     <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
       <div class="modal-header text-center">
-        <p class="heading lead"><mdb-icon fas icon="plus"></mdb-icon> Indicación Médica</p>
+        <p class="heading lead"><mdb-icon fas icon="plus"></mdb-icon> Medicamento</p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true" class="white-text">&times;</span>
         </button>
@@ -15,13 +15,23 @@
                       <div class="md-form form-sm ">
                         <input type="text" id="nombre" formControlName="nombre" class="form-control form-control-sm"
                                mdbInput mdbValidate>
-                        <label for="nombre"  class="font-weight-bold">Indicación Médica (*)</label>
-
+                        <label for="nombre"  class="font-weight-bold">Nombre del Medicamento (*)</label>
                       </div>
                  </div>
 
             </div>
-            
+
+            <div class="row mt-n2">
+                <div class="col-sm-12 col-xs-12">
+                        <label class="mdb-main-label">Presentación Medicamento</label>
+                        <select2 
+                            [data]="tipos_presentacion"
+                            placeholder="Seleccione Presentación"
+                            formControlName="presentacion"
+                        >
+                        </select2>
+                </div>
+            </div>
 
       </div>
       <div class="modal-footer d-flex justify-content-center">

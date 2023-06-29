@@ -229,4 +229,22 @@ export class MantenimientoService {
     return this.http.put(`${environment.apiUrl}/api/v1/especialidades/${id}`, JSON.stringify(registro), {params: {'empresa': org, 'cm': cm}});
   }
 
+  getPresentacionMedicamento(params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(`${environment.apiUrl}/api/v1/maestros/presentacion-medicamentos`, {params: { 'search': params }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(`${environment.apiUrl}/api/v1/maestros/presentacion-medicamentos`, {})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
 }
