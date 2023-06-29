@@ -1,10 +1,5 @@
 export { BreadcrumbsService } from './breadcrumbs.service';
 
-export { InventarioService } from './sidebar/inventario.service';
-export { PedidosService } from './sidebar/pedidos.service';
-export { ComercialService } from './sidebar/comercial.service';
-export { AdministradorService } from './sidebar/administrador.service';
-export { PosService } from './sidebar/pos.service';
 export { MantenimientosService } from './sidebar/mantenimientos.service';
 export { OcupacionalService } from './sidebar/ocupacional.service';
 export { AsistencialService } from './sidebar/asistencial.service';

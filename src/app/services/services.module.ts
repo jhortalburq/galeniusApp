@@ -8,11 +8,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {
   BreadcrumbsService,
-  PosService,
-  InventarioService,
   SidebarService,
-  AdministradorService,
-  ComercialService,
   AuthService,
   AuthInterceptor,
   EmpresaService,
@@ -23,11 +19,7 @@ import {
 @NgModule({
   providers: [
     BreadcrumbsService,
-    PosService,
     SidebarService,
-    InventarioService,
-    AdministradorService,
-    ComercialService,
     AuthService,
     EmpresaService,
     SharedService,

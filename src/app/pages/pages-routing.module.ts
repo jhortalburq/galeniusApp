@@ -31,22 +31,6 @@ const routes: Routes = [
           loadChildren: () => import('./organizaciones/organizaciones.module').then( m => m.OrganizacionesModule)
         },
         {
-          path: 'comercial',
-          loadChildren: () => import('./modulos/comercial/comercial.module').then( m => m.ComercialModule)
-        },
-        {
-          path: 'pos',
-          loadChildren: () => import('./modulos/pos/pos.module').then( m => m.PosModule)
-        },
-        {
-          path: 'inventario',
-          loadChildren: () => import('./modulos/inventario/inventario.module').then( m => m.InventarioModule)
-        },
-        {
-          path: 'pedidos',
-          loadChildren: () => import('./modulos/pedidos/pedidos.module').then( m => m.PedidosModule)
-        },
-        {
           path: 'administrador',
           loadChildren: () => import('./modulos/mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
         },
