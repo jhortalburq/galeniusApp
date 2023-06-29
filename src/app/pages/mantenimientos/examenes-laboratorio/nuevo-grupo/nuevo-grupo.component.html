@@ -1,0 +1,34 @@
+<div class="modal-content">
+
+    <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <div class="modal-header text-center">
+        <p class="heading lead"><mdb-icon fas icon="plus"></mdb-icon> Grupo de Laboratorio</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+
+            <div class="row ">
+                <div class="col-sm-12 col-xs-12">
+                      <div class="md-form form-sm ">
+                        <input type="text" id="nombre" formControlName="nombre" class="form-control form-control-sm"
+                               mdbInput mdbValidate>
+                        <label for="nombre"  class="font-weight-bold">Examen de Laboratorio (*)</label>
+
+                      </div>
+                 </div>
+
+
+            </div>
+            
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="danger" class="waves-light" mdbWavesEffect>Grabar</button>
+      </div>
+
+    </form>
+
+</div>

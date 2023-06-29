@@ -43,10 +43,6 @@ const routes: Routes = [
         path: 'examenes-laboratorio',
         loadChildren: () => import('./examenes-laboratorio/examenes-laboratorio.module').then( m => m.ExamenesLaboratorioModule)
       },
-      {
-        path: 'grupos-laboratorio',
-        loadChildren: () => import('./grupos-laboratorio/grupos-laboratorio.module').then( m => m.GruposLaboratorioModule)
-      },
 ];
 
 @NgModule({

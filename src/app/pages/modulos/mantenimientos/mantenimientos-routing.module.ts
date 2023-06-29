@@ -26,7 +26,10 @@ const routes: Routes = [
         path: 'mantenimientos',
         loadChildren: () => import('../../mantenimientos/mantenimientos.module').then( m => m.MantenimientosModule)
       },
-
+      {
+        path: 'especialistas',
+        loadChildren: () => import('../../especialistas/especialistas.module').then( m => m.EspecialistasModule)
+      },
       {
           path: '',
           redirectTo: 'menu',

@@ -28,13 +28,11 @@ export class MantenimientosService {
     },
     {
       titulo: 'ESPECIALISTAS',
-      icono: 'fa-user',
-      submenu: [
-        { titulo: 'Usuarios', url: '/administrador/usuarios/' },
-        { titulo : 'Permisos', url: '/progress' },
-        { titulo : 'Grupos', url: '/progress' },
-      ]
-    },
+      submenu: [  
+                { titulo: 'Registro de Especialistas', url: '/administrador/especialistas/lista' },
+                { titulo: 'Nuevo Especialista', url: '/administrador/especialistas/nuevo' },
+               ]
+     },
     {
       titulo: 'MANTENIMIENTOS',
       icono: 'fa-user',
@@ -44,7 +42,6 @@ export class MantenimientosService {
         { titulo: 'Especialidades', url: '/administrador/mantenimientos/especialidades' },
         { titulo: 'Estudios de Gabinete', url: '/administrador/mantenimientos/estudios-gabinete' },
         { titulo: 'Exámenes de Laboratorio', url: '/administrador/mantenimientos/examenes-laboratorio' },
-        { titulo: 'Grupos de Laboratorio', url: '/administrador/mantenimientos/grupos-laboratorio' },
         { titulo: 'Indicaciones Médicas', url: '/administrador/mantenimientos/indicaciones-medicas' },
         { titulo: 'Medicamentos', url: '/administrador/mantenimientos/medicamentos' },
         { titulo: 'Tipos de Citas', url: '/administrador/mantenimientos/tipos-citas' },

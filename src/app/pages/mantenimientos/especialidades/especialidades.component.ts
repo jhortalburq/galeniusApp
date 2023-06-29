@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class EspecialidadesComponent {
   modalRef: MDBModalRef;
 
-  displayedColumns = ['', 'Nombre', 'Exámen Relacionado', ''];
+  displayedColumns = ['', 'Nombre', 'Examen Relacionado', ''];
 
   public registros: any = [];
 

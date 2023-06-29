@@ -273,4 +273,12 @@ export class MantenimientoService {
     }
   }
 
+  getExamenLaboratorio(id: string, org: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/maestros/examenes-laboratorio/${id}`, { params: { 'organizacion': org} })
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
 }

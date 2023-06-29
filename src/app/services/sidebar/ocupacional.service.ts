@@ -60,7 +60,6 @@ export class OcupacionalService {
         { titulo: 'Análisis', url: '/ocupacional/mantenimientos/analisis-clinicos' },
         { titulo: 'Diagnósticos', url: '/ocupacional/mantenimientos/diagnosticos' },
         { titulo: 'Exámenes de Laboratorio', url: '/ocupacional/mantenimientos/examenes-laboratorio' },
-        { titulo: 'Grupos de Laboratorio', url: '/ocupacional/mantenimientos/grupos-laboratorio' },
         { titulo: 'Tipos de Evaluaciones', url: '/ocupacional/mantenimientos/tipos-evaluaciones' },
       ]
     },

@@ -49,7 +49,6 @@ export class AsistencialService {
       { titulo: 'Especialidades', url: '/asistencial/mantenimientos/especialidades' },
       { titulo: 'Estudios de Gabinete', url: '/asistencial/mantenimientos/estudios-gabinete' },
       { titulo: 'Exámenes de Laboratorio', url: '/asistencial/mantenimientos/examenes-laboratorio' },
-      { titulo: 'Grupos de Laboratorio', url: '/asistencial/mantenimientos/grupos-laboratorio' },
       { titulo: 'Indicaciones Médicas', url: '/asistencial/mantenimientos/indicaciones-medicas' },
       { titulo: 'Medicamentos', url: '/asistencial/mantenimientos/medicamentos' },
       { titulo: 'Tipos de Citas', url: '/asistencial/mantenimientos/tipos-citas' },
