@@ -12,7 +12,7 @@ export class MantenimientosService {
       titulo: 'SUCURSALES',
       icono: 'fa-user',
       submenu: [
-        { titulo: 'Sucursales', url: '/administrador/sucursales/' },
+        { titulo: 'Sucursales', url: '/administrador/sucursales/lista' },
         { titulo : 'Permisos', url: '/progress' },
         { titulo : 'Grupos', url: '/progress' },
       ]

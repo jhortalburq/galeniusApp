@@ -17,9 +17,16 @@ import { AgregarSucursalComponent } from '../sucursales/agregar-sucursal/agregar
   styleUrls: ['./organizaciones.component.scss']
 })
 export class OrganizacionesComponent {
+  total: number = 0;
+  page: number = 1;
+  perPage: number = 15;
+
+  nextURL: string = '';
+  prevURL: string = '';
+
   modalRef: MDBModalRef;
 
-  displayedColumns = ['', 'Nombre', 'Módulos', 'Sucursales Multiples', 'Activo', ''];
+  displayedColumns = ['', 'Nombre', 'Módulos', 'Sucursales Multiples', 'Creado Por', 'Fecha Creación', ''];
 
   public empresas: any = [];
 
@@ -44,27 +51,58 @@ export class OrganizacionesComponent {
 
     this.sharedService.quitarOrganizacionActivaUsuario();
     this.sharedService.quitarSucursalActivo();
-
-    // this.modalService.open.subscribe(() => console.log('open'));
-    // this.modalService.opened.subscribe(() => console.log('opened'));
-    // this.modalService.close.subscribe(() => console.log('close'));
-    // this.modalService.closed.subscribe(() => console.log('closed'));
-
   }
 
   getData(url?) {
-    this.sharedService.getOrganizacionesUsuario().subscribe({
+    if (url) {
+      this.sharedService.getOrganizacionesUsuarioURL(url).subscribe({
         next: (response: any) => {
-          console.log(response.results)
-              this.empresas = response.results;
-        },
-        error: (e: any) => {
-          if (e.status === 401) {
-            localStorage.removeItem('token');
-            this.router.navigate(['/login']);
+                this.empresas = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
           }
-        }
-    });
+        });
+    } else {
+        this.sharedService.getOrganizacionesUsuario().subscribe({
+          next: (response: any) => {
+                this.empresas = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    }
+  }
+
+  onNext(): void {
+    if (!this.lastPage()){
+        this.page += 1
+        this.getData(this.nextURL)
+    }
+  }
+
+  lastPage(): boolean {
+    return this.perPage * this.page > this.total;
+  }
+
+  onPrev(): void {
+    if (this.page >1){
+        this.page -= 1
+        this.getData(this.prevURL)
+    }
   }
 
   openModal() {
@@ -121,6 +159,9 @@ export class OrganizacionesComponent {
 
     this.sharedService.getOrganizacionesUsuario(filterValue).subscribe((response: any) => {
       this.empresas = response.results;
+      this.nextURL = response.next;
+      this.prevURL = response.previous;
+      this.total = response.count;
     });
   }
 

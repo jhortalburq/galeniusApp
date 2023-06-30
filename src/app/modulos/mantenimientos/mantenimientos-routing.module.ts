@@ -10,12 +10,12 @@ const routes: Routes = [
         component: MenuComponent,
       },
       {
-        path: 'sucursales',
-        loadChildren: () => import('../../pages/sucursales/sucursales.module').then( m => m.SucursalesModule)
-      },
-      {
         path: 'usuarios',
         loadChildren: () => import('../../pages/usuarios/usuarios.module').then( m => m.UsuariosModule)
+      },
+      {
+        path: 'sucursales',
+        loadChildren: () => import('../../pages/sucursales/sucursales.module').then( m => m.SucursalesModule)
       },
       {
         path: 'empresas',

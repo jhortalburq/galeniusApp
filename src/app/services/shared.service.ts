@@ -55,6 +55,26 @@ export class SharedService {
     }
   }
 
+  getOrganizacionesUsuarioURL(url, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(url, {params: { 'search': params }})
+                    .pipe(map( (res: any) => {
+                          this.empresas = res.results;
+                          return res;
+                      }),
+                    catchError(this.handleError)
+                  );
+    } else {
+      return this.http.get(url)
+                      .pipe(map( (res: any) => {
+                            this.empresas = res.results.filter( (item: any) => item.activo === true)
+                            return res;
+                        }),
+                      catchError(this.handleError)
+                    );
+    }
+  }
+
   addOrganizacion(empresa: any) {
     return this.http.post(`${environment.apiUrl}/api/v1/organizaciones`, JSON.stringify(empresa));
   }
@@ -109,9 +129,9 @@ export class SharedService {
     this.sucursal_seleccionada = {};
   }
 
-  getSucursalesUsuario(id: any, params?: string) {
+  getSucursalesUsuario(organizacion: any, params?: string) {
     if (params && params.length > 2) {
-      return this.http.get(`${environment.apiUrl}/api/v1/empresa/${id}/sucursales/`, {params: { 'search': params }})
+      return this.http.get(`${environment.apiUrl}/api/v1/sucursales`, {params: { 'search': params, 'organizacion': organizacion }})
                     .pipe(
                       map( (res: any) => {
                           this.sucursales = res.results;
@@ -120,7 +140,29 @@ export class SharedService {
                     catchError(this.handleError)
                   );
     } else {
-      return this.http.get(`${environment.apiUrl}/api/v1/sucursales`, {params: { 'empresa': `${id}` }})
+      return this.http.get(`${environment.apiUrl}/api/v1/sucursales`, {params: { 'organizacion': organizacion }})
+                      .pipe(
+                        map( (res: any) => {
+                            this.sucursales = res.results.filter( (item: any) => item.activo === true);
+                            return res;
+                        }),
+                      catchError(this.handleError)
+                    );
+    }
+  }
+
+  getSucursalesUsuarioURL(url, organizacion: any, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(url, {params: { 'search': params,  'organizacion': organizacion }})
+                    .pipe(
+                      map( (res: any) => {
+                          this.sucursales = res.results;
+                          return res;
+                      }),
+                    catchError(this.handleError)
+                  );
+    } else {
+      return this.http.get(url, {params: { 'organizacion': organizacion }})
                       .pipe(
                         map( (res: any) => {
                             this.sucursales = res.results.filter( (item: any) => item.activo === true);

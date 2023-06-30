@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef, Renderer2, DoCheck } from '@angular/core';
-import { AlmacenService, SharedService, BreadcrumbsService} from '../../../services/services.index';
+import { SharedService, BreadcrumbsService, MantenimientoService} from '../../../services/services.index';
 
 import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standard/src/public_api';
 import { NotificationsService } from '../../../services/notifications.service';
@@ -15,9 +15,16 @@ import { Router } from '@angular/router';
 })
 
 export class ListaSucursalesComponent implements OnInit, DoCheck {
+  total: number = 0;
+  page: number = 1;
+  perPage: number = 15;
+
+  nextURL: string = '';
+  prevURL: string = '';
+
   modalRef: MDBModalRef;
 
-  displayedColumns = ['Nombre Sucursal', 'Clave', 'R.U.C', 'Direccion', 'Ubigeo',  'Activo', ''];
+  displayedColumns = ['', 'Nombre Sucursal', 'Clave', 'R.U.C', 'Ubigeo',  'Creado Por', 'Fecha Creación', ''];
 
   public sucursales: any = [];
 
@@ -26,13 +33,13 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
   changeDetected: boolean = false;
 
   constructor(
-          public sharedService: SharedService,
-          public almacenService: AlmacenService,
-          private modalService: MDBModalService,
-          public breadcrumbService: BreadcrumbsService,
-          private renderer: Renderer2,
-          public notificationService: NotificationsService,
-          private router: Router
+      public sharedService: SharedService,
+      public mantenimientoService: MantenimientoService,
+      private modalService: MDBModalService,
+      public breadcrumbService: BreadcrumbsService,
+      private renderer: Renderer2,
+      public notificationService: NotificationsService,
+      private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,24 +50,44 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (!this.changeDetected) {
       if(this.sharedService.organizacion_seleccionada.id) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.sharedService.getSucursalesUsuario(this.sharedService.organizacion_seleccionada.id).subscribe({
-      next: (response: any) => {
-        this.sucursales = response.results;
-      },
-      error: (error: any) => {
-        if (error.status === 401) {
-          localStorage.removeItem('token');
-          this.router.navigate(['/login']);
-        }
-      }
-    });
+    if (url) {
+      this.sharedService.getSucursalesUsuarioURL(url, this.sharedService.organizacion_seleccionada.id).subscribe({
+        next: (response: any) => {
+                this.sucursales = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    } else {
+        this.sharedService.getSucursalesUsuario(this.sharedService.organizacion_seleccionada.id).subscribe({
+          next: (response: any) => {
+                this.sucursales = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    }
   }
 
   openModal() {
@@ -81,7 +108,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
@@ -110,10 +137,29 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
       console.log(result);
 
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
+  }
+
+
+  onNext(): void {
+    if (!this.lastPage()){
+        this.page += 1
+        this.getData(this.nextURL)
+    }
+  }
+
+  lastPage(): boolean {
+    return this.perPage * this.page > this.total;
+  }
+
+  onPrev(): void {
+    if (this.page >1){
+        this.page -= 1
+        this.getData(this.prevURL)
+    }
   }
 
   applyFilter(event: any) {
@@ -121,30 +167,12 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.almacenService.getSucursalesUsuario(this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
-      this.sucursales = response.results;
-    });
-  }
-
-  changeStatus(sucursal: any) {
-
-     this.almacenService.editSucursal( sucursal, sucursal.id, this.sharedService.organizacion_seleccionada.id ).subscribe(
-          (response) => {
-
-               if (sucursal.activo) {
-                  this.notificationService.showInfo('Se cambio el estado de la Sucursal', 'Sucursal Activo')
-                } else {
-                  this.notificationService.showInfo('Se cambio el estado de la Sucursal', 'Sucursal Inactivo')
-                }
-
-                this.almacenService.getSucursalesUsuario(this.sharedService.organizacion_seleccionada.id).subscribe();
-            },
-            err => {
-                  console.log(err);
-            }
-        );
-
-
+    // this.almacenService.getSucursalesUsuario(this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
+    //   this.sucursales = response.results;
+    //   this.nextURL = response.next;
+    //   this.prevURL = response.previous;
+    //   this.total = response.count;
+    // });
   }
 
 }
