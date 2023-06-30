@@ -24,7 +24,7 @@ export class PagesComponent implements OnInit {
       this.sidebarService.menu = this.asistencialService.menu;
     } else  if (this.router.url.includes("ocupacional")) {
       this.sidebarService.menu = this.ocupacionalService.menu;
-    } else  if (this.router.url.includes("mantenimientos")) {
+    } else  if (this.router.url.includes("administrador")) {
       this.sidebarService.menu = this.mantenimientosService.menu;
     }
 

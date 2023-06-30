@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class MantenimientosService {
 
-  constructor() { }
+  constructor() { 
+  }
 
   menu: any = [
     {

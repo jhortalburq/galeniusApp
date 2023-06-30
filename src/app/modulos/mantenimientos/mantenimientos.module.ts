@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MenuComponent } from './menu/menu.component';
 
 import { PageRoutingModule } from './mantenimientos-routing.module';
 
-import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
