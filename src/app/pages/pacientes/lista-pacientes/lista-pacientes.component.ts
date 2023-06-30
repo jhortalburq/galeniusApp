@@ -32,7 +32,8 @@ export class ListaPacientesComponent {
     'Email',
     'Telefono',
     'Nacionalidad',
-    'Creado',
+    'Creado Por',
+    'Fecha Creación',
     ''
   ];
 

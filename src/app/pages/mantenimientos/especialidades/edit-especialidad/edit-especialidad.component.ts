@@ -32,6 +32,8 @@ export class EditEspecialidadComponent {
 
   tipos_fichas: any = [];
 
+  ficha_default: number = 0;
+
   constructor(
         public modalRef: MDBModalRef,
         public sharedService: SharedService,
@@ -43,11 +45,12 @@ export class EditEspecialidadComponent {
     this.getTiposFichas();
     this.createFormControls();
     this.createForm();
+    this.ficha_default = this.registro.ficha;
   }
 
   createFormControls() {
     this.nombre = new FormControl(this.registro.nombre, Validators.required);
-    this.ficha = new FormControl(this.registro.ficha);
+    this.ficha = new FormControl(this.ficha_default);
   }
 
   getTiposFichas() {
@@ -56,6 +59,10 @@ export class EditEspecialidadComponent {
                                 for (let i = 0; i < response.results.length; i++) {
                                   this.tipos_fichas.push({value: response.results[i].id, label: response.results[i].nombre})
                                 }
+
+                                this.registerForm.patchValue({
+                                  ficha: this.registro.ficha
+                                })
                               });
   }
 

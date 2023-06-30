@@ -30,7 +30,8 @@ export class ListaEspecialistasComponent {
     'Edad', 
     'Nacionalidad',
     'Especialidades',
-    'Creado',
+    'Creado Por',
+    'Fecha Creación',
     ''
   ];
 

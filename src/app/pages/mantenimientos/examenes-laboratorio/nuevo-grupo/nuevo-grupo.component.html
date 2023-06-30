@@ -50,7 +50,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of analisis" [ngClass]="{'select': item.checked}">
-                                <td><a (click)="addItem(item)">{{ item.nombre }} {{ item.checked }}</a></td>
+                                <td><a (click)="addItem(item)">{{ item.nombre }}</a></td>
                                 <td class="text-center">{{ item.um }}</td>
                                 <td class="text-center">{{ item.rango }}</td>
                             </tr>

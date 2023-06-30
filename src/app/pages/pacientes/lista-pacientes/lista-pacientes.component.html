@@ -28,7 +28,12 @@
                             <td class="text-center">{{ registro.email }}</td>
                             <td class="text-center">{{ registro.telefono }}</td>
                             <td class="text-center">{{ registro.nacionalidad }}</td>
-                            <td class="text-center">{{ registro.created|date:'medium' }}</td>
+                            <td class="text-center">
+                              {{ registro.created_name }}
+                            </td>
+                            <td class="text-center">
+                              {{ registro.created | date: "dd/MM/yyyy, h:mm a" }}
+                            </td>
 
                             <td style="width: 5%" class="text-center">
                                 <mdb-badge [danger]="true"  style="cursor: pointer" (click)="editarRegistro(registro.slug)">

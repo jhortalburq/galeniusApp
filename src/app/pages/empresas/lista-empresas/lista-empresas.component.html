@@ -31,10 +31,14 @@
                               <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
                               <td style="width: 30%">{{ empresa.razon_social }}</td>
                               <td style="width: 10%" class="text-center">{{ empresa.ruc }}</td>
-                              <td style="width: 30%" class="text-left">{{ empresa.direccion }}</td>
                               <td class="text-left">{{ empresa.rubro }}</td>
                               <td style="width: 35%" class="text-left">{{ empresa.nombre_locacion }}</td>
-
+                              <td class="text-center">
+                                {{ empresa.created_name }}
+                              </td>
+                              <td class="text-center">
+                                {{ empresa.created | date: "dd/MM/yyyy, h:mm a" }}
+                              </td>
                               <td style="width: 10%" class="text-center">
                                   <mdb-badge [danger]="true" (click)="editarRegistro( empresa.slug )" style="cursor: pointer">
                                     <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
@@ -45,7 +49,7 @@
 
                           <tbody *ngIf="!empresas.length">
                             <tr mdbTableCol >
-                              <td colspan="7" style="width: 115%">No se encontraron registros</td>
+                              <td colspan="8" style="width: 115%">No se encontraron registros</td>
                             </tr>
                           </tbody>
 

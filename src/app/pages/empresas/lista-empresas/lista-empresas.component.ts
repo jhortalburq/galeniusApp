@@ -24,7 +24,7 @@ export class ListaEmpresasComponent implements OnInit {
   nextURL: string = '';
   prevURL: string = '';
 
-  displayedColumns = ['', 'Razón Social', 'RUC', 'Dirección', 'Rubro', 'Ubigeo', ''];
+  displayedColumns = ['', 'Razón Social', 'RUC', 'Rubro', 'Ubigeo', 'Creado Por', 'Fecha Creación', ''];
 
   public empresas: any = [];
 

@@ -31,7 +31,12 @@
                             <td class="text-center">
                               <span class="badge badge-pill badge-primary">{{ registro.especialidad.length }}</span>
                             </td>
-                            <td class="text-center">{{ registro.created|date:'medium' }}</td>
+                            <td class="text-center">
+                              {{ registro.created_name }}
+                            </td>
+                            <td class="text-center">
+                              {{ registro.created | date: "dd/MM/yyyy, h:mm a" }}
+                            </td>
 
 
                               <td style="width: 10%" class="text-center">
@@ -46,7 +51,7 @@
 
                         <tbody *ngIf="!registros.length">
                           <tr mdbTableCol >
-                            <td style="width: 115%" colspan="10">No se encontraron registros</td>
+                            <td style="width: 115%" colspan="11">No se encontraron registros</td>
                           </tr>
                         </tbody>
 
