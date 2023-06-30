@@ -48,6 +48,24 @@ export class MantenimientoService {
     }
   }
 
+  getQuerysetURL(url: string, org: number, cm: number, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(url, {params: { 'empresa': org, 'cm': cm, 'search': params }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(url, {params: { 'empresa': org, 'cm': cm }})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
   getFichasExamenes() {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/fichas`, {})
                       .pipe(map( (res: any) => {
@@ -203,6 +221,24 @@ export class MantenimientoService {
                   );
     } else {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/${source}`, {params: {'organizacion': org}})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
+  getDataMantenimientoURL(url: string, org: number, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(url, {params: { 'organizacion': org, 'search': params }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(url, {params: {'organizacion': org}})
                       .pipe(map( (res: any) => {
                             return res;
                         }),

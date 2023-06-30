@@ -19,7 +19,7 @@ export class OcupacionalService {
       titulo: 'EMPRESAS',
       submenu: [
                     { titulo: 'Registro de Empresas', url: '/ocupacional/empresas/lista' },
-                    { titulo: 'Nueva Empresa', url: '/ocupacional/pacientes/nuevo' },
+                    { titulo: 'Nueva Empresa', url: '/ocupacional/empresas/nuevo' },
                     { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
                ]
      },

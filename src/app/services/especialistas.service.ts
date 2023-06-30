@@ -16,36 +16,36 @@ export class EspecialistasService {
   }
 
   addEspecialista(especialista: any, empresa_id: any, sucursal_id: any) {
-    especialista['sucursal'] = [sucursal_id];
+    especialista['sucursal'] = sucursal_id;
     especialista['organizacion'] = empresa_id;
     try {
       especialista['fecha_nacimiento'] = especialista.fecha_nacimiento.toISOString().split('T')[0];
     } catch {
     }
-    return this.http.post(`${environment.apiUrl}/api/v1/especialistas`, JSON.stringify(especialista));
+    return this.http.post(`${environment.apiUrl}/api/v1/especialistas`, JSON.stringify(especialista), {params: { 'organizacion': empresa_id, 'sucursal': sucursal_id }})
   }
 
   editEspecialista(especialista: any, empresa_id: any, sucursal_id: any, slug: string) {
-    especialista['sucursal'] = [sucursal_id];
+    especialista['sucursal'] = sucursal_id;
     especialista['organizacion'] = empresa_id;
 
     try {
       especialista['fecha_nacimiento'] = especialista.fecha_nacimiento.toISOString().split('T')[0];
     } catch {
     }
-    return this.http.patch(`${environment.apiUrl}/api/v1/especialistas/${slug}`, JSON.stringify(especialista));
+    return this.http.patch(`${environment.apiUrl}/api/v1/especialistas/${slug}`, JSON.stringify(especialista), {params: { 'organizacion': empresa_id, 'sucursal': sucursal_id }})
   }
 
-  getEspecialistas(params?: string) {
+  getEspecialistas(organizacion: number, cm: number, params?: string) {
     if (params && params.length > 2) {
-      return this.http.get(`${environment.apiUrl}/api/v1/especialistas`, {params: { 'search': params }})
+      return this.http.get(`${environment.apiUrl}/api/v1/especialistas`, {params: { 'search': params, 'organizacion': organizacion, 'sucursal': cm  }})
                     .pipe(map( (res: any) => {
                           return res;
                       }),
                     catchError(this.sharedService.handleError)
                   );
     } else {
-      return this.http.get(`${environment.apiUrl}/api/v1/especialistas`)
+      return this.http.get(`${environment.apiUrl}/api/v1/especialistas`, {params: {  'organizacion': organizacion, 'sucursal': cm  }})
                       .pipe(map( (res: any) => {
                             return res;
                         }),
@@ -54,8 +54,26 @@ export class EspecialistasService {
     }
   }
 
-  getEspecialista(slug: string) {
-    return this.http.get(`${environment.apiUrl}/api/v1/especialistas/${slug}`)
+  getEspecialistasURL(url:string, organizacion: number, cm: number, params?: string) {
+    if (params && params.length > 2) {
+      return this.http.get(url, {params: { 'search': params , 'organizacion': organizacion, 'sucursal': cm }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(url, {params: {  'organizacion': organizacion, 'cm': cm  }})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
+  getEspecialista(slug: string, organizacion: number, cm: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/especialistas/${slug}`, {params: { 'organizacion': organizacion, 'sucursal': cm }})
                     .pipe(map( (res: any) => {
                           return res;
                       }),

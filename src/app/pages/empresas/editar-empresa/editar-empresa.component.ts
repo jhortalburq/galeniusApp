@@ -1,19 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {
-    FormGroup,
-    FormControl,
-    Validators,
-    FormBuilder
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
 } from '@angular/forms';
 
-import { Observable } from 'rxjs';
-
-import { Opcion } from '../../../interfaces/option';
-
-import { SharedService } from '../../../services/services.index';
-import { NotificationsService } from '../../../services/notifications.service';
-
+import { BreadcrumbsService, 
+        MantenimientoService, 
+        EmpresasService,
+        SharedService,
+        AlertService
+} from '../../../services/services.index';
 
 @Component({
   selector: 'app-editar-empresa',
@@ -23,160 +23,207 @@ import { NotificationsService } from '../../../services/notifications.service';
 
 export class EditarEmpresaComponent implements OnInit {
 
-  @Input() empresa;
-  @Output() submitChange = new EventEmitter();
+  slug: string;
+
+  registro: any = {};
 
   registerForm: FormGroup;
 
   razon_social: FormControl;
   nombre_comercial: FormControl;
-  no_documento: FormControl;
-  telefono: FormControl;
-  correo: FormControl;
+  ruc: FormControl;
+  rubro: FormControl;
+  departamento: FormControl;
+  provincia: FormControl;
+  ubigeo: FormControl;
   direccion: FormControl;
-  locacion: FormControl;
-  predeterminado: FormControl;
-  test: FormControl;
-  intentos: number;
+  contacto: FormControl;
+  nota: FormControl;
 
-  ubigeosOptions: Opcion[];
-  filteredUbigeo: Observable<any[]>;
-  loading: boolean;
+  disabled: boolean = false;
+
+  telefono: FormControl;
+  email: FormControl;
+
+  departamento_default: string = '';
+  provincia_default: string = '';
+  distrito_default: string = '';
+
+  tipos_departamentos: any = [];
+  tipos_provincias: any = [];
+  tipos_distritos: any = [];
 
   constructor(
-        public fb: FormBuilder,
-        public sharedService: SharedService,
-        public notificationService: NotificationsService
+      public breadcrumbService: BreadcrumbsService,
+      public mantenimientoService: MantenimientoService,
+      public empresaService: EmpresasService,
+      public sharedService: SharedService,
+      public alertService: AlertService,
+      private router: Router,
+      private route: ActivatedRoute,
   ) {
-    this.loading = false;
+    this.breadcrumbService.title = 'EDITAR EMPRESA';
   }
 
   ngOnInit(): void {
+    this.slug = this.route.snapshot.paramMap.get('slug');
+    this.getTiposDepartamentos();
     this.createFormControls();
     this.createForm();
-    this.intentos = 0;
+    this.getRegistro();
+  }
+
+  getRegistro() {
+    this.empresaService.getEmpresa(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.slug).subscribe({
+      next: (res: any) => {
+        this.registro = res;
+
+        this.provincia_default = this.registro.cod_prov
+        this.distrito_default = this.registro.ubigeo
+
+        this.loadProvincia(this.registro.cod_depart);
+        this.loadDistrito(this.registro.cod_depart, this.registro.cod_prov);
+
+        this.registerForm.patchValue({
+            ruc: this.registro.ruc,
+            razon_social: this.registro.razon_social,
+            nombre_comercial: this.registro.nombre_comercial,
+            rubro: this.registro.rubro,
+            email: this.registro.email,
+            telefono: this.registro.telefono,
+            contacto: this.registro.contacto,
+            direccion: this.registro.direccion,
+            departamento: this.registro.cod_depart,
+            nota: this.registro.nota,
+        })
+
+      },
+      error: (err: any) => {
+        console.log('error', err)
+      }
+    })
   }
 
   createFormControls() {
-    this.razon_social = new FormControl(this.empresa.razon_social, Validators.required);
-    this.nombre_comercial = new FormControl(this.empresa.nombre_comercial);
-    this.no_documento = new FormControl(this.empresa.no_documento, [
-                                             Validators.required,
-                                             Validators.maxLength(11),
-                                             Validators.minLength(11),
-                                             Validators.pattern('[0-9 ]*')
-                                            ]);
-    this.telefono = new FormControl(this.empresa.telefono);
-    this.correo = new FormControl(this.empresa.correo, Validators.email);
-    this.direccion = new FormControl(this.empresa.direccion);
-    this.locacion = new FormControl(this.empresa.nombre_locacion);
-    this.predeterminado = new FormControl(this.empresa.predeterminado);
-    this.test = new FormControl(this.empresa.test);
+    this.razon_social = new FormControl('', Validators.required);
+    this.nombre_comercial = new FormControl('');
+    this.rubro = new FormControl('');
+    this.ruc = new FormControl('', [Validators.required,
+                                    Validators.maxLength(11),
+                                    Validators.minLength(11),
+                                    Validators.pattern('[0-9 ]*')
+                                  ]);
+    this.direccion = new FormControl('');
+    this.departamento = new FormControl('');
+    this.provincia = new FormControl('');
+    this.ubigeo = new FormControl('');
+    this.contacto = new FormControl('');
+    this.telefono = new FormControl('');
+    this.nota = new FormControl('');
+    this.email = new FormControl('', Validators.email);
   }
 
   createForm() {
      this.registerForm = new FormGroup({
-      razon_social: this.razon_social,
-      nombre_comercial: this.nombre_comercial,
-      no_documento: this.no_documento,
-      direccion: this.direccion,
-      telefono: this.telefono,
-      correo: this.correo,
-      locacion: this.locacion,
-      predeterminado: this.predeterminado,
-      test: this.test
+        razon_social: this.razon_social,
+        rubro: this.rubro,
+        nombre_comercial: this.nombre_comercial,
+        ruc: this.ruc,
+        direccion: this.direccion,
+        telefono: this.telefono,
+        email: this.email,
+        departamento: this.departamento,
+        provincia: this.provincia,
+        ubigeo: this.ubigeo,
+        nota: this.nota,
+        contacto: this.contacto
      });
   }
 
-  onSubmit(){
+  getTiposDepartamentos() {
+    this.mantenimientoService.getTiposDepartamento()
+                             .subscribe((response: any) => {
+                                this.tipos_departamentos = response.results
+                              });
+  }
 
+  changeDepartment(e: any) {
+    if (e.value) {
+      this.departamento_default = e.value;
+      this.getTiposProvincia(e.value);
+    } 
+  }
+
+  loadProvincia(cod_dep: string) {
+    if (cod_dep) {
+      this.departamento_default = cod_dep;
+      this.getTiposProvincia(cod_dep);
+    } 
+  }
+
+  changeProvince(e: any) {
+    if (e.value) {
+      this.provincia_default = e.value;
+      this.getTiposDistritos(this.departamento_default, e.value);
+    }
+  }
+
+  loadDistrito(cod_dep: string, cod_prov: string) {
+    if (cod_dep && cod_prov) {
+      this.departamento_default = cod_dep;
+      this.provincia_default = cod_prov;
+      this.getTiposDistritos(cod_dep, cod_prov);
+    } 
+  }
+
+  getTiposProvincia(cod_depart: string) {
+    this.mantenimientoService.getTiposProvincia(cod_depart)
+                             .subscribe((response: any) => {
+                                  this.tipos_provincias = response.results
+                                  this.tipos_distritos = [];
+
+                                  this.registerForm.patchValue({
+                                      provincia: this.provincia_default,
+                                      ubigeo: ''
+                                  })
+
+                              });
+  }
+
+  getTiposDistritos(cod_depart: string, cod_provin: string) {
+    this.mantenimientoService.getTiposDistritos(cod_depart, cod_provin)
+                             .subscribe({
+                              next: (response: any) => {
+                                  this.tipos_distritos = response.results;        
+                                  
+                                  this.registerForm.patchValue({
+                                     ubigeo: this.distrito_default,
+                                  })                         
+                              }, 
+                              error: err => console.log(err)
+                             });
+  }
+
+  onSubmit() {
     if (this.registerForm.valid) {
+      this.empresaService.editEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.registro.slug)
+                          .subscribe({
+                                      next: (res: any) => {
+                                        this.alertService.successSwalToast('Empresa Editada', 5000);
 
-        this.sharedService.editOrganizacion( this.registerForm.value, this.empresa.id ).subscribe(
-          (response) => {
-              this.submitChange.emit(true);
-              this.notificationService.showInfo('Se editó el registro correctamente' , 'Empresa');
-            },
-            err => {
-                  console.log(err);
-              this.submitChange.emit(false);
-            }
-        );
-
+                                        setTimeout(() => {
+                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.slug, 'editar']);
+                                        }, 500)
+                                      },
+                                      error: (err: any) => {
+                                        console.log('error')
+                                      }
+                                    })
     }
   }
 
-  buscarUbigeo(e){
-     this.filteredUbigeo = this.sharedService.getOptionsUbigeo(e.target.value);
-  }
-
-  onKeydown(event) {
-    if (event.key === "Backspace" || event.key === "Delete ") {
-      this.registerForm.patchValue({
-              locacion: "",
-            });
-    }
-  }
-
-  selectUbigeo(ubigeo: Opcion){
-      this.registerForm.patchValue({
-              locacion: ubigeo.nombre,
-            });
-  }
-
-  onKeydownRUC(event) {
-    this.intentos = 0;
-    if (event.key === "Backspace" || event.key === "Delete ") {
-        this.registerForm.patchValue({
-            direccion: '',
-            nombre_comercial: '',
-            razon_social: '',
-            locacion: ''
-        });
-    }
-  }
-
-  async searchRuc() {
-    if (this.registerForm.value.no_documento.length === 11 && this.intentos < 6) {
-          this.loading = true;
-          await this.sharedService.getValidarDocumento(6, this.registerForm.value.no_documento).subscribe((response: any) => {
-
-              if( response.razonSocial ) {
-
-                if (response.departamento) {
-                  this.registerForm.patchValue({
-                    direccion: response.direccion,
-                    nombre_comercial: response.nombreComercial,
-                    razon_social: response.razonSocial,
-                    locacion: `${response.departamento}/${response.provincia}/${response.distrito}`
-                  });
-                } else {
-                  this.registerForm.patchValue({
-                    direccion: response.direccion,
-                    nombre_comercial: response.nombreComercial,
-                    razon_social: response.razonSocial,
-                  });
-                }
-
-                this.intentos = 0;
-                this.loading = false;
-
-              } else {
-
-                 this.registerForm.patchValue({
-                  direccion: '',
-                  nombre_comercial: '',
-                  razon_social: '',
-                  locacion: ''
-                });
-
-                this.intentos += 1;
-                this.loading = true;
-                this.searchRuc();
-              }
-          });
-    } else {
-      this.loading = false;
-    }
+  regresar() {
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/empresas/lista`;
+    this.router.navigate([url]);
   }
 }

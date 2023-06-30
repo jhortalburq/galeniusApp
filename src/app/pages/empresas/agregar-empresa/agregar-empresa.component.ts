@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MDBModalRef } from '../../../../../ng-uikit-pro-standard/src/public_api';
+import { Router } from '@angular/router';
 
 import {
     FormGroup,
@@ -8,14 +8,15 @@ import {
     FormBuilder
 } from '@angular/forms';
 
-import { Observable } from 'rxjs';
 
-import { Opcion } from '../../../interfaces/option';
-
-import { SharedService } from '../../../services/services.index';
-
-import { Subject } from 'rxjs';
-import { NotificationsService } from '../../../services/notifications.service';
+import { 
+  SharedService,
+  MantenimientoService, 
+  EmpresasService, 
+  AlertService,
+  NotificationsService,
+  BreadcrumbsService
+} from '../../../services/services.index';
 
 
 @Component({
@@ -24,171 +25,156 @@ import { NotificationsService } from '../../../services/notifications.service';
   styleUrls: ['./agregar-empresa.component.scss']
 })
 export class AgregarEmpresaComponent implements OnInit {
-
-  
+ 
   registerForm: FormGroup;
 
   razon_social: FormControl;
   nombre_comercial: FormControl;
-  no_documento: FormControl;
-  telefono: FormControl;
-  correo: FormControl;
+  ruc: FormControl;
+  rubro: FormControl;
+  departamento: FormControl;
+  provincia: FormControl;
+  ubigeo: FormControl;
   direccion: FormControl;
-  locacion: FormControl;
-  predeterminado: FormControl;
-  test: FormControl;
+  contacto: FormControl;
+  nota: FormControl;
 
-  ubigeosOptions: Opcion[];
-  filteredUbigeo: Observable<any[]>;
+  disabled: boolean = false;
 
-  intentos: number;
+  telefono: FormControl;
+  email: FormControl;
 
-  action: Subject<any> = new Subject();
+  departamento_default: string = '';
+  provincia_default: string = '';
+  distrito_default: string = '';
 
-  loading: boolean;
+  tipos_departamentos: any = [];
+  tipos_provincias: any = [];
+  tipos_distritos: any = [];
 
   constructor(
-        public modalRef: MDBModalRef,
-        public fb: FormBuilder,
         public sharedService: SharedService,
-        public notificationService: NotificationsService
+        public notificationService: NotificationsService,
+        public mantenimientoService: MantenimientoService,
+        public empresaService: EmpresasService,
+        public alertService: AlertService,
+        public breadcrumbService: BreadcrumbsService,
+        public router: Router,
   ) {
-    this.loading = false;
   }
 
   ngOnInit(): void {
+    this.getTiposDepartamentos();
     this.createFormControls();
     this.createForm();
-    this.intentos = 0;
-
   }
 
   createFormControls() {
     this.razon_social = new FormControl('', Validators.required);
     this.nombre_comercial = new FormControl('');
-    this.no_documento = new FormControl('', [
-                                             Validators.required,
-                                             Validators.maxLength(11),
-                                             Validators.minLength(11),
-                                             Validators.pattern('[0-9 ]*')
-                                            ]);
-    this.telefono = new FormControl('');
-    this.correo = new FormControl('', Validators.email);
+    this.rubro = new FormControl('');
+    this.ruc = new FormControl('', [Validators.required,
+                                    Validators.maxLength(11),
+                                    Validators.minLength(11),
+                                    Validators.pattern('[0-9 ]*')
+                                  ]);
     this.direccion = new FormControl('');
-    this.locacion = new FormControl('');
-    this.predeterminado = new FormControl(false);
-    this.test = new FormControl(false);
+    this.departamento = new FormControl('');
+    this.provincia = new FormControl('');
+    this.ubigeo = new FormControl('');
+    this.contacto = new FormControl('');
+    this.telefono = new FormControl('');
+    this.nota = new FormControl('');
+    this.email = new FormControl('', Validators.email);
   }
 
   createForm() {
      this.registerForm = new FormGroup({
-      razon_social: this.razon_social,
-      nombre_comercial: this.nombre_comercial,
-      no_documento: this.no_documento,
-      direccion: this.direccion,
-      telefono: this.telefono,
-      correo: this.correo,
-      locacion: this.locacion,
-      predeterminado: this.predeterminado,
-      test: this.test
+        razon_social: this.razon_social,
+        rubro: this.rubro,
+        nombre_comercial: this.nombre_comercial,
+        ruc: this.ruc,
+        direccion: this.direccion,
+        telefono: this.telefono,
+        email: this.email,
+        departamento: this.departamento,
+        provincia: this.provincia,
+        ubigeo: this.ubigeo,
+        nota: this.nota,
+        contacto: this.contacto
      });
   }
 
   onSubmit() {
-
     if (this.registerForm.valid) {
+        this.empresaService.addEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
+                          .subscribe({
+                                      next: (res: any) => {
+                                        this.alertService.successSwalToast('Empresa Registrada', 5000);
 
-        this.sharedService.addOrganizacion( this.registerForm.value ).subscribe(
-          (response) => {
-              this.action.next( true );
-              this.notificationService.showInfo('Se creó el registro correctamente' , 'Empresa');
-              this.modalRef.hide();
-            },
-            err => {
-                  console.log(err);
-                  this.notificationService.showError(JSON.stringify(err.error), '');
-
-            }
-        );
-
+                                        setTimeout(() => {
+                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.slug, 'editar']);
+                                        }, 500)
+                                      },
+                                      error: (err: any) => {
+                                        console.log('error')
+                                      }
+                                    })
     }
   }
 
-  // onDisplayValue(color: Color): string | undefined {
-  //   console.log(color)
-  //   return color ? color.name : undefined;
-  // }
-
-  buscarUbigeo(e){
-     this.filteredUbigeo = this.sharedService.getOptionsUbigeo(e.target.value);
+  getTiposDepartamentos() {
+    this.mantenimientoService.getTiposDepartamento()
+                             .subscribe((response: any) => {
+                                  this.tipos_departamentos = response.results
+                              });
   }
 
-  onKeydown(event) {
-    if (event.key === "Backspace" || event.key === "Delete ") {
-      this.registerForm.patchValue({
-              locacion: "",
-            });
+  changeDepartment(e: any) {
+    if (e.value) {
+      this.departamento_default = e.value;
+      this.getTiposProvincia(e.value);
     }
   }
 
-  selectUbigeo(ubigeo: Opcion){
-      this.registerForm.patchValue({
-              locacion: ubigeo.nombre,
-            });
-  }
-
-  onKeydownRUC(event) {
-    this.intentos = 0;
-    if (event.key === "Backspace" || event.key === "Delete ") {
-        this.registerForm.patchValue({
-            direccion: '',
-            nombre_comercial: '',
-            razon_social: '',
-            locacion: ''
-        });
+  changeProvince(e: any) {
+    if (e.value) {
+      this.provincia_default = e.value;
+      this.getTiposDistritos(this.departamento_default, e.value);
     }
   }
 
-  async searchRuc() {
-    if (this.registerForm.value.no_documento.length === 11 && this.intentos < 6) {
-          this.loading = true;
-          await this.sharedService.getValidarDocumento(6, this.registerForm.value.no_documento).subscribe((response: any) => {
+  getTiposProvincia(cod_depart: string) {
 
-              if( response.razonSocial ) {
+    this.mantenimientoService.getTiposProvincia(cod_depart)
+                             .subscribe((response: any) => {
+                                this.tipos_provincias = response.results
+                                this.tipos_distritos = [];
 
-                if (response.departamento) {
-                  this.registerForm.patchValue({
-                    direccion: response.direccion,
-                    nombre_comercial: response.nombreComercial,
-                    razon_social: response.razonSocial,
-                    locacion: `${response.departamento}/${response.provincia}/${response.distrito}`
-                  });
-                } else {
-                  this.registerForm.patchValue({
-                    direccion: response.direccion,
-                    nombre_comercial: response.nombreComercial,
-                    razon_social: response.razonSocial,
-                  });
-                }
+                                this.registerForm.patchValue({
+                                  ubigeo: '',
+                                  provincia: ''
+                                })
 
-                this.intentos = 0;
-                this.loading = false;
-              } else {
-
-                 this.registerForm.patchValue({
-                  direccion: '',
-                  nombre_comercial: '',
-                  razon_social: '',
-                  locacion: ''
-                });
-
-                this.intentos += 1;
-                this.loading = true;
-                this.searchRuc();
-              }
-          });
-    } else {
-      this.loading = false;
-    }
+                              });
   }
+
+  getTiposDistritos(cod_depart: string, cod_provin: string) {
+
+    this.mantenimientoService.getTiposDistritos(cod_depart, cod_provin)
+                             .subscribe((response: any) => {
+                                this.tipos_distritos = response.results
+ 
+                                this.registerForm.patchValue({
+                                  ubigeo: '',
+                                })
+                              });
+  }
+
+  regresar() {
+    let url = this.router.url;
+    url = url.replace('nuevo', 'lista');
+    this.router.navigate([url]);
+  }
+
 }

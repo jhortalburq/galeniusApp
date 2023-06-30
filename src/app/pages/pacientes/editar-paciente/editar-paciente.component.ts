@@ -95,7 +95,8 @@ export class EditarPacienteComponent {
   }
 
   getRegistro() {
-    this.pacienteService.getPaciente(this.slug).subscribe({
+    this.pacienteService.getPaciente(this.slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
+    .subscribe({
       next: (res: any) => {
         this.paciente = res;
 

@@ -14,6 +14,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./especialidades.component.scss']
 })
 export class EspecialidadesComponent {
+  total: number = 0;
+  page: number = 1;
+  perPage: number = 15;
+
+  nextURL: string = '';
+  prevURL: string = '';
+
   modalRef: MDBModalRef;
 
   displayedColumns = ['', 'Nombre', 'Examen Relacionado', ''];
@@ -42,25 +49,45 @@ export class EspecialidadesComponent {
   ngDoCheck() {
     if (!this.changeDetected) {
       if(this.sharedService.organizacion_seleccionada.id) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.mantenimientoService.getQueryset('especialidades', this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
-                      .subscribe({
-                        next: (response: any) => {
-                          this.registros = response.results;
-                        },
-                        error: (error: any) => {
-                          if (error.status === 401) {
-                            localStorage.removeItem('token');
-                            this.router.navigate(['/login']);
-                          }
-                        }
-                      });
+    if (url) {
+        this.mantenimientoService.getQuerysetURL(url, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id).subscribe({
+          next: (response: any) => {
+                this.registros = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    } else {
+        this.mantenimientoService.getQueryset('especialidades', this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
+        .subscribe({
+          next: (response: any) => {
+                  this.registros = response.results;
+                  this.nextURL = response.next;
+                  this.prevURL = response.previous;
+                  this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    }
   }
 
   openModal() {
@@ -80,7 +107,7 @@ export class EspecialidadesComponent {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
@@ -108,7 +135,7 @@ export class EspecialidadesComponent {
       console.log(result);
 
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
@@ -122,6 +149,27 @@ export class EspecialidadesComponent {
     this.mantenimientoService.getQueryset('especialidades', this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, filterValue)
                               .subscribe((response: any) => {
                                   this.registros = response.results;
+                                  this.nextURL = response.next;
+                                  this.prevURL = response.previous;
+                                  this.total = response.count;
                               });
+  }
+
+  onNext(): void {
+    if (!this.lastPage()){
+        this.page += 1
+        this.getData(this.nextURL)
+    }
+  }
+
+  lastPage(): boolean {
+    return this.perPage * this.page > this.total;
+  }
+
+  onPrev(): void {
+    if (this.page >1){
+        this.page -= 1
+        this.getData(this.prevURL)
+    }
   }
 }

@@ -1,0 +1,22 @@
+<nav>
+    <ul class="pagination pagination-circle pg-white float-right">
+
+        <li class="items">Registros {{ getMin() }} - {{ getMax() }} de {{ count }}</li>
+
+        <li (click)="onPrev()" class="page-item" [ngClass]="{ 'disabled': page === 1 || loading }">
+            <a class="page-link" aria-label="Previous" mdbWavesEffect>
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+
+        <li class="page-item active"><a class="page-link" mdbWavesEffect>{{ page }}</a></li>
+
+        <li (click)="onNext(true)"  class="page-item" [ngClass]="{ 'disabled': lastPage() || loading }">
+            <a class="page-link" aria-label="Next" mdbWavesEffect>
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+  </nav>

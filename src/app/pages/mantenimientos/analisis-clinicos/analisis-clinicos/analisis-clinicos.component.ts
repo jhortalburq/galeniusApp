@@ -14,9 +14,16 @@ import { EditAnalisisClinicoComponent } from '../edit-analisis-clinico/edit-anal
   styleUrls: ['./analisis-clinicos.component.scss']
 })
 export class AnalisisClinicosComponent {
+  total: number = 0;
+  page: number = 1;
+  perPage: number = 15;
+
+  nextURL: string = '';
+  prevURL: string = '';
+
   modalRef: MDBModalRef;
 
-  displayedColumns = ['', 'Nombre de Analisis', 'Código', 'Unidad', 'Rango',  ''];
+  displayedColumns = ['', 'Nombre de Analisis', 'Unidad', 'Rango',  ''];
 
   public registros: any = [];
 
@@ -42,24 +49,62 @@ export class AnalisisClinicosComponent {
   ngDoCheck() {
     if (!this.changeDetected) {
       if(this.sharedService.organizacion_seleccionada.id) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.mantenimientoService.getDataMantenimiento('analisis', this.sharedService.organizacion_seleccionada.id).subscribe({
-      next: (response: any) => {
-        this.registros = response.results;
-      },
-      error: (error: any) => {
-        if (error.status === 401) {
-          localStorage.removeItem('token');
-          this.router.navigate(['/login']);
-        }
-      }
-    });
+    if (url) {
+        this.mantenimientoService.getDataMantenimientoURL(url, this.sharedService.organizacion_seleccionada.id).subscribe({
+          next: (response: any) => {
+                this.registros = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    } else {
+        this.mantenimientoService.getDataMantenimiento('analisis', this.sharedService.organizacion_seleccionada.id).subscribe({
+          next: (response: any) => {
+                this.registros = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    }
+  }
+
+  onNext(): void {
+    if (!this.lastPage()){
+        this.page += 1
+        this.getData(this.nextURL)
+    }
+  }
+
+  lastPage(): boolean {
+    return this.perPage * this.page > this.total;
+  }
+
+  onPrev(): void {
+    if (this.page >1){
+        this.page -= 1
+        this.getData(this.prevURL)
+    }
   }
 
   openModal() {
@@ -79,7 +124,7 @@ export class AnalisisClinicosComponent {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
@@ -104,22 +149,23 @@ export class AnalisisClinicosComponent {
     this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
 
     this.modalRef.content.action.subscribe( (result: any) => {
-      console.log(result);
-
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
   }
 
   applyFilter(event: any) {
-    let filterValue = event.target.value;
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+      let filterValue = event.target.value;
+      filterValue = filterValue.trim(); // Remove whitespace
+      filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.mantenimientoService.getDataMantenimiento('analisis', this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
-      this.registros = response.results;
-    });
+      this.mantenimientoService.getDataMantenimiento('analisis', this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
+          this.registros = response.results;
+          this.nextURL = response.next;
+          this.prevURL = response.previous;
+          this.total = response.count;
+      });
   }
 }

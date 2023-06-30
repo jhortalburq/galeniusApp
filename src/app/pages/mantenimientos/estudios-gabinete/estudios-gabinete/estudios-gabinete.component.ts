@@ -15,6 +15,13 @@ import { EditEstudioGabineteComponent } from '../edit-estudio-gabinete/edit-estu
   styleUrls: ['./estudios-gabinete.component.scss']
 })
 export class EstudiosGabineteComponent {
+  total: number = 0;
+  page: number = 1;
+  perPage: number = 15;
+
+  nextURL: string = '';
+  prevURL: string = '';
+
   modalRef: MDBModalRef;
 
   displayedColumns = ['', 'Estudios Gabinete', 'Procedimientos',  ''];
@@ -43,24 +50,44 @@ export class EstudiosGabineteComponent {
   ngDoCheck() {
     if (!this.changeDetected) {
       if(this.sharedService.organizacion_seleccionada.id) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.changeDetected = true;
       }
     }
   }
 
   getData(url?) {
-    this.mantenimientoService.getDataMantenimiento('estudios-gabinete', this.sharedService.organizacion_seleccionada.id).subscribe({
-      next: (response: any) => {
-        this.registros = response.results;
-      },
-      error: (error: any) => {
-        if (error.status === 401) {
-          localStorage.removeItem('token');
-          this.router.navigate(['/login']);
-        }
-      }
-    });
+    if (url) {
+        this.mantenimientoService.getDataMantenimientoURL(url, this.sharedService.organizacion_seleccionada.id).subscribe({
+          next: (response: any) => {
+                this.registros = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    } else {
+        this.mantenimientoService.getDataMantenimiento('estudios-gabinete', this.sharedService.organizacion_seleccionada.id).subscribe({
+          next: (response: any) => {
+                this.registros = response.results;
+                this.nextURL = response.next;
+                this.prevURL = response.previous;
+                this.total = response.count;
+            },
+          error: (error: any) => {
+            if (error.status === 401) {
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+            }
+          }
+        });
+    }
   }
 
   openModal() {
@@ -80,7 +107,7 @@ export class EstudiosGabineteComponent {
 
     this.modalRef.content.action.subscribe( (result: any) => {
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
@@ -105,13 +132,30 @@ export class EstudiosGabineteComponent {
     this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
 
     this.modalRef.content.action.subscribe( (result: any) => {
-      console.log(result);
 
       if (result) {
-        this.getData(this.sharedService.organizacion_seleccionada.id);
+        this.getData();
         this.filter = '';
       }
     });
+  }
+
+  onNext(): void {
+    if (!this.lastPage()){
+        this.page += 1
+        this.getData(this.nextURL)
+    }
+  }
+
+  lastPage(): boolean {
+    return this.perPage * this.page > this.total;
+  }
+
+  onPrev(): void {
+    if (this.page >1){
+        this.page -= 1
+        this.getData(this.prevURL)
+    }
   }
 
   applyFilter(event: any) {
@@ -120,7 +164,10 @@ export class EstudiosGabineteComponent {
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
     this.mantenimientoService.getDataMantenimiento('estudios-gabinete', this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
-      this.registros = response.results;
+        this.registros = response.results;
+        this.nextURL = response.next;
+        this.prevURL = response.previous;
+        this.total = response.count;
     });
   }
 }

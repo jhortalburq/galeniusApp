@@ -94,42 +94,43 @@ export class EditarEspecialistaComponent {
 
 
   getRegistro() {
-    this.especialistaService.getEspecialista(this.slug).subscribe({
-      next: (res: any) => {
-        this.especialista = res;
+    this.especialistaService.getEspecialista(this.slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
+      .subscribe({
+        next: (res: any) => {
+          this.especialista = res;
 
-        this.provincia_default = this.especialista.cod_prov
-        this.distrito_default = this.especialista.ubigeo
+          this.provincia_default = this.especialista.cod_prov
+          this.distrito_default = this.especialista.ubigeo
 
-        let fecha_nacimiento = new Date(this.especialista.fecha_nacimiento);
+          let fecha_nacimiento = new Date(this.especialista.fecha_nacimiento);
 
-        fecha_nacimiento.setHours(24);
+          fecha_nacimiento.setHours(24);
 
-        this.loadProvincia(this.especialista.cod_depart);
-        this.loadDistrito(this.especialista.cod_depart, this.especialista.cod_prov);
+          this.loadProvincia(this.especialista.cod_depart);
+          this.loadDistrito(this.especialista.cod_depart, this.especialista.cod_prov);
 
-        this.registerForm.patchValue({
-            no_documento: this.especialista.no_documento,
-            tipo_documento: this.especialista.tipo_documento,
-            apellido_paterno: this.especialista.apellido_paterno,
-            apellido_materno: this.especialista.apellido_materno,
-            nombres: this.especialista.nombres,
-            fecha_nacimiento: fecha_nacimiento,
-            genero: this.especialista.genero,
-            email: this.especialista.email,
-            telefono: this.especialista.telefono,
-            colegiatura: this.especialista.colegiatura,
-            domicilio: this.especialista.domicilio,
-            nacionalidad: this.especialista.nacionalidad,
-            estado_civil: this.especialista.estado_civil,
-            departamento: this.especialista.cod_depart,
-        })
+          this.registerForm.patchValue({
+              no_documento: this.especialista.no_documento,
+              tipo_documento: this.especialista.tipo_documento,
+              apellido_paterno: this.especialista.apellido_paterno,
+              apellido_materno: this.especialista.apellido_materno,
+              nombres: this.especialista.nombres,
+              fecha_nacimiento: fecha_nacimiento,
+              genero: this.especialista.genero,
+              email: this.especialista.email,
+              telefono: this.especialista.telefono,
+              colegiatura: this.especialista.colegiatura,
+              domicilio: this.especialista.domicilio,
+              nacionalidad: this.especialista.nacionalidad,
+              estado_civil: this.especialista.estado_civil,
+              departamento: this.especialista.cod_depart,
+          })
 
-      },
-      error: (err: any) => {
-        console.log('error', err)
-      }
-    })
+        },
+        error: (err: any) => {
+          console.log('error', err)
+        }
+      })
   }
 
   createFormControls() {

@@ -16,6 +16,7 @@ import { CheckboxModulosComponent } from './components/checkbox-modulos/checkbox
 import { FiltrosPacientesComponent } from './filtros/filtros-pacientes/filtros-pacientes.component';
 import { CitasFiltroComponent } from './filtros/citas-filtro/citas-filtro.component';
 import { FiltroEspecialistaComponent } from './filtros/filtro-especialista/filtro-especialista.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FiltroEspecialistaComponent } from './filtros/filtro-especialista/filtr
     CitasFiltroComponent,
     FiltrosPacientesComponent,
     CheckboxModulosComponent,
+    PaginationComponent,
   ],
   exports: [
     NavigationComponent,
@@ -36,6 +38,7 @@ import { FiltroEspecialistaComponent } from './filtros/filtro-especialista/filtr
     CitasFiltroComponent,
     FiltrosPacientesComponent,
     CheckboxModulosComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
