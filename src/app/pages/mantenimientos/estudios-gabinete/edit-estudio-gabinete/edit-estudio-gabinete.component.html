@@ -21,7 +21,7 @@
                  </div>
             </div>
 
-            <div class="row mt-n3">
+            <div class="row mt-n4">
                 <div class="col-sm-8 col-xs-12">
                     <div class="md-form form-sm form-group">
                         <input
@@ -41,8 +41,8 @@
                       </div>
                  </div>
                  <div class="col-sm-2 col-xs-12">
-                    <a mdbBtn [floating]="true" size="sm" mdbWavesEffect (click)="addItem()">
-                        <mdb-icon fas icon="plus"></mdb-icon>
+                    <a class="btn btn-primary" mdbBtn [floating]="true" size="sm" mdbWavesEffect (click)="addItem()">
+                        <i class="fas fa-plus" style="color: #fff!important"></i>
                     </a>
                  </div>
             </div>
@@ -61,7 +61,7 @@
                                 <td>{{ item }}</td>
                                 <td style="width: 10%" class="text-center">
                                     <a (click)="quitarItem(item)" style="cursor: pointer">
-                                      <mdb-icon fas icon="trash" ></mdb-icon> 
+                                      <i class="fas fa-trash" style="color: red!important"></i>
                                     </a>
                                 </td>
                             </tr>

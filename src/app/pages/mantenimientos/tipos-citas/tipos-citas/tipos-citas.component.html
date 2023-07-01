@@ -29,7 +29,9 @@
                           <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                             
                             <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
-                            <td style="width:100%">{{ registro.nombre }}</td>
+                            <td style="width:100%">
+                              <a (click)="editModal(registro)">{{ registro.nombre }}</a>
+                            </td>
 
                             <td style="width: 10%" class="text-center">
                                 <mdb-badge [danger]="true" (click)="editModal(registro)" style="cursor: pointer">

@@ -29,7 +29,9 @@
                     <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                       
                       <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
-                      <td style="width:80%">{{ registro.nombre }}</td>
+                      <td style="width:80%">
+                          <a (click)="editModal(registro)">{{ registro.nombre }}</a>
+                      </td>
                       <td style="width:10%" class="text-center">{{ registro.um }}</td>
                       <td style="width:10%" class="text-center">{{ registro.rango }}</td>
 

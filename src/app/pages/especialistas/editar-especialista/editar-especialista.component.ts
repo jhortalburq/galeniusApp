@@ -107,7 +107,7 @@ export class EditarEspecialistaComponent {
           fecha_nacimiento.setHours(24);
 
           this.loadProvincia(this.especialista.cod_depart);
-          this.loadDistrito(this.especialista.cod_depart, this.especialista.cod_prov);
+          
 
           this.registerForm.patchValue({
               no_documento: this.especialista.no_documento,
@@ -242,6 +242,9 @@ export class EditarEspecialistaComponent {
   changeDepartment(e: any) {
     if (e.value) {
       this.departamento_default = e.value;
+      this.provincia_default = '';
+      this.especialista.cod_depart = 0;
+      this.especialista.cod_prov = 0;
       this.getTiposProvincia(e.value);
     }
   }
@@ -281,6 +284,8 @@ export class EditarEspecialistaComponent {
                                   provincia: this.provincia_default,
                                 })
 
+                                this.loadDistrito(this.especialista.cod_depart, this.especialista.cod_prov);
+                              
                               });
   }
 

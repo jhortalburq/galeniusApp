@@ -21,7 +21,9 @@
                           <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                             
                             <td class="text-center">{{  i + 1 }}</td>
-                            <td style="width:70%"><a (click)="verDetalle(registro.id)">{{ registro.nombre }}</a></td>
+                            <td style="width:70%">
+                              <a (click)="editModal(registro)">{{ registro.nombre }}</a>
+                            </td>
                             <td style="width:40%" class="text-center">
                                 <mdb-badge class="badge-item" [primary]="true" style="cursor: pointer" *ngFor="let item of registro.analisis">
                                     {{ item.nombre }}

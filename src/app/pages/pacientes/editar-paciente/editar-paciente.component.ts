@@ -108,7 +108,6 @@ export class EditarPacienteComponent {
         fecha_nacimiento.setHours(24);
         
         this.loadProvincia(this.paciente.cod_depart);
-        this.loadDistrito(this.paciente.cod_depart, this.paciente.cod_prov);
 
         this.registerForm.patchValue({
             no_documento: this.paciente.no_documento,
@@ -231,8 +230,10 @@ export class EditarPacienteComponent {
   changeDepartment(e: any) {
     if (e.value) {
       this.departamento_default = e.value;
-      this.getTiposProvincia(e.value);
-    } 
+      this.provincia_default = '';
+      this.paciente.cod_depart = 0;
+      this.paciente.cod_prov = 0;
+      this.getTiposProvincia(e.value);    } 
   }
 
   loadProvincia(cod_dep: string) {
@@ -267,6 +268,8 @@ export class EditarPacienteComponent {
                                       provincia: this.provincia_default,
                                       ubigeo: ''
                                   })
+                                  
+                                  this.loadDistrito(this.paciente.cod_depart, this.paciente.cod_prov);
 
                               });
   }
