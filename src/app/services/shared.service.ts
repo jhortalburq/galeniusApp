@@ -80,7 +80,23 @@ export class SharedService {
   }
 
   editOrganizacion(empresa: any, id: number) {
-    return this.http.put(`${environment.apiUrl}/api/v1/empresas/${id}/`, JSON.stringify(empresa), {});
+    return this.http.put(`${environment.apiUrl}/api/v1/organizaciones/${id}`, JSON.stringify(empresa));
+  }
+
+  habilitarOrganizacion(id: number) {
+    return this.http.post(`${environment.apiUrl}/api/v1/organizaciones/${id}/habilitar`, {});
+  }
+
+  deshabilitarOrganizacion(id: number) {
+    return this.http.post(`${environment.apiUrl}/api/v1/organizaciones/${id}/deshabilitar`, {});
+  }
+
+  modulosOrganizacion(id: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/organizaciones/${id}/modulos`, {});
+  }
+
+  modulosSucursal(organizacion: number, sucursal: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/sucursales/${sucursal}/modulos`, {params: { 'organizacion': organizacion }})
   }
 
   addSucursal(sucursal: any, empresa_id: number) {

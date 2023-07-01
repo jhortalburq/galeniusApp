@@ -9,14 +9,18 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { OrganizacionesComponent } from './organizaciones.component';
 import { AgregarOrganizacionComponent } from './agregar-organizacion/agregar-organizacion.component';
-import { DetalleOrganizacionComponent } from './detalle-organizacion/detalle-organizacion.component';
+import { HabiltarComponent } from './habiltar/habiltar.component';
+import { DeshabiltarComponent } from './deshabiltar/deshabiltar.component';
+import { EditarOrganizacionComponent } from './editar-organizacion/editar-organizacion.component';
 
 
 @NgModule({
   declarations: [
     OrganizacionesComponent,
     AgregarOrganizacionComponent,
-    DetalleOrganizacionComponent,
+    HabiltarComponent,
+    DeshabiltarComponent,
+    EditarOrganizacionComponent,
   ],
   imports: [
     CommonModule,

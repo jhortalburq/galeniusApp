@@ -6,9 +6,11 @@ import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/
 import { SharedService, NotificationsService, BreadcrumbsService } from '../../services/services.index';
 
 import { AgregarOrganizacionComponent } from './agregar-organizacion/agregar-organizacion.component';
-import { DetalleOrganizacionComponent } from './detalle-organizacion/detalle-organizacion.component';
+import { HabiltarComponent } from './habiltar/habiltar.component';
+import { DeshabiltarComponent } from './deshabiltar/deshabiltar.component';
 
 import { AgregarSucursalComponent } from '../sucursales/agregar-sucursal/agregar-sucursal.component';
+import { EditarOrganizacionComponent } from './editar-organizacion/editar-organizacion.component';
 
 
 @Component({
@@ -26,11 +28,12 @@ export class OrganizacionesComponent {
 
   modalRef: MDBModalRef;
 
-  displayedColumns = ['', 'Nombre', 'Módulos', 'Sucursales Multiples', 'Creado Por', 'Fecha Creación', ''];
+  displayedColumns = ['', 'Nombre', 'Módulos', 'Sucursales', 'Sucursales Multiples', 'Estado', 'Creado Por', 'Fecha Creación', ''];
 
   public empresas: any = [];
 
   filter: string;
+  changeDetected: boolean = false;
 
   constructor(
           public sharedService: SharedService,
@@ -42,8 +45,6 @@ export class OrganizacionesComponent {
   ) { }
 
   ngOnInit(): void {
-    this.getData();
-
     this.breadcrumbService.title = 'ORGANIZACIONES';
     this.breadcrumbService.flag_dropdown_empresa = false;
     this.breadcrumbService.flag_dropdown_sucursal = false;
@@ -51,6 +52,13 @@ export class OrganizacionesComponent {
 
     this.sharedService.quitarOrganizacionActivaUsuario();
     this.sharedService.quitarSucursalActivo();
+  }
+
+  ngDoCheck() {
+    if (!this.changeDetected) {
+        this.getData();
+        this.changeDetected = true;
+    }
   }
 
   getData(url?) {
@@ -128,16 +136,66 @@ export class OrganizacionesComponent {
 
   editModal(empresa: any): void {
 
-    this.modalRef = this.modalService.show(DetalleOrganizacionComponent, {
+    this.modalRef = this.modalService.show(EditarOrganizacionComponent, {
                   backdrop: true,
                   keyboard: true,
                   focus: true,
                   show: false,
                   ignoreBackdropClick: false,
-                  class: 'modal-lg modal-dialog cascading-modal ',
+                  class: 'modal-dialog modal-notify modal-primary',
                   animated: true,
                   data: {
-                      content: { empresa: empresa}
+                     empresa: empresa
+                  }
+              }
+    );
+
+    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
+
+    this.modalRef.content.action.subscribe( (result: any) => {
+      if (result) {
+        this.getData();
+        this.filter = '';
+      }
+    });
+  }
+
+  enableOrg(empresa: any): void {
+    this.modalRef = this.modalService.show(HabiltarComponent, {
+                  backdrop: true,
+                  keyboard: true,
+                  focus: true,
+                  show: false,
+                  ignoreBackdropClick: false,
+                  class: 'modal-dialog modal-notify modal-primary',
+                  animated: true,
+                  data: {
+                    empresa: empresa
+                  }
+              }
+    );
+
+    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
+
+    this.modalRef.content.action.subscribe( (result: any) => {
+      if (result) {
+        this.getData();
+        this.filter = '';
+      }
+    });
+  }
+
+  disableOrg(empresa: any): void {
+    this.modalRef = this.modalService.show(DeshabiltarComponent, {
+                  backdrop: true,
+                  keyboard: true,
+                  focus: true,
+                  show: false,
+                  ignoreBackdropClick: false,
+                  class: 'modal-dialog modal-notify modal-primary',
+                  animated: true,
+                  data: {
+                    empresa: empresa
                   }
               }
     );
@@ -167,21 +225,34 @@ export class OrganizacionesComponent {
 
   changeStatus(empresa: any) {
 
-     this.sharedService.editOrganizacion( empresa, empresa.id ).subscribe(
-          (response) => {
-            if (empresa.activo) {
-                  this.notificationService.showInfo('Se cambio el estado ', 'Empresa Activa');
-                } else {
-                  this.notificationService.showInfo('Se cambio el estado ', 'Empresa Inactiva');
-                }
+    this.sharedService.editOrganizacion( empresa, empresa.id ).subscribe({
+       next: (response: any) => {
+         if (empresa.activo) {
+           this.notificationService.showInfo('Se cambio el estado ', 'Organización Activa');
+         } else {
+           this.notificationService.showInfo('Se cambio el estado ', 'Organización Inactiva');
+         }
 
-            this.sharedService.getOrganizacionesUsuario().subscribe();
+         this.sharedService.getOrganizacionesUsuario().subscribe();
+       },
+       error: (err) => console.log(err)
+    })
+ }
 
-            },
-            err => {
-                  console.log(err);
-            }
-        );
+ changeFlagMultiple(empresa: any) {
+
+     this.sharedService.editOrganizacion( empresa, empresa.id ).subscribe({
+        next: (response: any) => {
+          if (empresa.flag_cm_multiples) {
+            this.notificationService.showInfo('Se habilitó el flag', 'Sucursales Múltiples');
+          } else {
+            this.notificationService.showInfo('Se deshabilitó el flag', 'Sucursales Múltiples');
+          }
+
+          this.sharedService.getOrganizacionesUsuario().subscribe();
+        },
+        error: (err) => console.log(err)
+     })
   }
 
   setOrganizacion( empresa: any ) {

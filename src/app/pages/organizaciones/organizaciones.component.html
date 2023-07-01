@@ -35,8 +35,23 @@
                                     {{ modulo.nombre }}
                                 </mdb-badge>
                             </td>
+                            <td class="text-center">
+                              <mdb-badge [primary]="true" (click)="disableOrg( empresa )" style="cursor: pointer">
+                                {{ empresa.sucursales.length }}
+                              </mdb-badge>
+                              
+                            </td>
                             <td style="width: 5%" class="text-center">
-                                <mdb-checkbox [default]="true" [(ngModel)]="empresa.flag_cm_multiples" (change)="changeStatus(empresa)"></mdb-checkbox>
+                                <mdb-checkbox [default]="true" [(ngModel)]="empresa.flag_cm_multiples" (change)="changeFlagMultiple(empresa)"></mdb-checkbox>
+                            </td>
+                            <td style="width: 5%" class="text-center">
+                              <mdb-badge [success]="true" (click)="disableOrg( empresa )" style="cursor: pointer" *ngIf="empresa.activo">
+                                  Activo
+                              </mdb-badge>
+                              <mdb-badge [danger]="true" (click)="enableOrg( empresa )" style="cursor: pointer" *ngIf="!empresa.activo">
+                                  Inactivo
+                              </mdb-badge>
+
                             </td>
                             <td class="text-center">
                               {{ empresa.created_name }}
@@ -55,7 +70,7 @@
 
                         <tbody *ngIf="!empresas.length">
                           <tr mdbTableCol >
-                            <td colspan="7" style="width: 115%">No se encontraron registros</td>
+                            <td colspan="8" style="width: 115%">No se encontraron registros</td>
                           </tr>
                         </tbody>
 

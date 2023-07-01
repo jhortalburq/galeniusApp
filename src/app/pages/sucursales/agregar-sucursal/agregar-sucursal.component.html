@@ -87,6 +87,7 @@
 
             <div class="row">
                     <app-checkbox-modulos [item]="item"
+                                          [modulos]="[]"  
                                           (selectItem)="changeCheckbox($event)" 
                                           *ngFor="let item of _modulos; let i = index">
                     </app-checkbox-modulos>

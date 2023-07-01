@@ -121,9 +121,10 @@ export class AgregarSucursalComponent implements OnInit {
   }
       
   getModulos() {
-    this.mantenimientoService.getDataModulos().subscribe((response: any) => {
-      this._modulos = response.results;
-    });
+    this.sharedService.modulosOrganizacion(this.sharedService.organizacion_seleccionada.id)
+                              .subscribe((response: any) => {
+                                  this._modulos = response;
+                              });
   }
 
   buscarUbigeo(e){

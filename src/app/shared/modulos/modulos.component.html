@@ -2,54 +2,11 @@
         <div class="modal-content">
         <div class="modal-body">
           <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo danger-color-dark" (click)="irModulo('asistencial')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="laptop-medical"></mdb-icon></a>
-
-              <span class="white-text">Asistencial</span>
-            </div>
-
-            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo success-color-dark" (click)="irModulo('ocupacional')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="hospital-user"></mdb-icon></a>
-
-              <span class="white-text">Ocupacional</span>
-            </div>
-           <!--
             
-            
-              <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo danger-color-dark" (click)="irModulo('pedidos')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="shopping-cart"></mdb-icon></a>
-
-              <span class="white-text">Pedidos</span>
-            </div>
-
-            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo success-color-dark" (click)="irModulo('inventario')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="box-open"></mdb-icon></a>
-
-              <span class="white-text">Inventarios</span>
-            </div>
-
-            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo info-color-dark"  (click)="irModulo('comercial')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="landmark"></mdb-icon></a>
-
-              <span class="white-text">Comercial</span>
-            </div>
-
-            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo primary-color-dark" (click)="irModulo('pos')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="cash-register"></mdb-icon></a>
-
-              <span class="white-text">Farmacia</span>
-            </div>
-            
-            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo secondary-color-dark" (click)="irModulo('administrador')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="cogs"></mdb-icon></a>
-
-              <span class="white-text">Administrador</span>
-            </div>  -->
-
-            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo secondary-color-dark" (click)="irModulo('administrador')">
-              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas icon="tools"></mdb-icon></a>
-
-              <span class="white-text">Administrador</span>
+            <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo" [ngClass]="modulo.background" (click)="irModulo(modulo.nombre)" *ngFor="let modulo of modulos">
+              <a mdbBtn [floating]="true" size="sm"><mdb-icon fas [icon]="modulo.icono"></mdb-icon></a>
+        
+              <span class="white-text">{{ modulo.nombre | uppercase }}</span>
             </div>
 
           </div>

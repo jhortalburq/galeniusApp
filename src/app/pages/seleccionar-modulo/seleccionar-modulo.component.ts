@@ -1,5 +1,5 @@
 import { Component, OnInit,  } from '@angular/core';
-import { SidebarService, BreadcrumbsService, SharedService } from '../../services/services.index';
+import { SidebarService, BreadcrumbsService, SharedService, ProfileService } from '../../services/services.index';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +11,13 @@ export class SeleccionarModuloComponent {
 
   organizacion_seleccionada: any = {};
   sucursal_seleccionada: any = {};
+  modulos: any = [];
 
   constructor(
         public sidebarService: SidebarService,
         public breadcrumbService: BreadcrumbsService,
         public sharedService: SharedService,
+        public profileService: ProfileService,
         public router: Router,
   ) { }
 
@@ -33,10 +35,43 @@ export class SeleccionarModuloComponent {
       this.sharedService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
       this.sucursal_seleccionada = this.sharedService.getSucursalActivo();
     }
+
+    this.getModulos();
   }
 
   irModulo(modulo: string) {
-    localStorage.setItem('last_modulo', modulo);
-    this.router.navigate(['/' + modulo, 'menu']);
+    localStorage.setItem('last_modulo', modulo.toLowerCase());
+    this.router.navigate(['/' + modulo.toLowerCase(), 'menu']);
+  }
+
+  getModulos() {
+    this.sharedService.modulosSucursal(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
+                          .subscribe((response: any) => {
+                              this.modulos = response;
+
+                              if (!this.modulos.length) {
+                                this.checkProfile()
+                              }
+                          });
+  }
+
+  checkProfile() {
+    this.profileService.getTypeProfile().subscribe({
+      next: (response: any) => {
+          response.forEach( (user: any) => {
+            if (user.is_superuser) {
+              this.router.navigate(['/administrador/menu'])
+            } else if (user.is_useruser) {
+              console.log('admin')
+            } else if (user.is_useruser) {
+              console.log('client')
+            } else if (user.is_useruser) {
+              console.log('user')
+            }
+          });
+      },
+      error: (e: any) => {
+      }
+    })
   }
 }
