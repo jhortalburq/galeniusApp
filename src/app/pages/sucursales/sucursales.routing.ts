@@ -13,11 +13,11 @@ const routes: Routes = [
     component: AgregarSucursalComponent
   },
   {
-    path: ':slug/editar',
+    path: ':sucursal_id/editar',
     component: EditarSucursalComponent
   },
   {
-    path: ':slug/detalle',
+    path: ':sucursal_id/detalle',
     component: DetalleSucursalComponent
   },
 ];

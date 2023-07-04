@@ -105,10 +105,9 @@ export class SharedService {
     return this.http.post(`${environment.apiUrl}/api/v1/sucursales`, data, {});
   }
 
-  editSucursal(sucursal: any, id: number, empresa_id: any) {
-    sucursal['organizacion'] = empresa_id;
+  editSucursal(sucursal: any, slug: string, empresa_id: any) {
     let data = JSON.stringify(sucursal);
-    return this.http.put(`${environment.apiUrl}/api/v1/empresa/sucursales/${id}`, data, {});
+    return this.http.put(`${environment.apiUrl}/api/v1/sucursales/${slug}`, data, {params: {'organizacion': empresa_id}});
   }
   
   getSucursalesOrganizacion(id: any, params?: string) {

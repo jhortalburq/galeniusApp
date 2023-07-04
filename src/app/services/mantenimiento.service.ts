@@ -331,4 +331,13 @@ export class MantenimientoService {
                     catchError(this.sharedService.handleError)
                   );
   }
+
+  getSucursal(slug: string, organizacion: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/sucursales/${slug}`, {params: { 'organizacion': organizacion }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
 }

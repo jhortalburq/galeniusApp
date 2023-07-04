@@ -13,12 +13,18 @@ export class CheckboxModulosComponent {
   @Output() selectItem = new EventEmitter<any>();
 
   ngOnInit(): void {
-    this.modulos.find(element => {
-      if (element.id === this.item.id) {
-        this.item.boolean = true;
-        this.addSelectItem(this.item);
-      }
-    });
+
+  }
+
+  ngOnChanges(){ 
+    if (this.modulos){
+      this.modulos.find(element => {
+        if (element.id === this.item.id) {
+          this.item.boolean = true;
+          this.addSelectItem(this.item);
+        }
+      });
+    }
   }
 
   addSelectItem(value: any) {

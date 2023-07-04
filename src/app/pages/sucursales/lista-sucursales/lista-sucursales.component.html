@@ -29,10 +29,17 @@
                           <tr mdbTableCol *ngFor="let sucursal of sucursales; let i = index">
                           
                             <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
-                            <td style="width: 30%">{{ sucursal.razon_social }}</td>
+                            <td style="width: 30%">
+                              <a (click)="irDetalle(sucursal.id)">{{ sucursal.razon_social }}</a>
+                            </td>
                             <td style="width: 10%" class="text-center">{{ sucursal.clave }}</td>
                             <td style="width: 25%" class="text-center">{{ sucursal.ruc }}</td>
-                            <td style="width: 15%" class="text-left">{{ sucursal.nombre_locacion }}</td>
+                            <td style="width:20%" class="text-center">
+                              <mdb-badge class="badge-item" [primary]="true" style="cursor: pointer" *ngFor="let modulo of sucursal.modulos">
+                                  {{ modulo.nombre }}
+                              </mdb-badge>
+                            </td>
+                            <td style="width: 15%" class="text-center">{{ sucursal.nombre_locacion }}</td>
 
                             <td class="text-center">
                               {{ sucursal.created_name }}
@@ -42,8 +49,8 @@
                             </td>
 
                             <td style="width: 10%" class="text-center">
-                                <mdb-badge [danger]="true" (click)="editModal( sucursal )" style="cursor: pointer">
-                                  <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
+                                <mdb-badge [danger]="true" (click)="irDetalle(sucursal.id)" style="cursor: pointer">
+                                  <mdb-icon fas icon="eye" ></mdb-icon> Ver
                                 </mdb-badge>
                             </td>
                           </tr>

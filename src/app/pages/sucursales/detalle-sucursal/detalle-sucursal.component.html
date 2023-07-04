@@ -1,45 +1,53 @@
-      <!--Content-->
-    <div class="modal-content">
-      <!--Modal cascading tabs-->
-      <div class="modal-c-tabs">
-        <!-- Tab panels -->
-        <mdb-tabset
-          #staticTabs
-          [buttonClass]="'nav md-tabs tabs-2 red darken-1'"
-          [contentClass]="''"
-          class="tab-content"
-        >
-          <!--Panel 7-->
-          <mdb-tab
-            class="tab-pane fade in show active"
-            id="panel7"
-            role="tabpanel"
-            heading="<i class='fas fa-edit'></i> Editar"
-          >
-            <!--Body-->
-            <div class="modal-body mb-1">
 
-              <app-editar-sucursal [sucursal]="content.sucursal" (submitChange)="onEditSucursal($event)"></app-editar-sucursal>
+    <mdb-tabset
+      #staticTabs
+      [vertical]="true"
+      [buttonClass]="'md-tabs tabs-3 mdb-color darken-3'" 
+      [contentClass]="'card'"
+    >
+      <mdb-tab
+        heading="DATOS DE SUCURSAL"
+      >
+        <div class="row">
+          <div class="col-12">
+            <app-editar-sucursal [sucursal_id]="sucursal_id" (submitChange)="onEditSucursal($event)"></app-editar-sucursal>
+          </div>
+        </div>
+      </mdb-tab>
 
-            </div>
-          </mdb-tab>
-          <!--/.Panel 7-->
+      <mdb-tab
+        heading="USUARIOS"
+      >
+      <div class="row">
+        <div class="col-12">
 
-          <!--Panel 8-->
-          <mdb-tab
-            class="tab-pane fade"
-            id="panel8"
-            role="tabpanel"
-            heading="<i class='fas fa-users'></i> Usuarios"
-          >
-            <!--Body-->
-            <div class="modal-body">
-              <app-usuarios-sucursal [sucursal]="content.sucursal" (submitChange)="onEditSucursal($event)"></app-usuarios-sucursal>
-            </div>
-          </mdb-tab>
-          <!--/.Panel 8-->
-
-        </mdb-tabset>
+          ss
+        </div>
       </div>
-    </div>
-    <!--/.Content-->
+      </mdb-tab>
+
+
+      <mdb-tab
+        heading="LOGO DE SUCURSAL"
+      >
+      <div class="row">
+        <div class="col-12">
+
+          ss
+        </div>
+      </div>
+      </mdb-tab>
+
+      <mdb-tab
+        heading="FORMATO PDF"
+      >
+      <div class="row">
+        <div class="col-12">
+
+          ss
+        </div>
+      </div>
+      </mdb-tab>
+
+    </mdb-tabset>
+

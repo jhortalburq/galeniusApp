@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MDBModalRef } from '../../../../../ng-uikit-pro-standard/src/public_api';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {
     FormGroup,
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 import { Opcion } from '../../../interfaces/option';
 
-import { SharedService, NotificationsService, MantenimientoService} from '../../../services/services.index';
+import { SharedService, NotificationsService, MantenimientoService, BreadcrumbsService} from '../../../services/services.index';
 
 import { Subject } from 'rxjs';
 
@@ -23,9 +23,11 @@ import { Subject } from 'rxjs';
 })
 
 export class EditarSucursalComponent implements OnInit {
-  @Input() sucursal;
+  @Input() sucursal_id;
   @Output() submitChange = new EventEmitter();
-  @Input() empresa_id: number;
+
+  registro: any = {};
+  disabled: boolean = false;
 
   registerForm: FormGroup;
 
@@ -49,28 +51,49 @@ export class EditarSucursalComponent implements OnInit {
   _modulos: any = [];
 
   constructor(
-        public modalRef: MDBModalRef,
         public sharedService: SharedService,
         public mantenimientoService: MantenimientoService,
-        public notificationService: NotificationsService
+        public notificationService: NotificationsService,
+        public breadcrumbService: BreadcrumbsService,
+        public router: Router
   ) { }
 
   ngOnInit(): void {
     this.getModulos();
     this.createFormControls();
     this.createForm();
+    this.getRegistro();
+    console.log(this.sucursal_id)
+  }
+
+  getRegistro() {
+    this.mantenimientoService.getSucursal(this.sucursal_id, this.sharedService.organizacion_seleccionada.id)
+    .subscribe({                                                                        
+      next: (res: any) => {
+        this.registro = res;
+        this.registerForm.patchValue({                                
+          ruc: this.registro.ruc,
+          razon_social: this.registro.razon_social,
+          clave: this.registro.clave,
+          nombre_comercial: this.registro.nombre_comercial,
+          organizacion_id: this.sharedService.organizacion_seleccionada.id,
+          direccion: this.registro.direccion,
+          locacion: this.registro.nombre_locacion,
+        })
+      }
+    })
   }
 
   createFormControls() {
-    this.razon_social = new FormControl(this.sucursal.razon_social, Validators.required);
-    this.nombre_comercial = new FormControl(this.sucursal.nombre_comercial);
-    this.ruc = new FormControl(this.ruc, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]);
-    this.clave = new FormControl(this.clave, Validators.required);
-    this.organizacion_id = new FormControl(this.empresa_id, Validators.required);
-    this.correo = new FormControl(this.correo);
-    this.telefono = new FormControl(this.telefono);
-    this.direccion = new FormControl(this.direccion);
-    this.locacion = new FormControl(this.locacion);
+    this.razon_social = new FormControl(this.registro.razon_social, Validators.required);
+    this.nombre_comercial = new FormControl(this.registro.nombre_comercial);
+    this.ruc = new FormControl(this.registro.ruc, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]);
+    this.clave = new FormControl(this.registro.clave, Validators.required);
+    this.organizacion_id = new FormControl('', Validators.required);
+    this.correo = new FormControl('');
+    this.telefono = new FormControl('');
+    this.direccion = new FormControl('');
+    this.locacion = new FormControl('');
     this.modulos_id = new FormArray([]);
   }
 
@@ -91,8 +114,9 @@ export class EditarSucursalComponent implements OnInit {
   }
 
   getModulos() {
-    this.mantenimientoService.getDataModulos().subscribe((response: any) => {
-      this._modulos = response.results;
+    this.sharedService.modulosOrganizacion(this.sharedService.organizacion_seleccionada.id).subscribe((response: any) => {
+      this._modulos = response;
+      console.log(this._modulos)
     });
   }
 
@@ -113,15 +137,16 @@ export class EditarSucursalComponent implements OnInit {
 
   onSubmit(){
 
-    if (this.registerForm.valid && this.empresa_id) {
+    if (this.registerForm.valid) {
+      this.disabled = true;
 
-        this.sharedService.editSucursal( this.registerForm.value, this.sucursal.id, this.empresa_id ).subscribe({
+        this.sharedService.editSucursal( this.registerForm.value, this.sucursal_id, this.sharedService.organizacion_seleccionada.id ).subscribe({
           next: (response: any) => {
-            this.action.next( true );
-            this.notificationService.showInfo('Se editó el registro correctamente' , 'Sucursal');
-            this.modalRef.hide();
+            this.disabled = false;
+            this.notificationService.showInfo('Se editó el registro correctamente' , this.registro.razon_social);
           },
           error: (err: any) =>{
+            this.disabled = false;
             console.log(err);
           }
         })
@@ -145,5 +170,10 @@ export class EditarSucursalComponent implements OnInit {
       this.registerForm.patchValue({
               locacion: ubigeo.nombre,
             });
+  }
+
+  regresar(): void {
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/sucursales/lista`;
+    this.router.navigate([url]);
   }
 }

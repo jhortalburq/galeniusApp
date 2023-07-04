@@ -21,7 +21,7 @@ export class BreadcrumbsService {
   }
 
   setModuloName(modulo: string, notification: boolean, modulo_rl?: string) {
-      // localStorage.setItem('last_modulo', modulo_rl);
+      localStorage.setItem('last_modulo', modulo);
       // localStorage.setItem('modulo', modulo);
       if (notification){
         this.notificationService.showWarning('Se Ingresó al modulo' , modulo);

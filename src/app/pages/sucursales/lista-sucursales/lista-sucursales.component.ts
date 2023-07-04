@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef, Renderer2, DoCheck } from '@angular/core';
-import { SharedService, BreadcrumbsService, MantenimientoService} from '../../../services/services.index';
+import { SharedService, BreadcrumbsService, MantenimientoService, NotificationsService} from '../../../services/services.index';
 
 import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standard/src/public_api';
-import { NotificationsService } from '../../../services/notifications.service';
 
 import { AgregarSucursalComponent } from '../agregar-sucursal/agregar-sucursal.component';
 import { DetalleSucursalComponent } from '../detalle-sucursal/detalle-sucursal.component';
@@ -24,7 +23,7 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
 
   modalRef: MDBModalRef;
 
-  displayedColumns = ['', 'Nombre Sucursal', 'Clave', 'R.U.C', 'Ubigeo',  'Creado Por', 'Fecha Creación', ''];
+  displayedColumns = ['', 'Nombre Sucursal', 'Clave', 'R.U.C', 'Módulos', 'Ubicación',  'Creado Por', 'Fecha Creación', ''];
 
   public sucursales: any = [];
 
@@ -44,13 +43,13 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.breadcrumbService.title = 'SUCURSALES';
+    this.getData();
 
   }
 
   ngDoCheck() {
     if (!this.changeDetected) {
       if(this.sharedService.organizacion_seleccionada.id) {
-        this.getData();
         this.changeDetected = true;
       }
     }
@@ -114,33 +113,10 @@ export class ListaSucursalesComponent implements OnInit, DoCheck {
     });
   }
 
-  editModal(sucursal: any): void {
-
-    this.modalRef = this.modalService.show(DetalleSucursalComponent, {
-                  backdrop: true,
-                  keyboard: true,
-                  focus: true,
-                  show: false,
-                  ignoreBackdropClick: false,
-                  class: 'modal-dialog modal-notify modal-primary',
-                  animated: true,
-                  data: {
-                      empresa_id: this.sharedService.organizacion_seleccionada.id,
-                      sucursal: sucursal
-                  }
-              }
-    );
-
-    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
-
-    this.modalRef.content.action.subscribe( (result: any) => {
-      console.log(result);
-
-      if (result) {
-        this.getData();
-        this.filter = '';
-      }
-    });
+  irDetalle(sucursal_id: number): void {
+      let url = `/${this.breadcrumbService.modulo.toLowerCase()}/sucursales/${sucursal_id}/detalle`;
+      console.log(url)
+      this.router.navigate([url]);
   }
 
 
