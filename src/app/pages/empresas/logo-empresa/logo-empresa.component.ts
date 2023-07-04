@@ -53,16 +53,16 @@ export class LogoEmpresaComponent implements OnInit {
   };
 
   cambiarImagen () {
-      this.sharedService.subirLogotipo( this.imagenSubir, this.empresa.id).then(
-          (response:any) => {
-                this.empresa.url_logo = response.logotipo;
-                this.submitChange.emit(true);
-                this.notificationService.showInfo('Se editó el Logotipo de la Empresa' , 'Logo Actualizado');
-            },
-            err => {
-                  console.log(err);
-            }
-        );
+      // this.sharedService.subirLogotipo( this.imagenSubir, this.empresa.id).then(
+      //     (response:any) => {
+      //           this.empresa.url_logo = response.logotipo;
+      //           this.submitChange.emit(true);
+      //           this.notificationService.showInfo('Se editó el Logotipo de la Empresa' , 'Logo Actualizado');
+      //       },
+      //       err => {
+      //             console.log(err);
+      //       }
+      //   );
   };
 
 }

@@ -1,0 +1,27 @@
+<div class=row>
+    <div class="col-sm-8">
+        <div class="file-field md-form">
+            <div mdbBtn [floating]="true" size="md" color="success" mdbWavesEffect>
+              <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
+              <input type="file" mdbFileSelect (change)="seleccionImagen($event)">
+            </div>
+            <div class="file-path-wrapper mt-3">
+              <input class="file-path" type="text" placeholder="Upload your file" [(ngModel)]="fileName" readonly>
+            </div>
+        </div>
+
+        <hr>
+
+        <button mdbBtn size="sm" color="danger" class="waves-light" mdbWavesEffect (click)="regresar()">Regresar</button>
+        <button mdbBtn size="sm" type="submit" [disabled]="!imagenSubir" color="primary" class="waves-light" mdbWavesEffect (click)="cambiarImagen()">Subir Foto</button>
+        
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body" style="text-align: center">
+                <img *ngIf="url_logo" [src]="registro.url_logo" style="width: 150px">
+                <img *ngIf="!url_logo" [src]="imageUrl" style="width: 150px">
+            </div>
+        </div>
+    </div>
+</div>

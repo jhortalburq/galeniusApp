@@ -26,6 +26,8 @@ export class NavigationComponent implements OnInit {
   organizacion_seleccionada: any = {};
   sucursal_seleccionada: any = {};
 
+  logo_sucursal = 'assets/img/galenius_small.png';
+
   modalOptions = {
       backdrop: true,
       keyboard: true,

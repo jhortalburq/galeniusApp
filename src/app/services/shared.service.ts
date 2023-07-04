@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import { EMPTY } from 'rxjs'
 
+import { AuthService } from './auth.service'
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class SharedService {
   public organizacion_seleccionada: any = {id: null};
   public sucursal_seleccionada: any = {id: null};
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public _authService: AuthService) {
   }
 
   quitarOrganizacionActivaUsuario() {
@@ -188,7 +189,7 @@ export class SharedService {
     }
   }
 
-  subirLogotipo( archivo: File, id: number) {
+  subirLogotipoSucursal( archivo: File, id: number, organizacion_id: number) {
 
     return new Promise ( ( resolve, reject ) => {
 
@@ -209,8 +210,8 @@ export class SharedService {
               }
           }
 
-          xhr.open('PUT', `${environment.apiUrl}/api/v1/empresas/${id}/set_logo/`, true);
-          xhr.setRequestHeader("Authorization", `JWT ${localStorage.getItem('token')}`);
+          xhr.open('PUT', `${environment.apiUrl}/api/v1/sucursales/${id}/set_logo?organizacion=${organizacion_id}`, true);
+          xhr.setRequestHeader("Authorization", `Bearer ${this._authService.getToken()}`);
           xhr.send( formData );
 
     })

@@ -23,10 +23,10 @@ import { Subject } from 'rxjs';
 })
 
 export class EditarSucursalComponent implements OnInit {
-  @Input() sucursal_id;
+  @Input() registro_id;
   @Output() submitChange = new EventEmitter();
-
   registro: any = {};
+
   disabled: boolean = false;
 
   registerForm: FormGroup;
@@ -62,12 +62,10 @@ export class EditarSucursalComponent implements OnInit {
     this.getModulos();
     this.createFormControls();
     this.createForm();
-    this.getRegistro();
-    console.log(this.sucursal_id)
   }
 
   getRegistro() {
-    this.mantenimientoService.getSucursal(this.sucursal_id, this.sharedService.organizacion_seleccionada.id)
+    this.mantenimientoService.getSucursal(this.registro_id, this.sharedService.organizacion_seleccionada.id)
     .subscribe({                                                                        
       next: (res: any) => {
         this.registro = res;
@@ -79,9 +77,15 @@ export class EditarSucursalComponent implements OnInit {
           organizacion_id: this.sharedService.organizacion_seleccionada.id,
           direccion: this.registro.direccion,
           locacion: this.registro.nombre_locacion,
+          telefono: this.registro.telefono,
+          correo: this.registro.correo
         })
       }
     })
+  }
+
+  ngOnChanges() {
+    this.getRegistro();
   }
 
   createFormControls() {
@@ -108,7 +112,7 @@ export class EditarSucursalComponent implements OnInit {
       locacion: this.locacion,
       direccion: this.direccion,
       organizacion_id: this.organizacion_id,
-      modulos_id: this.modulos_id
+      modulos_id: this.modulos_id,
      });
 
   }
@@ -140,7 +144,7 @@ export class EditarSucursalComponent implements OnInit {
     if (this.registerForm.valid) {
       this.disabled = true;
 
-        this.sharedService.editSucursal( this.registerForm.value, this.sucursal_id, this.sharedService.organizacion_seleccionada.id ).subscribe({
+        this.sharedService.editSucursal( this.registerForm.value, this.registro.id, this.sharedService.organizacion_seleccionada.id ).subscribe({
           next: (response: any) => {
             this.disabled = false;
             this.notificationService.showInfo('Se editó el registro correctamente' , this.registro.razon_social);

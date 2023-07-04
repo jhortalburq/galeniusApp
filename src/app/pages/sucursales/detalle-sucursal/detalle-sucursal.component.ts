@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class DetalleSucursalComponent implements OnInit {
   sucursal_id: any;
+  registro: any = {};
 
   content: any;
   action: Subject<any> = new Subject();

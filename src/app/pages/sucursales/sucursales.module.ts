@@ -17,6 +17,7 @@ import {
 }
 from './sucursales.index';
 import { UsuariosSucursalComponent } from './usuarios-sucursal/usuarios-sucursal.component';
+import { LogoSucursalComponent } from './logo-sucursal/logo-sucursal.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { UsuariosSucursalComponent } from './usuarios-sucursal/usuarios-sucursal
       EditarSucursalComponent,
       DetalleSucursalComponent,
       UsuariosSucursalComponent,
+      LogoSucursalComponent,
   ],
   imports: [
     CommonModule,
