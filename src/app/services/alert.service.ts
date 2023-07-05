@@ -20,6 +20,15 @@ export class AlertService {
       });
   }
 
+  warningSwal(message: string, title: string) {
+    Swal.fire({
+        title: title,
+        text: message,
+        icon: 'warning',
+        confirmButtonText: 'Cerrar'
+    });
+}
+
   errorSwal(message: string, title: string) {
         Swal.fire({
             title: title,

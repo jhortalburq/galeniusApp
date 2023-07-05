@@ -1,9 +1,13 @@
 import { Component, OnInit,  Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService } from '../../../services/services.index';
+import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService, AlertService } from '../../../services/services.index';
 
-
+import {
+  FormControl,
+  Validators,
+  FormGroup
+} from '@angular/forms';
 
 @Component({
   selector: 'app-horarios',
@@ -15,6 +19,10 @@ export class HorariosComponent {
 
   selected = new Date();
   changeDate: string = '';
+
+  registerForm: FormGroup;
+  especialista: FormControl;
+  especialidad: FormControl;
 
   especialidad_id: number = 0;
   especialista_id: number = 0;
@@ -29,21 +37,30 @@ export class HorariosComponent {
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
               public sharedService: SharedService,
-              private renderer: Renderer2,
+              public alertService: AlertService,
               private router: Router) {
   }
 
   ngOnInit() {
     this.breadcrumbService.title = 'HORARIOS POR ESPECIALISTAS';
     this.getEspecialidades();
+    this.createFormControls();
+    this.createForm();
+    this.changeDate = this.selected.toISOString();
+
   }
 
-  // ngAfterViewInit(){
-  //   this.calendarApi = this.calendarComponent.getApi();
-  //   let currentDate = this.calendarApi.view.activeStart;
-  
-  //   console.log(currentDate); // result: current calendar start date
-  // }
+  createFormControls() {
+    this.especialidad = new FormControl('', Validators.required);
+    this.especialista = new FormControl('', Validators.required);
+  }
+
+  createForm() {
+     this.registerForm = new FormGroup({
+      especialista: this.especialista,
+      especialidad: this.especialidad,
+     });
+  }
 
   getEspecialidades() {
     this.mantenimientoService.getEspecialidades(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
@@ -55,11 +72,18 @@ export class HorariosComponent {
   getEspecialistas(especialidad: number) {
     this.mantenimientoService.getEspecialistas(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, especialidad)
                              .subscribe((response: any) => {
-                                 this.especialistas = response;
+                                this.especialistas = response;
                               });
   }
 
   onSelectEspecialidad(item: any) {
+    this.especialista_id = 0;
+
+    this.registerForm.patchValue({
+        especialista: 0,
+    })
+    this.add_horario = false;
+
     this.especialidad_id = item.value;
     this.getEspecialistas(item.value);
   }
@@ -73,7 +97,12 @@ export class HorariosComponent {
   }
 
   addHorario() {
-    this.add_horario = true;
+    if (!this.especialista_id) {
+      this.alertService.warningSwal('Seleccione un Especialista', '')
+      this.add_horario = false;
+    } else {
+      this.add_horario = true;
+    }
   }
 
   closeHorario() {
@@ -82,5 +111,9 @@ export class HorariosComponent {
 
   setNewDate(event: any) {
     this.selected = event;
+  }
+
+  setHorario(success: boolean) {
+    console.log(success)
   }
 }

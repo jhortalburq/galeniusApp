@@ -10,10 +10,11 @@
         </div>
         <div class="row mt-3">
             <div class="col-12">
-                <mdb-card>
+                <form class="form-horizontal form-material" [formGroup]="registerForm">
+                    <mdb-card>
                         <mat-form-field class="mt-2 col-12">
                             <mat-label>Especialidad</mat-label>
-                            <mat-select (selectionChange)="onSelectEspecialidad($event)">
+                            <mat-select (selectionChange)="onSelectEspecialidad($event)" formControlName="especialidad">
                                 <mat-option *ngFor="let item of especialidades" [value]="item.id">
                                     {{item.nombre | uppercase}}
                                 </mat-option>
@@ -22,7 +23,7 @@
 
                         <mat-form-field class="mt-n3 col-12">
                             <mat-label>Especialistas</mat-label>
-                            <mat-select (selectionChange)="onSelectEspecialista($event)">
+                            <mat-select (selectionChange)="onSelectEspecialista($event)" formControlName="especialista">
                                 <mat-option *ngFor="let item of especialistas" [value]="item.id">
                                     {{item.especialista | uppercase}}
                                 </mat-option>
@@ -30,6 +31,7 @@
                         </mat-form-field>
 
                 </mdb-card>
+                </form>
             </div>
         </div>
     </div>
@@ -47,6 +49,7 @@
                 [especialidad_id]="especialidad_id"
                 [especialista_id]="especialista_id"
                 (changeDateCalendar)="setNewDate($event)"
+                (submitHorario)="setHorario($event)"
                 *ngIf="add_horario">
         </app-ingresar-horario>
     </div>
