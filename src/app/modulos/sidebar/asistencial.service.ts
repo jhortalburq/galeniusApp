@@ -10,7 +10,8 @@ export class AsistencialService {
     {
       titulo: 'AGENDA',
       submenu: [
-                { titulo: 'Agenda Diaria', url: '/asistencial/agenda/diaria' },
+                { titulo: 'Agendar Citas', url: '/asistencial/agenda/diaria' },
+                { titulo: 'Agenda por Especialista', url: '/asistencial/agenda/especialista' },
                 { titulo: 'Citas Programadas', url: '/asistencial/citas/citas-programadas' },
                ]
    },
@@ -37,7 +38,6 @@ export class AsistencialService {
    {
     titulo: 'REGISTRO DE HORARIOS',
     submenu: [
-                  { titulo: 'Tablero General', url: '/asistencial/horarios/tablero-general' },
                   { titulo: 'Horarios por Especialistas', url: '/asistencial/horarios/horarios-especialistas' },
              ]
    },

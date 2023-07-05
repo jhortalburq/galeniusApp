@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TableroGeneralComponent } from './tablero-general/tablero-general.component';
 import { IngresarHorarioComponent } from './ingresar-horario/ingresar-horario.component';
 import { HorarioDetalleComponent } from './horario-detalle/horario-detalle.component';
 
@@ -16,7 +15,6 @@ import { HorariosComponent } from './horarios/horarios.component';
 
 @NgModule({
   declarations: [
-    TableroGeneralComponent,
     IngresarHorarioComponent,
     HorarioDetalleComponent,
     HorariosComponent
@@ -29,6 +27,9 @@ import { HorariosComponent } from './horarios/horarios.component';
     FormsModule,
     ReactiveFormsModule,
     HorariosRoutingModule
+  ],
+  exports: [
+    HorarioDetalleComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

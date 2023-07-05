@@ -116,6 +116,7 @@ export class IngresarHorarioComponent {
                             error: (err: any) => {
                               console.log(err);
                               this.submitHorario.emit(false);
+                              this.disabled = false;
                             }
                           })
 
@@ -124,5 +125,10 @@ export class IngresarHorarioComponent {
 
   updateRepetitivo() {
     this.is_repetivo = !this.is_repetivo;
+
+    this.registerForm.patchValue({
+      fecha_limit: '',
+      dias: '',
+    })
   }
 }
