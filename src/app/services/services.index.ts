@@ -22,3 +22,4 @@ export { EspecialistasService } from './especialistas.service';
 
 export { PacientesService } from './pacientes.service';
 export { EmpresasService } from './empresas.service';
+export { ProtocolosService } from './protocolos.service';

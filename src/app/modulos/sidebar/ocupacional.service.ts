@@ -34,8 +34,8 @@ export class OcupacionalService {
      {
       titulo: 'PROTOCOLOS',
       submenu: [
-                    { titulo: 'Registro de Protoclos', url: '/ocupacional/pacientes/lista' },
-                    { titulo: 'Nueva Empresa', url: '/ocupacional/pacientes/nuevo' },
+                    { titulo: 'Registro de Protoclos', url: '/ocupacional/protocolos/lista' },
+                    { titulo: 'Nueva Empresa', url: '/ocupacional/protocolos/nuevo' },
                ]
      },
      {
