@@ -1,1 +1,106 @@
-<p>nuevo-protocolo works!</p>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+            <mdb-card class="mb-5">
+                <mdb-card-body>
+                    <div class="row">
+
+                        <div class="col-sm-12 pl-4">
+                            <div class="titulo_seccion">DATOS DEL PROTOCOLO</div>
+
+                            <div class="row mt-n2">
+
+                                <div class="col-sm-5">
+                                    <div class="md-form form-sm">
+                                        <input mdbInput type="text" id="nombre" class="form-control form-control-sm" formControlName="nombre">
+                                        <label for="nombre" class="">Nombre Protocolo(*)</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="mdb-main-label">Tipo de Evaluación (*)</label>
+                                    <select2 
+                                        [data]="choices_tipos_evaluaciones"
+                                        placeholder="Seleccione Tipo Evaluación"
+                                        formControlName="tipo_evaluacion"
+                                    >
+                                    </select2>
+                                </div>
+                               
+                                  
+                                <div class="col-sm-5">
+                                    <label class="mdb-main-label">Empresa</label>
+                                    <select2 
+                                        [data]="choices_empresas"
+                                        placeholder="Seleccione Empresa"
+                                        formControlName="empresa"
+                                    >
+                                    </select2>
+                                </div>
+
+                            </div>
+
+                            <div class="titulo_seccion mt-1">EXÁMEN MÉDICO OCUPACIONAL (EMO)</div>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <mdb-checkbox formControlName="flag_emo">EXAMEN MEDICO OCUPACIONAL (EMO)</mdb-checkbox>
+                                </div>
+                            </div>
+
+                            <div class="titulo_seccion mt-4">EXÁMENES MÉDICOS COMPLEMENTARIOS</div>
+
+                            <div class="row">
+                                <div class="col-sm-3" *ngFor="let item of choices_fichas; let i = index">
+                                    <app-checkbox-item [item]="item"
+                                        [items]="[]"  
+                                        (selectItem)="changeCheckbox($event, 1)" 
+                                        >
+                                    </app-checkbox-item>
+                                </div>
+                            </div>
+    
+                            <div class="titulo_seccion mt-4" *ngIf="enable_lab">EXÁMENES LABORATORIOS</div>
+    
+                            <div class="row" *ngIf="enable_lab">
+                                <div class="col-sm-3" *ngFor="let item of choices_grupo_analisis; let i = index">
+                                    <app-checkbox-item [item]="item"
+                                        [items]="[]"  
+                                        (selectItem)="changeCheckbox($event, 2)" 
+                                        >
+                                    </app-checkbox-item>
+                                </div>
+                            </div>
+
+                            <div class="titulo_seccion mt-4" *ngIf="enable_psico">TESTS PSICOLÓGICOS</div>
+    
+                            <div class="row" *ngIf="enable_psico">
+                                <div class="col-sm-4" *ngFor="let item of choices_tests_psicologicos; let i = index">
+                                    <app-checkbox-item [item]="item"
+                                        [items]="[]"  
+                                        (selectItem)="changeCheckbox($event, 3)" 
+                                        >
+                                    </app-checkbox-item>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-3 text-right">
+                        <div class="col-sm-12 text-right">
+                            <button mdbBtn size="sm" color="danger" class="waves-light" mdbWavesEffect (click)="regresar()">Regresar</button>
+                            <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
+                        </div>
+                    </div>
+                </mdb-card-body>
+
+            </mdb-card>
+
+        </form>
+    </div>
+</div>

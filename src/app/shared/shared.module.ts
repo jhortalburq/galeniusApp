@@ -12,6 +12,7 @@ import { Select2Module } from 'ng-select2-component';
 import { ModulosComponent } from './modulos/modulos.component';
 
 import { CheckboxModulosComponent } from './components/checkbox-modulos/checkbox-modulos.component';
+import { CheckboxItemComponent } from './components/checkbox-item/checkbox-item.component'
 
 import { FiltrosPacientesComponent } from './filtros/filtros-pacientes/filtros-pacientes.component';
 import { CitasFiltroComponent } from './filtros/citas-filtro/citas-filtro.component';
@@ -28,6 +29,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     FiltrosPacientesComponent,
     CheckboxModulosComponent,
     PaginationComponent,
+    CheckboxItemComponent,
   ],
   exports: [
     NavigationComponent,
@@ -38,6 +40,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     CitasFiltroComponent,
     FiltrosPacientesComponent,
     CheckboxModulosComponent,
+    CheckboxItemComponent,
     PaginationComponent,
   ],
   imports: [
