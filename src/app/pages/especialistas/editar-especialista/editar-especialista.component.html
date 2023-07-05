@@ -173,7 +173,8 @@
 
                             <div class="row">
                                 <app-checkbox-modulos [item]="item"
-                                                      (selectItem)="changeCheckbox($event)" 
+                                                        [modulos]="especialista.especialidad"  
+                                                        (selectItem)="changeCheckbox($event)" 
                                                       *ngFor="let item of _especialidades; let i = index">
                                 </app-checkbox-modulos>
                             </div>

@@ -23,9 +23,8 @@ import { Subject } from 'rxjs';
 })
 
 export class EditarSucursalComponent implements OnInit {
-  @Input() registro_id;
+  @Input() registro;
   @Output() submitChange = new EventEmitter();
-  registro: any = {};
 
   disabled: boolean = false;
 
@@ -65,23 +64,19 @@ export class EditarSucursalComponent implements OnInit {
   }
 
   getRegistro() {
-    this.mantenimientoService.getSucursal(this.registro_id, this.sharedService.organizacion_seleccionada.id)
-    .subscribe({                                                                        
-      next: (res: any) => {
-        this.registro = res;
-        this.registerForm.patchValue({                                
-          ruc: this.registro.ruc,
-          razon_social: this.registro.razon_social,
-          clave: this.registro.clave,
-          nombre_comercial: this.registro.nombre_comercial,
-          organizacion_id: this.sharedService.organizacion_seleccionada.id,
-          direccion: this.registro.direccion,
-          locacion: this.registro.nombre_locacion,
-          telefono: this.registro.telefono,
-          correo: this.registro.correo
-        })
-      }
-    })
+    if (this.registro.ruc) {
+      this.registerForm.patchValue({                                
+        ruc: this.registro.ruc,
+        razon_social: this.registro.razon_social,
+        clave: this.registro.clave,
+        nombre_comercial: this.registro.nombre_comercial,
+        organizacion_id: this.sharedService.organizacion_seleccionada.id,
+        direccion: this.registro.direccion,
+        locacion: this.registro.nombre_locacion,
+        telefono: this.registro.telefono,
+        correo: this.registro.correo
+      })
+    }
   }
 
   ngOnChanges() {
@@ -114,13 +109,11 @@ export class EditarSucursalComponent implements OnInit {
       organizacion_id: this.organizacion_id,
       modulos_id: this.modulos_id,
      });
-
   }
 
   getModulos() {
     this.sharedService.modulosOrganizacion(this.sharedService.organizacion_seleccionada.id).subscribe((response: any) => {
       this._modulos = response;
-      console.log(this._modulos)
     });
   }
 
@@ -148,6 +141,7 @@ export class EditarSucursalComponent implements OnInit {
           next: (response: any) => {
             this.disabled = false;
             this.notificationService.showInfo('Se editó el registro correctamente' , this.registro.razon_social);
+            this.submitChange.emit(true)
           },
           error: (err: any) =>{
             this.disabled = false;

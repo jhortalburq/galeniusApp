@@ -238,7 +238,7 @@ export class NuevoEspecialistaComponent {
       this.especialistaService.addEspecialista(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
-                                        this.alertService.successSwalToast('Especialista Registrado', 5000);
+                                        this.alertService.successSwalToast('Especialista Registrado', 2000);
 
                                         setTimeout(() => {
                                             this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'especialistas', res.slug, 'editar']);

@@ -9,9 +9,8 @@ import { SharedService, NotificationsService, MantenimientoService, BreadcrumbsS
   styleUrls: ['./logo-sucursal.component.scss']
 })
 export class LogoSucursalComponent {
-  @Input() registro_id;
+  @Input() registro;
   @Output() submitChange = new EventEmitter();
-  registro: any = {};
 
   fileName: string = 'Sin archivo seleccionado';
 
@@ -29,18 +28,8 @@ export class LogoSucursalComponent {
     public router: Router
 ) { }
 
-  getRegistro() {
-    this.mantenimientoService.getSucursal(this.registro_id, this.sharedService.organizacion_seleccionada.id)
-    .subscribe({                                                                        
-      next: (res: any) => {
-        this.registro = res;
-        this.url_logo = this.registro.url_logo;
-      }
-    })
-  }
-
   ngOnChanges() {
-    this.getRegistro();
+    this.url_logo = this.registro.url_logo;
   }
 
   seleccionImagen( img: any) {
@@ -62,7 +51,7 @@ export class LogoSucursalComponent {
     }
 
     this.fileName = imagen.name;
-
+    this.disabled = true;
     this.imagenSubir = imagen;
     const reader = new FileReader();
     reader.readAsDataURL( imagen );
@@ -70,17 +59,16 @@ export class LogoSucursalComponent {
   };
 
   cambiarImagen () {
-      this.disabled = true;
+      this.disabled = false;
       this.sharedService.subirLogotipoSucursal(this.imagenSubir, this.registro.id, this.sharedService.organizacion_seleccionada.id).then(
           (response:any) => {
                 this.registro.url_logo = response.logotipo;
                 this.submitChange.emit(true);
                 this.notificationService.showInfo('Se editó el Logotipo de la Empresa' , 'Logo Actualizado');
                 this.sharedService.sucursal_seleccionada.logo = response.logotipo; 
-                this.disabled = false;
               },
             err => {
-              this.disabled = false;
+              this.disabled = true;
               console.log(err);
             }
         );

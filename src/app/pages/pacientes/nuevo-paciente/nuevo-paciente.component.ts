@@ -224,7 +224,7 @@ export class NuevoPacienteComponent {
       this.pacienteService.addPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
-                                        this.alertService.successSwalToast('Paciente Registrado', 5000);
+                                        this.alertService.successSwalToast('Paciente Registrado', 2000);
 
                                         setTimeout(() => {
                                             this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);

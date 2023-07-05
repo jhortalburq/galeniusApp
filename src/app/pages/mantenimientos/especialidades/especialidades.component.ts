@@ -23,7 +23,7 @@ export class EspecialidadesComponent {
 
   modalRef: MDBModalRef;
 
-  displayedColumns = ['', 'Nombre', 'Examen Relacionado', ''];
+  displayedColumns = ['', 'Nombre', 'Duración (min)', 'Examen Relacionado', ''];
 
   public registros: any = [];
 

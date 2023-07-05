@@ -18,6 +18,7 @@ import {
 from './sucursales.index';
 import { UsuariosSucursalComponent } from './usuarios-sucursal/usuarios-sucursal.component';
 import { LogoSucursalComponent } from './logo-sucursal/logo-sucursal.component';
+import { TurnosAtencionComponent } from './turnos-atencion/turnos-atencion.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { LogoSucursalComponent } from './logo-sucursal/logo-sucursal.component';
       DetalleSucursalComponent,
       UsuariosSucursalComponent,
       LogoSucursalComponent,
+      TurnosAtencionComponent,
   ],
   imports: [
     CommonModule,

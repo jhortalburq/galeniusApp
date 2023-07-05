@@ -110,7 +110,7 @@ export class AgregarEmpresaComponent implements OnInit {
         this.empresaService.addEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
-                                        this.alertService.successSwalToast('Empresa Registrada', 5000);
+                                        this.alertService.successSwalToast('Empresa Registrada', 2000);
 
                                         setTimeout(() => {
                                             this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.slug, 'editar']);

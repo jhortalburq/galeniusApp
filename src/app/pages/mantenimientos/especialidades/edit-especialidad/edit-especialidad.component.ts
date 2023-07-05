@@ -29,6 +29,7 @@ export class EditEspecialidadComponent {
   registerForm: FormGroup;
   nombre: FormControl;
   ficha: FormControl;
+  duracion: FormControl;
 
   tipos_fichas: any = [];
 
@@ -51,6 +52,7 @@ export class EditEspecialidadComponent {
   createFormControls() {
     this.nombre = new FormControl(this.registro.nombre, Validators.required);
     this.ficha = new FormControl(this.ficha_default);
+    this.duracion = new FormControl(this.registro.duracion, Validators.required);
   }
 
   getTiposFichas() {
@@ -69,7 +71,8 @@ export class EditEspecialidadComponent {
   createForm() {
      this.registerForm = new FormGroup({
         nombre: this.nombre,
-        ficha: this.ficha
+        ficha: this.ficha,
+        duracion: this.duracion
      });
   }
 

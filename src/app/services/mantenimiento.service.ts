@@ -340,4 +340,18 @@ export class MantenimientoService {
                     catchError(this.sharedService.handleError)
                   );
   }
+
+  getTurnosAtencion(sucursal_id: number, organizacion: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/turnos-atencion`, {params: { 'organizacion': organizacion, 'cm': sucursal_id }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
+  setTurnoAtencion(registro: any, sucursal_id: number, org: number) {
+    return this.http.post(`${environment.apiUrl}/api/v1/sucursales/${sucursal_id}/turnos_atencion`, JSON.stringify(registro), {params: {'organizacion': org}});
+  }
+
 }

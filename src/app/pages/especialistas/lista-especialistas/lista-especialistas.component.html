@@ -20,9 +20,12 @@
                           <tr mdbTableCol *ngFor="let registro of registros; let i = index">
 
                             <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
-                            <td class="text-center">{{ registro.colegiatura }}</td>
+                            <td class="text-center">
+                              <a (click)="editarRegistro(registro.slug)">{{ registro.colegiatura }}</a>
+                            </td>
 
-                            <td style="width: 50%">{{ registro.full_name }}</td>
+                            <td style="width: 50%">
+                              <a (click)="editarRegistro(registro.slug)">{{ registro.full_name }}</a></td>
                             <td class="text-center">{{ registro.tipo_documento_name }}</td>
 
                             <td class="text-center">{{ registro.no_documento }}</td>

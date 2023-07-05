@@ -293,7 +293,7 @@ export class EditarPacienteComponent {
       this.pacienteService.editPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.paciente.slug)
                           .subscribe({
                                       next: (res: any) => {
-                                        this.alertService.successSwalToast('Paciente Editado', 5000);
+                                        this.alertService.successSwalToast('Paciente Editado', 2000);
 
                                         setTimeout(() => {
                                             this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);

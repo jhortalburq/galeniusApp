@@ -19,7 +19,9 @@
                         <tbody *ngIf="pacientes">
                           <tr mdbTableCol *ngFor="let registro of pacientes; let i = index">
                             <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
-                            <td style="width:30%">{{ registro.full_name }}</td>
+                            <td style="width:30%">
+                              <a (click)="editarRegistro(registro.slug)">{{ registro.full_name }}</a>
+                            </td>
                             <td class="text-center">{{ registro.tipo_documento_name }}</td>
                             <td class="text-center">{{ registro.no_documento }}</td>
                             <td class="text-center">{{ registro.edad }} años</td>

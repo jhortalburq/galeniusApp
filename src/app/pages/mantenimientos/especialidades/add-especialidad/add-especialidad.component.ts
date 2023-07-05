@@ -26,6 +26,7 @@ export class AddEspecialidadComponent {
   registerForm: FormGroup;
   nombre: FormControl;
   ficha: FormControl;
+  duracion: FormControl;
 
   tipos_fichas: any = [];
 
@@ -54,12 +55,14 @@ export class AddEspecialidadComponent {
   createFormControls() {
     this.nombre = new FormControl('', Validators.required);
     this.ficha = new FormControl('');
+    this.duracion = new FormControl('30', Validators.required);
   }
 
   createForm() {
      this.registerForm = new FormGroup({
         nombre: this.nombre,
-        ficha: this.ficha
+        ficha: this.ficha,
+        duracion: this.duracion
      });
   }
 

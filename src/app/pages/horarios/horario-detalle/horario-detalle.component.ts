@@ -70,7 +70,6 @@ export class HorarioDetalleComponent {
   }
 
   changeDateEmit(value: any) {
-    console.log(value)
     this.changeDateCalendar.emit(value);
   }
 

@@ -98,7 +98,6 @@ export class EditarEspecialistaComponent {
       .subscribe({
         next: (res: any) => {
           this.especialista = res;
-
           this.provincia_default = this.especialista.cod_prov
           this.distrito_default = this.especialista.ubigeo
 
@@ -108,7 +107,6 @@ export class EditarEspecialistaComponent {
 
           this.loadProvincia(this.especialista.cod_depart);
           
-
           this.registerForm.patchValue({
               no_documento: this.especialista.no_documento,
               tipo_documento: this.especialista.tipo_documento,
@@ -306,7 +304,7 @@ export class EditarEspecialistaComponent {
       this.especialistaService.editEspecialista(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.slug)
                           .subscribe({
                                       next: (res: any) => {
-                                        this.alertService.successSwalToast('Especialista Editado', 5000);
+                                        this.alertService.successSwalToast('Especialista Editado', 2000);
 
                                         setTimeout(() => {
                                             this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'especialistas', res.slug, 'editar']);

@@ -9,9 +9,19 @@
       >
         <div class="row">
           <div class="col-12">
-            <app-editar-sucursal [registro_id]="sucursal_id" (submitChange)="onEditSucursal($event)"></app-editar-sucursal>
+            <app-editar-sucursal [registro]="registro" (submitChange)="onEditSucursal($event)"></app-editar-sucursal>
           </div>
         </div>
+      </mdb-tab>
+
+      <mdb-tab
+        heading="TURNOS ATENCIÓN"
+      >
+      <div class="row">
+        <div class="col-12">
+          <app-turnos-atencion [registro]="registro" (submitChange)="onEditSucursal($event)"></app-turnos-atencion>
+        </div>
+      </div>
       </mdb-tab>
 
       <mdb-tab
@@ -31,7 +41,7 @@
       >
       <div class="row">
         <div class="col-12">
-          <app-logo-sucursal  [registro_id]="sucursal_id" (submitChange)="onEditSucursal($event)"></app-logo-sucursal>
+          <app-logo-sucursal  [registro]="registro" (submitChange)="onEditSucursal($event)"></app-logo-sucursal>
         </div>
       </div>
       </mdb-tab>
