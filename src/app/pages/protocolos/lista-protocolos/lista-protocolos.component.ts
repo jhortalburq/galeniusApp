@@ -64,7 +64,6 @@ export class ListaProtocolosComponent {
                 this.nextURL = response.next;
                 this.prevURL = response.previous;
                 this.total = response.count;
-                console.log(this.registros)
             },
           error: (error: any) => {
             if (error.status === 401) {

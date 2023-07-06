@@ -22,7 +22,7 @@ export class AlmacenService {
 }
 
   getSucursalesUsuario(id: any, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/empresa/${id}/sucursales/`, {params: { 'search': params }})
                     .pipe(
                       map( (res: any) => {
@@ -60,7 +60,7 @@ export class AlmacenService {
   }
 
   getAlmacenes(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/almacenes/`, {params: { 'search': params }})
                     .pipe(
                       map( (res: any) => {
@@ -98,7 +98,7 @@ export class AlmacenService {
   }
 
   getMovimientosActivosAlmacen(almacenId: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/almacenes/${almacenId}/movimientos/`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -122,7 +122,7 @@ export class AlmacenService {
 
 
   getEmpresasActivosAlmacen(almacenId: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/almacenes/${almacenId}/empresas/`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;

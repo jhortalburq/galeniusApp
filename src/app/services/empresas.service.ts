@@ -33,7 +33,7 @@ export class EmpresasService {
   }
 
   getEmpresasURL(url: string, organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'search': params, 'cm': cm, 'organizacion': organizacion }})
                     .pipe(map( (res: any) => {
                           return res;

@@ -18,7 +18,7 @@ export class UsuariosService {
   }
 
   getUsuarios(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/usuarios/`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           this.empresas = res.results;
@@ -58,7 +58,7 @@ export class UsuariosService {
   }
 
   getUsuariosActivosEmpresa(empresa_id: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/empresas/${empresa_id}/usuarios/`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           this.empresas = res.results;
@@ -78,7 +78,7 @@ export class UsuariosService {
   }
 
   getUsuariosActivosSucursal(sucursal_id: number | null, empresa_id:number | null, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/empresa/${empresa_id}/sucursales/${sucursal_id}/usuarios/`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           this.empresas = res.results;

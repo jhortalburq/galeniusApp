@@ -40,7 +40,7 @@ export class PacientesService {
   }
 
   getPacientes(organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/pacientes`, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -58,7 +58,7 @@ export class PacientesService {
   }
 
   getPacientesURL(url: string, organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm }})
                     .pipe(map( (res: any) => {
                           return res;

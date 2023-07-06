@@ -37,7 +37,7 @@ export class EspecialistasService {
   }
 
   getEspecialistas(organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/especialistas`, {params: { 'search': params, 'organizacion': organizacion, 'sucursal': cm  }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -55,7 +55,7 @@ export class EspecialistasService {
   }
 
   getEspecialistasURL(url:string, organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'search': params , 'organizacion': organizacion, 'sucursal': cm }})
                     .pipe(map( (res: any) => {
                           return res;

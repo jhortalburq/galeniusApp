@@ -32,7 +32,7 @@ export class MantenimientoService {
   }
 
   getQueryset(tipo: string, org: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/${tipo}`, {params: { 'empresa': org, 'cm': cm, 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -50,7 +50,7 @@ export class MantenimientoService {
   }
 
   getQuerysetURL(url: string, org: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'empresa': org, 'cm': cm, 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -77,7 +77,7 @@ export class MantenimientoService {
   }
   
   getEspecialidades(empresa_id: number|null, cm: number|null, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/empresa/${empresa_id}/vendedores/`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           // this.empresas = res.results;
@@ -96,7 +96,7 @@ export class MantenimientoService {
   }
 
   getTiposDocumentos(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/tipos-documentos`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -114,7 +114,7 @@ export class MantenimientoService {
   }
 
   getTiposGeneros(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/generos`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -132,7 +132,7 @@ export class MantenimientoService {
   }
 
   getTiposEstadosCivil(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/estados-civil`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -150,7 +150,7 @@ export class MantenimientoService {
   }
 
   getTiposGradosInstruccion(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/grados-instruccion`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -168,7 +168,7 @@ export class MantenimientoService {
   }
 
   getTiposDepartamento(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/departamentos`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -213,7 +213,7 @@ export class MantenimientoService {
   }
 
   getDataMantenimiento(source: string, org: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/${source}`, {params: { 'organizacion': org, 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -231,7 +231,7 @@ export class MantenimientoService {
   }
 
   getDataMantenimientoURL(url: string, org: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'organizacion': org, 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -269,7 +269,7 @@ export class MantenimientoService {
   }
 
   getPresentacionMedicamento(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/presentacion-medicamentos`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           return res;

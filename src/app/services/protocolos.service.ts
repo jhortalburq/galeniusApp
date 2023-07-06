@@ -29,7 +29,7 @@ export class ProtocolosService {
   }
 
   getProtocolos(organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/protocolos`, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm }})
                     .pipe(map( (res: any) => {
                           return res;
@@ -47,7 +47,7 @@ export class ProtocolosService {
   }
 
   getProtocolosURL(url: string, organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm }})
                     .pipe(map( (res: any) => {
                           return res;

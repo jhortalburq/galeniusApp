@@ -37,7 +37,7 @@ export class SharedService {
 
 
   getOrganizacionesUsuario(params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/organizaciones`, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           this.empresas = res.results;
@@ -57,7 +57,7 @@ export class SharedService {
   }
 
   getOrganizacionesUsuarioURL(url, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'search': params }})
                     .pipe(map( (res: any) => {
                           this.empresas = res.results;
@@ -112,7 +112,7 @@ export class SharedService {
   }
   
   getSucursalesOrganizacion(id: any, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/organizaciones/${id}/sucursales`, {params: { 'search': params }})
                     .pipe(
                       map( (res: any) => {
@@ -146,7 +146,7 @@ export class SharedService {
   }
 
   getSucursalesUsuario(organizacion: any, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/sucursales`, {params: { 'search': params, 'organizacion': organizacion }})
                     .pipe(
                       map( (res: any) => {
@@ -168,7 +168,7 @@ export class SharedService {
   }
 
   getSucursalesUsuarioURL(url, organizacion: any, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(url, {params: { 'search': params,  'organizacion': organizacion }})
                     .pipe(
                       map( (res: any) => {

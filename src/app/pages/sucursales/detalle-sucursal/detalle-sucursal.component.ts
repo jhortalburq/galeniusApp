@@ -49,7 +49,6 @@ export class DetalleSucursalComponent implements OnInit {
   }
 
   onEditSucursal(registro) {
-    console.log('ssssssssssssssssssss', registro)
     this.getRegistro();
   }
 
