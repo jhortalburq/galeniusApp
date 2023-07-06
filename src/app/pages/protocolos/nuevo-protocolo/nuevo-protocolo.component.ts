@@ -13,7 +13,8 @@ import { BreadcrumbsService,
         ProtocolosService,
         SharedService,
         AlertService,
-        EmpresasService
+        EmpresasService,
+        NotificationsService
 } from '../../../services/services.index';
 
 
@@ -25,13 +26,14 @@ import { BreadcrumbsService,
 export class NuevoProtocoloComponent {
   registerForm: FormGroup;
 
+  maxResults = 10;
+
   nombre: FormControl;
   tipo_evaluacion: FormControl;
   fichas: FormArray;
   analisis: FormArray;
   test_psicologicos: FormArray;
   empresa: FormControl;
-  flag_emo: FormControl;
 
   disabled: boolean = false;
 
@@ -53,6 +55,7 @@ export class NuevoProtocoloComponent {
       public sharedService: SharedService,
       public alertService: AlertService,
       public empresaService: EmpresasService,
+      public notificationService: NotificationsService,
       private router: Router
   ) { 
     this.breadcrumbService.title = 'NUEVO PROTOCOLO';
@@ -75,7 +78,6 @@ export class NuevoProtocoloComponent {
     this.fichas =  new FormArray([]);
     this.analisis =  new FormArray([]);
     this.test_psicologicos =  new FormArray([]);
-    this.flag_emo = new FormControl(true);
   }
 
   createForm() {
@@ -85,7 +87,6 @@ export class NuevoProtocoloComponent {
       empresa: this.empresa,
       fichas: this.fichas,
       analisis: this.analisis,
-      flag_emo: this.flag_emo,
       test_psicologicos: this.test_psicologicos
     });
   }
@@ -101,22 +102,27 @@ export class NuevoProtocoloComponent {
                               });
   }
 
-  getChoicesEmpresas() {
-    return this.empresaService.getEmpresas(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
-                       .subscribe((response: any) => {
-                                this.choices_empresas = [];
+  getChoicesEmpresas(params?: string) {
+      return this.empresaService.getEmpresas(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, params)
+            .subscribe((response: any) => {
+               this.choices_empresas = [];
 
-                                for (let i = 0; i < response.results.length; i++) {
-                                  this.choices_empresas.push({value: response.results[i].id, label: response.results[i].razon_social})
-                                }
-                              });
+               for (let i = 0; i < response.results.length; i++) {
+                 this.choices_empresas.push({value: response.results[i].id, label: response.results[i].razon_social})
+               }
+             });
+
   }
 
   getChoicesFichas() {
     return this.mantenimientoService.getFichasExamenes()
                        .subscribe((response: any) => {
-                                this.choices_fichas = response.results.map( (item) => {
-                                  return {...item, checked: false}
+                                this.choices_fichas = response.results.map( (item: any) => {
+                                  if (item.clave == 'emo') {
+                                    return {...item, boolean: true}
+                                  } else {
+                                    return {...item, boolean: false}
+                                  }
                                 })
                               });
   }
@@ -125,7 +131,7 @@ export class NuevoProtocoloComponent {
     this.mantenimientoService.getDataMantenimiento('examenes-laboratorio', this.sharedService.organizacion_seleccionada.id)
                             .subscribe((response: any) => {
                                 this.choices_grupo_analisis = response.results.map( (item) => {
-                                  return {...item, checked: false}
+                                  return {...item, boolean: false}
                                 })
                               });
   }
@@ -134,7 +140,7 @@ export class NuevoProtocoloComponent {
     this.mantenimientoService.getDataMantenimiento('tests-psicologicos', this.sharedService.organizacion_seleccionada.id)
                        .subscribe((response: any) => {
                                 this.choices_tests_psicologicos = response.results.map( (item) => {
-                                  return {...item, checked: false}
+                                  return {...item, boolean: false}
                                 })
                               });
   }
@@ -181,11 +187,26 @@ export class NuevoProtocoloComponent {
 
         if (item.clave == 'lab') {
           this.enable_lab = false;
+          this.fichas =  new FormArray([]);          
+          this.choices_grupo_analisis.map( (item: any) => {
+                item.boolean = false;
+                return item
+          })
         };
 
         if (item.clave == 'psico') {
           this.enable_psico = false;
+          this.test_psicologicos =  new FormArray([]);
+          this.choices_tests_psicologicos.map( (item: any) => {
+              item.boolean = false;
+              return item
+          })
         };
+
+        if (item.clave == 'emo') {
+          item.boolean = true;
+          this.notificationService.showError('No se puede quitar la ficha' , 'EMO');
+        }
 
         this.fichas.controls.forEach((ctrl: FormControl) => {
           if(ctrl.value == item.id) {
@@ -225,4 +246,14 @@ export class NuevoProtocoloComponent {
 
   }
 
+  _searchEmpresa(item: any) {
+    console.log(item)
+    this.getChoicesEmpresas(item.search)
+  }
+
+  _focus(item: any) {
+    console.log(item)
+    this.getChoicesEmpresas()
+
+  }
 }

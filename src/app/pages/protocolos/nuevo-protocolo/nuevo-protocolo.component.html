@@ -34,22 +34,21 @@
                                     <select2 
                                         [data]="choices_empresas"
                                         placeholder="Seleccione Empresa"
+                                        displaySearchStatus="always"
                                         formControlName="empresa"
+                                        noResultMessage="No existe resultados"
+                                        maxResultsMessage="Escriba en el campo de búsqueda"
+                                        [maxResults]="maxResults"
+                                        [customSearchEnabled]="true"
+                                        (open)="_focus($event)"
+                                        (search)="_searchEmpresa($event)"
                                     >
                                     </select2>
                                 </div>
 
                             </div>
 
-                            <div class="titulo_seccion mt-1">EXÁMEN MÉDICO OCUPACIONAL (EMO)</div>
-
-                            <div class="row">
-                                <div class="col-sm-12 col-xs-12">
-                                    <mdb-checkbox formControlName="flag_emo">EXAMEN MEDICO OCUPACIONAL (EMO)</mdb-checkbox>
-                                </div>
-                            </div>
-
-                            <div class="titulo_seccion mt-4">EXÁMENES MÉDICOS COMPLEMENTARIOS</div>
+                            <div class="titulo_seccion mt-2">EXÁMENES MÉDICOS</div>
 
                             <div class="row">
                                 <div class="col-sm-3" *ngFor="let item of choices_fichas; let i = index">
@@ -61,7 +60,7 @@
                                 </div>
                             </div>
     
-                            <div class="titulo_seccion mt-4" *ngIf="enable_lab">EXÁMENES LABORATORIOS</div>
+                            <div class="titulo_seccion mt-4" *ngIf="enable_lab">TIPOS DE LABORATORIOS</div>
     
                             <div class="row" *ngIf="enable_lab">
                                 <div class="col-sm-3" *ngFor="let item of choices_grupo_analisis; let i = index">

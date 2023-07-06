@@ -15,7 +15,7 @@ export class EmpresasService {
 
 
   getEmpresas(organizacion: number, cm: number, params?: string) {
-    if (params && params.length > 2) {
+    if (params) {
       return this.http.get(`${environment.apiUrl}/api/v1/empresas`, {params: { 'search': params, 'cm': cm, 'organizacion': organizacion }})
                     .pipe(map( (res: any) => {
                           return res;
