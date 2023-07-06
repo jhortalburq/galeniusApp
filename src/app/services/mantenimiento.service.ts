@@ -323,7 +323,7 @@ export class MantenimientoService {
     }
   }
 
-  getExamenLaboratorio(id: string, org: number) {
+  getExamenLaboratorio(id: number, org: number) {
     return this.http.get(`${environment.apiUrl}/api/v1/maestros/examenes-laboratorio/${id}`, { params: { 'organizacion': org} })
                     .pipe(map( (res: any) => {
                           return res;
@@ -332,6 +332,14 @@ export class MantenimientoService {
                   );
   }
 
+  getAnalisisExamenLaboratorio(id: number, org: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/maestros/examenes-laboratorio/${id}/grupos`, { params: { 'organizacion': org} })
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
   getSucursal(slug: string, organizacion: number) {
     return this.http.get(`${environment.apiUrl}/api/v1/sucursales/${slug}`, {params: { 'organizacion': organizacion }})
                     .pipe(map( (res: any) => {

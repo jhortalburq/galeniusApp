@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { MdbStepperComponent} from '../../../../../ng-uikit-pro-standard/src/lib/pro/mdb-pro.module';
 
 import {
   FormGroup,
@@ -24,6 +26,8 @@ import { BreadcrumbsService,
   styleUrls: ['./nuevo-protocolo.component.scss']
 })
 export class NuevoProtocoloComponent {
+  @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent
+
   registerForm: FormGroup;
 
   maxResults = 10;
@@ -32,6 +36,7 @@ export class NuevoProtocoloComponent {
   tipo_evaluacion: FormControl;
   fichas: FormArray;
   analisis: FormArray;
+  tipo_analisis: FormArray;
   test_psicologicos: FormArray;
   empresa: FormControl;
 
@@ -43,9 +48,12 @@ export class NuevoProtocoloComponent {
   choices_grupo_analisis: any = [];
   choices_tests_psicologicos: any = [];
 
+  choices_analisis: any = [];
+
   data: any = [];
 
   enable_lab: boolean = false;
+  enable_analisis: boolean = false;
   enable_psico: boolean = false;
 
   constructor(
@@ -77,6 +85,7 @@ export class NuevoProtocoloComponent {
     this.empresa = new FormControl('');
     this.fichas =  new FormArray([]);
     this.analisis =  new FormArray([]);
+    this.tipo_analisis =  new FormArray([]);
     this.test_psicologicos =  new FormArray([]);
   }
 
@@ -87,6 +96,7 @@ export class NuevoProtocoloComponent {
       empresa: this.empresa,
       fichas: this.fichas,
       analisis: this.analisis,
+      tipo_analisis: this.tipo_analisis,
       test_psicologicos: this.test_psicologicos
     });
   }
@@ -147,19 +157,20 @@ export class NuevoProtocoloComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      console.log('guardar', this.registerForm.value)
       this.protocolosService.addProtocolo(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Protocolo Registrado', 2000);
 
                                         setTimeout(() => {
-                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'protocolos', res.slug, 'editar']);
+                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'protocolos', 'lista']);
                                         }, 500)
                                       },
                                       error: (err: any) => {
                                         console.log('error')
                                       }
-                                    })
+                          })
     }
   }
 
@@ -168,7 +179,6 @@ export class NuevoProtocoloComponent {
     url = url.replace('nuevo', 'lista');
     this.router.navigate([url]);
   }
-
 
   changeCheckbox(item: any, tipo: number) {
     if (tipo == 1) {
@@ -182,21 +192,36 @@ export class NuevoProtocoloComponent {
         };
 
         this.fichas.push(new FormControl(item.id))
+
       } else {
+        
         let i: number = 0;
 
         if (item.clave == 'lab') {
           this.enable_lab = false;
-          this.fichas =  new FormArray([]);          
+          this.enable_analisis = false;
+
+          this.analisis.clear();
+
           this.choices_grupo_analisis.map( (item: any) => {
+                item.boolean = false;
+                return item
+          });
+
+          this.tipo_analisis.clear();
+
+          this.choices_analisis.map( (item: any) => {
                 item.boolean = false;
                 return item
           })
         };
 
         if (item.clave == 'psico') {
+          console.log('auiii')
           this.enable_psico = false;
-          this.test_psicologicos =  new FormArray([]);
+          
+          this.test_psicologicos.clear();
+
           this.choices_tests_psicologicos.map( (item: any) => {
               item.boolean = false;
               return item
@@ -220,6 +245,23 @@ export class NuevoProtocoloComponent {
       if (item.boolean) {
         this.analisis.push(new FormControl(item.id))
       } else {
+
+        let indexOfObject = this.choices_analisis.findIndex( vendor => vendor['examen_id'] === item.id);
+
+        let objeto = this.choices_analisis.find( vendor => vendor['examen_id'] === item.id);
+        
+        if (objeto) {
+          for (let _obj of objeto.results) {
+            this.tipo_analisis.controls.forEach((ctrl: FormControl, index) => {
+                if(ctrl.value == _obj.id) {
+                  this.tipo_analisis.removeAt(index);
+                }
+            });
+          }
+        }
+
+        this.choices_analisis.splice(indexOfObject, 1);
+
         let i: number = 0;
         this.analisis.controls.forEach((ctrl: FormControl) => {
           if(ctrl.value == item.id) {
@@ -230,6 +272,19 @@ export class NuevoProtocoloComponent {
         });  
       }
     }  else if (tipo == 3) {
+      if (item.boolean) {
+        this.tipo_analisis.push(new FormControl(item.id))
+      } else {
+        let i: number = 0;
+        this.tipo_analisis.controls.forEach((ctrl: FormControl) => {
+          if(ctrl.value == item.id) {
+            this.tipo_analisis.removeAt(i);
+            return;
+          }
+          i++;
+        });  
+      }
+    } else if (tipo == 4) {
       if (item.boolean) {
         this.test_psicologicos.push(new FormControl(item.id))
       } else {
@@ -247,13 +302,32 @@ export class NuevoProtocoloComponent {
   }
 
   _searchEmpresa(item: any) {
-    console.log(item)
     this.getChoicesEmpresas(item.search)
   }
 
   _focus(item: any) {
-    console.log(item)
     this.getChoicesEmpresas()
-
   }
+
+  async nextLab() {
+    // this.choices_analisis = [];
+
+    for (let i of this.registerForm.value.analisis) {
+        this.mantenimientoService.getAnalisisExamenLaboratorio(i, this.sharedService.organizacion_seleccionada.id)
+                      .subscribe((res: any) => {
+        
+                                let found = this.choices_analisis.some( vendor => vendor['examen'] === res['examen'] );
+
+                                if (!found) {
+                                    this.choices_analisis.push(res);                                   
+                                };
+
+                                this.enable_analisis = this.choices_analisis.length > 0 ? true : false;
+
+                        })
+    }
+
+    this.stepper.next();
+  }
+
 }

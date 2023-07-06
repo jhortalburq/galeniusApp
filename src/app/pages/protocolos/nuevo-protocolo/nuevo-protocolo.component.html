@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-12 col-lg-12">
-        <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form class="form-horizontal form-material" [formGroup]="registerForm">
 
-            <mdb-card class="mb-5">
+            <mdb-card class="mb-3">
                 <mdb-card-body>
                     <div class="row">
 
@@ -48,7 +48,7 @@
 
                             </div>
 
-                            <div class="titulo_seccion mt-2">EXÁMENES MÉDICOS</div>
+                            <!-- <div class="titulo_seccion mt-2">EXÁMENES MÉDICOS</div>
 
                             <div class="row">
                                 <div class="col-sm-3" *ngFor="let item of choices_fichas; let i = index">
@@ -82,20 +82,141 @@
                                         >
                                     </app-checkbox-item>
                                 </div>
-                            </div>
+                            </div> -->
 
 
                         </div>
                     </div>
 
-                    <hr>
+                </mdb-card-body>
+            </mdb-card>
+            
+            <mdb-card class="mb-5">
+                <mdb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <mdb-stepper #stepper [linear]="true">
+                                <mdb-step name="Exámenes" class="step1">
 
-                    <div class="row mt-3 text-right">
-                        <div class="col-sm-12 text-right">
-                            <button mdbBtn size="sm" color="danger" class="waves-light" mdbWavesEffect (click)="regresar()">Regresar</button>
-                            <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
+                                    <div class="titulo_seccion">EXÁMENES OCUPACIONALES</div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3" *ngFor="let item of choices_fichas; let i = index">
+                                            <app-checkbox-item [item]="item"
+                                                [items]="[]"  
+                                                (selectItem)="changeCheckbox($event, 1)" 
+                                                >
+                                            </app-checkbox-item>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12  d-flex justify-content-center">
+                                            <button mdbBtn size="sm" color="primary" (click)="stepper.next()">Continuar</button>
+                                        </div>
+                                    </div>
+                                </mdb-step>
+                                
+                                <mdb-step name="Laboratorio"  class="step2" *ngIf="enable_lab">
+
+                                    <div class="titulo_seccion">TIPOS DE LABORATORIO</div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3" *ngFor="let item of choices_grupo_analisis; let i = index">
+                                            <app-checkbox-item [item]="item"
+                                                [items]="[]"  
+                                                (selectItem)="changeCheckbox($event, 2)" 
+                                                >
+                                            </app-checkbox-item>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-12  d-flex justify-content-center">
+                                            <button mdbBtn size="sm" color="secondary" (click)="stepper.previous()">Regresar</button>
+                                            <button mdbBtn size="sm" color="primary" (click)="nextLab()">Continuar</button>
+                                        </div>
+                                    </div>
+                                </mdb-step>
+
+                                <mdb-step name="Análisis"  class="step2" *ngIf="enable_lab">
+
+                                    <div class="mb-3" *ngFor="let item of choices_analisis; let i = index">
+                                        
+                                        <div class="titulo_seccion">{{ item.examen }}</div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4" *ngFor="let analisis of item.results">
+                                                <app-checkbox-item [item]="analisis"
+                                                    [items]="[]"  
+                                                    (selectItem)="changeCheckbox($event, 3)" 
+                                                    >
+                                                </app-checkbox-item>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12  d-flex justify-content-center">
+                                            <button mdbBtn size="sm" color="secondary" (click)="stepper.previous()">Regresar</button>
+                                            <button mdbBtn size="sm" color="primary" (click)="stepper.next()">Continuar</button>
+                                        </div>
+                                    </div>
+                                </mdb-step>
+
+                                <mdb-step name="Tests" class="step3" *ngIf="enable_psico">
+
+                                    <div class="titulo_seccion">TESTS PSICOLÓGICOS</div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4" *ngFor="let item of choices_tests_psicologicos let i = index">
+                                            <app-checkbox-item [item]="item"
+                                                [items]="[]"  
+                                                (selectItem)="changeCheckbox($event, 4)" 
+                                                >
+                                            </app-checkbox-item>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12  d-flex justify-content-center">
+                                            <button mdbBtn size="sm" color="secondary" (click)="stepper.previous()">Regresar</button>
+                                            <button mdbBtn size="sm" color="primary" (click)="stepper.next()">Continuar</button>
+                                        </div>
+                                    </div>
+                                </mdb-step>
+                                <mdb-step name="Finalizar" class="step4">
+
+                                    <div class="alert alert-success" role="alert">
+                                        <h4 class="alert-heading">Finalizar Registro</h4>
+                                        <p>
+                                            Seguro de guardar los cambios y crear el Protocolo ?
+                                        </p>
+                                        <hr />
+                                        <p class="mb-0">Si no fuera el caso, y quiere cancelar el proceso, haga click
+                                            
+                                            <button mdbBtn size="sm" color="danger" class="waves-light" mdbWavesEffect (click)="regresar()">Cancelar</button>
+
+                                        </p>
+                                      </div>
+
+                                  <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12  d-flex justify-content-center">
+                                            <button mdbBtn size="sm" color="secondary" (click)="stepper.previous()">Regresar</button>
+                                            <button mdbBtn size="sm" color="primary" [disabled]="!registerForm.valid || disabled" (click)="onSubmit()">Grabar</button>
+                                        </div>
+                                    </div>
+                                </mdb-step>
+                              </mdb-stepper>
                         </div>
                     </div>
+
                 </mdb-card-body>
 
             </mdb-card>
