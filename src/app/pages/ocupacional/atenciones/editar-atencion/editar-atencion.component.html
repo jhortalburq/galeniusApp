@@ -51,6 +51,7 @@
                                         [maxResults]="maxResults"
                                         [customSearchEnabled]="true"
                                         (open)="_focusProtocolos($event)"
+                                        (update)="selectProtocolo($event)"
                                         (search)="_searchProtocolos($event)"
                                     >
                                     </select2>

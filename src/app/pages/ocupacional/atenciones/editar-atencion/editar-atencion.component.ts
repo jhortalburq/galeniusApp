@@ -60,6 +60,7 @@ export class EditarAtencionComponent {
   choices_analisis: any = [];
 
   data: any = [];
+  _data: any = [];
 
   enable_lab: boolean = false;
   enable_analisis: boolean = false;
@@ -420,5 +421,53 @@ export class EditarAtencionComponent {
     this.stepper.next();
   }
 
+  selectProtocolo(item: any) {
+    if (item.value) {
+      this.getItemsProtocolo(item.value);
+    }
+  }
+  
+  async getItemsProtocolo(protocolo_id: any) {
+    const detalle$ = this.protocolosService.getProtocolosItemsForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, protocolo_id);
+    this._data = await lastValueFrom(detalle$);
+
+    this.enable_analisis = false;
+    this.enable_lab = false;
+    this.enable_psico = false;
+    
+    this.analisis.clear();
+    this.tipo_analisis.clear();
+    this.test_psicologicos.clear();
+    this.fichas.clear();
+
+    this.choices_tests_psicologicos.map( (item: any) => {
+        item.boolean = false;
+        return item
+    })
+
+    this.choices_grupo_analisis.map( (item: any) => {
+          item.boolean = false;
+          return item
+    });
+
+
+    this.choices_analisis.map( (item: any) => {
+          item.boolean = false;
+          return item
+    })
+
+    this.choices_fichas.map( (item: any) => {
+      if (item.clave == 'emo') {
+        item.boolean = true;
+      } else {
+        item.boolean = false;
+      }
+      return item
+    })
+    
+    this.setChoicesFichas(this._data.fichas);
+    this.setChoicesTest(this._data.test_psicologicos);
+    this.setChoicesLaboratorio(this._data.analisis);
+  }
 
 }

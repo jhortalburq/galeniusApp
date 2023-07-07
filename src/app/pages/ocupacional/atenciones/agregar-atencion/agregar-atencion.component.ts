@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MdbStepperComponent} from '../../../../../../ng-uikit-pro-standard/src/lib/pro/mdb-pro.module';
+import { lastValueFrom } from 'rxjs';
 
 import {
   FormGroup,
@@ -58,6 +59,8 @@ export class AgregarAtencionComponent {
   enable_lab: boolean = false;
   enable_analisis: boolean = false;
   enable_psico: boolean = false;
+
+  _data: any = [];
 
   constructor(
       public breadcrumbService: BreadcrumbsService,
@@ -322,6 +325,55 @@ export class AgregarAtencionComponent {
     this.getChoicesProtocolos()
   }
 
+  selectProtocolo(item: any) {
+    if (item.value) {
+      this.getItemsProtocolo(item.value);
+    }
+  }
+
+  async getItemsProtocolo(protocolo_id: any) {
+    const detalle$ = this.protocolosService.getProtocolosItemsForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, protocolo_id);
+    this._data = await lastValueFrom(detalle$);
+
+    this.enable_analisis = false;
+    this.enable_lab = false;
+    this.enable_psico = false;
+    
+    this.analisis.clear();
+    this.tipo_analisis.clear();
+    this.test_psicologicos.clear();
+    this.fichas.clear();
+
+    this.choices_tests_psicologicos.map( (item: any) => {
+        item.boolean = false;
+        return item
+    })
+
+    this.choices_grupo_analisis.map( (item: any) => {
+          item.boolean = false;
+          return item
+    });
+
+
+    this.choices_analisis.map( (item: any) => {
+          item.boolean = false;
+          return item
+    })
+
+    this.choices_fichas.map( (item: any) => {
+      if (item.clave == 'emo') {
+        item.boolean = true;
+      } else {
+        item.boolean = false;
+      }
+      return item
+    })
+    
+    this.setChoicesFichas(this._data.fichas);
+    this.setChoicesTest(this._data.test_psicologicos);
+    this.setChoicesLaboratorio(this._data.analisis);
+  }
+
   async nextLab() {
     // this.choices_analisis = [];
 
@@ -336,11 +388,65 @@ export class AgregarAtencionComponent {
                                 };
 
                                 this.enable_analisis = this.choices_analisis.length > 0 ? true : false;
+                                this.setChoicesAnalisisLaboratorio(i, this._data.tipo_analisis);
 
                         })
     }
 
     this.stepper.next();
+  }
+
+  setChoicesFichas(fichas) {
+      for (let item of fichas) {
+          let index = this.choices_fichas.findIndex( (reg: any) => reg.id === item );
+          this.choices_fichas[index].boolean = true;
+
+          this.fichas.push(new FormControl(this.choices_fichas[index].id))
+
+      }
+  }
+
+  setChoicesLaboratorio(analisis) {
+    for (let item of analisis) {
+        let index = this.choices_grupo_analisis.findIndex( (reg: any) => reg.id === item );
+
+        if (index > 0) {
+          this.choices_grupo_analisis[index].boolean = true;
+
+          this.analisis.push(new FormControl(this.choices_grupo_analisis[index].id))
+
+          if (this.analisis.length > 0) {
+            this.enable_lab = true;
+          }
+        }
+    }
+  }
+
+  setChoicesAnalisisLaboratorio(tipo, analisis) {
+    let _index = this.choices_analisis.findIndex( (reg: any) => reg.examen_id === tipo );
+
+    for (let item of analisis) {
+        let index = this.choices_analisis[_index].results.findIndex( (reg: any) => reg.id === item );
+        if (index > 0) {
+          this.choices_analisis[_index].results[index].boolean = true;
+
+          this.tipo_analisis.push(new FormControl(this.choices_analisis[_index].results[index].id))
+
+        }
+    }
+  }
+
+  setChoicesTest(tests) {
+    for (let item of tests) {
+        let index = this.choices_tests_psicologicos.findIndex( (reg: any) => reg.id === item );
+        this.choices_tests_psicologicos[index].boolean = true;
+
+        this.test_psicologicos.push(new FormControl(this.choices_tests_psicologicos[index].id))
+
+        if (this.test_psicologicos.length > 0) {
+          this.enable_psico = true;
+        }
+    }
   }
 
 }

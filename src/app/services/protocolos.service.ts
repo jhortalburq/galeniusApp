@@ -56,6 +56,10 @@ export class ProtocolosService {
     }
   }
 
+  getProtocolosItemsForm(organizacion: number, cm: number, id: any): Observable<any>{
+    return this.http.get(`${environment.apiUrl}/api/v1/protocolo/items/${id}`, {params: {'organizacion': organizacion, 'cm': cm}})
+  }
+
   getProtocolosURL(url: string, organizacion: number, cm: number, params?: string) {
     if (params) {
       return this.http.get(url, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm }})
