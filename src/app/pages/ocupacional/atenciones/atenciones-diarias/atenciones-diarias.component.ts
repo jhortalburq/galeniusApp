@@ -110,4 +110,56 @@ export class AtencionesDiariasComponent {
     url = `/${url}/admision/${slug}/editar`;
     this.router.navigate([url])
   }
+
+  HojaRutaPDF(slug: string ){
+    this.admisionService.downloadHojaRutaPDF(slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc')
+      .subscribe({
+          next: (res: any) => this.downloadFile(res),
+          error: (err: any) => console.log(err)
+      })
+  }
+
+  ConsentimientoPDF(slug: string ){
+    this.admisionService.downloadConsentimientoPDF(slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc')
+      .subscribe({
+          next: (res: any) => this.downloadFile(res),
+          error: (err: any) => console.log(err)
+      })
+  }
+
+  downloadFile(res: any) {
+    var data = this.base64toBlob(res.file, { type: 'application/pdf'})
+
+    var fileUrl = window.URL.createObjectURL(data);
+
+    var a = document.createElement('a');
+       document.body.appendChild(a);
+       a.setAttribute('style', 'display: none');
+       a.href = fileUrl;
+       a.download = res.filename;
+       a.click();
+       window.URL.revokeObjectURL(fileUrl);
+       a.remove(); // remove the element
+  }
+
+  base64toBlob(base64Data, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 1024;
+    var byteCharacters = atob(base64Data);
+    var bytesLength = byteCharacters.length;
+    var slicesCount = Math.ceil(bytesLength / sliceSize);
+    var byteArrays = new Array(slicesCount);
+
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+        var begin = sliceIndex * sliceSize;
+        var end = Math.min(begin + sliceSize, bytesLength);
+
+        var bytes = new Array(end - begin);
+        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+            bytes[i] = byteCharacters[offset].charCodeAt(0);
+        }
+        byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
 }

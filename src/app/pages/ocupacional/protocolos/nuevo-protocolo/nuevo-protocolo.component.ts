@@ -157,9 +157,7 @@ export class NuevoProtocoloComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-
       this.disabled = true;
-
       this.protocolosService.addProtocolo(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
@@ -313,8 +311,6 @@ export class NuevoProtocoloComponent {
   }
 
   async nextLab() {
-    // this.choices_analisis = [];
-
     for (let i of this.registerForm.value.analisis) {
         this.mantenimientoService.getAnalisisExamenLaboratorio(i, this.sharedService.organizacion_seleccionada.id)
                       .subscribe((res: any) => {

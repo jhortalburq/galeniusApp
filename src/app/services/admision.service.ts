@@ -80,4 +80,12 @@ export class AdmisionService {
                     catchError(this.sharedService.handleError)
                   );
   }
+
+  downloadHojaRutaPDF(slug: string, organizacion: number, cm: number, tipo_orden: string ): any {
+    return this.http.get(`${environment.apiUrl}/api/v1/atenciones/${slug}/hoja_ruta`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden  }})
+  }
+
+  downloadConsentimientoPDF(slug: string, organizacion: number, cm: number, tipo_orden: string ): any {
+    return this.http.get(`${environment.apiUrl}/api/v1/atenciones/${slug}/consentimiento_informado`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden  }})
+  }
 }

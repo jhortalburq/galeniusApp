@@ -30,8 +30,14 @@
 
                             <td class="text-center">{{ registro.nombre_tipo_evaluacion }}</td>
                             <td class="text-center">
+                              <mdb-badge [danger]="true"  style="cursor: pointer" (click)="HojaRutaPDF(registro.slug)">
+                                <mdb-icon fas icon="file-pdf" ></mdb-icon>
+                              </mdb-badge>
                             </td>
                             <td class="text-center">
+                              <mdb-badge [danger]="true"  style="cursor: pointer" (click)="ConsentimientoPDF(registro.slug)">
+                                <mdb-icon fas icon="file-pdf" ></mdb-icon>
+                              </mdb-badge>
                             </td>
                             <td class="text-center">
                               {{ registro.status }}
