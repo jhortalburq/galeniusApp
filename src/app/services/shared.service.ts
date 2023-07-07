@@ -239,6 +239,24 @@ export class SharedService {
     }
   }
 
+  getValidateSunat(param: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/validacion/sunat`,  {params: { 'query': param }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.handleError)
+                  );
+  }
+
+  getValidateReniec(param: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/validacion/reniec`,  {params: { 'query': param }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.handleError)
+                  );
+  }
+
   getOptionsGenero() {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/generos/`)
                     .pipe(map( (res: any) => {

@@ -1,0 +1,26 @@
+<mat-form-field class="col-sm-4">
+    <mat-label>Departamento</mat-label>
+    <mat-select (selectionChange)="changeDepartment($event)">
+        <mat-option *ngFor="let item of tipos_departamentos" [value]="item.value">
+            {{item.label | uppercase}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field class="col-sm-4">
+    <mat-label>Provincia</mat-label>
+    <mat-select (selectionChange)="changeProvince($event)" >
+        <mat-option *ngFor="let item of tipos_provincias" [value]="item.value">
+            {{item.label | uppercase}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field class="col-sm-4">
+    <mat-label>Distrito</mat-label>
+    <mat-select>
+        <mat-option *ngFor="let item of tipos_distritos" [value]="item.value">
+            {{item.label | uppercase}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

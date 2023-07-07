@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { MdbStepperComponent} from '../../../../../../ng-uikit-pro-standard/src/lib/pro/mdb-pro.module';
@@ -39,6 +39,8 @@ export class EditarAtencionComponent {
   registerForm: FormGroup;
 
   maxResults = 10;
+
+  isLoadInit: boolean = true;
 
   tipo_orden: FormControl;
   fecha_examen: FormControl;
@@ -89,14 +91,20 @@ export class EditarAtencionComponent {
       this.createFormControls();
       this.createForm();
 
-      this.getChoicesProtocolos();
-      this.getChoicesPacientes();
+      const protocolos$ = this.protocolosService.getProtocolosForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id);
+      let _protocolos = await lastValueFrom(protocolos$);
+      this.choices_protocolos = _protocolos.results;
+      
+      const pacientes$ = this.pacientesService.getPacientesForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id);
+      let _pacientes = await lastValueFrom(pacientes$);
+      this.choices_tipos_pacientes = _pacientes.results;
 
       this.getChoicesFichas();
       this.getChoicesGruposAnalisis();
       this.getChoicesTestPsicologicos();
       this.getRegistro();
   }
+
 
   getRegistro() {
     this.admisionService.getAtencion(this.slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc')
@@ -247,6 +255,7 @@ export class EditarAtencionComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.disabled = true;
+      window.scroll(0,0);
       this.admisionService.editAtencion(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.slug, 'oc')
                           .subscribe({
                                       next: (res: any) => {
@@ -389,7 +398,6 @@ export class EditarAtencionComponent {
 
   }
 
-
   _searchPaciente(item: any) {
     this.getChoicesPacientes(item.search)
   }
@@ -422,9 +430,13 @@ export class EditarAtencionComponent {
     this.stepper.next();
   }
 
-  selectProtocolo(item: any) {
+  selectProtocolo(item: any, init: boolean) {
     if (item.value) {
-      this.getItemsProtocolo(item.value);
+      if (!init) {
+        this.getItemsProtocolo(item.value);
+      } else {
+        this.isLoadInit = false;
+      }
     }
   }
   

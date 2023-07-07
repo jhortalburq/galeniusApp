@@ -222,6 +222,8 @@ export class NuevoPacienteComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.disabled = true;
+      window.scroll(0,0);
+
       this.pacienteService.addPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
@@ -244,5 +246,36 @@ export class NuevoPacienteComponent {
     let url = this.router.url;
     url = url.replace('nuevo', 'lista');
     this.router.navigate([url]);
+  }
+
+
+  searchReniec(params: any) {
+    if (params.target.value.length === 8 && this.registerForm.value.tipo_documento === this.documento_default) {
+
+      this.disabled = true;
+      
+      this.registerForm.patchValue({
+        nombres: '',
+        apellido_paterno: '',
+        apellido_materno: '',
+    });
+      
+    this.sharedService.getValidateReniec(params.target.value).subscribe({
+        next: (res: any) => {
+          console.log(res)
+
+          this.registerForm.patchValue({
+              nombres: res.nombres,
+              apellido_paterno: res.apellidoPaterno,
+              apellido_materno: res.apellidoMaterno,
+          });
+          this.disabled = false;
+        },
+        error: (err: any) => {
+          this.disabled = false;
+          console.log(err)
+        }
+      })
+    }
   }
 }

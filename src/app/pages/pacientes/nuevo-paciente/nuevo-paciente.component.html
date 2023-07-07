@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="md-form form-sm">
-                                        <input mdbInput type="text" id="no_documento" class="form-control form-control-sm" formControlName="no_documento">
+                                        <input mdbInput type="text" id="no_documento" class="form-control form-control-sm" formControlName="no_documento" mdbValidate (change)="searchReniec($event)">
                                         <label for="no_documento" class="">Número de Documento (*)</label>
                                     </div>
                                 </div>
@@ -48,16 +48,18 @@
                                     </select2>
                                 </div>
 
-
-                                <div class="col-sm-3">
-                                    <mat-form-field>
-                                        <mat-label>Fecha Nacimiento</mat-label>
-                                        <input matInput [matDatepicker]="picker" formControlName="fecha_nacimiento" (click)="picker.open()" readonly>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                    </mat-form-field>
+                                <div class="col-sm-2">
+                                    <div class="md-form form-sm">
+                                        <input
+                                          type="date"
+                                          id="fecha_nacimiento"
+                                          class="form-control form-control-sm"
+                                          formControlName="fecha_nacimiento"
+                                          mdbInput
+                                        />
+                                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                                    </div>
                                 </div>
-
 
                             </div>
 
@@ -142,7 +144,6 @@
                             </div>
 
                             <div class="form-row mt-n3">
-
                                 <mat-form-field class="col-sm-4">
                                     <mat-label>Departamento</mat-label>
                                     <mat-select (selectionChange)="changeDepartment($event)" formControlName="departamento">

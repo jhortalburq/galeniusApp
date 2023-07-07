@@ -47,7 +47,7 @@ export class EditarEmpresaComponent implements OnInit {
 
   departamento_default: string = '';
   provincia_default: string = '';
-  distrito_default: string = '';
+  distrito_default: number = 0;
 
   tipos_departamentos: any = [];
   tipos_provincias: any = [];
@@ -78,11 +78,10 @@ export class EditarEmpresaComponent implements OnInit {
       next: (res: any) => {
         this.registro = res;
 
-        this.provincia_default = this.registro.cod_prov
-        this.distrito_default = this.registro.ubigeo
-
-        this.loadProvincia(this.registro.cod_depart);
-        this.loadDistrito(this.registro.cod_depart, this.registro.cod_prov);
+        this.provincia_default = this.registro.cod_prov;
+        this.distrito_default = this.registro.ubigeo;
+        console.log(this.registro)
+        this.loadProvincia(this.registro.cod_depart, this.registro.cod_prov);
 
         this.registerForm.patchValue({
             ruc: this.registro.ruc,
@@ -150,14 +149,17 @@ export class EditarEmpresaComponent implements OnInit {
   changeDepartment(e: any) {
     if (e.value) {
       this.departamento_default = e.value;
-      this.getTiposProvincia(e.value);
+      this.provincia_default = '';
+      this.registro.cod_depart = 0;
+      this.registro.cod_prov = 0;
+      this.getTiposProvincia(e.value);    
     } 
   }
 
-  loadProvincia(cod_dep: string) {
+  loadProvincia(cod_dep: string, cod_provin: string) {
     if (cod_dep) {
       this.departamento_default = cod_dep;
-      this.getTiposProvincia(cod_dep);
+      this.getTiposProvincia(cod_dep, cod_provin);
     } 
   }
 
@@ -176,7 +178,7 @@ export class EditarEmpresaComponent implements OnInit {
     } 
   }
 
-  getTiposProvincia(cod_depart: string) {
+  getTiposProvincia(cod_depart: string, cod_provin?) {
     this.mantenimientoService.getTiposProvincia(cod_depart)
                              .subscribe((response: any) => {
                                   this.tipos_provincias = response.results
@@ -186,6 +188,7 @@ export class EditarEmpresaComponent implements OnInit {
                                       provincia: this.provincia_default,
                                       ubigeo: ''
                                   })
+                                  this.loadDistrito(cod_depart, cod_provin);
 
                               });
   }
@@ -207,6 +210,7 @@ export class EditarEmpresaComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       this.disabled = true;
+      window.scroll(0,0);
       this.empresaService.editEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.registro.slug)
                           .subscribe({
                                       next: (res: any) => {
@@ -229,4 +233,43 @@ export class EditarEmpresaComponent implements OnInit {
     let url = `/${this.breadcrumbService.modulo.toLowerCase()}/empresas/lista`;
     this.router.navigate([url]);
   }
+
+  searchSunat(params: any) {
+    if (params.target.value.length === 11) {
+      this.disabled = true;
+      
+      this.departamento_default = '';
+      this.provincia_default = '';
+
+      this.registerForm.patchValue({
+          razon_social: '',
+          direccion: '',
+          departamento: '',
+          provincia: '',
+          ubigeo: ''
+      });
+      
+      this.sharedService.getValidateSunat(params.target.value).subscribe({
+        next: (res: any) => {
+          this.provincia_default = res.cod_provin
+          this.distrito_default = res.ubigeo
+
+          this.loadProvincia(res.cod_depart, res.cod_provin);
+          
+          this.registerForm.patchValue({
+              razon_social: res.razonSocial,
+              direccion: res.direccion,
+              departamento: res.cod_depart,
+          });
+          this.disabled = false;
+        },
+        error: (err: any) => {
+          this.disabled = false;
+        }
+      })
+    }
+  }
+
+  
+
 }

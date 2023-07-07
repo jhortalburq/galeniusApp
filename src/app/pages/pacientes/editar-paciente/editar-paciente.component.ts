@@ -100,14 +100,14 @@ export class EditarPacienteComponent {
       next: (res: any) => {
         this.paciente = res;
 
-        this.provincia_default = this.paciente.cod_prov
-        this.distrito_default = this.paciente.ubigeo
+        this.provincia_default = this.paciente.cod_prov;
+        this.distrito_default = this.paciente.ubigeo;
 
         let fecha_nacimiento = new Date(this.paciente.fecha_nacimiento);
 
         fecha_nacimiento.setHours(24);
-        
-        this.loadProvincia(this.paciente.cod_depart);
+
+        this.loadProvincia(this.paciente.cod_depart, this.paciente.cod_prov);
 
         this.registerForm.patchValue({
             no_documento: this.paciente.no_documento,
@@ -233,13 +233,14 @@ export class EditarPacienteComponent {
       this.provincia_default = '';
       this.paciente.cod_depart = 0;
       this.paciente.cod_prov = 0;
-      this.getTiposProvincia(e.value);    } 
+      this.getTiposProvincia(e.value);    
+    } 
   }
 
-  loadProvincia(cod_dep: string) {
+  loadProvincia(cod_dep: string, cod_provin: string) {
     if (cod_dep) {
       this.departamento_default = cod_dep;
-      this.getTiposProvincia(cod_dep);
+      this.getTiposProvincia(cod_dep, cod_provin);
     } 
   }
 
@@ -258,7 +259,7 @@ export class EditarPacienteComponent {
     } 
   }
 
-  getTiposProvincia(cod_depart: string) {
+  getTiposProvincia(cod_depart: string, cod_provin?) {
     this.mantenimientoService.getTiposProvincia(cod_depart)
                              .subscribe((response: any) => {
                                   this.tipos_provincias = response.results
@@ -269,7 +270,7 @@ export class EditarPacienteComponent {
                                       ubigeo: ''
                                   })
                                   
-                                  this.loadDistrito(this.paciente.cod_depart, this.paciente.cod_prov);
+                                  this.loadDistrito(cod_depart, cod_provin);
 
                               });
   }
@@ -291,6 +292,8 @@ export class EditarPacienteComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.disabled = true;
+      window.scroll(0,0);
+
       this.pacienteService.editPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.paciente.slug)
                           .subscribe({
                                       next: (res: any) => {
@@ -312,5 +315,35 @@ export class EditarPacienteComponent {
   regresar() {
     let url = `/${this.breadcrumbService.modulo.toLowerCase()}/pacientes/lista`;
     this.router.navigate([url]);
+  }
+
+  searchReniec(params: any) {
+    if (params.target.value.length === 8 && this.registerForm.value.tipo_documento === this.documento_default) {
+
+      this.disabled = true;
+      
+      this.registerForm.patchValue({
+        nombres: '',
+        apellido_paterno: '',
+        apellido_materno: '',
+    });
+      
+    this.sharedService.getValidateReniec(params.target.value).subscribe({
+        next: (res: any) => {
+          console.log(res)
+
+          this.registerForm.patchValue({
+              nombres: res.nombres,
+              apellido_paterno: res.apellidoPaterno,
+              apellido_materno: res.apellidoMaterno,
+          });
+          this.disabled = false;
+        },
+        error: (err: any) => {
+          this.disabled = false;
+          console.log(err)
+        }
+      })
+    }
   }
 }

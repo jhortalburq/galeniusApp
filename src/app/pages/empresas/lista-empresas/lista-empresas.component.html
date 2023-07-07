@@ -29,7 +29,9 @@
                             <tr mdbTableCol *ngFor="let empresa of empresas; let i = index">
                               
                               <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
-                              <td style="width: 30%">{{ empresa.razon_social }}</td>
+                              <td style="width: 30%">
+                                <a (click)="editarRegistro( empresa.slug )">{{ empresa.razon_social }}</a>
+                              </td>
                               <td style="width: 10%" class="text-center">{{ empresa.ruc }}</td>
                               <td class="text-left">{{ empresa.rubro }}</td>
                               <td style="width: 35%" class="text-left">{{ empresa.nombre_locacion }}</td>

@@ -49,18 +49,13 @@ export class EditGrupoComponent {
     this.createForm();
   }
 
-  getAnalisis(url?) {
-    this.mantenimientoService.getDataMantenimiento('analisis-options', this.sharedService.organizacion_seleccionada.id).subscribe({
+  getAnalisis(params?) {
+    this.mantenimientoService.getDataMantenimiento('analisis-options', this.sharedService.organizacion_seleccionada.id, params).subscribe({
       next: (response: any) => {
-        // this.analisis = response.results.map( (item) => {
-        //   return {...item, checked: false}
-        // })
-
         this.analisis = response.results.map(item => {
             return {...item, checked: this.analisis_registrados.some(o2 => item.id === o2.id)}
 
         })
-
       },
       error: (error: any) => {
         if (error.status === 401) {
@@ -106,7 +101,14 @@ export class EditGrupoComponent {
 
   addItem( item: any ) {
     item.checked = true;
-    this.analisis_registrados.push(item)
+    let exist = this.analisis_registrados.find((reg) => {
+        if (reg.id == item.id) {
+          return true
+        }
+    });
+    if (!exist) {
+      this.analisis_registrados.push(item)
+    }
   }
   
   quitarItem( item: any) {
@@ -126,10 +128,12 @@ export class EditGrupoComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
 
-    this.mantenimientoService.getDataMantenimiento('analisis-options', this.sharedService.organizacion_seleccionada.id, filterValue).subscribe((response: any) => {
-      this.analisis = response.results;
-    });
+    this.getAnalisis(filterValue);
   }
 
+  cancelar() {
+    this.action.next(true);
+    this.modalRef.hide();
+  }
 
 }

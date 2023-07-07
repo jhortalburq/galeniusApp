@@ -17,42 +17,33 @@
                       <div class="col-sm-9 pl-4">
                           <div class="titulo_seccion">DATOS DE EMPRESA</div>
 
-                          <div class="form-row">
+                          <div class="form-row mt-n2">
 
-                              <div class="col-sm-3">
+                              <div class="col-sm-2">
                                     <div class="md-form form-sm">
-                                        <input mdbInput type="text" id="ruc" class="form-control form-control-sm" formControlName="ruc" mdbValidate>
+                                        <input mdbInput type="text" id="ruc" class="form-control form-control-sm" formControlName="ruc" mdbValidate (change)="searchSunat($event)">
                                         <label for="ruc" class="">R.U.C (*)</label>
                                     </div>
                               </div>
 
-                              <div class="col-sm-9">
+                              <div class="col-sm-8">
                                 <div class="md-form form-sm">
                                     <input mdbInput type="text" id="razon_social" class="form-control form-control-sm" formControlName="razon_social" mdbValidate>
                                     <label for="razon_social" class="">Razón Social (*)</label>
                                 </div>
                               </div>
 
+
+                              <div class="col-sm-2">
+                                <div class="md-form form-sm">
+                                    <input mdbInput type="text" id="rubro" class="form-control form-control-sm" formControlName="rubro">
+                                    <label for="rubro" class="">Rubro</label>
+                                </div>
+                            </div>
                           </div>
 
-                          <div class="form-row mt-n4">
-                              <div class="col-sm-7">
-                                  <div class="md-form form-sm">
-                                      <input mdbInput type="text" id="nombre_comercial" class="form-control form-control-sm" formControlName="nombre_comercial">
-                                      <label for="nombre_comercial" class="">Nombre Comerial</label>
-                                  </div>
-                              </div>
 
-                              <div class="col-sm-5">
-                                  <div class="md-form form-sm">
-                                      <input mdbInput type="text" id="rubro" class="form-control form-control-sm" formControlName="rubro">
-                                      <label for="rubro" class="">Rubro</label>
-                                  </div>
-                              </div>
-
-                          </div>
-
-                          <div class="form-row mt-n2">
+                          <div class="form-row mt-n3">
 
                             <mat-form-field class="col-sm-4">
                                 <mat-label>Departamento</mat-label>
@@ -83,7 +74,7 @@
 
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-row mt-n2">
                             <div class="col-sm-12">
                                 <div class="md-form form-sm">
                                     <input mdbInput type="text" id="direccion" class="form-control form-control-sm" formControlName="direccion">

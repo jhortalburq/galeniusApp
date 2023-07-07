@@ -108,6 +108,7 @@ export class AgregarEmpresaComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
         this.disabled = true;
+        window.scroll(0,0);
         this.empresaService.addEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
@@ -136,6 +137,8 @@ export class AgregarEmpresaComponent implements OnInit {
   changeDepartment(e: any) {
     if (e.value) {
       this.departamento_default = e.value;
+      this.provincia_default = '';
+      this.distrito_default = '';
       this.getTiposProvincia(e.value);
     }
   }
@@ -155,8 +158,8 @@ export class AgregarEmpresaComponent implements OnInit {
                                 this.tipos_distritos = [];
 
                                 this.registerForm.patchValue({
-                                  ubigeo: '',
-                                  provincia: ''
+                                  provincia: this.provincia_default,
+                                  ubigeo: ''
                                 })
 
                               });
@@ -169,8 +172,8 @@ export class AgregarEmpresaComponent implements OnInit {
                                 this.tipos_distritos = response.results
  
                                 this.registerForm.patchValue({
-                                  ubigeo: '',
-                                })
+                                  ubigeo: this.distrito_default,
+                                })   
                               });
   }
 
@@ -179,5 +182,61 @@ export class AgregarEmpresaComponent implements OnInit {
     url = url.replace('nuevo', 'lista');
     this.router.navigate([url]);
   }
+  
+  searchSunat(params: any) {
+    if (params.target.value.length === 11) {
+      this.disabled = true;
+      
+      this.departamento_default = '';
+      this.provincia_default = '';
 
+      this.registerForm.patchValue({
+        razon_social: '',
+        direccion: '',
+        departamento: '',
+        provincia: '',
+        ubigeo: ''
+    });
+      
+      this.sharedService.getValidateSunat(params.target.value).subscribe({
+        next: (res: any) => {
+          console.log(res)
+          console.log(this.distrito_default)
+          this.provincia_default = res.cod_provin
+          this.distrito_default = res.ubigeo
+
+          this.loadProvincia(res.cod_depart);
+          this.loadDistrito(res.cod_depart, res.cod_provin);
+          
+          this.registerForm.patchValue({
+              razon_social: res.razonSocial,
+              direccion: res.direccion,
+              departamento: res.cod_depart,
+              provincia: res.cod_provin
+          });
+          this.disabled = false;
+          console.log(this.distrito_default)
+        },
+        error: (err: any) => {
+          this.disabled = false;
+          console.log(err)
+        }
+      })
+    }
+  }
+
+  loadProvincia(cod_dep: string) {
+    if (cod_dep) {
+      this.departamento_default = cod_dep;
+      this.getTiposProvincia(cod_dep);
+    } 
+  }
+
+  loadDistrito(cod_dep: string, cod_prov: string) {
+    if (cod_dep && cod_prov) {
+      this.departamento_default = cod_dep;
+      this.provincia_default = cod_prov;
+      this.getTiposDistritos(cod_dep, cod_prov);
+    } 
+  }
 }

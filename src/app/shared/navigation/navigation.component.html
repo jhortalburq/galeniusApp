@@ -4,10 +4,8 @@
       <!-- Logo -->
       <li>
         <div class="logo-wrapper waves-light">
-            <a (click)="irInicio()">
               <img [src]="sharedService.sucursal_seleccionada.logo" class="img-fluid flex-center" *ngIf="sharedService.sucursal_seleccionada && sharedService.sucursal_seleccionada.logo">
               <img [src]="logo_sucursal" class="img-fluid flex-center" *ngIf="sharedService.sucursal_seleccionada && !sharedService.sucursal_seleccionada.logo">
-            </a>
         </div>
       </li>
       <!--/. Logo -->

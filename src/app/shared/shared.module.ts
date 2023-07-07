@@ -18,6 +18,7 @@ import { FiltrosPacientesComponent } from './filtros/filtros-pacientes/filtros-p
 import { CitasFiltroComponent } from './filtros/citas-filtro/citas-filtro.component';
 import { FiltroEspecialistaComponent } from './filtros/filtro-especialista/filtro-especialista.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { UbigeoComponent } from './components/ubigeo/ubigeo.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     CheckboxModulosComponent,
     PaginationComponent,
     CheckboxItemComponent,
+    UbigeoComponent,
   ],
   exports: [
     NavigationComponent,
@@ -42,6 +44,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     CheckboxModulosComponent,
     CheckboxItemComponent,
     PaginationComponent,
+    UbigeoComponent
   ],
   imports: [
     CommonModule,

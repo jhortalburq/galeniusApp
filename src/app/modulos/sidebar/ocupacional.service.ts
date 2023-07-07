@@ -12,7 +12,7 @@ export class OcupacionalService {
       titulo: 'ADMISIÓN',
       submenu: [
                     { titulo: 'Atenciones Diarias', url: '/ocupacional/admision/atenciones-diarias' },
-                    { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
+                    // { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
                ]
      },
     {
@@ -20,7 +20,7 @@ export class OcupacionalService {
       submenu: [
                     { titulo: 'Registro de Empresas', url: '/ocupacional/empresas/lista' },
                     { titulo: 'Nueva Empresa', url: '/ocupacional/empresas/nuevo' },
-                    { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
+                    // { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
                ]
      },
     {
@@ -28,7 +28,7 @@ export class OcupacionalService {
       submenu: [
                     { titulo: 'Registro de Pacientes', url: '/ocupacional/pacientes/lista' },
                     { titulo: 'Nuevo Paciente', url: '/ocupacional/pacientes/nuevo' },
-                    { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
+                    // { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
                ]
      },
      {
@@ -38,21 +38,21 @@ export class OcupacionalService {
                     { titulo: 'Nuevo Protocolo', url: '/ocupacional/protocolos/nuevo' },
                ]
      },
-     {
-      titulo: 'EXÁMENES MÉDICOS',
-      submenu: [
-                    { titulo: 'Registro de Protoclos', url: '/ocupacional/pacientes/lista' },
-                    { titulo: 'Nueva Empresa', url: '/ocupacional/pacientes/nuevo' },
-               ]
-     },
-    {
-      titulo: 'RESULTADOS MÉDICOS',
-      icono: 'fa-user',
-      submenu: [
-        { titulo: 'Resumen de Ventas', url: '/usuarios' },
-        { titulo: 'Consolidado de Carga', url: '/hospitales' },
-      ]
-    },
+    //  {
+    //   titulo: 'EXÁMENES MÉDICOS',
+    //   submenu: [
+    //                 { titulo: 'Registro de Protoclos', url: '/ocupacional/pacientes/lista' },
+    //                 { titulo: 'Nueva Empresa', url: '/ocupacional/pacientes/nuevo' },
+    //            ]
+    //  },
+    // {
+    //   titulo: 'RESULTADOS MÉDICOS',
+    //   icono: 'fa-user',
+    //   submenu: [
+    //     { titulo: 'Resumen de Ventas', url: '/usuarios' },
+    //     { titulo: 'Consolidado de Carga', url: '/hospitales' },
+    //   ]
+    // },
     {
       titulo: 'MANTENIMIENTOS',
       icono: 'fa-user',

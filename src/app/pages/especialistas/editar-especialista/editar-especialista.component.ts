@@ -302,6 +302,8 @@ export class EditarEspecialistaComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.disabled = true;
+      window.scroll(0,0);
+
       this.especialistaService.editEspecialista(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.slug)
                           .subscribe({
                                       next: (res: any) => {
@@ -324,5 +326,36 @@ export class EditarEspecialistaComponent {
   regresar() {
     let url = `/${this.breadcrumbService.modulo.toLowerCase()}/especialistas/lista`;
     this.router.navigate([url]);
+  }
+
+
+  searchReniec(params: any) {
+    if (params.target.value.length === 8 && this.registerForm.value.tipo_documento === this.documento_default) {
+
+      this.disabled = true;
+      
+      this.registerForm.patchValue({
+        nombres: '',
+        apellido_paterno: '',
+        apellido_materno: '',
+    });
+      
+    this.sharedService.getValidateReniec(params.target.value).subscribe({
+        next: (res: any) => {
+          console.log(res)
+
+          this.registerForm.patchValue({
+              nombres: res.nombres,
+              apellido_paterno: res.apellidoPaterno,
+              apellido_materno: res.apellidoMaterno,
+          });
+          this.disabled = false;
+        },
+        error: (err: any) => {
+          this.disabled = false;
+          console.log(err)
+        }
+      })
+    }
   }
 }

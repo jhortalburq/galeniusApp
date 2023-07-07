@@ -247,6 +247,7 @@ export class EditarProtocoloComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.disabled = true;
+      window.scroll(0,0);
       this.protocolosService.editProtocolo(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.slug)
                           .subscribe({
                                       next: (res: any) => {

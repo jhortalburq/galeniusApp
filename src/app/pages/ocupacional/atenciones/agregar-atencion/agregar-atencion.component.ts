@@ -164,6 +164,7 @@ export class AgregarAtencionComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.disabled = true;
+      window.scroll(0,0);
 
       this.admisionService.addAtencion(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc')
                           .subscribe({
