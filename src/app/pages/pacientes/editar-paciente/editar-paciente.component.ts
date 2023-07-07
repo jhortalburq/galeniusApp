@@ -290,17 +290,20 @@ export class EditarPacienteComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.disabled = true;
       this.pacienteService.editPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.paciente.slug)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Paciente Editado', 2000);
+                                        this.disabled = false;
 
                                         setTimeout(() => {
-                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
+                                          this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
                                         }, 500)
                                       },
                                       error: (err: any) => {
                                         console.log('error')
+                                        this.disabled = false;
                                       }
                                     })
     }

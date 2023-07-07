@@ -66,6 +66,7 @@ export class EditarAtencionComponent {
   enable_analisis: boolean = false;
   enable_psico: boolean = false;
 
+  
   constructor(
       public breadcrumbService: BreadcrumbsService,
       public mantenimientoService: MantenimientoService,

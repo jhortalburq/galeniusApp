@@ -18,6 +18,8 @@ export class AtencionesDiariasComponent {
 
   registros: any = [];
 
+  is_loading: boolean = false;
+
   displayedColumns = [
     '',
     'Nro Orden',
@@ -112,18 +114,26 @@ export class AtencionesDiariasComponent {
   }
 
   HojaRutaPDF(slug: string ){
+    this.is_loading = true;
+
     this.admisionService.downloadHojaRutaPDF(slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc')
       .subscribe({
           next: (res: any) => this.downloadFile(res),
-          error: (err: any) => console.log(err)
+          error: (err: any) => {
+            this.is_loading = false;
+          }
       })
   }
 
   ConsentimientoPDF(slug: string ){
+    this.is_loading = true;
+
     this.admisionService.downloadConsentimientoPDF(slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc')
       .subscribe({
           next: (res: any) => this.downloadFile(res),
-          error: (err: any) => console.log(err)
+          error: (err: any) => {
+            this.is_loading = false;
+          }
       })
   }
 
@@ -140,7 +150,10 @@ export class AtencionesDiariasComponent {
        a.click();
        window.URL.revokeObjectURL(fileUrl);
        a.remove(); // remove the element
-  }
+
+       this.is_loading = false;
+
+    }
 
   base64toBlob(base64Data, contentType) {
     contentType = contentType || '';

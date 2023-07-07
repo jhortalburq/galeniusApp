@@ -221,16 +221,19 @@ export class NuevoPacienteComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.disabled = true;
       this.pacienteService.addPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Paciente Registrado', 2000);
 
                                         setTimeout(() => {
-                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
+                                          this.disabled = false;
+                                          this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
                                         }, 500)
                                       },
                                       error: (err: any) => {
+                                        this.disabled = false;
                                         console.log('error')
                                       }
                                     })

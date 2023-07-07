@@ -206,16 +206,19 @@ export class EditarEmpresaComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.disabled = true;
       this.empresaService.editEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.registro.slug)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Empresa Editada', 2000);
+                                        this.disabled = false;
 
                                         setTimeout(() => {
                                             this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.slug, 'editar']);
                                         }, 500)
                                       },
                                       error: (err: any) => {
+                                        this.disabled = false;
                                         console.log('error')
                                       }
                                     })

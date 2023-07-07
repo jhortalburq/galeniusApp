@@ -301,16 +301,20 @@ export class EditarEspecialistaComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.disabled = true;
       this.especialistaService.editEspecialista(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.slug)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Especialista Editado', 2000);
 
+                                        this.disabled = false;
+
                                         setTimeout(() => {
-                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'especialistas', res.slug, 'editar']);
+                                          this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'especialistas', res.slug, 'editar']);
                                         }, 500)
                                       },
                                       error: (err: any) => {
+                                        this.disabled = false;
                                         console.log('error')
                                       }
                                     })

@@ -235,6 +235,7 @@ export class NuevoEspecialistaComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.disabled = true;
       this.especialistaService.addEspecialista(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
                           .subscribe({
                                       next: (res: any) => {
@@ -245,6 +246,7 @@ export class NuevoEspecialistaComponent {
                                         }, 500)
                                       },
                                       error: (err: any) => {
+                                        this.disabled = false;
                                         console.log('error')
                                       }
                                     })
