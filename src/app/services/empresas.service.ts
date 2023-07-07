@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 import { SharedService } from './shared.service'
 import {catchError, map} from 'rxjs/operators';
@@ -32,6 +33,14 @@ export class EmpresasService {
     }
   }
 
+  getEmpresasForm(organizacion: number, cm: number, params?: string): Observable<any>{
+    if (params) {
+        return this.http.get(`${environment.apiUrl}/api/v1/empresas`, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm, 'type': 'true' }})
+    } else {
+        return this.http.get(`${environment.apiUrl}/api/v1/empresas`, {params: { 'organizacion': organizacion, 'cm': cm, 'type': 'true' }})
+    }
+  }
+  
   getEmpresasURL(url: string, organizacion: number, cm: number, params?: string) {
     if (params) {
       return this.http.get(url, {params: { 'search': params, 'cm': cm, 'organizacion': organizacion }})

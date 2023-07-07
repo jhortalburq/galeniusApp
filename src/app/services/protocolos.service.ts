@@ -3,9 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, } from 'rxjs/operators';
 
 import { SharedService } from './shared.service'
+
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +45,14 @@ export class ProtocolosService {
                         }),
                       catchError(this.sharedService.handleError)
                     );
+    }
+  }
+
+  getProtocolosForm(organizacion: number, cm: number, params?: string): Observable<any>{
+    if (params) {
+        return this.http.get(`${environment.apiUrl}/api/v1/protocolos`, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm, 'type': 'true' }})
+    } else {
+        return this.http.get(`${environment.apiUrl}/api/v1/protocolos`, {params: { 'organizacion': organizacion, 'cm': cm, 'type': 'true' }})
     }
   }
 

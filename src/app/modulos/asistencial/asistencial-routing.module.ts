@@ -12,15 +12,15 @@ const routes: Routes = [
       },
       {
         path: 'agenda',
-        loadChildren: () => import('../../pages/agenda/agenda.module').then( m => m.AgendaModule)
+        loadChildren: () => import('../../pages/clinico/agenda/agenda.module').then( m => m.AgendaModule)
       },
       {
         path: 'citas',
-        loadChildren: () => import('../../pages/citas/citas.module').then( m => m.CitasModule)
+        loadChildren: () => import('../../pages/clinico/citas/citas.module').then( m => m.CitasModule)
       },
       {
         path: 'horarios',
-        loadChildren: () => import('../../pages/horarios/horarios.module').then( m => m.HorariosModule)
+        loadChildren: () => import('../../pages/clinico/horarios/horarios.module').then( m => m.HorariosModule)
       },
       {
         path: 'especialistas',
@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'consultas',
-        loadChildren: () => import('../../pages/consultas/consultas.module').then( m => m.ConsultasModule)
+        loadChildren: () => import('../../pages/clinico/consultas/consultas.module').then( m => m.ConsultasModule)
       },
       {
         path: 'pacientes',

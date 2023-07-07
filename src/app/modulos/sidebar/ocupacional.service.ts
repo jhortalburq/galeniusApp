@@ -11,7 +11,7 @@ export class OcupacionalService {
     {
       titulo: 'ADMISIÓN',
       submenu: [
-                    { titulo: 'Atenciones Diarias', url: '/ocupacional/pacientes/lista' },
+                    { titulo: 'Atenciones Diarias', url: '/ocupacional/admision/atenciones-diarias' },
                     { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
                ]
      },

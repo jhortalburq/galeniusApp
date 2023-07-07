@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 
 import { SharedService } from './shared.service'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,14 @@ export class PacientesService {
                         }),
                       catchError(this.sharedService.handleError)
                     );
+    }
+  }
+
+  getPacientesForm(organizacion: number, cm: number, params?: string): Observable<any>{
+    if (params) {
+        return this.http.get(`${environment.apiUrl}/api/v1/pacientes`, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm, 'type': 'true' }})
+    } else {
+        return this.http.get(`${environment.apiUrl}/api/v1/pacientes`, {params: { 'organizacion': organizacion, 'cm': cm, 'type': 'true' }})
     }
   }
 

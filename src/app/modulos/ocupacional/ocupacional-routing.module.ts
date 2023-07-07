@@ -20,7 +20,11 @@ const routes: Routes = [
       },
       {
         path: 'protocolos',
-        loadChildren: () => import('../../pages/protocolos/protocolos.module').then( m => m.ProtocolosModule)
+        loadChildren: () => import('../../pages/ocupacional/protocolos/protocolos.module').then( m => m.ProtocolosModule)
+      },
+      {
+        path: 'admision',
+        loadChildren: () => import('../../pages/ocupacional/atenciones/atenciones.module').then( m => m.AtencionesModule)
       },
       {
         path: 'mantenimientos',
