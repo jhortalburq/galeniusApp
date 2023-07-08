@@ -13,6 +13,10 @@ import { Select2Module } from 'ng-select2-component';
 import { SharedModule } from '../../shared/shared.module';
 
 import { PacientesRoutingModule } from './pacientes-routing.module';
+import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
+import { DatosLaboralesComponent } from './datos-laborales/datos-laborales.component';
+import { DatosBiometricosComponent } from './datos-biometricos/datos-biometricos.component';
+import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
 
 
 @NgModule({
@@ -21,6 +25,10 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
     NuevoPacienteComponent,
     EditarPacienteComponent,
     DetallePacienteComponent,
+    DatosPersonalesComponent,
+    DatosLaboralesComponent,
+    DatosBiometricosComponent,
+    ConfirmacionComponent,
   ],
   imports: [
     CommonModule,

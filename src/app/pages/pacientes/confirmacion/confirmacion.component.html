@@ -1,0 +1,19 @@
+<!--Content-->
+<div class="modal-content text-center">
+    <!--Header-->
+    <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Paciente</p>
+    </div>
+    <!--Body-->
+    <div class="modal-body">
+        <mdb-icon fas icon="warning" size="4x" class="animated rotateIn mb-4"></mdb-icon>
+        <p>Seguro de guardar los cambios del registro?</p>
+    </div>
+    <!--Footer-->
+    <div class="modal-footer justify-content-center">
+        <a mdbBtn size="sm" (click)="cancelar()" color="danger" class="waves-light" mdbWavesEffect>Cancelar</a>
+        <a mdbBtn size="sm" (click)="regresar()" color="secondary" class="waves-light" mdbWavesEffect>Regresar</a>
+        <a mdbBtn size="sm" (click)="guardar()" color="primary" class="waves-light" mdbWavesEffect>Guardar</a>
+    </div>
+</div>
+<!--/.Content-->

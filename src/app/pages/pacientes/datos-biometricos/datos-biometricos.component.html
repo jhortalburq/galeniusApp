@@ -1,0 +1,108 @@
+<form class="form-horizontal form-material" [formGroup]="registerForm">
+
+    <div class="row">
+        <div class="col-sm-9">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="file-field md-form">
+                        <div mdbBtn [floating]="true" size="sm" color="primary" class="waves-light" mdbWavesEffect mdbTooltip="Subir Archivo">
+                            <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
+                            <input type="file" mdbFileSelect (change)="seleccionImagen($event)">
+                        </div>
+                        <div class="file-path-wrapper mt-3">
+                            <input class="file-path" type="text" placeholder="Seleccione una Imagen"  readonly>
+                        </div>
+                        <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Foto">
+                            <mdb-icon fas icon="camera" aria-hidden="true"></mdb-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-n4">
+                <div class="col-sm-6">
+                    <div class="file-field md-form">
+                        <div mdbBtn [floating]="true" size="sm" color="primary" mdbWavesEffect mdbTooltip="Subir Archivo">
+                            <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
+                            <input type="file" mdbFileSelect (change)="seleccionImagen($event)">
+                        </div>
+                        <div class="file-path-wrapper mt-3">
+                            <input class="file-path" type="text" placeholder="Seleccione Firma"  readonly>
+                        </div>
+                        <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Firma">
+                            <mdb-icon fas icon="file-signature" aria-hidden="true"></mdb-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="file-field md-form">
+                        <div mdbBtn [floating]="true" size="sm" color="primary" mdbWavesEffect mdbTooltip="Subir Archivo">
+                            <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
+                            <input type="file" mdbFileSelect (change)="seleccionImagen($event)">
+                        </div>
+                        <div class="file-path-wrapper mt-3">
+                            <input class="file-path" type="text" placeholder="Seleccione Huella"  readonly>
+                        </div>
+                        <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Huella">
+                            <mdb-icon fas icon="fingerprint" aria-hidden="true"></mdb-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-n4">
+                <div class="col-sm-6 text-center">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <img *ngIf="url_logo" [src]="registro.url_logo" style="width: 150px">
+                            <img *ngIf="!url_logo" [src]="imageUrl" style="width: 150px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Firma">
+                                <mdb-icon fas icon="trash" aria-hidden="true"></mdb-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <img *ngIf="url_logo" [src]="registro.url_logo" style="width: 150px">
+                            <img *ngIf="!url_logo" [src]="imageUrl" style="width: 150px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Huella">
+                                <mdb-icon fas icon="trash" aria-hidden="true"></mdb-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-3 text-center">
+            <div class="row">
+                <div class="col-sm-12">
+                    <img *ngIf="url_logo" [src]="registro.url_logo" style="width: 150px">
+                    <img *ngIf="!url_logo" [src]="imageUrl" style="width: 150px">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Foto">
+                        <mdb-icon fas icon="trash" aria-hidden="true"></mdb-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+</form>

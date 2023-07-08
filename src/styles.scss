@@ -41,26 +41,29 @@ body::before {
     color: #ffffff!important;
   }
   
+  .md-form textarea.md-textarea{
+    font-size: 0.8rem;
+  }
+
   .md-form label{
     font-size: 0.7rem!important;
   }
   
   .md-form input[type=text]{
-    font-size: 0.7rem!important;
+    font-size: 0.8rem!important;
   }
 
   .form-control-sm{
-    font-size: 0.7rem!important;
+    font-size: 0.8rem!important;
   }
   
   .form-check-label {
-      font-size: 0.7rem!important;
+      font-size: 0.8rem!important;
   }
   
   mdb-select > div > div.single > div.placeholder {
     font-size: 0.7rem!important;
   }
-  
   
   mdb-select > div > div.single > div.value {
     font-size: 0.7rem!important;

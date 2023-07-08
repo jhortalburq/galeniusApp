@@ -1,0 +1,227 @@
+<form class="form-horizontal form-material" [formGroup]="registerForm">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="form-row">
+
+                <div class="col-sm-3">
+                    <label class="mdb-main-label">Tipo Documento (*)</label>
+                    <select2 
+                        [data]="tipos_documentos"
+                        placeholder="Seleccione Tipo Documento"
+                        formControlName="tipo_documento"
+                        [value]="documento_default"
+                    >
+                    </select2>
+                </div>
+        
+                <div class="col-sm-2">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="no_documento" class="form-control form-control-sm" formControlName="no_documento" mdbValidate (change)="searchReniec($event)">
+                        <label for="no_documento" class="">N° de Documento (*)</label>
+                    </div>
+                </div>
+        
+                <div class="col-sm-3">
+                    <div class="md-form form-sm">
+                        <input
+                        type="date"
+                        id="fecha_nacimiento"
+                        class="form-control form-control-sm"
+                        formControlName="fecha_nacimiento"
+                        mdbInput
+                        />
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                    </div>
+                </div>
+        
+                <div class="col-sm-4">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="nacionalidad" class="form-control form-control-sm" formControlName="nacionalidad">
+                        <label for="nacionalidad" class="">Nacionalidad</label>
+                    </div>
+                </div>
+        
+            </div>
+        
+            <div class="form-row mt-n4">
+                <div class="col-sm-4">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="apellido_paterno" class="form-control form-control-sm" formControlName="apellido_paterno">
+                        <label for="apellido_paterno" class="">Apellido Paterno (*)</label>
+                    </div>
+                </div>
+        
+                <div class="col-sm-4">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="apellido_materno" class="form-control form-control-sm" formControlName="apellido_materno">
+                        <label for="apellido_materno" class="">Apellido Materno (*)</label>
+                    </div>
+                </div>
+        
+                <div class="col-sm-4">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="nombres" class="form-control form-control-sm" formControlName="nombres">
+                        <label for="nombres" class="">Nombres (*)</label>
+                    </div>
+                </div>
+        
+            </div>
+        
+            <div class="form-row mt-n4">
+                <div class="col-sm-5">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="email" class="form-control form-control-sm" formControlName="email">
+                        <label for="email" class="">Correo Electrónico</label>
+                    </div>
+                </div>
+                                        
+                <div class="col-sm-3">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="telefono" class="form-control form-control-sm" formControlName="telefono">
+                        <label for="telefono" class="">Teléfono</label>
+                    </div>
+                </div>
+        
+                <div class="col-sm-4">
+                    <div class="md-form form-sm">
+                        <input mdbInput type="text" id="profesion" class="form-control form-control-sm" formControlName="profesion">
+                        <label for="profesion" class="">A que se dedica</label>
+                    </div>
+                </div>
+            
+            </div>
+            
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body" style="text-align: center">
+                    <img [src]="imageUrl" style="width: 150px">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="form-row mt-n2">
+    
+        <div class="col-sm-3">
+            <label class="mdb-main-label">Estado Civil</label>
+            <select2 
+                [data]="tipos_estado_civil"
+                placeholder="Seleccione Estado Civil"
+                formControlName="estado_civil"
+            >
+            </select2>
+        </div>
+
+        <div class="col-sm-3">
+            <label class="mdb-main-label">Grado de Instrucción</label>
+            <select2 
+                [data]="tipos_grado_instruccion"
+                placeholder="Seleccione Grado Instrucción"
+                formControlName="grado_instruccion"
+            >
+            </select2>
+        </div>
+
+        <div class="col-sm-3">
+            <label class="mdb-main-label">Género</label>
+            <select2 
+                [data]="tipos_generos"
+                placeholder="Seleccione Género"
+                formControlName="genero"
+                [value]="genero_default"
+            >
+            </select2>
+        </div>
+
+    </div>
+
+    <div class="form-row mt-3">
+        <mat-form-field class="col-sm-4">
+            <mat-label>Departamento</mat-label>
+            <mat-select (selectionChange)="changeDepartment($event)" formControlName="departamento">
+                <mat-option *ngFor="let item of tipos_departamentos" [value]="item.value">
+                    {{item.label | uppercase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-4">
+            <mat-label>Provincia</mat-label>
+            <mat-select (selectionChange)="changeProvince($event)" formControlName="provincia">
+                <mat-option *ngFor="let item of tipos_provincias" [value]="item.value">
+                    {{item.label | uppercase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-4">
+            <mat-label>Distrito</mat-label>
+            <mat-select formControlName="ubigeo">
+                <mat-option *ngFor="let item of tipos_distritos" [value]="item.value">
+                    {{item.label | uppercase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+    <div class="form-row mt-n2">
+        <div class="col-sm-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="domicilio" class="form-control form-control-sm" formControlName="domicilio">
+                <label for="domicilio">Domicilio Fiscal (Dirección Completa)</label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-row mt-n1">
+    
+        <div class="col-sm-2">
+            <label class="mdb-main-label">Residencia Lugar de Trabajo</label>
+            <select2 
+                [data]="choices_si_no"
+                placeholder="Seleccione Opción"
+                formControlName="residencia_lugar_trabajo"
+            >
+            </select2>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="tiempo_residencia_trabajo" class="form-control form-control-sm" formControlName="tiempo_residencia_trabajo">
+                <label for="tiempo_residencia_trabajo" class="">Tiempo residencia trabajo
+                </label>
+            </div>
+        </div>
+    
+        <div class="col-sm-2">
+            <label class="mdb-main-label">Cobertura</label>
+            <select2 
+                [data]="choices_cobertura"
+                placeholder="Seleccione Cobertura"
+                formControlName="cobertura"
+            >
+            </select2>
+        </div>
+
+
+        <div class="col-sm-2">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="hijos_vivos" class="form-control form-control-sm" formControlName="hijos_vivos">
+                <label for="hijos_vivos" class="">Nº Total de Hijos Vivos</label>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="no_dependientes" class="form-control form-control-sm" formControlName="no_dependientes">
+                <label for="no_dependientes" class="">N° Dependientes</label>
+            </div>
+        </div>
+    
+    </div>
+
+</form>
