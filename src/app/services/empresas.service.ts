@@ -65,20 +65,19 @@ export class EmpresasService {
     return this.http.post(`${environment.apiUrl}/api/v1/empresas`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion }})
   }
 
-  editEmpresa(registro: any, organizacion: number, sucursal_id: any, slug: string) {
+  editEmpresa(registro: any, organizacion: number, sucursal_id: any, id: number) {
     registro['organizacion'] = organizacion;
     registro['cm'] = sucursal_id;
-    return this.http.patch(`${environment.apiUrl}/api/v1/empresas/${slug}`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion }})
+    return this.http.patch(`${environment.apiUrl}/api/v1/empresas/${id}`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion }})
   }
 
-  getEmpresa(organizacion: number, cm: number, slug: string) {
-    return this.http.get(`${environment.apiUrl}/api/v1/empresas/${slug}`,  {params: { 'cm': cm , 'organizacion': organizacion }})
+  getEmpresa(organizacion: number, cm: number, id: number) {
+    return this.http.get(`${environment.apiUrl}/api/v1/empresas/${id}`,  {params: { 'cm': cm , 'organizacion': organizacion }})
                     .pipe(map( (res: any) => {
                           return res;
                       }),
                     catchError(this.sharedService.handleError)
                   );
   }
-
 
 }

@@ -1,1 +1,48 @@
-<p>detalle-paciente works!</p>
+    <mdb-tabset
+      #staticTabs
+      [vertical]="true"
+      [buttonClass]="'md-tabs tabs-3 mdb-color darken-3'" 
+      [contentClass]="'card'"
+    >
+      <mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+      <mdb-tab
+        heading="DATOS DEL PACIENTE"
+      >
+        <div class="row">
+          <div class="col-12">
+              <app-datos-personales 
+                  [registro]="registro"
+                  (submitChange)="onSubmitDatosPersonales($event)"
+              ></app-datos-personales>
+          </div>
+        </div>
+      </mdb-tab>
+
+      <mdb-tab
+        heading="INFORMACIÓN LABORAL"
+      >
+      <div class="row">
+        <div class="col-12">
+            <app-datos-laborales
+                [registro]="registro"
+                (submitChange)="onSubmitDatosLaborales($event)"
+            ></app-datos-laborales>
+        </div>
+      </div>
+      </mdb-tab>
+
+      <mdb-tab
+        heading="DATOS BIOMÉTRICOS"
+      >
+      <div class="row">
+        <div class="col-12">
+            <app-datos-biometricos 
+                [registro]="registro"
+                (submitChange)="onSubmitDatosBiometricos($event)"
+            ></app-datos-biometricos>
+        </div>
+      </div>
+      </mdb-tab>
+
+
+    </mdb-tabset>

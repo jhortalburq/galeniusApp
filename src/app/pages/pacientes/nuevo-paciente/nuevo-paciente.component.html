@@ -10,49 +10,37 @@
                             <mdb-stepper #stepper [linear]="true">
                                 <mdb-step name="Paciente" class="step1">
 
-                                    <app-datos-personales></app-datos-personales>
+                                    <app-datos-personales 
+                                        [registro]="{}"
+                                        (submitChange)="onSubmitDatosPersonales($event)"
+                                    >
+                                    </app-datos-personales>
 
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-12  d-flex justify-content-center">
-                                            <button mdbBtn size="sm" color="danger" (click)="regresar()">Cancelar</button>
-                                            <button mdbBtn size="sm" color="primary" (click)="nextStep()">Continuar</button>
-                                        </div>
-                                    </div>
 
                                 </mdb-step>
                                 
                                 <mdb-step name="Laboral"  class="step2" >
 
-                                    <app-datos-laborales></app-datos-laborales>
+                                    <app-datos-laborales
+                                        [registro]="{}"
+                                        (previousStep)="regresarDatosLaborales()" 
+                                        (submitChange)="onSubmitDatosLaborales($event)"
+                                    ></app-datos-laborales>
 
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-12  d-flex justify-content-center">
-                                            <button mdbBtn size="sm" color="secondary" (click)="previousStep()">Regresar</button>
-                                            <button mdbBtn size="sm" color="primary" (click)="nextStep()">Continuar</button>
-                                        </div>
-                                    </div>
+                                   
                                 </mdb-step>
 
                                 <mdb-step name="Biométricos"  class="step2">
 
-                                    <app-datos-biometricos></app-datos-biometricos>
+                                    <app-datos-biometricos 
+                                        [registro]="{}"    
+                                        (previousStep)="regresarDatosBiometricos()" 
+                                        (submitChange)="onSubmitDatosBiometricos($event)"
+                                    ></app-datos-biometricos>
                                     
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-12  d-flex justify-content-center">
-                                            <button mdbBtn size="sm" color="secondary" (click)="previousStep()">Regresar</button>
-                                            <button mdbBtn size="sm" color="primary" (click)="finishStep()">Continuar</button>
-                                        </div>
-                                    </div>
                                 </mdb-step>
 
                                 <mdb-step name="Finalizar" class="step4">
-
                                     
                                 </mdb-step>
                               </mdb-stepper>

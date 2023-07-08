@@ -83,9 +83,9 @@ export class ListaEmpresasComponent implements OnInit {
     this.router.navigate([url])
   }
 
-  editarRegistro(slug: string) {
+  editarRegistro(id: number) {
     let url = this.router.url.split('/')[1];
-    url = `/${url}/empresas/${slug}/editar`;
+    url = `/${url}/empresas/${id}/editar`;
     this.router.navigate([url])
   }
 

@@ -18,7 +18,7 @@ const routes: Routes = [
           component: AgregarEmpresaComponent,
         },
         {
-          path: ':slug/editar',
+          path: ':empresa_id/editar',
           component: EditarEmpresaComponent,
         },
         {

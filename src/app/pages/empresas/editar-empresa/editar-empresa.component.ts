@@ -23,7 +23,7 @@ import { BreadcrumbsService,
 
 export class EditarEmpresaComponent implements OnInit {
 
-  slug: string;
+  empresa_id: any;
 
   registro: any = {};
 
@@ -66,7 +66,7 @@ export class EditarEmpresaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.slug = this.route.snapshot.paramMap.get('slug');
+    this.empresa_id = this.route.snapshot.paramMap.get('empresa_id');
     this.getTiposDepartamentos();
     this.createFormControls();
     this.createForm();
@@ -74,10 +74,9 @@ export class EditarEmpresaComponent implements OnInit {
   }
 
   getRegistro() {
-    this.empresaService.getEmpresa(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.slug).subscribe({
+    this.empresaService.getEmpresa(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.empresa_id).subscribe({
       next: (res: any) => {
         this.registro = res;
-
         this.provincia_default = this.registro.cod_prov;
         this.distrito_default = this.registro.ubigeo;
         console.log(this.registro)
@@ -211,14 +210,14 @@ export class EditarEmpresaComponent implements OnInit {
     if (this.registerForm.valid) {
       this.disabled = true;
       window.scroll(0,0);
-      this.empresaService.editEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.registro.slug)
+      this.empresaService.editEmpresa(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.registro.id)
                           .subscribe({
                                       next: (res: any) => {
                                         this.alertService.successSwalToast('Empresa Editada', 2000);
                                         this.disabled = false;
 
                                         setTimeout(() => {
-                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.slug, 'editar']);
+                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.id, 'editar']);
                                         }, 500)
                                       },
                                       error: (err: any) => {

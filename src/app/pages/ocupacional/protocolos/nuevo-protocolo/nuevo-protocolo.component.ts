@@ -115,11 +115,11 @@ export class NuevoProtocoloComponent {
   getChoicesEmpresas(params?: string) {
       return this.empresaService.getEmpresasForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, params)
             .subscribe((response: any) => {
-               this.choices_empresas = [];
+               this.choices_empresas = response.results
 
-               for (let i = 0; i < response.results.length; i++) {
-                 this.choices_empresas.push({value: response.results[i].id, label: response.results[i].razon_social})
-               }
+              //  for (let i = 0; i < response.results.length; i++) {
+              //    this.choices_empresas.push({value: response.results[i].id, label: response.results[i].razon_social})
+              //  }
              });
 
   }

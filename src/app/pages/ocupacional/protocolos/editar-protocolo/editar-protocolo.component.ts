@@ -199,13 +199,8 @@ export class EditarProtocoloComponent {
   async getChoicesEmpresas(params?: string) {
     const empresas$ = this.empresaService.getEmpresasForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, params);
     let _empresas = await lastValueFrom(empresas$);
-    this.choices_empresas = [];
-
-    for (let i = 0; i < _empresas.results.length; i++) {
-      this.choices_empresas.push({value: _empresas.results[i].id, label: _empresas.results[i].razon_social})
-    }
+    this.choices_empresas = _empresas.results
   }
-
 
   getChoicesFichas() {
     return this.mantenimientoService.getFichasExamenes()

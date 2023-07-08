@@ -57,4 +57,23 @@ export class AlertService {
       title: title
     })
   }
+
+  warningSwalToast(title: string, time: number) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: time,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+      
+    Toast.fire({
+      icon: 'warning',
+      title: title
+    })
+  }
 }

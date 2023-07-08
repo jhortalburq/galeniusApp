@@ -26,7 +26,7 @@ export class EditarPacienteComponent {
 
   modulo: string = '';
 
-  paciente: any = {};
+  paciente: any = {};     
 
   registerForm: FormGroup;
 

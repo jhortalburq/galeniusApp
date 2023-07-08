@@ -5,12 +5,15 @@ import { MdbStepperComponent} from '../../../../../ng-uikit-pro-standard/src/lib
 import { BreadcrumbsService, 
         MantenimientoService, 
         PacientesService,
+        NotificationsService,
         SharedService,
         AlertService
 } from '../../../services/services.index';
 
 import { MDBModalRef, MDBModalService } from '../../../../../ng-uikit-pro-standard/src/public_api';
 import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
+
+import { lastValueFrom } from 'rxjs';
 
 
 @Component({
@@ -25,8 +28,11 @@ export class NuevoPacienteComponent {
 
   data: any = [];
 
-  lastStep: boolean = false;
   modalRef: MDBModalRef;
+
+  infoPersonal: any = {};
+  infoLaboral: any = {};
+  infoBiometrico: any = {};
 
   constructor(
       public breadcrumbService: BreadcrumbsService,
@@ -35,6 +41,7 @@ export class NuevoPacienteComponent {
       public sharedService: SharedService,
       public alertService: AlertService,
       private modalService: MDBModalService,
+      public notificationService: NotificationsService,
       private renderer: Renderer2,
       private router: Router
   ) { 
@@ -45,27 +52,80 @@ export class NuevoPacienteComponent {
   }
 
 
-  onSubmit() {
-    // if (this.registerForm.valid) {
-      // this.disabled = true;
-      // window.scroll(0,0);
+  async onSubmit() {
 
-      // this.pacienteService.addPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
-      //                     .subscribe({
-      //                                 next: (res: any) => {
-      //                                   this.alertService.successSwalToast('Paciente Registrado', 2000);
+    this.disabled = true;
+    window.scroll(0,0);
 
-      //                                   setTimeout(() => {
-      //                                     this.disabled = false;
-      //                                     this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
-      //                                   }, 500)
-      //                                 },
-      //                                 error: (err: any) => {
-      //                                   this.disabled = false;
-      //                                   console.log('error')
-      //                                 }
-      //                               })
-    // }
+    const paciente$ = this.pacienteService.addPaciente(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.infoPersonal);
+    let _paciente = await lastValueFrom(paciente$).catch((errors: any) => {
+                                                    this.notificationService.showError('No se registro el paciente', 'Paciente');
+                                                      return "an error has occured"
+                                                  }).then(response => {
+                                                    console.log("resp: ", response) 
+                                                    return response
+                                                  });
+
+    if (this.infoLaboral.empresa) {
+      this.infoLaboral['paciente'] = _paciente.id
+      const infoLaboral$ = this.pacienteService.infoLaboralPaciente(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.infoLaboral);
+      let _infoLaboral = await lastValueFrom(infoLaboral$).catch((error: any) => {
+                                          console.log("error: ", error);
+                                          this.notificationService.showError('Hubo un error al guardar los datos', 'Información Laboral');
+                                          return "an error has occured"
+                                        }).then(response => {
+                                          console.log("resp: ", response)
+                                        });
+    }
+
+    if (this.infoBiometrico.changeHuella || this.infoBiometrico.changeFirma || this.infoBiometrico.changeImage) {
+      const datosBiometricos$ = await this.pacienteService.datosBiometricosPaciente(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, _paciente.slug, this.infoBiometrico);
+      console.log('biometricos', datosBiometricos$)
+    }
+
+    setTimeout(() => {
+      this.disabled = false;
+      this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', 'lista']);
+    }, 500)
+
+    // this.pacienteService.addPaciente(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.infoPersonal)
+    //                     .subscribe({
+    //                                 next: (res: any) => {
+    //                                   this.alertService.successSwalToast('Paciente Registrado', 2000);
+
+    //                                   setTimeout(() => {
+    //                                     this.disabled = false;
+    //                                     this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
+    //                                   }, 500)
+    //                                 },
+    //                                 error: (err: any) => {
+    //                                   this.disabled = false;
+    //                                   console.log('error')
+    //                                 }
+    //                               })
+  }
+
+  onSubmitDatosPersonales(registro: any) {
+    this.infoPersonal = registro;
+    this.nextStep();
+  }
+
+  onSubmitDatosLaborales(registro: any) {
+    this.infoLaboral = registro;
+    this.nextStep();
+  }
+
+  onSubmitDatosBiometricos(registro: any) {
+    this.infoBiometrico = registro;
+    this.finishStep();
+  }
+
+  regresarDatosLaborales() {
+    this.previousStep();
+  }
+
+  regresarDatosBiometricos() {
+    this.previousStep();
   }
 
   regresar() {
@@ -82,12 +142,10 @@ export class NuevoPacienteComponent {
   previousStep() {
       window.scroll(0,0);
       this.stepper.previous();
-      this.lastStep = false;
     }
 
   finishStep() {
     window.scroll(0,0);
-    this.lastStep = true;
     this.stepper.next();
     this.openModal();
   }

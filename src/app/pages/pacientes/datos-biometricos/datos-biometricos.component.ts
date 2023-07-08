@@ -1,16 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
 
 import { BreadcrumbsService, 
         MantenimientoService, 
         SharedService,
         EmpresasService,
+        NotificationsService,
         AlertService
 } from '../../../services/services.index';
 
@@ -20,86 +15,168 @@ import { BreadcrumbsService,
   styleUrls: ['./datos-biometricos.component.scss']
 })
 export class DatosBiometricosComponent {
+  @Output() submitChange = new EventEmitter();
+  @Output() previousStep = new EventEmitter();
+  @Input() registro;
 
-  registro: any = {};
+  disabled: boolean = false;
 
-  registerForm: FormGroup;
+  changeImage: boolean = false;
+  changeFirma: boolean = false;
+  changeHuella: boolean = false;
 
-  imagen: FormControl;
-  firma: FormControl;
-  huella: FormControl;
+  imagenSubir: File = null;
+  firmaSubir: File = null;
+  huellaSubir: File = null;
 
-  imagenSubir: File;
   imageUrl: string | ArrayBuffer = "assets/img/image.png";
+  firmaUrl: string | ArrayBuffer = "assets/img/image.png";
+  huellaUrl: string | ArrayBuffer = "assets/img/image.png";
 
-  url_logo: string = '';
-  fileName: string = 'Sin archivo seleccionado';
+  url_imagen: string = '';
+  fileName_imagen: string = 'Sin archivo seleccionado';
+
+  url_firma: string = '';
+  fileName_firma: string = 'Sin archivo seleccionado';
+  
+  url_huella: string = '';
+  fileName_huella: string = 'Sin archivo seleccionado';
 
   constructor(
     public breadcrumbService: BreadcrumbsService,
     public mantenimientoService: MantenimientoService,
     public empresaService: EmpresasService,
     public sharedService: SharedService,
+    private router: Router,
+    public notificationService: NotificationsService,
     public alertService: AlertService,
   ) {}
 
   async ngOnInit() {
-      this.createFormControls();
-      this.createForm();
-    }
-
-  createFormControls() {
-      this.imagen = new FormControl('');
-      this.firma = new FormControl('');
-      this.huella = new FormControl('');
   }
-
-  createForm() {
-    this.registerForm = new FormGroup({
-      imagen: this.imagen,
-      firma: this.firma,
-      huella: this.huella,
-    });
+  
+  ngOnChanges() {
+    this.url_imagen = this.registro.imagen;
+    this.url_firma = this.registro.firma;
+    this.url_huella = this.registro.huella;
   }
 
   seleccionImagen( img: any) {
-    this.url_logo = '';
+    this.url_imagen = '';
 
     let imagen = img.target.files[0];
 
     if ( !imagen ){
       this.imagenSubir = null;
-      this.fileName = 'Sin archivo seleccionado';
+      this.fileName_imagen = 'Sin archivo seleccionado';
       return;
     }
 
     if (imagen.type.indexOf('image') <0 ){
-      // this.notificationService.showError('Solo es permitido imagenes', 'Error')
+      this.notificationService.showError('Solo es permitido imagenes', 'Error')
       this.imagenSubir = null;
-      this.fileName = 'Sin archivo seleccionado';
+      this.fileName_imagen = 'Sin archivo seleccionado';
       return
     }
 
-    this.fileName = imagen.name;
+    this.fileName_imagen = imagen.name;
     this.imagenSubir = imagen;
+    this.changeImage = true;
     const reader = new FileReader();
     reader.readAsDataURL( imagen );
     reader.onloadend = () => this.imageUrl = reader.result;
   };
 
-  cambiarImagen () {
-      // this.sharedService.subirLogotipoSucursal(this.imagenSubir, this.registro.id, this.sharedService.organizacion_seleccionada.id).then(
-      //     (response:any) => {
-      //           this.registro.url_logo = response.logotipo;
-      //           this.submitChange.emit(true);
-      //           this.notificationService.showInfo('Se editó el Logotipo de la Empresa' , 'Logo Actualizado');
-      //           this.sharedService.sucursal_seleccionada.logo = response.logotipo; 
-      //         },
-      //       err => {
-      //         console.log(err);
-      //       }
-      //   );
+  seleccionFirma( img: any) {
+    this.url_firma = '';
+
+    let imagen = img.target.files[0];
+
+    if ( !imagen ){
+      this.firmaSubir = null;
+      this.fileName_firma = 'Sin archivo seleccionado';
+      return;
+    }
+
+    if (imagen.type.indexOf('image') <0 ){
+      this.notificationService.showError('Solo es permitido imagenes', 'Error')
+      this.firmaSubir = null;
+      this.fileName_firma = 'Sin archivo seleccionado';
+      return
+    }
+
+    this.fileName_firma = imagen.name;
+    this.firmaSubir = imagen;
+    this.changeFirma = true;
+    const reader = new FileReader();
+    reader.readAsDataURL( imagen );
+    reader.onloadend = () => this.firmaUrl = reader.result;
   };
 
+  seleccionHuella( img: any) {
+    this.url_huella = '';
 
+    let imagen = img.target.files[0];
+
+    if ( !imagen ){
+      this.huellaSubir = null;
+      this.fileName_huella = 'Sin archivo seleccionado';
+      return;
+    }
+
+    if (imagen.type.indexOf('image') <0 ){
+      this.notificationService.showError('Solo es permitido imagenes', 'Error')
+      this.huellaSubir = null;
+      this.fileName_huella = 'Sin archivo seleccionado';
+      return
+    }
+
+    this.fileName_huella = imagen.name;
+    this.huellaSubir = imagen;
+    this.changeHuella = true;
+    const reader = new FileReader();
+    reader.readAsDataURL( imagen );
+    reader.onloadend = () => this.huellaUrl = reader.result;
+  };
+
+  regresar() {
+    if (this.registro.id) {
+      let url = `/${this.breadcrumbService.modulo.toLowerCase()}/pacientes/lista`;
+      this.router.navigate([url]);
+    } else {
+      this.previousStep.emit();
+    }
+  }
+
+  onSubmit() {
+    this.submitChange.emit({
+        imagen: this.imagenSubir,
+        firma: this.firmaSubir,
+        huella: this.huellaSubir,
+        changeImage: this.changeImage,
+        changeFirma: this.changeFirma,
+        changeHuella: this.changeHuella
+    });
+  }
+
+  quitarFirma() {
+    this.url_firma = '';
+    this.firmaSubir = null;
+    this.changeFirma = true;
+    this.firmaUrl = "assets/img/image.png";
+  }
+
+  quitarHuella() {
+    this.huellaSubir = null;
+    this.url_huella = '';
+    this.changeHuella = true;
+    this.huellaUrl = "assets/img/image.png";
+  }
+
+  quitarImagen() {
+      this.imagenSubir = null;
+      this.imageUrl = "assets/img/image.png";
+      this.url_imagen = '';
+      this.changeImage = true;
+  }
 }

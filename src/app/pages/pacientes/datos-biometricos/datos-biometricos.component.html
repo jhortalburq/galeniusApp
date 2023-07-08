@@ -1,4 +1,3 @@
-<form class="form-horizontal form-material" [formGroup]="registerForm">
 
     <div class="row">
         <div class="col-sm-9">
@@ -8,14 +7,14 @@
                     <div class="file-field md-form">
                         <div mdbBtn [floating]="true" size="sm" color="primary" class="waves-light" mdbWavesEffect mdbTooltip="Subir Archivo">
                             <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
-                            <input type="file" mdbFileSelect (change)="seleccionImagen($event)">
+                            <input type="file" mdbFileSelect (change)="seleccionImagen($event)" >
                         </div>
                         <div class="file-path-wrapper mt-3">
-                            <input class="file-path" type="text" placeholder="Seleccione una Imagen"  readonly>
+                            <input class="file-path" type="text" placeholder="Seleccione una Imagen" [(ngModel)]="fileName_imagen" readonly>
                         </div>
-                        <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Foto">
+                        <!-- <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Foto">
                             <mdb-icon fas icon="camera" aria-hidden="true"></mdb-icon>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -25,14 +24,14 @@
                     <div class="file-field md-form">
                         <div mdbBtn [floating]="true" size="sm" color="primary" mdbWavesEffect mdbTooltip="Subir Archivo">
                             <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
-                            <input type="file" mdbFileSelect (change)="seleccionImagen($event)">
+                            <input type="file" mdbFileSelect (change)="seleccionFirma($event)" >
                         </div>
                         <div class="file-path-wrapper mt-3">
-                            <input class="file-path" type="text" placeholder="Seleccione Firma"  readonly>
+                            <input class="file-path" type="text" placeholder="Seleccione Firma" [(ngModel)]="fileName_firma" readonly>
                         </div>
-                        <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Firma">
+                        <!-- <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Firma">
                             <mdb-icon fas icon="file-signature" aria-hidden="true"></mdb-icon>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -40,14 +39,14 @@
                     <div class="file-field md-form">
                         <div mdbBtn [floating]="true" size="sm" color="primary" mdbWavesEffect mdbTooltip="Subir Archivo">
                             <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
-                            <input type="file" mdbFileSelect (change)="seleccionImagen($event)">
+                            <input type="file" mdbFileSelect (change)="seleccionHuella($event)" >
                         </div>
                         <div class="file-path-wrapper mt-3">
-                            <input class="file-path" type="text" placeholder="Seleccione Huella"  readonly>
+                            <input class="file-path" type="text" placeholder="Seleccione Huella" [(ngModel)]="fileName_huella" readonly>
                         </div>
-                        <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Huella">
+                        <!-- <div mdbBtn [floating]="true" size="sm" color="info" mdbWavesEffect mdbTooltip="Capturar Huella">
                             <mdb-icon fas icon="fingerprint" aria-hidden="true"></mdb-icon>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -56,13 +55,13 @@
                 <div class="col-sm-6 text-center">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img *ngIf="url_logo" [src]="registro.url_logo" style="width: 150px">
-                            <img *ngIf="!url_logo" [src]="imageUrl" style="width: 150px">
+                            <img *ngIf="url_firma" [src]="url_firma" >
+                            <img *ngIf="!url_firma" [src]="firmaUrl" >
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="firmaSubir || url_firma">
                         <div class="col-sm-12">
-                            <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Firma">
+                            <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Firma" (click)="quitarFirma()">
                                 <mdb-icon fas icon="trash" aria-hidden="true"></mdb-icon>
                             </div>
                         </div>
@@ -71,13 +70,13 @@
                 <div class="col-sm-6 text-center">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img *ngIf="url_logo" [src]="registro.url_logo" style="width: 150px">
-                            <img *ngIf="!url_logo" [src]="imageUrl" style="width: 150px">
+                            <img *ngIf="url_huella" [src]="url_huella" >
+                            <img *ngIf="!url_huella" [src]="huellaUrl" >
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="huellaSubir || url_huella">
                         <div class="col-sm-12">
-                            <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Huella">
+                            <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Huella" (click)="quitarHuella()">
                                 <mdb-icon fas icon="trash" aria-hidden="true"></mdb-icon>
                             </div>
                         </div>
@@ -89,13 +88,13 @@
         <div class="col-sm-3 text-center">
             <div class="row">
                 <div class="col-sm-12">
-                    <img *ngIf="url_logo" [src]="registro.url_logo" style="width: 150px">
-                    <img *ngIf="!url_logo" [src]="imageUrl" style="width: 150px">
+                    <img *ngIf="url_imagen" [src]="url_imagen" >
+                    <img *ngIf="!url_imagen" [src]="imageUrl" >
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="imagenSubir || url_imagen">
                 <div class="col-sm-12">
-                    <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Foto">
+                    <div mdbBtn [floating]="true" size="sm" color="danger" mdbWavesEffect mdbTooltip="Quitar Foto" (click)="quitarImagen()">
                         <mdb-icon fas icon="trash" aria-hidden="true"></mdb-icon>
                     </div>
                 </div>
@@ -104,5 +103,11 @@
     
     </div>
 
+    <hr>
 
-</form>
+    <div class="row">
+        <div class="col-sm-12  d-flex justify-content-center">
+            <button mdbBtn size="sm" type="cancel" color="secondary" (click)="regresar()">Regresar</button>
+            <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+        </div>
+    </div>

@@ -18,7 +18,6 @@ import { DatosLaboralesComponent } from './datos-laborales/datos-laborales.compo
 import { DatosBiometricosComponent } from './datos-biometricos/datos-biometricos.component';
 import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
 
-
 @NgModule({
   declarations: [
     ListaPacientesComponent,

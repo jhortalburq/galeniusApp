@@ -30,7 +30,7 @@
                               
                               <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
                               <td style="width: 30%">
-                                <a (click)="editarRegistro( empresa.slug )">{{ empresa.razon_social }}</a>
+                                <a (click)="editarRegistro( empresa.id )">{{ empresa.razon_social }}</a>
                               </td>
                               <td style="width: 10%" class="text-center">{{ empresa.ruc }}</td>
                               <td class="text-left">{{ empresa.rubro }}</td>
@@ -42,7 +42,7 @@
                                 {{ empresa.created | date: "dd/MM/yyyy, h:mm a" }}
                               </td>
                               <td style="width: 10%" class="text-center">
-                                  <mdb-badge [danger]="true" (click)="editarRegistro( empresa.slug )" style="cursor: pointer">
+                                  <mdb-badge [danger]="true" (click)="editarRegistro( empresa.id )" style="cursor: pointer">
                                     <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
                                   </mdb-badge>
                               </td>

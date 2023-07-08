@@ -116,7 +116,7 @@ export class AgregarEmpresaComponent implements OnInit {
                                         this.disabled = false;
 
                                         setTimeout(() => {
-                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.slug, 'editar']);
+                                            this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'empresas', res.id, 'editar']);
                                         }, 500)
                                       },
                                       error: (err: any) => {

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 
 import {
   FormGroup,
@@ -20,6 +21,9 @@ import { BreadcrumbsService,
   styleUrls: ['./datos-personales.component.scss']
 })
 export class DatosPersonalesComponent {
+  @Output() submitChange = new EventEmitter();
+  @Input() registro;
+
   registerForm: FormGroup;
 
   imageUrl: string | ArrayBuffer = "assets/img/image.png";
@@ -99,6 +103,50 @@ export class DatosPersonalesComponent {
       this.getTiposDepartamentos();
       this.createFormControls();
       this.createForm();
+  }
+
+  async getRegistro() {
+    if (this.registro.id) {
+      this.departamento_default = this.registro.cod_depart;
+      this.provincia_default = this.registro.cod_prov;
+      this.distrito_default = this.registro.ubigeo;
+
+      const provincias$ = this.mantenimientoService.getTiposProvincia(this.registro.cod_depart);
+      this.tipos_provincias = await lastValueFrom(provincias$).then(response => response.results);
+
+      const distritos$ = this.mantenimientoService.getTiposDistritos(this.registro.cod_depart, this.registro.cod_prov);
+      this.tipos_distritos = await lastValueFrom(distritos$).then(response => response.results);
+
+      this.registerForm.patchValue({
+          no_documento: this.registro.no_documento,
+          tipo_documento: this.registro.tipo_documento,
+          apellido_paterno: this.registro.apellido_paterno,
+          apellido_materno: this.registro.apellido_materno,
+          fecha_nacimiento: this.registro.fecha_nacimiento,
+          nombres: this.registro.nombres,
+          genero: this.registro.genero,
+          email: this.registro.email,
+          telefono: this.registro.telefono,
+          ocupacion: this.registro.ocupacion,
+          domicilio: this.registro.domicilio,
+          nacionalidad: this.registro.nacionalidad,
+          estado_civil: this.registro.estado_civil,
+          grado_instruccion: this.registro.grado_instruccion,
+          residencia_lugar_trabajo: this.registro.residencia_lugar_trabajo,
+          tiempo_residencia_trabajo: this.registro.tiempo_residencia_trabajo,
+          cobertura: this.registro.cobertura,
+          hijos_vivos: this.registro.hijos_vivos,
+          no_dependientes: this.registro.no_dependientes,
+          profesion: this.registro.profesion,
+          departamento: this.departamento_default,
+          provincia: this.provincia_default,
+          ubigeo: this.distrito_default,
+      })
+    }
+  }
+
+  ngOnChanges() {
+    this.getRegistro();
   }
 
   createFormControls() {
@@ -219,7 +267,7 @@ export class DatosPersonalesComponent {
     }
   }
 
-  getTiposProvincia(cod_depart: string) {
+  getTiposProvincia(cod_depart: string, cod_provin?) {
 
     this.mantenimientoService.getTiposProvincia(cod_depart)
                              .subscribe((response: any) => {
@@ -248,30 +296,12 @@ export class DatosPersonalesComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      // this.disabled = true;
-      // window.scroll(0,0);
-
-      // this.pacienteService.addPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
-      //                     .subscribe({
-      //                                 next: (res: any) => {
-      //                                   this.alertService.successSwalToast('Paciente Registrado', 2000);
-
-      //                                   setTimeout(() => {
-      //                                     this.disabled = false;
-      //                                     this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
-      //                                   }, 500)
-      //                                 },
-      //                                 error: (err: any) => {
-      //                                   this.disabled = false;
-      //                                   console.log('error')
-      //                                 }
-      //                               })
+      this.submitChange.emit(this.registerForm.value)
     }
   }
 
   regresar() {
-    let url = this.router.url;
-    url = url.replace('nuevo', 'lista');
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/pacientes/lista`;
     this.router.navigate([url]);
   }
 
@@ -288,8 +318,6 @@ export class DatosPersonalesComponent {
       
     this.sharedService.getValidateReniec(params.target.value).subscribe({
         next: (res: any) => {
-          console.log(res)
-
           this.registerForm.patchValue({
               nombres: res.nombres,
               apellido_paterno: res.apellidoPaterno,
