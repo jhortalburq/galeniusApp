@@ -217,28 +217,6 @@ export class SharedService {
     })
   }
 
-  getValidarDocumento(codigo: number, no_documento: string) {
-    if (codigo === 6 && no_documento.length === 11) {
-      return this.http.get(`${environment.sunatUrl}/public/api/ruc/${no_documento}`)
-                    .pipe(map( (res: any) => {
-                          return res;
-                      }),
-                    catchError(this.handleError)
-                  );
-    } else if (codigo === 1 && no_documento.length === 8){
-      return this.http.get(`${environment.sunatUrl}/public/api/dni/${no_documento}`)
-                      .pipe(map( (res: any) => {
-                            // this.empresas = res.results.filter( (item: any) => item.activo === true)
-                        console.log(res)
-                            return res;
-                        }),
-                      catchError(this.handleError)
-                    );
-    }  else {
-      return null
-    }
-  }
-
   getValidateSunat(param: string) {
     return this.http.get(`${environment.apiUrl}/api/v1/validacion/sunat`,  {params: { 'query': param }})
                     .pipe(map( (res: any) => {
