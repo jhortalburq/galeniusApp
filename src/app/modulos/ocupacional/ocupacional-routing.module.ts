@@ -30,6 +30,10 @@ const routes: Routes = [
         path: 'mantenimientos',
         loadChildren: () => import('../../pages/mantenimientos/mantenimientos-routing.module').then( m => m.MantenimientoRoutingModule)
       },
+      {
+        path: 'ficha_medica',
+        loadChildren: () => import('../../pages/examenes/medico/medico.module').then( m => m.MedicoModule)
+      },
 ];
 
 @NgModule({

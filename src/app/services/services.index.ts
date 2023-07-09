@@ -24,3 +24,5 @@ export { PacientesService } from './pacientes.service';
 export { EmpresasService } from './empresas.service';
 export { ProtocolosService } from './protocolos.service';
 export { AdmisionService } from './admision.service';
+
+export { ExamenesService } from './examenes.service';

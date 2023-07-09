@@ -38,13 +38,12 @@ export class OcupacionalService {
                     { titulo: 'Nuevo Protocolo', url: '/ocupacional/protocolos/nuevo' },
                ]
      },
-    //  {
-    //   titulo: 'EXÁMENES MÉDICOS',
-    //   submenu: [
-    //                 { titulo: 'Registro de Protoclos', url: '/ocupacional/pacientes/lista' },
-    //                 { titulo: 'Nueva Empresa', url: '/ocupacional/pacientes/nuevo' },
-    //            ]
-    //  },
+     {
+      titulo: 'EXÁMENES MÉDICOS',
+      submenu: [
+                    { titulo: 'Examen Ocupacional (EMO)', url: '/ocupacional/ficha_medica/lista' },
+               ]
+     },
     // {
     //   titulo: 'RESULTADOS MÉDICOS',
     //   icono: 'fa-user',
