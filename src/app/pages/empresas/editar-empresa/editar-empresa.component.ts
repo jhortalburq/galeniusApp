@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-
 import { BreadcrumbsService, 
         MantenimientoService, 
         EmpresasService,
@@ -49,7 +42,6 @@ export class EditarEmpresaComponent implements OnInit {
     .subscribe({                                                                        
       next: (res: any) => {
         this.registro = res;
-        console.log(this.registro)
       }
     })
   }

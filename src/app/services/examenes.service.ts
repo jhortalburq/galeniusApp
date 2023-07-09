@@ -54,4 +54,16 @@ export class ExamenesService {
     }
   }
 
+  getInfoLaboral(slug: string, organizacion: number, cm: number, tipo_orden: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/examenes/emo/${slug}/laboral`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden }})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
+  updateinfoLaboralPaciente(registro: any, empresa_id: number, sucursal_id: number, tipo_orden: string, slug: any) {
+    return this.http.post(`${environment.apiUrl}/api/v1/examenes/emo/${slug}/update_laboral`, JSON.stringify(registro), {params: { 'organizacion': empresa_id, 'cm': sucursal_id, 'tipo_orden': tipo_orden}})
+  }
 }

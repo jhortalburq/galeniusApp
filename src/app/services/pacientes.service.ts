@@ -114,7 +114,6 @@ export class PacientesService {
   }
 
   datosBiometricosPaciente( organizacion_id: number, cm: number, slug: string, registro: any) {
-    console.log(registro);
 
     return new Promise ( ( resolve, reject ) => {
 

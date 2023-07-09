@@ -25,15 +25,19 @@
     </li>
 </ul>
 
-
-<div class="card">
-    <div class="card-body">
-        <app-laboral-ficha *ngIf="tab == 1"></app-laboral-ficha>
-        <app-filiacion-ficha *ngIf="tab == 2"></app-filiacion-ficha>
-        <app-antecedentes *ngIf="tab == 3"></app-antecedentes>
-        <app-evaluacion *ngIf="tab == 4"></app-evaluacion>
-        <app-interconsultas *ngIf="tab == 5"></app-interconsultas>
-        <app-examenes-complementarios *ngIf="tab == 6"></app-examenes-complementarios>
-        <app-historia *ngIf="tab == 7"></app-historia>
+<div class="row pb-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <app-laboral-ficha *ngIf="tab == 1"></app-laboral-ficha>
+                <app-filiacion-ficha *ngIf="tab == 2"></app-filiacion-ficha>
+                <app-antecedentes *ngIf="tab == 3"></app-antecedentes>
+                <app-evaluacion *ngIf="tab == 4"></app-evaluacion>
+                <app-interconsultas *ngIf="tab == 5"></app-interconsultas>
+                <app-examenes-complementarios *ngIf="tab == 6"></app-examenes-complementarios>
+                <app-historia *ngIf="tab == 7"></app-historia>
+            </div>
+        </div>
     </div>
 </div>
+
