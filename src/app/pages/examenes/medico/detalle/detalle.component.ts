@@ -43,7 +43,7 @@ export class DetalleComponent {
     this.tab = number;
   }
 
-  updateLaboral(action: any) {
+  updateResumenOrden(action: any) {
     this.getRegistro();
   }
 }

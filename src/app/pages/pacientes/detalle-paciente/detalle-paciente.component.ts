@@ -93,7 +93,7 @@ export class DetallePacienteComponent {
 
       this.pacienteService.datosBiometricosPaciente(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.registro.slug, registro)
                                             .then((response: any) => {
-                                                 this.alertService.successSwalToast('Datos Biométricos Actualziadas', 2000);
+                                                 this.alertService.successSwalToast('Datos Biométricos Actualizadas', 2000);
                                                  this.disabled = false;
                                                  this.registro.imagen = response.imagen;
                                             });

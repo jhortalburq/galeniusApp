@@ -18,6 +18,8 @@ import { ExamenesModule } from '../examenes.module';
 import { ExamenMedicoRoutingModule } from './medico-routing.module';
 import { FiliacionFichaComponent } from './filiacion-ficha/filiacion-ficha.component';
 import { LaboralFichaComponent } from './laboral-ficha/laboral-ficha.component';
+import { DatosBiometricosOrdenComponent } from './datos-biometricos-orden/datos-biometricos-orden.component';
+import { DatosPersonalesOrdenComponent } from './datos-personales-orden/datos-personales-orden.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,10 @@ import { LaboralFichaComponent } from './laboral-ficha/laboral-ficha.component';
     ExamenesComplementariosComponent,
     HistoriaComponent,
     FiliacionFichaComponent,
-    LaboralFichaComponent
+    LaboralFichaComponent,
+    DatosBiometricosOrdenComponent,
+    DatosPersonalesOrdenComponent,
+
   ],
   imports: [
     CommonModule,

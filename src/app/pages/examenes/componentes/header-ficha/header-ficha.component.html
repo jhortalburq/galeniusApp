@@ -2,10 +2,8 @@
     <mdb-card-body>
         <div class="row">
             <div class="col-5 col-sm-2 text-center">
-                <div class="file-field">
-                    <img *ngIf="orden.imagen" [src]="orden.imagen" class="img-fluid avatar-header">
-                    <img *ngIf="!orden.imagen"src="assets/img/image.png" class="img-fluid avatar-header">
-                </div>
+                <img *ngIf="orden.imagen" [src]="orden.imagen" class="img-fluid avatar-header">
+                <img *ngIf="!orden.imagen"src="assets/img/image.png" class="img-fluid avatar-header">
             </div>
 
             <div class="col-7 col-sm-10">
@@ -14,11 +12,11 @@
                         <th style="width: 20%">N° Ficha Medica:</th>
                         <td style="width: 40%">{{ orden.no_ficha }}</td>
                         <th style="width: 10%">Fecha:</th>
-                        <td style="width: 30%">{{ orden.fecha_examen }}</td>
+                        <td style="width: 30%">{{ orden.fecha_examen | date: "dd/MM/yyyy" }}</td>
                     </tr>
                     <tr>
                         <th>Paciente:</th>
-                        <td>{{ orden.nombre_empresa }}</td>
+                        <td>{{ orden.nombre_paciente }}</td>
                         <th>DNI:</th>
                         <td>{{ orden.no_documento }}</td>
                     </tr>

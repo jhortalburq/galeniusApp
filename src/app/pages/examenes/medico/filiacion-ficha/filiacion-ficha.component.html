@@ -1,1 +1,35 @@
-<p>filiacion-ficha works!</p>
+<mdb-tabset
+#staticTabs
+[vertical]="true"
+[buttonClass]="'md-tabs tabs-3 mdb-color darken-3'" 
+[contentClass]="'card'"
+>
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+<mdb-tab
+  heading="DATOS DEL PACIENTE"
+>
+  <div class="row">
+    <div class="col-12">
+        <app-datos-personales-orden 
+            [registro]="registro"
+            (submitChange)="onSubmitDatosPersonales($event)"
+        ></app-datos-personales-orden>
+    </div>
+  </div>
+</mdb-tab>
+
+<mdb-tab
+  heading="DATOS BIOMÉTRICOS"
+>
+<div class="row">
+  <div class="col-12">
+      <app-datos-biometricos-orden 
+          [registro]="registro"
+          (submitChange)="onSubmitDatosBiometricos($event)"
+      ></app-datos-biometricos-orden>
+  </div>
+</div>
+</mdb-tab>
+
+
+</mdb-tabset>
