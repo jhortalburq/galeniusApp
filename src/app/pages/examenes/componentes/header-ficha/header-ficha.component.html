@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-5 col-sm-2 text-center">
                 <div class="file-field">
-                    <img src="assets/img/image.png" class="img-fluid avatar-header">
+                    <img *ngIf="orden.imagen" [src]="orden.imagen" class="img-fluid avatar-header">
+                    <img *ngIf="!orden.imagen"src="assets/img/image.png" class="img-fluid avatar-header">
                 </div>
             </div>
 
@@ -11,27 +12,28 @@
                 <table class="table table-sm table-striped text-nowrap mt-3">
                     <tr>
                         <th style="width: 20%">N° Ficha Medica:</th>
-                        <td style="width: 50%">sss</td>
+                        <td style="width: 40%">{{ orden.no_ficha }}</td>
                         <th style="width: 10%">Fecha:</th>
-                        <td style="width: 20%">ssss</td>
+                        <td style="width: 30%">{{ orden.fecha_examen }}</td>
                     </tr>
                     <tr>
-                        <th>Empleado:</th>
-                        <td><a target="_blank" class="link_href" href="">xxxx</a></td>
+                        <th>Paciente:</th>
+                        <td>{{ orden.nombre_empresa }}</td>
                         <th>DNI:</th>
-                        <td>sss</td>
+                        <td>{{ orden.no_documento }}</td>
                     </tr>
                     <tr>
                         <th>Tipo Evaluación:</th>
-                        <td>sss</td>
+                        <td>{{ orden.nombre_tipo_evaluacion }}</td>
                         <th>Edad:</th>
-                        <td>sss</td>
+                        <td>{{ orden.edad }} años</td>
                     </tr>
                     <tr>
                         <th>Empresa:</th>
-                        <td>sss</td>
+                        <td>{{ orden.nombre_empresa }}</td>
                         <th>Puesto:</th>
-                        <td>sss</td>
+                        <td *ngIf="orden.clave_evaluacion === 'pre'">{{ orden.puesto_postula }}</td>
+                        <td *ngIf="orden.clave_evaluacion !== 'pre'">{{ orden.ocupacion }}</td>
                     </tr>
                 </table>
             </div>

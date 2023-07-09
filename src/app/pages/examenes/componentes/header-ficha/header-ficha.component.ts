@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header-ficha',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./header-ficha.component.scss']
 })
 export class HeaderFichaComponent {
+  @Input() orden;
 
+  ngOnInit(): void {
+  }
+
+  ngOnChanges() {
+    console.log(this.orden)
+  }
 }

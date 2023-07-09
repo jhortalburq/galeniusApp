@@ -72,9 +72,7 @@ export class ListaExamenesComponent {
     }
   }
 
-
   onNext(): void {
-    console.log('aquuiiuiii')
     if (!this.lastPage()){
         this.page += 1
         this.getData(this.nextURL)
@@ -86,7 +84,6 @@ export class ListaExamenesComponent {
   }
 
   onPrev(): void {
-    console.log('aquuiiuiii2')
     if (this.page >1){
         this.page -= 1
         this.getData(this.prevURL)
@@ -94,10 +91,7 @@ export class ListaExamenesComponent {
   }
 
   onSearchFilter(search: any) {
-    console.log('asssssss')
-    console.log(search)
     this.registros.push(search)
-    console.log(this.registros);
   }
 
 }

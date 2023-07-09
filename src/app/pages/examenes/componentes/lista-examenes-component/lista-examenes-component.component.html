@@ -21,7 +21,7 @@
                     <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
                     <td style="width:10%" class="text-center">{{ registro.no_ficha }}</td>
                     <td style="width:30%">
-                      <a (click)="detalleRegistro(registro.slug)">{{ registro.nombre_paciente }}</a>
+                      <a (click)="detalleRegistro(registro.orden_slug, registro.slug)">{{ registro.nombre_paciente }}</a>
                     </td>
                     <td class="text-center">
                         {{ registro.fecha_atencion | date: "dd/MM/yyyy" }}
@@ -41,7 +41,7 @@
                     </td>
                     
                     <td style="width: 5%" class="text-center">
-                        <mdb-badge [danger]="true"  style="cursor: pointer" (click)="detalleRegistro(registro.slug)">
+                        <mdb-badge [danger]="true"  style="cursor: pointer" (click)="detalleRegistro(registro.orden_slug, registro.slug)">
                           <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
                         </mdb-badge>
                     </td>

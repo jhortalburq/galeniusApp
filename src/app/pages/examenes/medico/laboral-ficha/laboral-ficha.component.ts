@@ -12,7 +12,7 @@ import { BreadcrumbsService,
         SharedService,
         EmpresasService,
         AlertService,
-        ExamenesService
+        AdmisionService
 } from '../../../../services/services.index';
 
 import { lastValueFrom } from 'rxjs';
@@ -24,9 +24,8 @@ import { lastValueFrom } from 'rxjs';
 })
 export class LaboralFichaComponent {
   @Output() submitChange = new EventEmitter();
-  @Output() previousStep = new EventEmitter();
 
-  slug: string = '';
+  orden_slug: string = '';
 
   registerLaboralForm: FormGroup;
   disabled: boolean = false;
@@ -63,11 +62,11 @@ export class LaboralFichaComponent {
     private router: Router,
     private route: ActivatedRoute,
     public alertService: AlertService,
-    public examenesService: ExamenesService,
+    public admisionService: AdmisionService,
   ) {}
 
   async ngOnInit() {
-      this.slug = this.route.snapshot.paramMap.get('slug');
+      this.orden_slug = this.route.snapshot.paramMap.get('orden_slug');
       this.createFormControls();
       this.createForm();
 
@@ -79,10 +78,8 @@ export class LaboralFichaComponent {
     }
 
   async getRegistro() {
-      const info$ = this.examenesService.getInfoLaboral(this.slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc');
+      const info$ = this.admisionService.getInfoLaboral(this.orden_slug, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc');
       let info_laboral = await lastValueFrom(info$);
-      console.log(this.choices_empresas)
-      console.log('info', info_laboral)
       this.registerLaboralForm.patchValue({
           empresa: info_laboral.empresa,
           ruc: info_laboral.ruc,
@@ -188,10 +185,11 @@ export class LaboralFichaComponent {
         this.disabled = true;
         window.scroll(0,0);
     
-        this.examenesService.updateinfoLaboralPaciente(this.registerLaboralForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc', this.slug)
+        this.admisionService.updateinfoLaboralPaciente(this.registerLaboralForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc', this.orden_slug)
                             .subscribe({
                                 next: (res: any) => {
                                   this.disabled = false;
+                                  this.submitChange.emit(true);
                                   this.alertService.successSwalToast('Información Laboral Actualizada', 2000);
                                 },
                                 error: (err: any) => {

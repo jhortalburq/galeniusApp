@@ -63,13 +63,12 @@ export class ListaExamenesComponentComponent {
     this.prevPage.emit();
   }
 
-  detalleRegistro(slug: string) {
-    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/${this.examen}/${slug}/detalle`;
+  detalleRegistro(orden: string, slug: string) {
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/${this.examen}/${orden}/detalle/${slug}`;
     this.router.navigate([url]);
   }
 
   onSearchSubmit(query: any){
-    console.log('aaaaa', query)
     this.searchSubmit.emit(query)
   }
 }
