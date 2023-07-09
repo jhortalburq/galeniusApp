@@ -14,6 +14,8 @@ import {
 })
 export class DetalleComponent {
   orden_slug: string = '';
+  slug: string = '';
+  
   tab: number = 1;
 
   orden: any = {};
@@ -27,6 +29,7 @@ export class DetalleComponent {
 
   ngOnInit(): void {
     this.orden_slug = this.route.snapshot.paramMap.get('orden_slug');
+    this.slug = this.route.snapshot.paramMap.get('slug');
 
     this.breadcrumbService.title = 'EXÁMENES MÉDICOS OCUPACIONALES';
     this.getRegistro();

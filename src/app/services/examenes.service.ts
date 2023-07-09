@@ -53,5 +53,31 @@ export class ExamenesService {
                     );
     }
   }
+  
+  getAntecedentesLaborales(organizacion: number, cm: number, tipo_orden: string, ficha_slug: string, params?: string) {
+    if (params) {
+      return this.http.get(`${environment.apiUrl}/api/v1/antecedentes/laborales`, {params: { 'search': params, 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden, 'ficha_slug': ficha_slug}})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(`${environment.apiUrl}/api/v1/antecedentes/laborales`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden, 'ficha_slug': ficha_slug}})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
+  updateAtencedenteLaboralFicha(registro: any, organizacion: number, sucursal_id: any, tipo_orden: string, ficha_slug: string) {
+    return this.http.post(`${environment.apiUrl}/api/v1/antecedentes/laborales`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+  }
+
+  deleteAtencedenteLaboralFicha(item_id, organizacion: number, sucursal_id: any, tipo_orden: string, ficha_slug: string) {
+    return this.http.delete(`${environment.apiUrl}/api/v1/antecedentes/laborales/${item_id}`, {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+  }
 
 }

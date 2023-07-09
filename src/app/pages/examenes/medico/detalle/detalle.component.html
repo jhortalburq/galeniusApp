@@ -29,9 +29,9 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <app-laboral-ficha *ngIf="tab == 1" (submitChange)="updateResumenOrden($event)"></app-laboral-ficha>
-                <app-filiacion-ficha *ngIf="tab == 2" (submitChange)="updateResumenOrden($event)"></app-filiacion-ficha>
-                <app-antecedentes *ngIf="tab == 3"></app-antecedentes>
+                <app-laboral-ficha *ngIf="tab == 1" [orden_slug]="orden_slug" (submitChange)="updateResumenOrden($event)"></app-laboral-ficha>
+                <app-filiacion-ficha *ngIf="tab == 2" [orden_slug]="orden_slug" (submitChange)="updateResumenOrden($event)"></app-filiacion-ficha>
+                <app-antecedentes *ngIf="tab == 3" [slug]="slug"></app-antecedentes>
                 <app-evaluacion *ngIf="tab == 4"></app-evaluacion>
                 <app-interconsultas *ngIf="tab == 5"></app-interconsultas>
                 <app-examenes-complementarios *ngIf="tab == 6"></app-examenes-complementarios>

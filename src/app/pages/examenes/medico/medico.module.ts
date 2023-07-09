@@ -20,6 +20,11 @@ import { FiliacionFichaComponent } from './filiacion-ficha/filiacion-ficha.compo
 import { LaboralFichaComponent } from './laboral-ficha/laboral-ficha.component';
 import { DatosBiometricosOrdenComponent } from './datos-biometricos-orden/datos-biometricos-orden.component';
 import { DatosPersonalesOrdenComponent } from './datos-personales-orden/datos-personales-orden.component';
+import { AntecedentesLaboralesComponent } from './antecedentes/antecedentes-laborales/antecedentes-laborales.component';
+import { AntecedentesPersonalesComponent } from './antecedentes/antecedentes-personales/antecedentes-personales.component';
+import { AntecedentesFamiliaresComponent } from './antecedentes/antecedentes-familiares/antecedentes-familiares.component';
+import { AbsentismosLaboralesComponent } from './antecedentes/absentismos-laborales/absentismos-laborales.component';
+import { HabitosNocivosComponent } from './antecedentes/habitos-nocivos/habitos-nocivos.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,11 @@ import { DatosPersonalesOrdenComponent } from './datos-personales-orden/datos-pe
     LaboralFichaComponent,
     DatosBiometricosOrdenComponent,
     DatosPersonalesOrdenComponent,
+    AntecedentesLaboralesComponent,
+    AntecedentesPersonalesComponent,
+    AntecedentesFamiliaresComponent,
+    AbsentismosLaboralesComponent,
+    HabitosNocivosComponent,
 
   ],
   imports: [

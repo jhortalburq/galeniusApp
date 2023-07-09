@@ -29,7 +29,8 @@
                     <tr>
                         <th>Empresa:</th>
                         <td>{{ orden.nombre_empresa }}</td>
-                        <th>Puesto:</th>
+                        <th *ngIf="orden.clave_evaluacion === 'pre'">Puesto Postula:</th>
+                        <th *ngIf="orden.clave_evaluacion !== 'pre'">Puesto:</th>
                         <td *ngIf="orden.clave_evaluacion === 'pre'">{{ orden.puesto_postula }}</td>
                         <td *ngIf="orden.clave_evaluacion !== 'pre'">{{ orden.ocupacion }}</td>
                     </tr>

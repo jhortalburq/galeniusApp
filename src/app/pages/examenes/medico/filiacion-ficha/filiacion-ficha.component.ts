@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { BreadcrumbsService, 
   MantenimientoService, 
@@ -16,8 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class FiliacionFichaComponent {
   @Output() submitChange = new EventEmitter();
-
-  orden_slug: string = '';
+  @Input() orden_slug;
 
   registro: any = {};
   slug: any;
@@ -36,7 +35,6 @@ export class FiliacionFichaComponent {
   }
 
   ngOnInit(): void {
-    this.orden_slug = this.route.snapshot.paramMap.get('orden_slug');
     this.getRegistro();
   }
 

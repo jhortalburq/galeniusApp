@@ -1,1 +1,69 @@
-<p>antecedentes works!</p>
+<mdb-tabset
+#staticTabs
+[vertical]="true"
+[buttonClass]="'md-tabs tabs-3 mdb-color darken-3'" 
+[contentClass]="'card'"
+>
+<mdb-tab
+  heading="ANTECEDENTES LABORALES"
+>
+  <div class="row">
+    <div class="col-12">
+        <app-antecedentes-laborales 
+            [slug]="slug"
+        ></app-antecedentes-laborales>
+    </div>
+  </div>
+</mdb-tab>
+
+<mdb-tab
+  heading="ANTECEDENTES PERSONALES"
+>
+<div class="row">
+  <div class="col-12">
+      <app-antecedentes-personales 
+            [slug]="slug"
+      ></app-antecedentes-personales>
+  </div>
+</div>
+</mdb-tab>
+
+
+<mdb-tab
+  heading="HÁBITOS NOCIVOS"
+>
+<div class="row">
+  <div class="col-12">
+      <app-habitos-nocivos 
+            [slug]="slug"
+      ></app-habitos-nocivos>
+  </div>
+</div>
+</mdb-tab>
+
+<mdb-tab
+  heading="ANTECEDENTES FAMILIARES"
+>
+<div class="row">
+  <div class="col-12">
+      <app-antecedentes-familiares
+            [slug]="slug"
+      ></app-antecedentes-familiares>
+  </div>
+</div>
+</mdb-tab>
+
+<mdb-tab
+  heading="ABSENTISMOS LABORALES"
+>
+<div class="row">
+  <div class="col-12">
+      <app-absentismos-laborales 
+              [slug]="slug"
+      ></app-absentismos-laborales>
+  </div>
+</div>
+</mdb-tab>
+
+
+</mdb-tabset>

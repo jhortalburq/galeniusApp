@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-antecedentes',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./antecedentes.component.scss']
 })
 export class AntecedentesComponent {
+  @Input() slug;
 
+  constructor(
+    private route: ActivatedRoute,
+) { }
+
+  ngOnInit(): void {
+    console.log(this.slug)
+  }
 }

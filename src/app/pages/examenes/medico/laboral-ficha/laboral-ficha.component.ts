@@ -24,8 +24,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class LaboralFichaComponent {
   @Output() submitChange = new EventEmitter();
-
-  orden_slug: string = '';
+  @Input() orden_slug;
 
   registerLaboralForm: FormGroup;
   disabled: boolean = false;
@@ -66,7 +65,6 @@ export class LaboralFichaComponent {
   ) {}
 
   async ngOnInit() {
-      this.orden_slug = this.route.snapshot.paramMap.get('orden_slug');
       this.createFormControls();
       this.createForm();
 
