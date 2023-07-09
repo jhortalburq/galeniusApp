@@ -1,0 +1,68 @@
+<form class="form-horizontal form-material">
+    
+    <div class="row mt-n3">
+        <div class="col-sm-3 col-xs-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="form1" class="form-control">
+                <label for="form1" class="">Busqueda de Paciente</label>
+              </div>
+        </div>
+        
+        <div class="col-sm-2">
+            <label class="mdb-main-label">Estado</label>
+            <select2 [data]="data" (update)="searchEspecialista($event)">
+            </select2>
+        </div>
+
+        <div class="col-sm-2">
+            <label class="mdb-main-label">Tipo de Evaluación</label>
+            <select2 [data]="data" (update)="searchEspecialista($event)">
+            </select2>
+        </div>
+
+        <div class="col-sm-1 col-xs-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="form1" class="form-control">
+                <label for="form1" class="">Fecha de Inicio</label>
+              </div>
+        </div>
+
+        <div class="col-sm-1 col-xs-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="form1" class="form-control">
+                <label for="form1" class="">Fecha Fin</label>
+              </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 btn-filter">
+            <a href="" class="btn btn-danger btn-sm btn-rounded"> <i class="fas fa-times"></i> Quitar</a>
+            <button mdbBtn size="sm" type="submit" color="mdb-color" [rounded]="true" class="waves-light" mdbWavesEffect (click)="onSubmit()">
+                <mdb-icon fas icon="search"></mdb-icon> Buscar
+            </button>
+        </div>
+    </div>
+
+    <div class="row mt-n4">
+        
+        <div class="col-sm-5">
+            <label class="mdb-main-label">Empresa</label>
+            <select2 [data]="data" (update)="searchEspecialista($event)">
+            </select2>
+        </div>
+
+
+        <div class="col-sm-5">
+            <label class="mdb-main-label">Protocolo</label>
+            <select2 [data]="data" (update)="searchEspecialista($event)">
+            </select2>
+        </div>
+
+
+        <div class="col-sm-1">
+            <label class="mdb-main-label">Año</label>
+            <select2 [data]="data" (update)="searchEspecialista($event)">
+            </select2>
+        </div>
+
+    </div>
+</form>

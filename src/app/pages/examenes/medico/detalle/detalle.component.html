@@ -1,1 +1,39 @@
-<p>detalle works!</p>
+
+<app-header-ficha></app-header-ficha>
+
+<ul class="nav nav-tabs text-nowrap mt-3">
+    <li class="nav-item ml-auto">
+        <a class="nav-link" [class.active]="tab==1" (click)="irTab(1)"><i class="fas fa-gavel"></i> Datos Empresa</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==2" (click)="irTab(2)"><i class="fas fa-user"></i> Filiación</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==3" (click)="irTab(3)"><i class="fas fa-address-book"></i> Antecedentes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==4" (click)="irTab(4)"><i class="fas fa-binoculars"></i> Evaluación</a>
+    </li>   
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==5" (click)="irTab(5)"><i class="fas fa-paperclip"></i> Interconsultas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==6" (click)="irTab(6)"><i class="fas fa-paperclip"></i> Exámenes Compl</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==7" (click)="irTab(7)"><i class="fas fa-history"></i> Eval. Previas</a>
+    </li>
+</ul>
+
+
+<div class="card">
+    <div class="card-body">
+        <app-laboral-ficha *ngIf="tab == 1"></app-laboral-ficha>
+        <app-filiacion-ficha *ngIf="tab == 2"></app-filiacion-ficha>
+        <app-antecedentes *ngIf="tab == 3"></app-antecedentes>
+        <app-evaluacion *ngIf="tab == 4"></app-evaluacion>
+        <app-interconsultas *ngIf="tab == 5"></app-interconsultas>
+        <app-examenes-complementarios *ngIf="tab == 6"></app-examenes-complementarios>
+        <app-historia *ngIf="tab == 7"></app-historia>
+    </div>
+</div>

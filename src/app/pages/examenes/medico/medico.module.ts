@@ -14,8 +14,10 @@ import { MDBBootstrapModulesPro } from '../../../../../ng-uikit-pro-standard/src
 import { MaterialModule } from '../../../material.module';
 import { Select2Module } from 'ng-select2-component';
 import { SharedModule } from '../../../shared/shared.module';
-
+import { ExamenesModule } from '../examenes.module';
 import { ExamenMedicoRoutingModule } from './medico-routing.module';
+import { FiliacionFichaComponent } from './filiacion-ficha/filiacion-ficha.component';
+import { LaboralFichaComponent } from './laboral-ficha/laboral-ficha.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +27,16 @@ import { ExamenMedicoRoutingModule } from './medico-routing.module';
     DetalleComponent,
     InterconsultasComponent,
     ExamenesComplementariosComponent,
-    HistoriaComponent
+    HistoriaComponent,
+    FiliacionFichaComponent,
+    LaboralFichaComponent
   ],
   imports: [
     CommonModule,
     MDBBootstrapModulesPro,
     Select2Module,
     SharedModule,
+    ExamenesModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,

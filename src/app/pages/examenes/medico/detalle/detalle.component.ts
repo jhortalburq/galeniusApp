@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class DetalleComponent {
 
+  tab: number = 1;
+
+  irTab(number) {
+    this.tab = number;
+  }
 }

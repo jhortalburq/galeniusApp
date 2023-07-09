@@ -1,0 +1,79 @@
+<mdb-card class="mdb-card-80">
+    <mdb-card-body>
+        <div class="row">
+            <div class="col-12">
+                <app-filtro-examenes-component
+                  (searchSubmit)="onSearchSubmit($event)"
+                ></app-filtro-examenes-component>
+            </div>
+        </div>
+
+        <div class="flex-row mt-3">
+            <div class="table-responsive text-nowrap">
+              <table mdbTable [bordered]="true" [small]="true" [hover]="true" scrollY="true" style="overflow: auto">
+                <thead>
+                  <tr class="mdb-color darken-3 white-text">
+                    <th *ngFor="let head of displayedColumns" scope="col">{{head}} </th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="registros">
+                  <tr mdbTableCol *ngFor="let registro of registros; let i = index">
+                    <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
+                    <td style="width:10%" class="text-center">{{ registro.no_ficha }}</td>
+                    <td style="width:30%">
+                      <a (click)="detalleRegistro(registro.slug)">{{ registro.nombre_paciente }}</a>
+                    </td>
+                    <td class="text-center">
+                        {{ registro.fecha_atencion | date: "dd/MM/yyyy" }}
+                      </td>
+
+                    <td style="width:30%" class="text-center">{{ registro.nombre_empresa }}</td>
+                    <td class="text-center">{{ registro.nombre_tipo_evaluacion }}</td>
+
+                    <td class="text-center">
+                      
+                    </td>
+                    <td class="text-center">
+                      {{ registro.modified_name }}
+                    </td>
+                    <td class="text-center">
+                      {{ registro.last_modified | date: "dd/MM/yyyy, h:mm a" }}
+                    </td>
+                    
+                    <td style="width: 5%" class="text-center">
+                        <mdb-badge [danger]="true"  style="cursor: pointer" (click)="detalleRegistro(registro.slug)">
+                          <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
+                        </mdb-badge>
+                    </td>
+
+                    <td class="text-center">
+                        <mdb-badge [danger]="true"  style="cursor: pointer">
+                          <mdb-icon fas icon="file-pdf" ></mdb-icon>
+                        </mdb-badge>
+                      </td>
+          
+                  </tr>
+                </tbody>
+
+                <tbody *ngIf="!registros.length">
+                  <tr mdbTableCol >
+                    <td style="width: 115%" colspan="12">No se encontraron registros</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+    </mdb-card-body>
+
+    <mdb-card-footer class="text-muted">
+      <app-pagination
+            (goNext)="onNext()"
+            (goPrev)="onPrev()"
+            [pagesToShow]="1"
+            [page]="page"
+            [perPage]="perPage"
+            [count]="total">
+        </app-pagination>
+    </mdb-card-footer>
+</mdb-card>

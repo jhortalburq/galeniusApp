@@ -10,7 +10,7 @@ const routes: Routes = [
         component: ListaExamenesComponent
       },
       {
-        path: 'detalle',
+        path: ':slug/detalle',
         component: DetalleComponent
       },
 ];

@@ -1,5 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { MDBModalRef, MDBModalService } from '../../../../../../ng-uikit-pro-standard/src/public_api';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { 
@@ -25,27 +24,9 @@ export class ListaExamenesComponent {
 
   registros: any = [];
 
-  modalRef: MDBModalRef;
-
-  programa: string = '';
-
-  displayedColumns = [
-    '',
-    'N° Ficha', 
-    'Paciente',
-    'Fecha Atención', 
-    'Empresa',
-    'Tipo Evaluación',
-    'Estado',
-    'Modificó',
-    'Ult. Modificación',
-    '',
-    ''
-  ];
+  examen: string = 'ficha_medica';
 
   constructor(
-      private modalService: MDBModalService,
-      private renderer: Renderer2,
       public breadcrumbService: BreadcrumbsService,
       public examenesService: ExamenesService,
       public sharedService: SharedService,
@@ -54,6 +35,7 @@ export class ListaExamenesComponent {
 
   ngOnInit(): void {
     this.getData();
+    this.breadcrumbService.title = 'EXÁMENES MÉDICOS OCUPACIONALES';
   }
 
   getData(url?) {
@@ -92,6 +74,7 @@ export class ListaExamenesComponent {
 
 
   onNext(): void {
+    console.log('aquuiiuiii')
     if (!this.lastPage()){
         this.page += 1
         this.getData(this.nextURL)
@@ -103,14 +86,18 @@ export class ListaExamenesComponent {
   }
 
   onPrev(): void {
+    console.log('aquuiiuiii2')
     if (this.page >1){
         this.page -= 1
         this.getData(this.prevURL)
     }
   }
 
-  detalleRegistro(slug: string) {
-    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/ficha_medica/detalle`;
-    this.router.navigate([url]);
+  onSearchFilter(search: any) {
+    console.log('asssssss')
+    console.log(search)
+    this.registros.push(search)
+    console.log(this.registros);
   }
+
 }
