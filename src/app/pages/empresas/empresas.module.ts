@@ -14,7 +14,7 @@ import {
   AgregarEmpresaComponent,
   EditarEmpresaComponent,
   UsuariosEmpresaComponent,
-  LogoEmpresaComponent
+  DatosEmpresaComponent,
 } from './empresas.index';
 
 
@@ -24,7 +24,7 @@ import {
     AgregarEmpresaComponent,
     EditarEmpresaComponent,
     UsuariosEmpresaComponent,
-    LogoEmpresaComponent,
+    DatosEmpresaComponent,
   ],
   imports: [
     CommonModule,

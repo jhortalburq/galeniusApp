@@ -35,6 +35,10 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/pacientes/pacientes.module').then( m => m.PacientesModule)
       },
       {
+        path: 'empresas',
+        loadChildren: () => import('../../pages/empresas/empresas.module').then( m => m.EmpresasModule)
+      },
+      {
         path: 'mantenimientos',
         loadChildren: () => import('../../pages/mantenimientos/mantenimientos-routing.module').then( m => m.MantenimientoRoutingModule)
       },

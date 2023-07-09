@@ -87,22 +87,6 @@ export class NuevoPacienteComponent {
       this.disabled = false;
       this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', 'lista']);
     }, 500)
-
-    // this.pacienteService.addPaciente(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.infoPersonal)
-    //                     .subscribe({
-    //                                 next: (res: any) => {
-    //                                   this.alertService.successSwalToast('Paciente Registrado', 2000);
-
-    //                                   setTimeout(() => {
-    //                                     this.disabled = false;
-    //                                     this.router.navigate(['/', this.breadcrumbService.modulo.toLowerCase(), 'pacientes', res.slug, 'editar']);
-    //                                   }, 500)
-    //                                 },
-    //                                 error: (err: any) => {
-    //                                   this.disabled = false;
-    //                                   console.log('error')
-    //                                 }
-    //                               })
   }
 
   onSubmitDatosPersonales(registro: any) {

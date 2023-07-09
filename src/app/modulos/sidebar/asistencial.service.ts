@@ -22,6 +22,13 @@ export class AsistencialService {
              ]
    },
    {
+    titulo: 'ESPECIALISTAS',
+    submenu: [  
+              { titulo: 'Registro de Especialistas', url: '/asistencial/especialistas/lista' },
+              { titulo: 'Nuevo Especialista', url: '/asistencial/especialistas/nuevo' },
+             ]
+   },
+   {
     titulo: 'PACIENTES',
     submenu: [
                   { titulo: 'Registro de Pacientes', url: '/asistencial/pacientes/lista' },
@@ -29,10 +36,11 @@ export class AsistencialService {
              ]
    },
    {
-    titulo: 'ESPECIALISTAS',
-    submenu: [  
-              { titulo: 'Registro de Especialistas', url: '/asistencial/especialistas/lista' },
-              { titulo: 'Nuevo Especialista', url: '/asistencial/especialistas/nuevo' },
+    titulo: 'EMPRESAS',
+    submenu: [
+                  { titulo: 'Registro de Empresas', url: '/asistencial/empresas/lista' },
+                  { titulo: 'Nueva Empresa', url: '/asistencial/empresas/nuevo' },
+                  // { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
              ]
    },
    {

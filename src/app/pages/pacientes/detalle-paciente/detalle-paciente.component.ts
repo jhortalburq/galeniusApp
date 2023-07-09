@@ -109,5 +109,5 @@ export class DetallePacienteComponent {
         this.registro = res;
       }
     })
-}
+  }
 }

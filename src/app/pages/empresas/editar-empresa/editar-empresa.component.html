@@ -1,139 +1,32 @@
-<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+<mdb-tabset
+#staticTabs
+[vertical]="true"
+[buttonClass]="'md-tabs tabs-3 mdb-color darken-3'" 
+[contentClass]="'card'"
+>
 
-<div class="row">
-  <div class="col-md-12 col-lg-12">
-      <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mdb-tab
+    heading="INFORMACIÓN EMPRESA"
+    >
+    <div class="row">
+    <div class="col-12">
+        <app-datos-empresa
+            [registro]="registro"
+        ></app-datos-empresa>
+    </div>
+    </div>
+    </mdb-tab>
 
-          <mdb-card class="mb-5">
-              <mdb-card-body>
-                  <div class="row">
-                      <div class="col-sm-3 text-center">
-                          <div class="file-field mb-4">
-                              <div class="z-depth-1-half mb-4">
-                                  <img id="imagen_paciente" src="assets/img/image.png" class="img-fluid avatar-pic2">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-9 pl-4">
-                          <div class="titulo_seccion">DATOS DE EMPRESA</div>
-
-                          <div class="form-row mt-n2">
-
-                              <div class="col-sm-2">
-                                    <div class="md-form form-sm">
-                                        <input mdbInput type="text" id="ruc" class="form-control form-control-sm" formControlName="ruc" mdbValidate (change)="searchSunat($event)">
-                                        <label for="ruc" class="">R.U.C (*)</label>
-                                    </div>
-                              </div>
-
-                              <div class="col-sm-8">
-                                <div class="md-form form-sm">
-                                    <input mdbInput type="text" id="razon_social" class="form-control form-control-sm" formControlName="razon_social" mdbValidate>
-                                    <label for="razon_social" class="">Razón Social (*)</label>
-                                </div>
-                              </div>
+    <mdb-tab
+    heading="ACCESO DE USUARIOS"
+    >
+    <div class="row">
+        <div class="col-12">
+            <app-usuarios-empresa
+            ></app-usuarios-empresa>
+        </div>
+    </div>
+    </mdb-tab>
 
 
-                              <div class="col-sm-2">
-                                <div class="md-form form-sm">
-                                    <input mdbInput type="text" id="rubro" class="form-control form-control-sm" formControlName="rubro">
-                                    <label for="rubro" class="">Rubro</label>
-                                </div>
-                            </div>
-                          </div>
-
-
-                          <div class="form-row mt-n3">
-
-                            <mat-form-field class="col-sm-4">
-                                <mat-label>Departamento</mat-label>
-                                <mat-select (selectionChange)="changeDepartment($event)" formControlName="departamento">
-                                    <mat-option *ngFor="let item of tipos_departamentos" [value]="item.value">
-                                        {{item.label | uppercase}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-sm-4">
-                                <mat-label>Provincia</mat-label>
-                                <mat-select (selectionChange)="changeProvince($event)" formControlName="provincia">
-                                    <mat-option *ngFor="let item of tipos_provincias" [value]="item.value">
-                                        {{item.label | uppercase}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-sm-4">
-                                <mat-label>Distrito</mat-label>
-                                <mat-select formControlName="ubigeo">
-                                    <mat-option *ngFor="let item of tipos_distritos" [value]="item.value">
-                                        {{item.label | uppercase}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                        </div>
-
-                        <div class="form-row mt-n2">
-                            <div class="col-sm-12">
-                                <div class="md-form form-sm">
-                                    <input mdbInput type="text" id="direccion" class="form-control form-control-sm" formControlName="direccion">
-                                    <label for="direccion">Dirección</label>
-                                </div>
-                            </div>
-                       
-                        </div>
-
-                        <div class="titulo_seccion mt-3">DATOS DE CONTACTO</div>
-
-
-                        <div class="form-row mt-n3">
-                          
-                            <div class="col-sm-5">
-                              <div class="md-form form-sm">
-                                  <input mdbInput type="text" id="contacto" class="form-control form-control-sm" formControlName="contacto">
-                                  <label for="contacto" class="">Contacto</label>
-                              </div>
-                            </div>
-  
-                            <div class="col-sm-3">
-                                <div class="md-form form-sm">
-                                    <input mdbInput type="text" id="telefono" class="form-control form-control-sm" formControlName="telefono">
-                                    <label for="telefono" class="">Teléfono</label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="md-form form-sm">
-                                    <input mdbInput type="text" id="email" class="form-control form-control-sm" formControlName="email">
-                                    <label for="email" class="">Correo Electrónico</label>
-                                </div>
-                            </div>
-                        </div>
-                          
-                        <div class="row mt-n4">
-                          <div class="col-sm-12 col-xs-12">
-                              <div class="md-form form-sm">
-                                  <textarea rows="1" type="text" id="nota" formControlName="nota" class="md-textarea form-control form-control-sm" mdbInput></textarea>
-                                  <label for="nota">Nota</label>
-                                </div>
-                           </div>
-                        </div>
-                        
-                        
-                      </div>
-                  </div>
-
-                  <div class="row mt-3 text-right">
-                      <div class="col-sm-12 text-right">
-                          <button mdbBtn size="sm" color="danger" class="waves-light" mdbWavesEffect (click)="regresar()">Regresar</button>
-                          <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
-                      </div>
-                  </div>
-              </mdb-card-body>
-
-          </mdb-card>
-
-      </form>
-  </div>
-</div>
+</mdb-tabset>
