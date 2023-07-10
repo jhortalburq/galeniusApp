@@ -49,7 +49,11 @@ export class ArchivosFichasComponent {
   };
 
   eliminarItem( item: any) {
-
+    this.examenesService.deleteArchivoFicha(item, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.programa, this.clave, this.slug)
+        .subscribe((response: any) => {
+            this.submitChange.emit(true);
+            this.alertService.successSwalToast('Archivo Eliminado', 2000);
+        });
   }
 
   submit(file) {

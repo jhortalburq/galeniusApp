@@ -168,7 +168,6 @@ export class ExamenesService {
   }
 
   updateDiagnosticoFicha(organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string, registro: any, tipo?: number) {
-    console.log('aqqqqq', tipo);
     if (Number(tipo) === 2) {
       return this.http.post(`${environment.apiUrl}/api/v1/${clave}/otros-diagnosticos`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
     } else {
