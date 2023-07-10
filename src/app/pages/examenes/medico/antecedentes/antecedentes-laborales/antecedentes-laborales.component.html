@@ -1,127 +1,137 @@
 <mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
 
-<form class="form-horizontal form-material" [formGroup]="registerForm" (submit)="onSubmit()">
-    <div class="titulo_seccion">ANTECEDENTES LABORALES</div>
+<div class="container">
 
-    <div class="form-row mt-n2">
+    <form class="form-horizontal form-material" [formGroup]="registerForm" (submit)="onSubmit()">
+        <div class="titulo_seccion">ANTECEDENTES LABORALES</div>
 
-        <div class="col-sm-5">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="empresa_antigua" class="form-control form-control-sm" formControlName="empresa_antigua" mdbValidate>
-                <label for="empresa_antigua" class="">Empresa (*)</label>
+        <div class="form-row mt-n2">
+
+            <div class="col-sm-5">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="empresa_antigua" class="form-control form-control-sm" formControlName="empresa_antigua" mdbValidate>
+                    <label for="empresa_antigua" class="">Empresa (*)</label>
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="area_trabajo" class="form-control form-control-sm" formControlName="area_trabajo">
+                    <label for="area_trabajo" class="">Area de Trabajo</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2  d-flex justify-content-center">
+                <a class="btn btn-primary" mdbBtn [floating]="true" size="sm" mdbWavesEffect (click)="onSubmit()">
+                    <i class="fas fa-plus" style="color: #fff!important"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n4">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="ocupacion" class="form-control form-control-sm" formControlName="ocupacion">
+                    <label for="ocupacion" class="">Ocupacion</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_inicio" class="form-control form-control-sm" formControlName="fecha_inicio">
+                    <label for="fecha_inicio" class="">Fecha Inicio</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_fin" class="form-control form-control-sm" formControlName="fecha_fin">
+                    <label for="fecha_fin" class="">Fecha Fin</label>
+                </div>
+            </div>
+
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="tiempo" class="form-control form-control-sm" formControlName="tiempo">
+                    <label for="tiempo">Tiempo (Duración)</label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="form-row mt-n4">
+            <div class="col-sm-5">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="exposicion" class="form-control form-control-sm" formControlName="exposicion">
+                    <label for="exposicion">Exposición</label>
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="epp" class="form-control form-control-sm" formControlName="epp">
+                    <label for="epp">EPP</label>
+                </div>
             </div>
         </div>
+        
 
-        <div class="col-sm-5">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="area_trabajo" class="form-control form-control-sm" formControlName="area_trabajo">
-                <label for="area_trabajo" class="">Area de Trabajo</label>
+        <div class="row mt-2">
+
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover table-bordered">
+                        <thead>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th class="text-center">Empresa</th>
+                                <th class="text-center">Área Trabajo</th>
+                                <th class="text-center">Ocupación</th>
+                                <th class="text-center">Ingreso</th>
+                                <th class="text-center">Salida</th>
+                                <th class="text-center">Tiempo</th>
+                                <th class="text-center">Exposición Ocupacional</th>
+                                <th class="text-center">EPP</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="registros">
+                            <tr mdbTableCol *ngFor="let registro of registros; let i = index">
+                                <td class="text-nowrap">{{ registro.empresa_antigua }}</td>
+                                <td class="text-center text-nowrap">{{ registro.area_trabajo }}</td>
+                                <td class="text-center text-nowrap">{{ registro.ocupacion }}</td>
+                                <td class="text-nowrap text-center">{{ registro.fecha_inicio }}</td>
+                                <td class="text-nowrap text-center">{{ registro.fecha_fin }}</td>
+                                <td class="text-nowrap text-center">{{ registro.tiempo }}</td>
+                                <td class="text-center">{{ registro.exposicion }}</td>
+                                <td class="text-center">{{ registro.epp }}</td>
+                                <td class="text-center">
+                                    <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">
+                                        <mdb-icon fas icon="trash" ></mdb-icon>
+                                    </mdb-badge>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tbody *ngIf="!registros.length">
+                            <tr mdbTableCol >
+                            <td colspan="9">No se encontraron registros</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
             </div>
         </div>
-
-        <div class="col-sm-2  d-flex justify-content-center">
-            <a class="btn btn-primary" mdbBtn [floating]="true" size="sm" mdbWavesEffect (click)="onSubmit()">
-                <i class="fas fa-plus" style="color: #fff!important"></i>
-            </a>
-        </div>
-
-    </div>
-
-    <div class="form-row mt-n4">
-        <div class="col-sm-4">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="ocupacion" class="form-control form-control-sm" formControlName="ocupacion">
-                <label for="ocupacion" class="">Ocupacion</label>
-            </div>
-        </div>
-
-        <div class="col-sm-2">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="fecha_inicio" class="form-control form-control-sm" formControlName="fecha_inicio">
-                <label for="fecha_inicio" class="">Fecha Inicio</label>
-            </div>
-        </div>
-
-        <div class="col-sm-2">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="fecha_fin" class="form-control form-control-sm" formControlName="fecha_fin">
-                <label for="fecha_fin" class="">Fecha Fin</label>
-            </div>
-        </div>
-
-
-        <div class="col-sm-2">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="tiempo" class="form-control form-control-sm" formControlName="tiempo">
-                <label for="tiempo">Tiempo (Duración)</label>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="form-row mt-n4">
-        <div class="col-sm-5">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="exposicion" class="form-control form-control-sm" formControlName="exposicion">
-                <label for="exposicion">Exposición</label>
-            </div>
-        </div>
-
-        <div class="col-sm-5">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="epp" class="form-control form-control-sm" formControlName="epp">
-                <label for="epp">EPP</label>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="row mt-2">
-
-        <div class="col-sm-12">
-            <div class="table-responsive">
-                <table class="table table-sm table-hover table-bordered">
-                    <thead>
-                        <tr class="mdb-color darken-3 white-text">
-                            <th class="text-center">Empresa</th>
-                            <th class="text-center">Área Trabajo</th>
-                            <th class="text-center">Ocupación</th>
-                            <th class="text-center">Ingreso</th>
-                            <th class="text-center">Salida</th>
-                            <th class="text-center">Tiempo</th>
-                            <th class="text-center">Exposición Ocupacional</th>
-                            <th class="text-center">EPP</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="registros">
-                        <tr mdbTableCol *ngFor="let registro of registros; let i = index">
-                            <td class="text-nowrap">{{ registro.empresa_antigua }}</td>
-                            <td class="text-center text-nowrap">{{ registro.area_trabajo }}</td>
-                            <td class="text-center text-nowrap">{{ registro.ocupacion }}</td>
-                            <td class="text-nowrap text-center">{{ registro.fecha_inicio }}</td>
-                            <td class="text-nowrap text-center">{{ registro.fecha_fin }}</td>
-                            <td class="text-nowrap text-center">{{ registro.tiempo }}</td>
-                            <td class="text-center">{{ registro.exposicion }}</td>
-                            <td class="text-center">{{ registro.epp }}</td>
-                            <td class="text-center">
-                                <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">
-                                    <mdb-icon fas icon="trash" ></mdb-icon>
-                                </mdb-badge>
-                            </td>
-                        </tr>
-                    </tbody>
-
-                    <tbody *ngIf="!registros.length">
-                        <tr mdbTableCol >
-                          <td colspan="9">No se encontraron registros</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-</form>
+    </form>
+</div>

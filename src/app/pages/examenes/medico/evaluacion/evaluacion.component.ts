@@ -18,7 +18,11 @@ export class EvaluacionComponent {
   @Output() submitChange = new EventEmitter();
   @Input() slug;
 
-  registro: any = {};
+  registro: any = {
+      diagnosticos: [], 
+      otros_diagnosticos: [],
+      archivos: [],
+  };
 
   disabled: boolean = false;
 

@@ -58,6 +58,12 @@ export class AntecedentesPersonalesComponent {
   //   }
   // }
   
+  regresar() {
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/ficha_medica/lista`;
+    this.router.navigate([url]);
+  }
+
+  
   onSubmit() {
       this.disabled = true;
       window.scroll(0,0);

@@ -1,0 +1,43 @@
+<div class="row mt-n3">
+    <div class="col-sm-12">
+        <div class="file-field md-form">
+            <div mdbBtn [floating]="true" size="sm" color="primary" class="waves-light" mdbWavesEffect mdbTooltip="Subir Archivo">
+                <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
+                <input type="file" mdbFileSelect (change)="seleccionarArchivo($event)" >
+            </div>
+            <div class="file-path-wrapper mt-3">
+                <input class="file-path" type="text" placeholder="Seleccione una Imagen" [(ngModel)]="fileName" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr class="mdb-color darken-3 white-text">
+                    <th class="text-center"style="width:85%">Nombre Archivo</th>
+                    <th class="text-center" style="width:10%">Tamaño</th>
+                    <th class="text-center" style="width:5%"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="registros.length">
+                <tr mdbTableCol *ngFor="let registro of registros; let i = index">
+                    <td class="text-nowrap">{{ registro.filename }}</td>
+                    <td class="text-center text-nowrap">{{ registro.size }}</td>
+                    <td class="text-center">
+                        <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">
+                            <mdb-icon fas icon="trash" ></mdb-icon>
+                        </mdb-badge>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="!registros.length">
+                <tr mdbTableCol >
+                  <td colspan="3">No se encontraron registros</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

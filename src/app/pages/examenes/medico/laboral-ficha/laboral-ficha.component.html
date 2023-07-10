@@ -117,16 +117,14 @@
         </div>
 
         <div class="form-row mt-n4">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="md-form form-sm">
                     <textarea type="text" id="principales_riesgos" class="md-textarea form-control" mdbInput formControlName="principales_riesgos"></textarea>
                     <label for="principales_riesgos">Principales Riesgos</label>
                 </div>
             </div>
-        </div>
 
-        <div class="form-row mt-n4">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="md-form form-sm">
                     <textarea type="text" id="medidas_seguridad" class="md-textarea form-control" mdbInput formControlName="medidas_seguridad"></textarea>
                     <label for="medidas_seguridad">Medidas seguridad</label>
@@ -136,7 +134,7 @@
 
         <div class="row">
             <div class="col-sm-12  d-flex justify-content-center">
-                <button mdbBtn size="sm" type="cancel" color="secondary" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
                 <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="!registerLaboralForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
             </div>
         </div>

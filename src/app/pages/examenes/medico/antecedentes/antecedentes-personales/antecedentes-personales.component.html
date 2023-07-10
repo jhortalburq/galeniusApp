@@ -1,28 +1,33 @@
 <mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
 
-<div class="titulo_seccion">ANTECEDENTES PERSONALES</div>
+<div class="container">
 
-<div class="row mb-3">
-    <div class="col-sm-4" *ngFor="let item of registros let i = index">
-        <mdb-checkbox [(ngModel)]="item.padece"> {{ item.tipo_patologia }}</mdb-checkbox> 
-    </div>
-</div>
+    <div class="titulo_seccion">ANTECEDENTES PERSONALES</div>
 
-
-<div class="form-row" *ngFor="let item of registros_detalle">
-    <div class="col-sm-12">
-        <div class="md-form form-sm">
-            <input mdbInput type="text" class="form-control form-control-sm" [(ngModel)]="item.descripcion">
-            <label>{{ item.tipo_patologia }}</label>
+    <div class="row mb-3">
+        <div class="col-sm-4" *ngFor="let item of registros let i = index">
+            <mdb-checkbox [(ngModel)]="item.padece"> {{ item.tipo_patologia }}</mdb-checkbox> 
         </div>
     </div>
 
-</div>
 
-<hr>
+    <div class="form-row" *ngFor="let item of registros_detalle">
+        <div class="col-sm-12">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" class="form-control form-control-sm" [(ngModel)]="item.descripcion">
+                <label>{{ item.tipo_patologia }}</label>
+            </div>
+        </div>
 
-<div class="row">
-    <div class="col-sm-12  d-flex justify-content-center">
-        <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
     </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12  d-flex justify-content-center">
+            <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+            <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
+        </div>
+    </div>
+
 </div>

@@ -67,6 +67,7 @@ export class MantenimientoService {
     }
   }
 
+
   getFichasExamenes() {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/fichas`, {})
                       .pipe(map( (res: any) => {
@@ -222,6 +223,25 @@ export class MantenimientoService {
                   );
     } else {
       return this.http.get(`${environment.apiUrl}/api/v1/maestros/${source}`, {params: {'organizacion': org}})
+                      .pipe(map( (res: any) => {
+                            return res;
+                        }),
+                      catchError(this.sharedService.handleError)
+                    );
+    }
+  }
+
+
+  getDataFormMantenimiento(source: string, org: number, params?: string) {
+    if (params) {
+      return this.http.get(`${environment.apiUrl}/api/v1/maestros/${source}`, {params: { 'organizacion': org,  'search': params, 'type': 'true'}})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+    } else {
+      return this.http.get(`${environment.apiUrl}/api/v1/maestros/${source}`, {params: { 'organizacion': org,  'type': 'true'}})
                       .pipe(map( (res: any) => {
                             return res;
                         }),

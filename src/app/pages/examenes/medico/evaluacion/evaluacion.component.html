@@ -17,10 +17,10 @@
                 <table class="table table-sm table-borderless">
                     <tbody>
                         <tr>
-                            <th class="text-center" style="width: 20%">
+                            <th class="text-center mdb-color darken-3 white-text" style="width: 20%">
                                 EXÁMEN CLÍNICO
                             </th>
-                            <th>
+                            <th class="triaje">
                                 <app-triaje 
                                     [talla]="registro.talla"
                                     [peso]="registro.peso"
@@ -94,7 +94,7 @@
 
                 <div class="titulo_seccion">CONCLUSIONES DE EXÁMENES COMPLEMENTARIOS</div>
                 
-                <div class="form-row" style="margin-top: -10px">
+                <div class="form-row mt-n4">
                     <div class="col-sm-4">
 
                         <div class="md-form md-form-sm">
@@ -119,9 +119,7 @@
 
                 </div>
 
-                <div class="form-row" style="margin-top: -10px">
-
-
+                <div class="form-row mt-n4">
                     <div class="col-sm-4">
                         <div class="md-form md-form-sm">
                             <textarea mdbInput type="text" id="id_conclusion_audiometria" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_audiometria"></textarea>
@@ -146,7 +144,7 @@
 
                 </div>
 
-                <div class="form-row" style="margin-top: -10px">
+                <div class="form-row mt-n4">
                     <div class="col-sm-4">
                         <div class="md-form md-form-sm">
                             <textarea mdbInput type="text" id="id_conclusion_oftalmologica" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_oftalmologica"></textarea>
@@ -170,12 +168,11 @@
 
                 </div>
 
-
             </div>
 
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-2">
 
             <div class="col-xs-12 col-sm-12">
 
@@ -186,7 +183,13 @@
         </div>
 
 
-        <div class="row mt-3">
+        <app-diagnosticos-fichas
+            [registros]="registro.diagnosticos"
+        >
+        </app-diagnosticos-fichas>
+
+
+        <div class="row mt-2">
 
             <div class="col-xs-12 col-sm-12">
 
@@ -196,7 +199,14 @@
 
         </div>
 
-        <div class="row mt-4">
+
+        <app-diagnosticos-fichas
+            [registros]="registro.otros_diagnosticos"
+        >
+        </app-diagnosticos-fichas>
+
+
+        <div class="row mt-2">
 
             <div class="col-xs-12 col-sm-12">
 
@@ -206,7 +216,12 @@
 
         </div>
 
-        <div class="row mt-4">
+        <app-archivos-fichas
+            [registros]="registro.archivos"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
 
             <div class="col-xs-12 col-sm-12">
 
@@ -216,7 +231,7 @@
 
         </div>
 
-        <div class="form-row mt-n2">
+        <div class="form-row mt-n4">
             <div class="col-sm-4">
                 <div class="md-form form-sm">
                     <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendaciones"></textarea>
@@ -237,7 +252,7 @@
             </div>
         </div>
 
-        <div class="form-row mt-3">
+        <div class="form-row mt-n3">
             <div class="col-sm-2">
                 <div class="md-form form-sm">
                     <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_examen">
@@ -267,6 +282,7 @@
 
         <div class="row">
             <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
                 <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
             </div>
         </div>

@@ -1,0 +1,81 @@
+<form class="form-horizontal form-material" [formGroup]="registerForm" (submit)="onSubmit()">
+
+    <div class="form-row mt-n2">
+
+        <div class="col-sm-8">
+            <div class="md-form form-sm">
+                <label >Diagnóstico</label>
+                <select2 
+                    [data]="choices_diagnosticos"
+                    placeholder="Seleccione Diagnóstico"
+                    displaySearchStatus="always"
+                    formControlName="diagnostico"
+                    noResultMessage="No existe resultados"
+                    maxResultsMessage="Escriba en el campo de búsqueda"
+                    [maxResults]="maxResults"
+                    [customSearchEnabled]="true"
+                    (open)="_focus($event)"
+                    (search)="_searchDiagnostico($event)"
+                >
+                </select2>
+            </div>
+        </div>
+
+        <div class="col-sm-1 mt-n2">
+            <label class="mdb-main-label">Tipo</label>
+            <select2 [data]="options" formControlName="pdr" >
+            </select2>
+        </div>
+
+        <div class="col-sm-1 d-flex justify-content-center">
+            <a class="btn btn-primary" mdbBtn [floating]="true" size="sm" mdbWavesEffect (click)="onSubmit()">
+                <i class="fas fa-plus" style="color: #fff!important"></i>
+            </a>
+        </div>
+
+    </div>
+
+    
+
+    <div class="row mt-n2">
+
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-bordered">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Diagnósticos</th>
+                            <th style="width: 5%;" class="text-center">P</th>
+                            <th style="width: 5%;" class="text-center">D</th>
+                            <th style="width: 5%;" class="text-center">R</th>
+                            <th style="width: 10%;" class="text-center">CIE10</th>
+                            <th style="width: 5%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="registros">
+                        <tr mdbTableCol *ngFor="let registro of registros; let i = index">
+                            <td class="text-nowrap">{{ registro.nombre_diagnostico }}</td>
+                            <td class="text-center text-nowrap">{{ registro.p }}</td>
+                            <td class="text-center text-nowrap">{{ registro.d }}</td>
+                            <td class="text-center text-nowrap">{{ registro.r }}</td>
+                            <td class="text-center text-nowrap text-center">{{ registro.cie }}</td>
+                            <td class="text-center">
+                                <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">
+                                    <mdb-icon fas icon="trash" ></mdb-icon>
+                                </mdb-badge>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody *ngIf="!registros.length">
+                        <tr mdbTableCol >
+                          <td colspan="6">No se encontraron registros</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</form>
