@@ -120,7 +120,7 @@ export class AntecedentesLaboralesComponent {
                         .subscribe({
                             next: (res: any) => {
                               this.disabled = false;
-                              this.alertService.successSwalToast('Antecedente Registrado', 2000);
+                              this.alertService.successSwalToast('Antecedente Eliminado', 2000);
                               this.getRegistro();
                             },
                             error: (err: any) => {

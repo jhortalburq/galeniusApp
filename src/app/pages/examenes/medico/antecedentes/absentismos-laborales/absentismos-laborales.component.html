@@ -1,1 +1,84 @@
-<p>absentismos-laborales works!</p>
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+<form class="form-horizontal form-material" [formGroup]="registerForm" (submit)="onSubmit()">
+    <div class="titulo_seccion">ABSENTISMOS LABORALES</div>
+
+    <div class="form-row mt-n2">
+
+        <div class="col-sm-7">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="enfermedad" class="form-control form-control-sm" formControlName="enfermedad" mdbValidate>
+                <label for="enfermedad" class="">Enfermedad o Motivo (*)</label>
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <label class="mdb-main-label">Asociado al Trabajo</label>
+            <select2 [data]="options" formControlName="en_trabajo" >
+            </select2>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="anio" class="form-control form-control-sm" formControlName="anio" mdbValidate>
+                <label for="anio" class="">Año</label>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="md-form form-sm">
+                <input mdbInput type="text" id="dias_descanso" class="form-control form-control-sm" formControlName="dias_descanso" mdbValidate>
+                <label for="dias_descanso" class="">Días de Descanso</label>
+            </div>
+        </div>
+
+        <div class="col-sm-1 d-flex justify-content-center">
+            <a class="btn btn-primary" mdbBtn [floating]="true" size="sm" mdbWavesEffect (click)="onSubmit()">
+                <i class="fas fa-plus" style="color: #fff!important"></i>
+            </a>
+        </div>
+
+    </div>
+
+    
+
+    <div class="row mt-2">
+
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-bordered">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Enfermedad o Motivo</th>
+                            <th class="text-center">Asociado al Trabajo</th>
+                            <th class="text-center">Año o Periodo</th>
+                            <th class="text-center">Tiempo de Descanso</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="registros">
+                        <tr mdbTableCol *ngFor="let registro of registros; let i = index">
+                            <td class="text-nowrap">{{ registro.enfermedad }}</td>
+                            <td class="text-center text-nowrap">{{ registro.en_trabajo }}</td>
+                            <td class="text-center text-nowrap">{{ registro.anio }}</td>
+                            <td class="text-center text-nowrap text-center">{{ registro.dias_descanso }}</td>
+                            <td>
+                                <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">
+                                    <mdb-icon fas icon="trash" ></mdb-icon>
+                                </mdb-badge>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody *ngIf="!registros.length">
+                        <tr mdbTableCol >
+                          <td colspan="5">No se encontraron registros</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</form>
