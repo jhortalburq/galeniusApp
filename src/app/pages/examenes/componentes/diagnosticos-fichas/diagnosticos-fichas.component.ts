@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
@@ -14,8 +14,6 @@ import { BreadcrumbsService,
          ExamenesService
 } from '../../../../services/services.index';
 
-import { lastValueFrom } from 'rxjs';
-
 @Component({
   selector: 'app-diagnosticos-fichas',
   templateUrl: './diagnosticos-fichas.component.html',
@@ -24,6 +22,11 @@ import { lastValueFrom } from 'rxjs';
 
 export class DiagnosticosFichasComponent {
   @Input() registros;
+  @Input() tipo;
+  @Input() slug;
+  @Input() clave;
+  @Input() programa;
+  @Output() submitChange = new EventEmitter();
 
   options = [
     {value: 1, label: 'P'},
@@ -56,13 +59,8 @@ export class DiagnosticosFichasComponent {
   }
 
   ngOnChanges() {
-    this.getRegistro();
   }
   
-  getRegistro() {
-    console.log('¿aaaa')
-  }
-
   createFormControls() {
       this.diagnostico = new FormControl('', Validators.required);
       this.pdr = new FormControl(1);
@@ -77,13 +75,34 @@ export class DiagnosticosFichasComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-    
-
-    }
+        this.examenesService.updateDiagnosticoFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.programa, this.clave, this.slug, this.registerForm.value, this.tipo)
+                          .subscribe({
+                              next: (res: any) => {
+                                this.submitChange.emit(true);
+                                this.registerForm.patchValue({
+                                  diagnostico: '',
+                                  pdf: 1
+                                })
+                              },
+                              error: (err: any) => {
+                                console.log('error')
+                                this.disabled = false;
+                              }
+                          })
+                  }
   }
 
   eliminarItem(item_id: number) {
-
+      this.examenesService.deleteDiagnosticoFicha(item_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.programa, this.clave, this.slug, this.tipo)
+                      .subscribe({
+                          next: (res: any) => {
+                            this.submitChange.emit(true);
+                          },
+                          error: (err: any) => {
+                            console.log('error')
+                            this.disabled = false;
+                          }
+                      })
   }
 
   _searchDiagnostico(item: any) {
@@ -94,7 +113,6 @@ export class DiagnosticosFichasComponent {
     return this.mantenimientoService.getDataFormMantenimiento('diagnosticos', this.sharedService.organizacion_seleccionada.id, params)
           .subscribe((response: any) => {
              this.choices_diagnosticos = response.results;
-             console.log(this.choices_diagnosticos)
            });
   }
 

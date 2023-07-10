@@ -127,6 +127,96 @@ export class ExamenesService {
     return this.http.post(`${environment.apiUrl}/api/v1/antecedentes/personales`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
   }
 
+  getDetalleFicha(organizacion: number, cm: number, clave: string, tipo_orden: string, ficha_slug: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/examenes/${clave}/${ficha_slug}`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden}})
+                  .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
+  updateEvaluacionFicha(organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string, registro: any) {
+    return this.http.patch(`${environment.apiUrl}/api/v1/examenes/${clave}/${ficha_slug}`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+  }
+
+  getDiagnosticosFicha(organizacion: number, cm: number, clave: string, tipo_orden: string, ficha_slug: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/${clave}/diagnosticos`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden, 'ficha_slug': ficha_slug}})
+                  .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
+  getOtrosDiagnosticosFicha(organizacion: number, cm: number, clave: string, tipo_orden: string, ficha_slug: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/${clave}/otros-diagnosticos`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden, 'ficha_slug': ficha_slug}})
+                  .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
+  getArchivosFicha(organizacion: number, cm: number, clave: string, tipo_orden: string, ficha_slug: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/${clave}/archivos`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden, 'ficha_slug': ficha_slug}})
+                  .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
+  updateDiagnosticoFicha(organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string, registro: any, tipo?: number) {
+    console.log('aqqqqq', tipo);
+    if (Number(tipo) === 2) {
+      return this.http.post(`${environment.apiUrl}/api/v1/${clave}/otros-diagnosticos`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+    } else {
+      return this.http.post(`${environment.apiUrl}/api/v1/${clave}/diagnosticos`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+    }
+  }
+
+  updateArchivoFicha(organizacion_id: number, cm: number, tipo_orden: string, clave: string, ficha_slug: string, archivo: File) {
+
+    return new Promise ( ( resolve, reject ) => {
+
+          let formData = new FormData();
+          let xhr = new XMLHttpRequest();
+
+          formData.append('file', archivo, archivo.name );
+          formData.append('nombre', archivo.name );
+
+          xhr.onreadystatechange = () => {
+              if ( xhr.readyState === 4 ){
+                  if ( xhr.status === 201 ) {
+                      console.log('Archivo Subida');
+                      resolve( JSON.parse(xhr.response) );
+                  }else{
+                      console.log('Fallo en la subida');
+                      reject( JSON.parse(xhr.response) );
+                  }
+              }
+          }
+
+          xhr.open('POST', `${environment.apiUrl}/api/v1/${clave}/archivos?organizacion=${organizacion_id}&cm=${cm}&tipo_orden=${tipo_orden}&ficha_slug=${ficha_slug}`, true);
+          xhr.setRequestHeader("Authorization", `Bearer ${this._authService.getToken()}`);
+          xhr.send( formData );
+
+    })
+  }
+
+  deleteDiagnosticoFicha(item_id:number, organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string, tipo?: number) {
+    if (Number(tipo) === 2) {
+      return this.http.delete(`${environment.apiUrl}/api/v1/${clave}/otros-diagnosticos/${item_id}`, {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+    } else {
+      return this.http.delete(`${environment.apiUrl}/api/v1/${clave}/diagnosticos/${item_id}`, {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+    }
+  }
+
+  deleteArchivoFicha(item_id:number, organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string) {
+    return this.http.delete(`${environment.apiUrl}/api/v1/${clave}/archivos/${item_id}`, {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+  }
+
 }
 
 

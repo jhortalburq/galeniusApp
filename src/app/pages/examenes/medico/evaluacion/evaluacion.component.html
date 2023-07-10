@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <div class="form-row mt-n1">
+        <div class="form-row mt-1">
             <div class="col-sm-8">
                 <div class="md-form form-sm">
                     <textarea mdbInput type="text" id="anamnesis" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.anamnesis"></textarea>
@@ -22,19 +22,7 @@
                             </th>
                             <th class="triaje">
                                 <app-triaje 
-                                    [talla]="registro.talla"
-                                    [peso]="registro.peso"
-                                    [imc]="registro.imc"
-                                    [peso]="registro.peso"
-                                    [perimetro_abdominal]="registro.perimetro_abdominal"
-                                    [perimetro_cadera]="registro.perimetro_cadera"
-                                    [icc]="registro.icc"
-                                    [fr]="registro.fr"
-                                    [fc]="registro.fc"
-                                    [pa]="registro.pa"
-                                    [temperatura]="registro.temperatura"
-                                    [sat]="registro.sat"
-                                    [triaje_otros]="registro.triaje_otros"
+                                    [registro]="registro"
                                 >
                                 </app-triaje>
                     
@@ -51,7 +39,7 @@
             <div class="col-sm-8">
                 <div class="md-form form-sm">
                     <input mdbInput type="text" id="ectoscopia" class="form-control form-control-sm" [(ngModel)]="registro.ectoscopia">
-                    <label for="ectoscopia" class="">Ectoscopia</label>
+                    <label for="ectoscopia" class="active">Ectoscopia</label>
                 </div>
             </div>
         </div>
@@ -60,7 +48,7 @@
             <div class="col-sm-8">
                 <div class="md-form form-sm">
                     <input mdbInput type="text" id="estado_mental" class="form-control form-control-sm" [(ngModel)]="registro.estado_mental">
-                    <label for="estado_mental" class="">Estado Mental</label>
+                    <label for="estado_mental" class="active">Estado Mental</label>
                 </div>
             </div>
         </div>
@@ -184,7 +172,12 @@
 
 
         <app-diagnosticos-fichas
-            [registros]="registro.diagnosticos"
+            [registros]="diagnosticos"
+            tipo="1"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnostico($event)"
         >
         </app-diagnosticos-fichas>
 
@@ -201,7 +194,12 @@
 
 
         <app-diagnosticos-fichas
-            [registros]="registro.otros_diagnosticos"
+            [registros]="otros_diagnosticos"
+            tipo="2"
+            [clave]="clave"
+            [programa]="programa"
+            [slug]="slug"
+            (submitChange)="onSubmitOtroDiagnostico($event)"
         >
         </app-diagnosticos-fichas>
 
@@ -217,7 +215,11 @@
         </div>
 
         <app-archivos-fichas
-            [registros]="registro.archivos"
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
         >
         </app-archivos-fichas>
 
@@ -255,7 +257,7 @@
         <div class="form-row mt-n3">
             <div class="col-sm-2">
                 <div class="md-form form-sm">
-                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_examen">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
                     <label for="fecha_examen" class="">Fecha de Evaluación</label>
                 </div>
             </div>

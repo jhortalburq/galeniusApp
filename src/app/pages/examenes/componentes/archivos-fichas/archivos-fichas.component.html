@@ -24,7 +24,9 @@
             </thead>
             <tbody *ngIf="registros.length">
                 <tr mdbTableCol *ngFor="let registro of registros; let i = index">
-                    <td class="text-nowrap">{{ registro.filename }}</td>
+                    <td class="text-nowrap">
+                        <a [href]="registro.file" target="_blank">{{ registro.nombre }}</a>
+                    </td>
                     <td class="text-center text-nowrap">{{ registro.size }}</td>
                     <td class="text-center">
                         <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">

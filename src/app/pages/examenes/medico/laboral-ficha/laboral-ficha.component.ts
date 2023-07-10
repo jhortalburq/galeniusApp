@@ -141,7 +141,6 @@ export class LaboralFichaComponent {
     return this.empresaService.getEmpresasForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, params)
           .subscribe((response: any) => {
              this.choices_empresas = response.results;
-             console.log(this.choices_empresas)
            });
   }
 

@@ -55,9 +55,21 @@
                     <tbody *ngIf="registros">
                         <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                             <td class="text-nowrap">{{ registro.nombre_diagnostico }}</td>
-                            <td class="text-center text-nowrap">{{ registro.p }}</td>
-                            <td class="text-center text-nowrap">{{ registro.d }}</td>
-                            <td class="text-center text-nowrap">{{ registro.r }}</td>
+                            <td class="text-center text-nowrap">
+                                <mdb-badge [primary]="true" *ngIf="registro.pdr === 1">
+                                    <mdb-icon fas icon="check" ></mdb-icon>
+                                </mdb-badge>
+                            </td>
+                            <td class="text-center text-nowrap">
+                                <mdb-badge [primary]="true" *ngIf="registro.pdr === 2">
+                                    <mdb-icon fas icon="check" ></mdb-icon>
+                                </mdb-badge>
+                            </td>
+                            <td class="text-center text-nowrap">
+                                <mdb-badge [primary]="true" *ngIf="registro.pdr === 3">
+                                    <mdb-icon fas icon="check" ></mdb-icon>
+                                </mdb-badge>
+                            </td>
                             <td class="text-center text-nowrap text-center">{{ registro.cie }}</td>
                             <td class="text-center">
                                 <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">
