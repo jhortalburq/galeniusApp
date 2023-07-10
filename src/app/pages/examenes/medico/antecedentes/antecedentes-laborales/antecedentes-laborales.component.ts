@@ -56,7 +56,6 @@ export class AntecedentesLaboralesComponent {
   async getRegistro() {
       const info$ = this.examenesService.getAntecedentesLaborales(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc', this.slug);
       let _registros = await lastValueFrom(info$);
-      console.log(_registros);
       this.registros = _registros.results;
   }
 
@@ -102,6 +101,7 @@ export class AntecedentesLaboralesComponent {
                             .subscribe({
                                 next: (res: any) => {
                                   this.disabled = false;
+                                  this.registerForm.reset();
                                   this.alertService.successSwalToast('Antecedente Registrado', 2000);
                                   this.getRegistro();
                                 },

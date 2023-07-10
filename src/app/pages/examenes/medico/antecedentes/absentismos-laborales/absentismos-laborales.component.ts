@@ -88,6 +88,12 @@ export class AbsentismosLaboralesComponent {
                             .subscribe({
                                 next: (res: any) => {
                                   this.disabled = false;
+                                  this.registerForm.reset();
+
+                                  this.registerForm.patchValue({
+                                    en_trabajo: 'Si'
+                                  })
+
                                   this.alertService.successSwalToast('Antecedente Registrado', 2000);
                                   this.getRegistro();
                                 },

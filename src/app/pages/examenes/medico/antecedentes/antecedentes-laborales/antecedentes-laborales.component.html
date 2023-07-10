@@ -98,14 +98,14 @@
                     <tbody *ngIf="registros">
                         <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                             <td class="text-nowrap">{{ registro.empresa_antigua }}</td>
-                            <td class="text-nowrap">{{ registro.area_trabajo }}</td>
-                            <td class="text-nowrap">{{ registro.ocupacion }}</td>
+                            <td class="text-center text-nowrap">{{ registro.area_trabajo }}</td>
+                            <td class="text-center text-nowrap">{{ registro.ocupacion }}</td>
                             <td class="text-nowrap text-center">{{ registro.fecha_inicio }}</td>
                             <td class="text-nowrap text-center">{{ registro.fecha_fin }}</td>
                             <td class="text-nowrap text-center">{{ registro.tiempo }}</td>
                             <td class="text-center">{{ registro.exposicion }}</td>
                             <td class="text-center">{{ registro.epp }}</td>
-                            <td>
+                            <td class="text-center">
                                 <mdb-badge [danger]="true" style="cursor: pointer" (click)="eliminarItem(registro.id)">
                                     <mdb-icon fas icon="trash" ></mdb-icon>
                                 </mdb-badge>

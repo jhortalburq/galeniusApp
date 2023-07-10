@@ -19,7 +19,9 @@
                 <tbody *ngIf="registros">
                   <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                     <td class="text-center">{{  i + 1 + perPage * (page - 1) }}</td>
-                    <td style="width:10%" class="text-center">{{ registro.no_ficha }}</td>
+                    <td style="width:10%" class="text-center">
+                      <a (click)="detalleRegistro(registro.orden_slug, registro.slug)">{{ registro.no_ficha }}</a>
+                    </td>
                     <td style="width:30%">
                       <a (click)="detalleRegistro(registro.orden_slug, registro.slug)">{{ registro.nombre_paciente }}</a>
                     </td>

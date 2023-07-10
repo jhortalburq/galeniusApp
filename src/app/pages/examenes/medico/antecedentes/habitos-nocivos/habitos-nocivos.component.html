@@ -1,1 +1,50 @@
-<p>habitos-nocivos works!</p>
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+<div class="titulo_seccion">HÁBITOS NOCIVOS</div>
+
+<div class="row mt-5">
+
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-sm table-hover table-bordered">
+                <thead>
+                    <tr class="mdb-color darken-3 white-text">
+                        <th class="text-center">Hábito</th>
+                        <th class="text-center">Tipo</th>
+                        <th style="width: 10%;" class="text-center">Cantidad</th>
+                        <th class="text-center">Frecuencia</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="registros">
+                    <tr mdbTableCol *ngFor="let registro of registros; let i = index">
+                        <td class="text-center text-nowrap">{{ registro.tipo_habito | uppercase }}</td>
+                        <td class="text-center text-nowrap text-center">
+                            <input type="text" [(ngModel)]="registro.tipo" class="form-control form-control-sm" />
+                        </td>
+                        <td class="text-center text-nowrap text-center">
+                            <input type="text" [(ngModel)]="registro.cantidad" class="text-center form-control form-control-sm" />
+                        </td>
+                        <td class="text-center text-nowrap text-center">
+                            <input type="text" [(ngModel)]="registro.frecuencia" class="form-control form-control-sm" />
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="!registros.length">
+                    <tr mdbTableCol >
+                        <td colspan="4">No se encontraron registros</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-sm-12  d-flex justify-content-center">
+        <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
+    </div>
+</div>
