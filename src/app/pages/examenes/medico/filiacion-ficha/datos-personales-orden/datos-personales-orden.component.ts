@@ -13,7 +13,7 @@ import { BreadcrumbsService,
         AdmisionService,
         SharedService,
         AlertService
-} from '../../../../services/services.index';
+} from '../../../../../services/services.index';
 
 @Component({
   selector: 'app-datos-personales-orden',

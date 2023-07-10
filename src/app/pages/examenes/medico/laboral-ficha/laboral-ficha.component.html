@@ -1,143 +1,145 @@
 <mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+<div class="container">
 
-<form class="form-horizontal form-material" [formGroup]="registerLaboralForm">
+    <form class="form-horizontal form-material" [formGroup]="registerLaboralForm">
 
-    <div class="form-row">
+        <div class="form-row mt-3">
 
-        <div class="col-sm-6">
-            <label class="mdb-main-label">Empresa</label>
-            <select2 
-                [data]="choices_empresas"
-                placeholder="Seleccione Empresa"
-                displaySearchStatus="always"
-                formControlName="empresa"
-                noResultMessage="No existe resultados"
-                maxResultsMessage="Escriba en el campo de búsqueda"
-                [maxResults]="maxResults"
-                [customSearchEnabled]="true"
-                (open)="_focus($event)"
-                (update)="_selectEmpresa($event)"
-                (search)="_searchEmpresa($event)"
-            >
-            </select2>
+            <div class="col-sm-6">
+                <label class="mdb-main-label">Empresa</label>
+                <select2 
+                    [data]="choices_empresas"
+                    placeholder="Seleccione Empresa"
+                    displaySearchStatus="always"
+                    formControlName="empresa"
+                    noResultMessage="No existe resultados"
+                    maxResultsMessage="Escriba en el campo de búsqueda"
+                    [maxResults]="maxResults"
+                    [customSearchEnabled]="true"
+                    (open)="_focus($event)"
+                    (update)="_selectEmpresa($event)"
+                    (search)="_searchEmpresa($event)"
+                >
+                </select2>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="ruc" class="form-control form-control-sm" formControlName="ruc" mdbValidate>
+                    <label for="ruc" class="">R.U.C (*)</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="rubro" class="form-control form-control-sm" formControlName="rubro" >
+                    <label for="rubro" class="">Rubro</label>
+                </div>
+            </div>
+
         </div>
 
-        <div class="col-sm-2">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="ruc" class="form-control form-control-sm" formControlName="ruc" mdbValidate>
-                <label for="ruc" class="">R.U.C (*)</label>
+        <div class="form-row mt-n4">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="departamento" class="form-control form-control-sm" formControlName="departamento">
+                    <label for="departamento" class="">Departamento</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="provincia" class="form-control form-control-sm" formControlName="provincia">
+                    <label for="provincia" class="">Provincia</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="distrito" class="form-control form-control-sm" formControlName="distrito">
+                    <label for="distrito" class="">Distrito</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n3">
+            <div class="col-sm-12">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="direccion" class="form-control form-control-sm" formControlName="direccion">
+                    <label for="direccion">Domicilio Fiscal</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n3">
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="area_trabajo" class="form-control form-control-sm" formControlName="area_trabajo">
+                    <label for="area_trabajo" class="">Area trabajo
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="date" id="fecha_inicio" class="form-control form-control-sm" formControlName="fecha_inicio">
+                    <label for="fecha_inicio" class="">Fecha inicio</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="tiempo_laborando" class="form-control form-control-sm" formControlName="tiempo_laborando">
+                    <label for="tiempo_laborando" class="">Tiempo laborando</label>
+                </div>
+            </div>
+        
+            <div class="col-sm-3">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="ocupacion" class="form-control form-control-sm" formControlName="ocupacion">
+                    <label for="ocupacion" class="">Puesto de Trabajo
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="col-sm-3">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="puesto_postula" class="form-control form-control-sm" formControlName="puesto_postula">
+                    <label for="puesto_postula" class="">Puesto que Postula</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n4">
+            <div class="col-sm-12">
+                <div class="md-form form-sm">
+                    <textarea type="text" id="principales_riesgos" class="md-textarea form-control" mdbInput formControlName="principales_riesgos"></textarea>
+                    <label for="principales_riesgos">Principales Riesgos</label>
+                </div>
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="rubro" class="form-control form-control-sm" formControlName="rubro" mdbValidate>
-                <label for="rubro" class="">Rubro</label>
+        <div class="form-row mt-n4">
+            <div class="col-sm-12">
+                <div class="md-form form-sm">
+                    <textarea type="text" id="medidas_seguridad" class="md-textarea form-control" mdbInput formControlName="medidas_seguridad"></textarea>
+                    <label for="medidas_seguridad">Medidas seguridad</label>
+                </div>
             </div>
         </div>
 
-    </div>
-
-    <div class="form-row mt-n4">
-        <div class="col-sm-4">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="departamento" class="form-control form-control-sm" formControlName="departamento">
-                <label for="departamento" class="">Departamento</label>
+        <div class="row">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="secondary" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="!registerLaboralForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="provincia" class="form-control form-control-sm" formControlName="provincia">
-                <label for="provincia" class="">Provincia</label>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="distrito" class="form-control form-control-sm" formControlName="distrito">
-                <label for="distrito" class="">Distrito</label>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="form-row mt-n3">
-        <div class="col-sm-12">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="direccion" class="form-control form-control-sm" formControlName="direccion">
-                <label for="direccion">Domicilio Fiscal</label>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="form-row mt-n3">
-
-        <div class="col-sm-2">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="area_trabajo" class="form-control form-control-sm" formControlName="area_trabajo">
-                <label for="area_trabajo" class="">Area trabajo
-                </label>
-            </div>
-        </div>
-
-
-        <div class="col-sm-2">
-            <div class="md-form form-sm">
-                <input mdbInput type="date" id="fecha_inicio" class="form-control form-control-sm" formControlName="fecha_inicio">
-                <label for="fecha_inicio" class="">Fecha inicio</label>
-            </div>
-        </div>
-
-        <div class="col-sm-2">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="tiempo_laborando" class="form-control form-control-sm" formControlName="tiempo_laborando">
-                <label for="tiempo_laborando" class="">Tiempo laborando</label>
-            </div>
-        </div>
-    
-        <div class="col-sm-3">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="ocupacion" class="form-control form-control-sm" formControlName="ocupacion">
-                <label for="ocupacion" class="">Puesto de Trabajo
-                </label>
-            </div>
-        </div>
-
-
-        <div class="col-sm-3">
-            <div class="md-form form-sm">
-                <input mdbInput type="text" id="puesto_postula" class="form-control form-control-sm" formControlName="puesto_postula">
-                <label for="puesto_postula" class="">Puesto que Postula</label>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="form-row mt-n4">
-        <div class="col-sm-12">
-            <div class="md-form form-sm">
-                <textarea type="text" id="principales_riesgos" class="md-textarea form-control" mdbInput formControlName="principales_riesgos"></textarea>
-                <label for="principales_riesgos">Principales Riesgos</label>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-row mt-n4">
-        <div class="col-sm-12">
-            <div class="md-form form-sm">
-                <textarea type="text" id="medidas_seguridad" class="md-textarea form-control" mdbInput formControlName="medidas_seguridad"></textarea>
-                <label for="medidas_seguridad">Medidas seguridad</label>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12  d-flex justify-content-center">
-            <button mdbBtn size="sm" type="cancel" color="secondary" (click)="regresar()">Regresar</button>
-            <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="!registerLaboralForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
-        </div>
-    </div>
-
-</form>
+    </form>
+</div>

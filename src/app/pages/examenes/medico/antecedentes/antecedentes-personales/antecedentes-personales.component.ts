@@ -62,7 +62,6 @@ export class AntecedentesPersonalesComponent {
       this.disabled = true;
       window.scroll(0,0);
       let _registros = this.registros.concat(this.registros_detalle)
-      console.log(_registros)
       this.examenesService.updateAntecedentePersonalesFicha(_registros, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc', this.slug)
                           .subscribe({
                               next: (res: any) => {

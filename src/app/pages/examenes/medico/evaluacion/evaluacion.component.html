@@ -1,1 +1,273 @@
-<p>evaluacion works!</p>
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <div class="form-row mt-n1">
+            <div class="col-sm-8">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="anamnesis" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.anamnesis"></textarea>
+                    <label for="anamnesis">Anamnesis</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row mt-n3 border">
+
+            <div class="col-sm-12">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                        <tr>
+                            <th class="text-center" style="width: 20%">
+                                EXÁMEN CLÍNICO
+                            </th>
+                            <th>
+                                <app-triaje 
+                                    [talla]="registro.talla"
+                                    [peso]="registro.peso"
+                                    [imc]="registro.imc"
+                                    [peso]="registro.peso"
+                                    [perimetro_abdominal]="registro.perimetro_abdominal"
+                                    [perimetro_cadera]="registro.perimetro_cadera"
+                                    [icc]="registro.icc"
+                                    [fr]="registro.fr"
+                                    [fc]="registro.fc"
+                                    [pa]="registro.pa"
+                                    [temperatura]="registro.temperatura"
+                                    [sat]="registro.sat"
+                                    [triaje_otros]="registro.triaje_otros"
+                                >
+                                </app-triaje>
+                    
+                            </th>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+        <div class="form-row mt-3">
+            <div class="col-sm-8">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="ectoscopia" class="form-control form-control-sm" [(ngModel)]="registro.ectoscopia">
+                    <label for="ectoscopia" class="">Ectoscopia</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row mt-n3">
+            <div class="col-sm-8">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="estado_mental" class="form-control form-control-sm" [(ngModel)]="registro.estado_mental">
+                    <label for="estado_mental" class="">Estado Mental</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">EXAMEN FÍSICO</div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-nowrap">
+                        <thead>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th>Órgano o Sistema</th>
+                                <th>Hallazgos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EXÁMENES COMPLEMENTARIOS</div>
+                
+                <div class="form-row" style="margin-top: -10px">
+                    <div class="col-sm-4">
+
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_psicologico" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_psicologico"></textarea>
+                            <label  for="id_conclusion_psicologico">Evaluación Psicológica</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_radiograficas" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_radiograficas"></textarea>
+                            <label  for="id_conclusion_radiograficas">Radiográficas</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_laboratorio" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_laboratorio"></textarea>
+                            <label  for="id_conclusion_laboratorio">Hallazgos Patológicos de Laboratorio</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row" style="margin-top: -10px">
+
+
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_audiometria" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_audiometria"></textarea>
+                            <label  for="id_conclusion_audiometria">Audiometría</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_espirometria" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_espirometria"></textarea>
+                            <label  for="id_conclusion_espirometria">Espirometría</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_ekg" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_ekg"></textarea>
+                            <label  for="id_conclusion_ekg">EKG</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row" style="margin-top: -10px">
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_oftalmologica" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_oftalmologica"></textarea>
+                            <label  for="id_conclusion_oftalmologica">Oftalmologia</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_osteomuscular" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_osteomuscular"></textarea>
+                            <label  for="id_conclusion_osteomuscular">Osteomuscular</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="md-form md-form-sm">
+                            <textarea mdbInput type="text" id="id_conclusion_otros" class="md-textarea form-control form-control-sm" mdbInput [(ngModel)]="registro.conclusion_otros"></textarea>
+                            <label  for="id_conclusion_otros">Conclusion Otros</label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DIAGNÓSTICOS EXÁMEN OCUPACIONAL</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">OTROS DIAGNÓSTICOS</div>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendaciones"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="restricciones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.restricciones"></textarea>
+                    <label for="restricciones">Restricciones</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row mt-3">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_examen">
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <label class="mdb-main-label">Aptitud</label>
+                <select2 [data]="options_aptitud" [(ngModel)]="registro.aptitud">
+                </select2>
+            </div>
+
+            <div class="col-sm-3">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+            <div class="col-sm-3">
+                <label class="mdb-main-label">Médico Aptitud</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.medico_aptitud">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>

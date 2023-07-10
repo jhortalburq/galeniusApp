@@ -8,6 +8,7 @@ import { Select2Module } from 'ng-select2-component';
 import { ListaExamenesComponentComponent } from './componentes/lista-examenes-component/lista-examenes-component.component';
 import { FiltroExamenesComponentComponent } from './componentes/filtro-examenes-component/filtro-examenes-component.component';
 import { HeaderFichaComponent } from './componentes/header-ficha/header-ficha.component';
+import { TriajeComponent } from './componentes/triaje/triaje.component';
 
 
 
@@ -15,7 +16,8 @@ import { HeaderFichaComponent } from './componentes/header-ficha/header-ficha.co
   declarations: [
     ListaExamenesComponentComponent,
     FiltroExamenesComponentComponent,
-    HeaderFichaComponent
+    HeaderFichaComponent,
+    TriajeComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { HeaderFichaComponent } from './componentes/header-ficha/header-ficha.co
   exports:[
     ListaExamenesComponentComponent,
     FiltroExamenesComponentComponent,
-    HeaderFichaComponent
+    HeaderFichaComponent,
+    TriajeComponent
   ]
 })
 export class ExamenesModule { }

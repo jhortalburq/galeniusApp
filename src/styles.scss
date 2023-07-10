@@ -47,6 +47,11 @@ body::before {
 
   .md-form label{
     font-size: 0.7rem!important;
+    color: #312d2d;
+  }
+
+  .md-form label.active{
+    color: #312d2d;
   }
   
   .md-form input[type=text]{

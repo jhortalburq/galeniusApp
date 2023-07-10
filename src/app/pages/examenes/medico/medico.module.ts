@@ -16,10 +16,11 @@ import { Select2Module } from 'ng-select2-component';
 import { SharedModule } from '../../../shared/shared.module';
 import { ExamenesModule } from '../examenes.module';
 import { ExamenMedicoRoutingModule } from './medico-routing.module';
+
 import { FiliacionFichaComponent } from './filiacion-ficha/filiacion-ficha.component';
 import { LaboralFichaComponent } from './laboral-ficha/laboral-ficha.component';
-import { DatosBiometricosOrdenComponent } from './datos-biometricos-orden/datos-biometricos-orden.component';
-import { DatosPersonalesOrdenComponent } from './datos-personales-orden/datos-personales-orden.component';
+import { DatosBiometricosOrdenComponent } from './filiacion-ficha/datos-biometricos-orden/datos-biometricos-orden.component';
+import { DatosPersonalesOrdenComponent } from './filiacion-ficha//datos-personales-orden/datos-personales-orden.component';
 import { AntecedentesLaboralesComponent } from './antecedentes/antecedentes-laborales/antecedentes-laborales.component';
 import { AntecedentesPersonalesComponent } from './antecedentes/antecedentes-personales/antecedentes-personales.component';
 import { AntecedentesFamiliaresComponent } from './antecedentes/antecedentes-familiares/antecedentes-familiares.component';
