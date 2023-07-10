@@ -8,6 +8,7 @@ import { BreadcrumbsService,
 } from '../../../../../services/services.index';
 
 import { lastValueFrom } from 'rxjs';
+
 @Component({
   selector: 'app-habitos-nocivos',
   templateUrl: './habitos-nocivos.component.html',

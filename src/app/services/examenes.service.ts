@@ -114,6 +114,19 @@ export class ExamenesService {
     return this.http.post(`${environment.apiUrl}/api/v1/antecedentes/habitos`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
   }
 
+  getAntecedentesPersonales(organizacion: number, cm: number, tipo_orden: string, ficha_slug: string, params?: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/antecedentes/personales`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden, 'ficha_slug': ficha_slug}})
+                    .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
+  updateAntecedentePersonalesFicha(registro: any, organizacion: number, sucursal_id: any, tipo_orden: string, ficha_slug: string) {
+    return this.http.post(`${environment.apiUrl}/api/v1/antecedentes/personales`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+  }
+
 }
 
 
