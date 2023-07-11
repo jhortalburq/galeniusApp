@@ -154,7 +154,6 @@ export class ExamenesService {
                   );
   }
 
-
   updateEvaluacionFicha(organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string, registro: any) {
     return this.http.patch(`${environment.apiUrl}/api/v1/examenes/${clave}/${ficha_slug}`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
   }

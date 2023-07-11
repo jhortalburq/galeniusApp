@@ -23,7 +23,7 @@ import { HistorialComponent } from './componentes/historial/historial.component'
     TriajeComponent,
     DiagnosticosFichasComponent,
     ArchivosFichasComponent,
-    HistorialComponent
+    HistorialComponent,
   ],
   imports: [
     CommonModule,

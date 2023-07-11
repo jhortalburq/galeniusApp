@@ -50,6 +50,10 @@ const routes: Routes = [
         path: 'osteomuscular',
         loadChildren: () => import('../../pages/examenes/osteomuscular/osteomuscular.module').then( m => m.OsteomuscularModule)
       },
+      {
+        path: 'altura-estructural',
+        loadChildren: () => import('../../pages/examenes/altura-estructural/altura-estructural.module').then( m => m.AlturaEstructuralModule)
+      },
   ];
 
 @NgModule({

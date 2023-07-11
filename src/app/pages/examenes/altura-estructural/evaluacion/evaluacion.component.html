@@ -1,0 +1,227 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="main_titulo">
+                    <h5>EVALUACIÓN MÉDICA PARA TRABAJOS EN ALTURA<br>
+                                            ESTRUCTURAL MAYOR A 1.8 METROS</h5>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">ANTECEDENTE LABORAL EN ALTURA MAYOR A 1.8 METROS</div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <mdb-checkbox [(ngModel)]="registro.experiencia_previa">Experiencia en altura estructural anteriormente?</mdb-checkbox>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <mdb-checkbox [(ngModel)]="registro.problemas_salud_previo">Ha tenido problemas con su salud en trabajos de altura?</mdb-checkbox>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">ANTECEDENTES PATOLÓGICOS</div>
+                
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-xs-12 col-sm-12">
+                <table class="table table-sm">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center"></th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">SI</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of registro.antecedentes; let i = index">
+                            <td class="text-center">{{ i+1 }}</td>
+                            <td>{{ item.nombre_antecedente}}</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="q1_{{ i }}_1" name="q1_{{ i }}" [(ngModel)]="item.respuesta" value="Si" mdbInput>
+                                    <label class="custom-control-label" for="q1_{{ i }}_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="q1_{{ i }}_2" name="q1_{{ i }}" [(ngModel)]="item.respuesta" value="No" mdbInput>
+                                    <label class="custom-control-label" for="q1_{{ i }}_2"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm" [(ngModel)]="item.detalle">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">EXAMEN FÍSICO</div>
+                
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-xs-12 col-sm-12">
+                <table class="table table-sm">
+                    <thead>
+
+                        <tr class="mdb-color darken-3 white-text">
+                                <th class="text-center"></th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Normal</th>
+                                <th class="text-center">Anormal</th>
+                                <th class="text-center">Observación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of registro.examen_fisico; let i = index">
+                                <td class="text-center">{{ i+1}}</td>
+                                <td>{{ item.nombre_examen }}</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="q2_{{ i }}_1" name="q2_{{ i }}" [(ngModel)]="item.respuesta" value="Normal" mdbInput>
+                                        <label class="custom-control-label" for="q2_{{ i }}_1"></label>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="q2_{{ i }}_2" name="q2_{{ i }}" [(ngModel)]="item.respuesta" value="Anormal" mdbInput>
+                                        <label class="custom-control-label" for="q2_{{ i }}_2"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input mdbInput type="text" class="form-control form-control-sm" [(ngModel)]="item.detalle">
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DIAGNÓSTICOS EVALUACIÓN</div>
+
+            </div>
+
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos"
+            tipo="1"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnostico($event)"
+        >
+        </app-diagnosticos-fichas>
+
+        
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>              
+            </div>
+        </div>
+
+        <app-archivos-fichas
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendacion"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <label class="mdb-main-label">Aptitud</label>
+                <select2 [data]="options_aptitud" [(ngModel)]="registro.aptitud">
+                </select2>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>
