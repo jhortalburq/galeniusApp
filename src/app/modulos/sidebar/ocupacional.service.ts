@@ -45,6 +45,7 @@ export class OcupacionalService {
                     { titulo: 'EKG', url: '/ocupacional/ekg/lista' },
                     { titulo: 'Espirometría', url: '/ocupacional/espirometria/lista' },
                     { titulo: 'Ofalmología', url: '/ocupacional/oftalmologia/lista' },
+                    { titulo: 'Osteomuscular', url: '/ocupacional/osteomuscular/lista' },
                ]
      },
     // {

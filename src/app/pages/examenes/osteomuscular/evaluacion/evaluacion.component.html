@@ -1,0 +1,91 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">I. EVALUACIÓN MUSCULOESQUELÉTICA</div>
+                
+            </div>
+        </div>
+
+    
+        <div class="form-row">
+            <div class="col-xs-12 col-sm-12">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center"></th>
+                            <th class="text-center" style="vertical-align: middle">
+                                Usted ha tenido en los últimos 12 meses problemas (dolor, curvaturas, etc.) a nivel de:
+                            </th>
+                            <th class="text-center" style="vertical-align: middle">
+                                Durante los últimos doce meses ha estado incapacitado(a) para su trabajo (en casa o fuera) por causa del problema
+                            </th>
+                            <th class="text-center" style="vertical-align: middle">
+                                ¿Ha tenido problemas en los últimos siete días?
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr *ngFor="let item of registro.sintomas; let i = index">
+                            <td class="text-center" style="width: 25%">
+                                {{ item.nombre_parte }}
+                            </td>
+                            <td style="width: 20%" >
+                                <select2 class="text-center" [data]="options_sintomas" [(ngModel)]="item.respuesta">
+                                </select2>
+                            </td>
+                            <td style="width: 35%" class="horizontal text-center">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="respuesta_2_{{ i }}_1" name="respuesta_2_{{ i }}" [(ngModel)]="item.respuesta_2" value="No" mdbInput>
+                                    <label class="custom-control-label" for="respuesta_2_{{ i }}_1">No</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="respuesta_2_{{ i }}_2" name="respuesta_2_{{ i }}" [(ngModel)]="item.respuesta_2" value="Si" mdbInput>
+                                    <label class="custom-control-label" for="respuesta_2_{{ i }}_2">Si</label>
+                                </div>
+                            </td>
+                            <td style="width: 20%" class="horizontal text-center">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="respuesta_3_{{ i }}_1" name="respuesta_3_{{ i }}" [(ngModel)]="item.respuesta_3" value="No" mdbInput>
+                                    <label class="custom-control-label" for="respuesta_3_{{ i }}_1">No</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="respuesta_3_{{ i }}_2" name="respuesta_3_{{ i }}" [(ngModel)]="item.respuesta_3" value="Si" mdbInput>
+                                    <label class="custom-control-label" for="respuesta_3_{{ i }}_2">Si</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+        <div class="form-row mt-3">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+       
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>

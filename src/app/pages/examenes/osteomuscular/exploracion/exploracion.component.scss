@@ -1,0 +1,35 @@
+.titulo_seccion {
+    font-weight: bold;
+    color: #757575;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #757575;
+    margin-bottom: 25px;
+}
+
+td,
+th{
+    vertical-align: middle;
+}
+
+.border{
+    border: 5px solid #222121;
+}
+
+.triaje{
+    padding: 20px!important;
+}
+
+
+.md-form {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+table tbody th{
+    text-align: left!important;
+}
+
+.horizontal label{
+    padding-top: 5px;
+}

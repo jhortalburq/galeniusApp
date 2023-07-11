@@ -21,7 +21,7 @@ export class DetalleComponent {
   orden: any = {};
   
   programa = 'oc';
-  title = 'OFTALMOLOGÍA';
+  title = 'OSTEOMUSCULAR';
 
   constructor(
     public breadcrumbService: BreadcrumbsService,

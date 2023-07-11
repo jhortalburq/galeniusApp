@@ -46,6 +46,10 @@ const routes: Routes = [
         path: 'oftalmologia',
         loadChildren: () => import('../../pages/examenes/ofalmologia/ofalmologia.module').then( m => m.OfalmologiaModule)
       },
+      {
+        path: 'osteomuscular',
+        loadChildren: () => import('../../pages/examenes/osteomuscular/osteomuscular.module').then( m => m.OsteomuscularModule)
+      },
   ];
 
 @NgModule({

@@ -1,0 +1,791 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">I. EXAMEN FÍSICO</div>
+                
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="4">Desviación Eje Antero-Posterior</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Curvas Fisiológicas Ant-Post</th>
+                            <th class="text-center">Normal</th>
+                            <th class="text-center">Aumentada</th>
+                            <th class="text-center">Disminuida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td>Cervical</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_cervical_1" name="deviacion_cervical" [(ngModel)]="registro.deviacion_cervical" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_cervical_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_cervical_2" name="deviacion_cervical" [(ngModel)]="registro.deviacion_cervical" value="Aumentada" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_cervical_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_cervical_3" name="deviacion_cervical" [(ngModel)]="registro.deviacion_cervical" value="Disminuida" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_cervical_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>Dorsal</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_dorsal_1" name="deviacion_dorsal" [(ngModel)]="registro.deviacion_dorsal" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_dorsal_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_dorsal_2" name="deviacion_dorsal" [(ngModel)]="registro.deviacion_dorsal" value="Aumentada" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_dorsal_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_dorsal_3" name="deviacion_dorsal" [(ngModel)]="registro.deviacion_dorsal" value="Disminuida" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_dorsal_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>Lumbar</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_lumbar_1" name="deviacion_lumbar" [(ngModel)]="registro.deviacion_lumbar" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_lumbar_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_lumbar_2" name="deviacion_lumbar" [(ngModel)]="registro.deviacion_lumbar" value="Aumentada" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_lumbar_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_lumbar_3" name="deviacion_lumbar" [(ngModel)]="registro.deviacion_lumbar" value="Disminuida" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_lumbar_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th  class="text-center" colspan="4">Desviación Eje Lateral</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Eje Lateral</th>
+                            <th class="text-center">Normal</th>
+                            <th class="text-center">Concavidad Derecha</th>
+                            <th class="text-center">Concavidad Izquierda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td>Dorsal</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_lumbar_lateral_1" name="deviacion_lumbar_lateral" [(ngModel)]="registro.deviacion_lumbar_lateral" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_lumbar_lateral_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_lumbar_lateral_2" name="deviacion_lumbar_lateral" [(ngModel)]="registro.deviacion_lumbar_lateral" value="Concavidad Derecha" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_lumbar_lateral_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_lumbar_lateral_3" name="deviacion_lumbar_lateral" [(ngModel)]="registro.deviacion_lumbar_lateral" value="Concavidad Izquierda" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_lumbar_lateral_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>Lumbar</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_dorsal_lateral_1" name="deviacion_dorsal_lateral" [(ngModel)]="registro.deviacion_dorsal_lateral" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_dorsal_lateral_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_dorsal_lateral_2" name="deviacion_dorsal_lateral" [(ngModel)]="registro.deviacion_dorsal_lateral" value="Concavidad Derecha" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_dorsal_lateral_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="deviacion_dorsal_lateral_3" name="deviacion_dorsal_lateral" [(ngModel)]="registro.deviacion_dorsal_lateral" value="Concavidad Izquierda" mdbInput>
+                                    <label class="custom-control-label" for="deviacion_dorsal_lateral_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="8">Movilidad - Dolor</th>
+                    </tr>
+                    <tr class="mdb-color darken-3 white-text">
+                        <th class="text-center"></th>
+                        <th style="width: 10%" class="text-center">Flexión</th>
+                        <th style="width: 10%" class="text-center">Extensión</th>
+                        <th style="width: 10%" class="text-center">Lateraliz.<br>Derecha</th>
+                        <th style="width: 10%" class="text-center">Lateraliz.<br>Izquierda</th>
+                        <th style="width: 10%" class="text-center">Rotación<br>Derecha</th>
+                        <th style="width: 10%"  class="text-center">Rotación<br>Izquierda</th>
+                        <th style="width: 10%" class="text-center">Irradiación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of registro.exploracion_columna; let i = index">
+                        <td class="text-center">{{ item.nombre_parte }}</td>
+                        <td>
+                            <input mdbInput type="text" id="flexion" class="form-control form-control-sm text-center" [(ngModel)]="item.flexion">
+                        </td>
+                        <td>
+                            <input mdbInput type="text" id="extension" class="form-control form-control-sm text-center" [(ngModel)]="item.extension">
+                        </td>
+                        <td>
+                            <input mdbInput type="text" id="lat_der" class="form-control form-control-sm text-center" [(ngModel)]="item.lat_der">
+                        </td>
+                        <td>
+                            <input mdbInput type="text" id="lat_izq" class="form-control form-control-sm text-center" [(ngModel)]="item.lat_izq">
+                        </td>
+                        <td>
+                            <input mdbInput type="text" id="rot_der" class="form-control form-control-sm text-center" [(ngModel)]="item.rot_der">
+                        </td>
+                        <td>
+                            <input mdbInput type="text" id="rot_izq" class="form-control form-control-sm text-center" [(ngModel)]="item.rot_izq">
+                        </td>
+                        <td>
+                            <input mdbInput type="text" id="irradiacion" class="form-control form-control-sm text-center" [(ngModel)]="item.irradiacion">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+               <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="text-center">Muñecas</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th colspan="2" class="text-center">Test</th>
+                            <th class="text-center">(+)</th>
+                            <th class="text-center">(-)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 50%" class="text-center" rowspan="2">Phalen</td>
+                            <td class="text-center">Der</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="phalen_der_1" name="phalen_der" [(ngModel)]="registro.phalen_der" value="+" mdbInput>
+                                    <label class="custom-control-label" for="phalen_der_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="phalen_der_2" name="phalen_der" [(ngModel)]="registro.phalen_der" value="-" mdbInput>
+                                    <label class="custom-control-label" for="phalen_der_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Izq</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="phalen_izq_1" name="phalen_izq" [(ngModel)]="registro.phalen_izq" value="+" mdbInput>
+                                    <label class="custom-control-label" for="phalen_izq_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="phalen_izq_2" name="phalen_izq" [(ngModel)]="registro.phalen_izq" value="-" mdbInput>
+                                    <label class="custom-control-label" for="phalen_izq_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" rowspan="2">Tinel</td>
+                            <td class="text-center">Der</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="tinel_der_1" name="tinel_der" [(ngModel)]="registro.tinel_der" value="+" mdbInput>
+                                    <label class="custom-control-label" for="tinel_der_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="tinel_der_2" name="tinel_der" [(ngModel)]="registro.tinel_der" value="-" mdbInput>
+                                    <label class="custom-control-label" for="tinel_der_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Izq</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="tinel_izq_1" name="tinel_izq" [(ngModel)]="registro.tinel_izq" value="+" mdbInput>
+                                    <label class="custom-control-label" for="tinel_izq_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="tinel_izq_2" name="tinel_izq" [(ngModel)]="registro.tinel_izq" value="-" mdbInput>
+                                    <label class="custom-control-label" for="tinel_izq_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+               <table class="table table-sm">
+                    <thead>
+                         <tr>
+                            <th colspan="4" class="text-center">Palpación</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Columna</th>
+                            <th class="text-center">Normal</th>
+                            <th class="text-center">Apófisis espinosas dolorosas</th>
+                            <th class="text-center">Contractura Muscular</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">Cervical</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_cervical_1" name="palpacion_cervical" [(ngModel)]="registro.palpacion_cervical" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_cervical_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_cervical_2" name="palpacion_cervical" [(ngModel)]="registro.palpacion_cervical" value="Apófisis espinosas dolorosas" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_cervical_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_cervical_3" name="palpacion_cervical" [(ngModel)]="registro.palpacion_cervical" value="Contractura muscular" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_cervical_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Dorsal</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_dorsal_1" name="palpacion_dorsal" [(ngModel)]="registro.palpacion_dorsal" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_dorsal_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_dorsal_2" name="palpacion_dorsal" [(ngModel)]="registro.palpacion_dorsal" value="Apófisis espinosas dolorosas" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_dorsal_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_dorsal_3" name="palpacion_dorsal" [(ngModel)]="registro.palpacion_dorsal" value="Contractura muscular" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_dorsal_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Lumbar</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_lumbar_1" name="palpacion_lumbar" [(ngModel)]="registro.palpacion_lumbar" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_lumbar_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_lumbar_2" name="palpacion_lumbar" [(ngModel)]="registro.palpacion_lumbar" value="Apófisis espinosas dolorosas" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_lumbar_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="palpacion_lumbar_3" name="palpacion_lumbar" [(ngModel)]="registro.palpacion_lumbar" value="Contractura muscular" mdbInput>
+                                    <label class="custom-control-label" for="palpacion_lumbar_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+               <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="text-center">Ciatico</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th colspan="2" class="text-center">Signos</th>
+                            <th class="text-center">(+)</th>
+                            <th class="text-center">(-)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 50%" class="text-center" rowspan="2">Lasegue</td>
+                            <td class="text-center">Der</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="lasegue_der_1" name="lasegue_der" [(ngModel)]="registro.lasegue_der" value="+" mdbInput>
+                                    <label class="custom-control-label" for="lasegue_der_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="lasegue_der_2" name="lasegue_der" [(ngModel)]="registro.lasegue_der" value="-" mdbInput>
+                                    <label class="custom-control-label" for="lasegue_der_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Izq</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="lasegue_izq_1" name="lasegue_izq" [(ngModel)]="registro.lasegue_izq" value="+" mdbInput>
+                                    <label class="custom-control-label" for="lasegue_izq_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="lasegue_izq_2" name="lasegue_izq" [(ngModel)]="registro.lasegue_izq" value="-" mdbInput>
+                                    <label class="custom-control-label" for="lasegue_izq_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" rowspan="2">Schover</td>
+                            <td class="text-center">Der</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="schover_der_1" name="schover_der" [(ngModel)]="registro.schover_der" value="+" mdbInput>
+                                    <label class="custom-control-label" for="schover_der_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="schover_der_2" name="schover_der" [(ngModel)]="registro.schover_der" value="-" mdbInput>
+                                    <label class="custom-control-label" for="schover_der_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Izq</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="schover_izq_1" name="schover_izq" [(ngModel)]="registro.schover_izq" value="+" mdbInput>
+                                    <label class="custom-control-label" for="schover_izq_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="schover_izq_2" name="schover_izq" [(ngModel)]="registro.schover_izq" value="-" mdbInput>
+                                    <label class="custom-control-label" for="schover_izq_2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+               <table class="table table-sm">
+                    <thead>
+                         <tr>
+                            <th colspan="5" class="text-center">Simetría</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th colspan="2" class="text-center"></th>
+                            <th class="text-center">Normal</th>
+                            <th class="text-center">Varo</th>
+                            <th class="text-center">Valgo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" class="text-center">Codo</td>
+                            <td class="text-center">Der</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="codo_der_1" name="codo_der" [(ngModel)]="registro.codo_der" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="codo_der_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="codo_der_2" name="codo_der" [(ngModel)]="registro.codo_der" value="Varo" mdbInput>
+                                    <label class="custom-control-label" for="codo_der_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="codo_der_3" name="codo_der" [(ngModel)]="registro.codo_der" value="Valgo" mdbInput>
+                                    <label class="custom-control-label" for="codo_der_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Izq</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="codo_izq_1" name="codo_izq" [(ngModel)]="registro.codo_izq" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="codo_izq_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="codo_izq_2" name="codo_izq" [(ngModel)]="registro.codo_izq" value="Varo" mdbInput>
+                                    <label class="custom-control-label" for="codo_izq_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="codo_izq_3" name="codo_izq" [(ngModel)]="registro.codo_izq" value="Valgo" mdbInput>
+                                    <label class="custom-control-label" for="codo_izq_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th colspan="2" class="text-center"></th>
+                            <th class="text-center">Normal</th>
+                            <th class="text-center">Cavo</th>
+                            <th class="text-center">Plano</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="text-center">Pie</td>
+                            <td class="text-center">Der</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="pie_der_1" name="pie_der" [(ngModel)]="registro.pie_der" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="pie_der_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="pie_der_2" name="pie_der" [(ngModel)]="registro.pie_der" value="Cavo" mdbInput>
+                                    <label class="custom-control-label" for="pie_der_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="pie_der_3" name="pie_der" [(ngModel)]="registro.pie_der" value="Plano" mdbInput>
+                                    <label class="custom-control-label" for="pie_der_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Izq</td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="pie_izq_1" name="pie_izq" [(ngModel)]="registro.pie_izq" value="Normal" mdbInput>
+                                    <label class="custom-control-label" for="pie_izq_1"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="pie_izq_2" name="pie_izq" [(ngModel)]="registro.pie_izq" value="Cavo" mdbInput>
+                                    <label class="custom-control-label" for="pie_izq_2"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="pie_izq_3" name="pie_izq" [(ngModel)]="registro.pie_izq" value="Plano" mdbInput>
+                                    <label class="custom-control-label" for="pie_izq_3"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+               <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th style="width: 40%" rowspan="2" class="text-center">Reflejos</th>
+                            <th colspan="2" class="text-center">Grados: 0,1+,2+ (Normal), 3+, 4+</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Der</th>
+                            <th class="text-center">Izq</th>
+                        </tr>
+                    </thead>
+                   <tbody>
+                        <tr>
+                            <td  class="text-center">Rotuliano</td>
+                            <td>
+                                <input mdbInput type="text" id="rotuliano_der" class="form-control form-control-sm text-center" [(ngModel)]="registro.rotuliano_der">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="rotuliano_izq" class="form-control form-control-sm text-center" [(ngModel)]="registro.rotuliano_izq"> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Aquileo</td>
+                            <td>
+                                <input mdbInput type="text" id="aquileo_der" class="form-control form-control-sm text-center" [(ngModel)]="registro.aquileo_der"> 
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="aquileo_izq" class="form-control form-control-sm text-center" [(ngModel)]="registro.aquileo_izq"> 
+                            </td>
+                        </tr>
+                   </tbody>
+               </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">II. ARTICULACIONES</div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="8">Movilidad - Dolor</th>
+                    </tr>
+                    <tr class="mdb-color darken-3 white-text">
+                        <th colspan="2" class="text-center">Articulación</th>
+                        <th style="width: 10%" class="text-center">Abducc</th>
+                        <th style="width: 10%" class="text-center">Flexión</th>
+                        <th style="width: 10%" class="text-center">Extensión</th>
+                        <th style="width: 10%" class="text-center">Rotación<br>Ext</th>
+                        <th style="width: 10%"  class="text-center">Rotación<br>Int</th>
+                        <th style="width: 10%" class="text-center">Irradiación</th>
+                        <th style="width: 10%" class="text-center">Alt. Masa<br>Muscular</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let inline of registro.exploracion_articulacion">
+                        <tr>
+                            <td rowspan="2" class="text-center">{{ inline.nombre_parte}}</td>
+                            <td class="text-center">Der</td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.abducc_der">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.flexion_der">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.extension_der">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.rot_ext_der">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.rot_int_der">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.irradiacion_der">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.alt_mas_der">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Izq</td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.abducc_izq">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.flexion_izq">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.extension_izq">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.rot_ext_izq">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.rot_int_izq">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.irradiacion_izq">
+                            </td>
+                            <td>
+                                <input mdbInput type="text" class="form-control form-control-sm text-center" [(ngModel)]="inline.alt_mas_izq">
+                            </td>
+                        </tr>
+    
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr class="mdb-color darken-3 white-text">
+                        <th class="text-center" colspan="2">Signos y Sintomas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="alert-success text-center">Grado 0</th>
+                        <td>Ausencia de signos y síntomas</td>
+                    </tr>
+                    <tr>
+                        <th class="alert-success text-center">Grado 1</th>
+                        <td>Dolor en reposo y/o existencia de sintomatología sugestiva</td>
+                    </tr>
+                    <tr>
+                        <th class="alert-success text-center">Grado 2</th>
+                        <td>Grado 1 más contractura y/o dolor a la movilización</td>
+                    </tr>
+                    <tr>
+                        <th class="alert-success text-center">Grado 3</th>
+                        <td>Grado 2 más dolor a la palpación y/o percusión</td>
+                    </tr>
+                    <tr>
+                        <th class="alert-success text-center">Grado 4</th>
+                        <td>Grado 3 más limitación funcional evidente clínicamente</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">DIAGNÓSTICOS OSTEOMUSCULAR</div>
+            </div>
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos"
+            tipo="1"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnostico($event)"
+        >
+        </app-diagnosticos-fichas>
+
+        
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>              
+            </div>
+        </div>
+
+        <app-archivos-fichas
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendaciones"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>

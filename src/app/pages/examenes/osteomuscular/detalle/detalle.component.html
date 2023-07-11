@@ -1,0 +1,35 @@
+
+<app-header-ficha [orden]="orden"></app-header-ficha>
+
+<ul class="nav nav-tabs text-nowrap mt-3">
+
+    <li class="nav-item ml-auto">
+        <a class="nav-link" [class.active]="tab==1" (click)="irTab(1)"><i class="fas fa-binoculars"></i> Cuestionario</a>
+    </li>   
+
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==2" (click)="irTab(2)"><i class="fas fa-binoculars"></i> Evaluación</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==3" (click)="irTab(3)"><i class="fas fa-binoculars"></i> Exploración Física</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="tab==4" (click)="irTab(4)"><i class="fas fa-history"></i> Eval. Previas</a>
+    </li>
+</ul>
+
+<div class="row pb-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <app-cuestionario *ngIf="tab == 1" [slug]="slug"></app-cuestionario>
+                <app-evaluacion *ngIf="tab == 2" [slug]="slug"></app-evaluacion>
+                <app-exploracion *ngIf="tab == 3" [slug]="slug"></app-exploracion>
+                <app-historial *ngIf="tab == 4"></app-historial>
+            </div>
+        </div>
+    </div>
+</div>
+
