@@ -136,8 +136,21 @@ export class ExamenesService {
                   );
   }
 
+  getDetalleCuestionario(organizacion: number, cm: number, clave: string, tipo_orden: string, ficha_slug: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/${clave}/cuestionario/${ficha_slug}`, {params: { 'organizacion': organizacion, 'cm': cm, 'tipo_orden': tipo_orden}})
+                  .pipe(map( (res: any) => {
+                          return res;
+                      }),
+                    catchError(this.sharedService.handleError)
+                  );
+  }
+
   updateEvaluacionFicha(organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string, registro: any) {
     return this.http.patch(`${environment.apiUrl}/api/v1/examenes/${clave}/${ficha_slug}`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
+  }
+
+  updateCuestionarioFicha(organizacion: number, sucursal_id: any, tipo_orden: string, clave: string, ficha_slug: string, registro: any) {
+    return this.http.patch(`${environment.apiUrl}/api/v1/${clave}/cuestionario/${ficha_slug}`, JSON.stringify(registro), {params: { 'cm': sucursal_id , 'organizacion': organizacion, 'ficha_slug': ficha_slug, 'tipo_orden': tipo_orden}})
   }
 
   getDiagnosticosFicha(organizacion: number, cm: number, clave: string, tipo_orden: string, ficha_slug: string) {

@@ -1,0 +1,291 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <!-- 
+        <div class="form-row mt-1">
+            <div class="col-sm-8">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="anamnesis" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.anamnesis"></textarea>
+                    <label for="anamnesis">Anamnesis</label>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DATOS SOBRE LA ESPIROMETRÍA</div>
+                
+            </div>
+        </div>
+
+        <div class="form-row mt-n1">
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="id_no_espirometria" class="form-control form-control-sm" [(ngModel)]="registro.no_espirometria">
+                    <label for="id_no_espirometria" class="active">N° Espirometría</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="date" id="fecha" class="form-control form-control-sm" [(ngModel)]="registro.fecha">
+                    <label for="fecha" class="active">Fecha</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="time" id="id_hora" class="form-control form-control-sm" [(ngModel)]="registro.hora">
+                    <label  for="id_hora" class="active">Hora</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row mt-1">
+            <mat-form-field class="col-sm-4">
+                <mat-label>Departamento</mat-label>
+                <mat-select (selectionChange)="changeDepartment($event)" [(ngModel)]="registro.cod_depart">
+                    <mat-option *ngFor="let item of tipos_departamentos" [value]="item.value">
+                        {{item.label | uppercase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field class="col-sm-4">
+                <mat-label>Provincia</mat-label>
+                <mat-select (selectionChange)="changeProvince($event)" [(ngModel)]="registro.cod_prov">
+                    <mat-option *ngFor="let item of tipos_provincias" [value]="item.value">
+                        {{item.label | uppercase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field class="col-sm-4">
+                <mat-label>Distrito</mat-label>
+                <mat-select [(ngModel)]="registro.ubigeo">
+                    <mat-option *ngFor="let item of tipos_distritos" [value]="item.value">
+                        {{item.label | uppercase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <label class="mdb-main-label">Origen Étnico</label>
+                <select2 
+                    [data]="options_etnia"
+                    placeholder="Seleccione Opción"
+                    [(ngModel)]="registro.etnia"
+                >
+                </select2>
+            </div>
+            
+            <div class="col-sm-2">
+                <label class="mdb-main-label">Fumador</label>
+                <select2 
+                    [data]="options_fumador"
+                    placeholder="Seleccione Opción"
+                    [(ngModel)]="registro.fumador"
+                >
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">VALORES OBSERVADOS DE ESPIROMETRÍA</div>                           
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <table class="table table-sm">
+                    <thead>
+
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center"></th>
+                            <th class="text-center">% Pred</th>
+                            <th class="text-center">Edad Pulmonar Estimada</th>
+                            <th class="text-center">
+                                <input mdbInput type="text" id="id_edad_estimada" class="form-control form-control-sm text-center" [(ngModel)]="registro.edad_estimada">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th  class="text-center">FVC</th>
+                            <td>
+                                <input mdbInput type="text" id="id_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.fvc">                                
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">FEV<span class="sub_indice">1</span></th>
+                            <td>
+                                <input mdbInput type="text" id="id_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.fev1">                                
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">FEV<span class="sub_indice">1</span>/FVC</th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.fev1_fvc">                                
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">FEF 25% - 75%</th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.fef25_75">                                
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">PEF</th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.pef">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">FER</th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.fer">                                
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">F<span class="sub_indice">25</span></th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.f25">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">F<span class="sub_indice">50</span></th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.f50">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">MEF</th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.mef">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">R<span class="sub_indice">50</span></th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.r50">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th  class="text-center">MVV (IND)</th>
+                            <td>
+                                <input mdbInput type="text" id="id_fev1_fvc" class="form-control form-control-sm text-center" [(ngModel)]="registro.mvv">
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        <div class="row mt-2">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DIAGNÓSTICOS ESPIROMETRÍA<div>
+
+            </div>
+
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos"
+            tipo="1"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnostico($event)"
+        >
+        </app-diagnosticos-fichas>
+
+        
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>              
+            </div>
+        </div>
+
+        <app-archivos-fichas
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendaciones"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>

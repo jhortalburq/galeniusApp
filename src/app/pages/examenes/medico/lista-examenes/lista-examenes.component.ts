@@ -19,7 +19,8 @@ export class ListaExamenesComponent {
 
   programa = 'oc';
   clave = 'emo';
-  
+  title = 'EXÁMENES MÉDICOS OCUPACIONALES';
+
   is_loading: boolean = false;
 
   nextURL: string = '';
@@ -38,7 +39,7 @@ export class ListaExamenesComponent {
 
   ngOnInit(): void {
     this.getData();
-    this.breadcrumbService.title = 'EXÁMENES MÉDICOS OCUPACIONALES';
+    this.breadcrumbService.title = this.title;
   }
 
   getData(url?) {

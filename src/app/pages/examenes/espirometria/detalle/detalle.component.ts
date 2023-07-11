@@ -19,8 +19,9 @@ export class DetalleComponent {
   tab: number = 1;
 
   orden: any = {};
+  
   programa = 'oc';
-  title = 'EXÁMENES MÉDICOS OCUPACIONALES';
+  title = 'ESPIROMETRIA';
 
   constructor(
     public breadcrumbService: BreadcrumbsService,
@@ -48,7 +49,4 @@ export class DetalleComponent {
     this.tab = number;
   }
 
-  updateResumenOrden(action: any) {
-    this.getRegistro();
-  }
 }

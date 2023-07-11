@@ -38,6 +38,10 @@ const routes: Routes = [
         path: 'ekg',
         loadChildren: () => import('../../pages/examenes/ekg/ekg.module').then( m => m.EkgModule)
       },
+      {
+        path: 'espirometria',
+        loadChildren: () => import('../../pages/examenes/espirometria/espirometria.module').then( m => m.EspirometriaModule)
+      },
   ];
 
 @NgModule({

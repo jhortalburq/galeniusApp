@@ -18,8 +18,8 @@ export class ListaExamenesComponent {
   perPage: number = 15;
 
   programa = 'oc';
-  clave = 'ekg';
-  title = 'EKG';
+  clave = 'espirometria';
+  title = 'ESPIROMETRIA';
 
   is_loading: boolean = false;
 
@@ -28,7 +28,7 @@ export class ListaExamenesComponent {
 
   registros: any = [];
 
-  examen: string = 'ekg';
+  examen: string = 'espirometria';
 
   constructor(
       public breadcrumbService: BreadcrumbsService,

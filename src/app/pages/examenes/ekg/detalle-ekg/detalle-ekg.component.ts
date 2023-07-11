@@ -21,6 +21,7 @@ export class DetalleEkgComponent {
   orden: any = {};
   
   programa = 'oc';
+  title = 'EKG';
 
   constructor(
     public breadcrumbService: BreadcrumbsService,
@@ -33,7 +34,7 @@ export class DetalleEkgComponent {
     this.orden_slug = this.route.snapshot.paramMap.get('orden_slug');
     this.slug = this.route.snapshot.paramMap.get('slug');
 
-    this.breadcrumbService.title = 'EKG';
+    this.breadcrumbService.title = this.title;
     this.getRegistro();
   }
 
@@ -46,9 +47,5 @@ export class DetalleEkgComponent {
 
   irTab(number) {
     this.tab = number;
-  }
-
-  updateResumenOrden(action: any) {
-    this.getRegistro();
   }
 }
