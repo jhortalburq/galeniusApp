@@ -1,0 +1,429 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="main_titulo">
+                    <h5>RADIOLOGÍA OIT</h5>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="form-row mt-3">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="nro_rayos" class="form-control form-control-sm" [(ngModel)]="registro.nro_rayos">
+                    <label for="nro_rayos" class="active">Placa N°</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="lector" class="form-control form-control-sm" [(ngModel)]="registro.lector">
+                    <label for="lector" class="active">Lector</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="date" id="fecha" class="form-control form-control-sm" [(ngModel)]="registro.fecha">
+                    <label for="fecha" class="active">Fecha de Radiografia</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="date" id="fecha_lectura" class="form-control form-control-sm" [(ngModel)]="registro.fecha_lectura">
+                    <label for="fecha_lectura" class="active">Fecha de Lectura</label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <section class="row mt-2" >
+            <div class="col-xs-12 col-sm-12 ">
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th style="width: 15%" class="mdb-color darken-3text-center white-text">I. Calidad <br>Radiográfica</th>
+                        <td style="width: 40%" class="horizontal text-center">
+                            <div class="custom-control custom-radio custom-control-inline" *ngFor="let item of options_calidad let i = index">
+                                <input type="radio" class="custom-control-input" id="calidad_{{ i }}" name="calidad" [(ngModel)]="registro.calidad" [value]="item.value" mdbInput>
+                                <label class="custom-control-label" for="calidad_{{ i }}">{{ item.label }}</label>
+                            </div>
+                        </td>
+                        <th style="width: 15%"  class="mdb-color darken-3text-center  white-text">Causas</th>
+                        <td clas="ml-3">
+                            <mdb-checkbox [(ngModel)]="item.padece" *ngFor="let item of registro.causas let i = index"> {{ item.nombre_causa }}</mdb-checkbox> 
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </section>
+
+        <div class="form-row mt-3">
+            <div class="col-sm-12">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="comentarios_defectos" class="form-control form-control-sm" [(ngModel)]="registro.comentarios_defectos">
+                    <label for="comentarios_defectos" class="active">Comentarios sobre los defectos técnicos</label>
+                </div>
+            </div>
+        </div>
+
+
+        <section class="row mt-2" >
+            <div class="col-xs-12 col-sm-12 ">
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th colspan="6" class="mdb-color darken-3 white-text" style="text-align: left">II. ANORMALIDADES PARENQUIMATOSAS (si NO hay anormalidades parenquimatosas pase a III A.Pleurales)</th>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%" colspan="2" class="text-center">
+                            2.1 Zonas afectadas (marque TODAS las zonas afectadas)
+                        </td>
+                        <td class="text-center">
+                            2.2 Profusión (opacidades pequeñas)(escala de 12 puntos)(Consulte las radiografías estándar – marque la subcategoría de profusión)
+                        </td>
+                        <td colspan="2" class="text-center">
+                            2.3 Forma y tamaño (Consulte las radiografías estándar; se requieren dos símbolos; marque un primario y un secundario)
+                        </td>
+                        <td  class="text-center">
+                            2.4 Opacidades grandes (Marque 0 si no hay ninguna o marque A, B o C)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            Superior
+                        </td>
+                        <td>
+                            <select2 [data]="options_zona_afectada" [(ngModel)]="registro.zona_afectada_superior">
+                            </select2>
+                        </td>
+                        <td rowspan="3">
+                            <select2 [data]="options_profusion_choices" [(ngModel)]="registro.profusion">
+                            </select2>
+                        </td>
+                        <td class="text-center">
+                            Primaria
+                        </td>
+                        <td>
+                            <select2 [data]="options_choices" [(ngModel)]="registro.forma_primaria">
+                            </select2>
+                        </td>
+                        <td rowspan="3">
+                            <select2 [data]="options_opacidades" [(ngModel)]="registro.opacidad_grande">
+                            </select2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            Medio
+                        </td>
+                        <td>
+                            <select2 [data]="options_zona_afectada" [(ngModel)]="registro.zona_afectada_medio">
+                            </select2>
+                        </td>
+                        <td class="text-center">
+                            Secundaria
+                        </td>
+                        <td>
+                            <select2 [data]="options_choices" [(ngModel)]="registro.forma_secundaria">
+                            </select2>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            Inferior
+                        </td>
+                        <td>
+                            <select2 [data]="options_zona_afectada" [(ngModel)]="registro.zona_afectada_inferior">
+                            </select2>
+                        </td>
+                        <td colspan="2"></td>
+                    </tr>
+
+                </table>
+            </div>
+        </section>
+
+        <section class="row" >
+            <div class="col-xs-12 col-sm-12 anormalidades_section">
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th colspan="11" style="text-align: left" class="mdb-color darken-3 white-text">III. ANORMALIDADES PLEURALES (si NO hay anormalidades pase a símbolos)</th>
+                        <th colspan="2" class="mdb-color darken-3 white-text">
+                            <select2 [data]="options_no_si" [(ngModel)]="registro.anormalidades_pleurales">
+                            </select2>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="13" style="text-align: left" class="alert-success">3.1 Placas Pleurales (0 = Ninguna, D = Hemitórax derecho, I = Hemitórax izquierdo)</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Sitio <br> (Marque las casillas adecuadas)</th>
+                        <th>Calcificación <br>(marque)</th>
+                        <th colspan="5">Extensión (pared Toráxica; combinada <br>para placas de perfil y de frente)</th>
+                        <th colspan="5">Ancho (opcional) (ancho <br>mínimo exigido: 3 mm)</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Pared Toráxica de perfil</td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.sitio_pared_toracica">
+                            </select2>
+                        </td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.calcificacion_pared_toracica">
+                            </select2>
+                        </td>
+                        <th class="alert-warningtext-center">1</th>
+                        <td colspan="4">< 1/4 de la pared lateral del tórax</td>
+                        <th class="alert-warningtext-center">a</th>
+                        <td colspan="4">De 3 a 5 mm</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">De frente</td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.sitio_defrente">
+                            </select2>
+                        </td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.calcificacion_defrente">
+                            </select2>
+                        </td>
+                        <th class="alert-warningtext-center">2</th>
+                        <td colspan="4">Entre 1/4 y 1/2 de la pared lateral del torax</td>
+                        <th class="alert-warningtext-center">b</th>
+                        <td colspan="4">De 5 a 10 mm</td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">Diafragma</td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.sitio_diafragma">
+                            </select2>
+                        </td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.calcificacion_diafragma">
+                            </select2>
+                        </td>
+                        <th class="alert-warningtext-center">3</th>
+                        <td colspan="4">> 1/2 de la pared lateral del tórax</td>
+                        <th class="alert-warningtext-center">c</th>
+                        <td colspan="4">Mayor a 10 mm</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Otro(s) sitio(s)</td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.sitio_otros">
+                            </select2>
+                        </td>
+                        <td>
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.calcificacion_otros">
+                            </select2>
+                        </td>
+                        <td></td>
+                        <td class="text-center">D</td>
+                        <td>
+                            <select2 [data]="options_extension_choices" [(ngModel)]="registro.pleurales_extension_der">
+                            </select2>
+                        </td>
+                        <th class="text-center">I</th>
+                            <td>
+                                <select2 [data]="options_extension_choices" [(ngModel)]="registro.pleurales_extension_izq">
+                                </select2>
+                            </td>
+                        <td></td>
+                        <td  class="text-center">D</td>
+                        <td>
+                            <select2 [data]="options_ancho_choices" [(ngModel)]="registro.ancho_derecho">
+                            </select2>
+                        </td>
+                        
+                        <td class="text-center">I</td>
+                        <td>
+                            <select2 [data]="options_ancho_choices" [(ngModel)]="registro.ancho_izquierdo">
+                            </select2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Obliteración del Ángulo Costofrénico</th>
+                        <td> 
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.obliteracion">
+                            </select2>
+                        </td>
+                        <td></td>
+                        <td colspan="7"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="13" class="alert-success" style="text-align: left">3.2 Engrosamiento Difuso de la Pleura (0 = Ninguna, D = Hemitórax derecho, I = Hemitórax izquierdo)</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Pared Toráxica</th>
+                        <th>Calcificación</th>
+                        <th></th>
+                        <th colspan="4">Extensión</th>
+                        <th></th>
+                        <th colspan="4">Ancho</th>
+                    </tr>
+                    <tr>
+                        <td>De Perfil</td>
+                        <td> 
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.engrosamiento_pared_perfil">
+                            </select2>
+                        </td>
+                        <td> 
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.engrosamiento_calcificacion_perfil">
+                            </select2>
+                        </td>
+                        <td></td>
+                        <td class="text-center">D</td>
+                        <td> 
+                            <select2 [data]="options_extension_choices" [(ngModel)]="registro.engrosamiento_extension_der">
+                            </select2>
+                        </td>
+                        <td class="text-center">I</td>
+                        <td> 
+                            <select2 [data]="options_extension_choices" [(ngModel)]="registro.engrosamiento_extension_izq">
+                            </select2>
+                        </td>
+                        <td></td>
+                        <td class="text-center">D</td>
+                        <td> 
+                            <select2 [data]="options_ancho_choices" [(ngModel)]="registro.engrosamiento_ancho_der">
+                            </select2>
+                        </td>
+                        <td class="text-center">I</td>
+                        <td> 
+                            <select2 [data]="options_ancho_choices" [(ngModel)]="registro.engrosamiento_ancho_izq">
+                            </select2>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>De frente</td>
+                        <td> 
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.engrosamiento_pared_frente">
+                            </select2>
+                        </td>
+                        <td> 
+                            <select2 [data]="options_oid_choices" [(ngModel)]="registro.engrosamiento_calcificacion_frente">
+                            </select2>
+                        </td>
+                        <td colspan="10"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="row" >
+            <div class="col-xs-12 col-sm-12 ">
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th style="text-align: left; width: 90%" class="mdb-color darken-3 white-text">IV. SÍMBOLOS</th>
+                        <td class="mdb-color darken-3 white-text">
+                            <select2 [data]="options_simbolo_choices" [(ngModel)]="registro.simbolo_radiologia">
+                            </select2>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+
+        <div class="row mt-2">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DIAGNÓSTICOS EVALUACIÓN</div>
+
+            </div>
+
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos"
+            tipo="1"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnostico($event)"
+        >
+        </app-diagnosticos-fichas>
+
+        
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>              
+            </div>
+        </div>
+
+        <app-archivos-fichas
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendacion"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <label class="mdb-main-label">Aptitud</label>
+                <select2 [data]="options_aptitud" [(ngModel)]="registro.aptitud">
+                </select2>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>

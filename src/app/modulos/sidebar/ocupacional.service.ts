@@ -47,6 +47,7 @@ export class OcupacionalService {
                     { titulo: 'Espirometría', url: '/ocupacional/espirometria/lista' },
                     { titulo: 'Ofalmología', url: '/ocupacional/oftalmologia/lista' },
                     { titulo: 'Osteomuscular', url: '/ocupacional/osteomuscular/lista' },
+                    { titulo: 'Radiologia OIT', url: '/ocupacional/radiologia/lista' },
                ]
      },
     // {

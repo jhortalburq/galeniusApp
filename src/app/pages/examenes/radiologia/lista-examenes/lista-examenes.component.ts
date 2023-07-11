@@ -18,9 +18,9 @@ export class ListaExamenesComponent {
   perPage: number = 15;
 
   programa = 'oc';
-  clave = 'ekg';
-  title = 'EKG';
-  examen: string = 'ekg';
+  clave = 'radiologia';
+  title = 'RADIOLOGÍA OIT';
+  examen: string = 'radiologia';
 
   is_loading: boolean = false;
 

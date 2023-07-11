@@ -54,6 +54,10 @@ const routes: Routes = [
         path: 'altura-estructural',
         loadChildren: () => import('../../pages/examenes/altura-estructural/altura-estructural.module').then( m => m.AlturaEstructuralModule)
       },
+      {
+        path: 'radiologia',
+        loadChildren: () => import('../../pages/examenes/radiologia/radiologia.module').then( m => m.RadiologiaModule)
+      },
   ];
 
 @NgModule({

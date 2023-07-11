@@ -1,0 +1,39 @@
+.titulo_seccion {
+    font-weight: bold;
+    color: #757575;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #757575;
+    margin-bottom: 25px;
+}
+
+
+.main_titulo h5{
+    font-weight: bold;
+    color: #757575;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+  
+td,
+th{
+    vertical-align: middle;
+}
+
+.border{
+    border: 5px solid #222121;
+}
+
+.triaje{
+    padding: 20px!important;
+}
+
+.md-form {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.horizontal label{
+    padding-top: 5px;
+}
