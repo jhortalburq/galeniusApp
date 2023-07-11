@@ -18,13 +18,12 @@ export class EvaluacionComponent {
   @Output() submitChange = new EventEmitter();
   @Input() slug;
 
-  clave: string = 'emo';
+  clave: string = 'ekg';
   programa: string = 'oc';
 
   registro: any = {};
 
   diagnosticos = []
-  otros_diagnosticos = []
   archivos = []
 
   disabled: boolean = false;
@@ -54,14 +53,6 @@ export class EvaluacionComponent {
     this.diagnosticos = _diagnosticos.results;
   }
 
-
-  async getRegistroOtrosDiagnosticos() {
-    const info$ = this.examenesService.getOtrosDiagnosticosFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.clave, this.programa, this.slug);
-    let _otros_diagnosticos = await lastValueFrom(info$);
-    this.otros_diagnosticos = _otros_diagnosticos.results;
-  }
-
-
   async getRegistroArchivos() {
     const info$ = this.examenesService.getArchivosFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.clave, this.programa, this.slug);
     let _archivos = await lastValueFrom(info$);
@@ -72,10 +63,6 @@ export class EvaluacionComponent {
     this.getRegistroDiagnosticos();
   }
 
-  onSubmitOtroDiagnostico(item: any) {
-    this.getRegistroOtrosDiagnosticos();
-  }
-
   onSubmitArchivo(item: any) {
     this.getRegistroArchivos();
   }
@@ -83,18 +70,15 @@ export class EvaluacionComponent {
   ngOnChanges() {
     this.getRegistro();
     this.getRegistroDiagnosticos();
-    this.getRegistroOtrosDiagnosticos();
     this.getRegistroArchivos();
   }
   
   regresar() {
-    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/ficha_medica/lista`;
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/${this.clave}/lista`;
     this.router.navigate([url]);
   }
 
- 
-
-  onSubmit() {
+   onSubmit() {
         this.disabled = true;
         window.scroll(0,0);
         console.log(this.registro);
@@ -104,7 +88,7 @@ export class EvaluacionComponent {
                                 next: (res: any) => {
                                   this.disabled = false;
                                   this.submitChange.emit(true);
-                                  this.alertService.successSwalToast('Ficha Médica Actualizada', 2000);
+                                  this.alertService.successSwalToast('Ficha EKG Actualizada', 2000);
                                 },
                                 error: (err: any) => {
                                   console.log('error')

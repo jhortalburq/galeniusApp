@@ -14,7 +14,7 @@
     <links>
 
       <!--Search Form-->
-      <li>
+      <li >
         <button type="button" class="btn mdb-color darken-3 btn-block btn-sm white-text" (click)="openModal()">
           <b>{{ breadcrumbService.modulo }}</b>
         </button>
@@ -45,6 +45,11 @@
         </ul>
       </li>
 
+      <li>
+        <button type="button" class="btn btn-danger btn-block btn-sm white-text btn_regresar" (click)="irInicio()">
+          <b>IR A INICIO</b>
+        </button>
+      </li>
       <!--/. Side navigation links -->
     </links>
 
@@ -65,7 +70,7 @@
     </navlinks>
 
     <mdb-navbar-brand>
-      <a class="navbar-brand">{{ breadcrumbService.title | uppercase}}</a>
+      <a class="navbar-brand" (click)="sidenav.show()">{{ breadcrumbService.title | uppercase}}</a>
     </mdb-navbar-brand>
 
     <navlinks>

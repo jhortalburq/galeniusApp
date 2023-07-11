@@ -18,8 +18,8 @@ export class ListaExamenesComponent {
   perPage: number = 15;
 
   programa = 'oc';
-  clave = 'emo';
-  
+  clave = 'ekg';
+
   is_loading: boolean = false;
 
   nextURL: string = '';
@@ -27,7 +27,7 @@ export class ListaExamenesComponent {
 
   registros: any = [];
 
-  examen: string = 'ficha_medica';
+  examen: string = 'ekg';
 
   constructor(
       public breadcrumbService: BreadcrumbsService,
@@ -38,7 +38,7 @@ export class ListaExamenesComponent {
 
   ngOnInit(): void {
     this.getData();
-    this.breadcrumbService.title = 'EXÁMENES MÉDICOS OCUPACIONALES';
+    this.breadcrumbService.title = 'EKG';
   }
 
   getData(url?) {

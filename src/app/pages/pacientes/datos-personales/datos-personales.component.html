@@ -1,4 +1,4 @@
-<form class="form-horizontal form-material" [formGroup]="registerForm" >
+<form class="form-horizontal form-material" [formGroup]="registerForm" (submit)="onSubmit()">
     <div class="row">
         <div class="col-sm-9">
             <div class="form-row">
@@ -225,8 +225,9 @@
 
     <div class="row">
         <div class="col-sm-12  d-flex justify-content-center">
+            <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect hidden>Grabar</button>
             <button mdbBtn size="sm" color="danger" (click)="regresar()">Cancelar</button>
-            <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="!registerForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid || disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
         </div>
     </div>
 

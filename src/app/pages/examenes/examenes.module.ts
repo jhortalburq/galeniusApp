@@ -11,6 +11,7 @@ import { HeaderFichaComponent } from './componentes/header-ficha/header-ficha.co
 import { TriajeComponent } from './componentes/triaje/triaje.component';
 import { DiagnosticosFichasComponent } from './componentes/diagnosticos-fichas/diagnosticos-fichas.component';
 import { ArchivosFichasComponent } from './componentes/archivos-fichas/archivos-fichas.component';
+import { HistorialComponent } from './componentes/historial/historial.component';
 
 
 
@@ -21,7 +22,8 @@ import { ArchivosFichasComponent } from './componentes/archivos-fichas/archivos-
     HeaderFichaComponent,
     TriajeComponent,
     DiagnosticosFichasComponent,
-    ArchivosFichasComponent
+    ArchivosFichasComponent,
+    HistorialComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { ArchivosFichasComponent } from './componentes/archivos-fichas/archivos-
     HeaderFichaComponent,
     TriajeComponent,
     DiagnosticosFichasComponent,
-    ArchivosFichasComponent
+    ArchivosFichasComponent,
+    HistorialComponent
   ]
 })
 export class ExamenesModule { }

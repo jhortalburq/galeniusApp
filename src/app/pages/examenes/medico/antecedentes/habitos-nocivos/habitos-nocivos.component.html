@@ -21,13 +21,13 @@
                         <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                             <td class="text-center text-nowrap">{{ registro.tipo_habito | uppercase }}</td>
                             <td class="text-center text-nowrap text-center">
-                                <input type="text" [(ngModel)]="registro.tipo" class="form-control form-control-sm" />
+                                <input type="text" [(ngModel)]="registro.tipo" class="form-control form-control-sm"  (keyup.enter)="onSubmit()"/>
                             </td>
                             <td class="text-center text-nowrap text-center">
-                                <input type="text" [(ngModel)]="registro.cantidad" class="text-center form-control form-control-sm" />
+                                <input type="text" [(ngModel)]="registro.cantidad" class="text-center form-control form-control-sm"  (keyup.enter)="onSubmit()"/>
                             </td>
                             <td class="text-center text-nowrap text-center">
-                                <input type="text" [(ngModel)]="registro.frecuencia" class="form-control form-control-sm" />
+                                <input type="text" [(ngModel)]="registro.frecuencia" class="form-control form-control-sm"  (keyup.enter)="onSubmit()"/>
                             </td>
                         </tr>
                     </tbody>
@@ -47,7 +47,6 @@
 
     <div class="row">
         <div class="col-sm-12  d-flex justify-content-center">
-            <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
             <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
         </div>
     </div>

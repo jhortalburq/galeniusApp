@@ -82,7 +82,6 @@ export class AbsentismosLaboralesComponent {
   onSubmit() {
     if (this.registerForm.valid) {
         this.disabled = true;
-        window.scroll(0,0);
     
         this.examenesService.updateAbsentismoLaboralFicha(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc', this.slug)
                             .subscribe({
@@ -94,7 +93,7 @@ export class AbsentismosLaboralesComponent {
                                     en_trabajo: 'Si'
                                   })
 
-                                  this.alertService.successSwalToast('Antecedente Registrado', 2000);
+                                  this.alertService.successSwalToast('Antecedente Registrado', 1000);
                                   this.getRegistro();
                                 },
                                 error: (err: any) => {
@@ -112,7 +111,7 @@ export class AbsentismosLaboralesComponent {
                         .subscribe({
                             next: (res: any) => {
                               this.disabled = false;
-                              this.alertService.successSwalToast('Antecedente Eliminado', 2000);
+                              this.alertService.successSwalToast('Antecedente Eliminado', 1000);
                               this.getRegistro();
                             },
                             error: (err: any) => {

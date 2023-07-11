@@ -95,4 +95,5 @@ export class NavigationComponent implements OnInit {
     this.el.hide();
     this.router.navigate(['/']);
   }
+  
 }

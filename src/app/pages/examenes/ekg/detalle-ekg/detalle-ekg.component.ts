@@ -8,17 +8,18 @@ import {
 } from '../../../../services/services.index';
 
 @Component({
-  selector: 'app-detalle',
-  templateUrl: './detalle.component.html',
-  styleUrls: ['./detalle.component.scss']
+  selector: 'app-detalle-ekg',
+  templateUrl: './detalle-ekg.component.html',
+  styleUrls: ['./detalle-ekg.component.scss']
 })
-export class DetalleComponent {
+export class DetalleEkgComponent {
   orden_slug: string = '';
   slug: string = '';
   
   tab: number = 1;
 
   orden: any = {};
+  
   programa = 'oc';
 
   constructor(
@@ -32,7 +33,7 @@ export class DetalleComponent {
     this.orden_slug = this.route.snapshot.paramMap.get('orden_slug');
     this.slug = this.route.snapshot.paramMap.get('slug');
 
-    this.breadcrumbService.title = 'EXÁMENES MÉDICOS OCUPACIONALES';
+    this.breadcrumbService.title = 'EKG';
     this.getRegistro();
   }
 

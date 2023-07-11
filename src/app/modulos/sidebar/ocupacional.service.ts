@@ -42,6 +42,7 @@ export class OcupacionalService {
       titulo: 'EXÁMENES MÉDICOS',
       submenu: [
                     { titulo: 'Examen Ocupacional (EMO)', url: '/ocupacional/ficha_medica/lista' },
+                    { titulo: 'EKG', url: '/ocupacional/ekg/lista' },
                ]
      },
     // {

@@ -46,13 +46,12 @@ export class AntecedentesFamiliaresComponent {
 
     onSubmit() {
         this.disabled = true;
-        window.scroll(0,0);
     
         this.examenesService.updateAntecedenteFamiliarFicha(this.registros, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc', this.slug)
                             .subscribe({
                                 next: (res: any) => {
                                   this.disabled = false;
-                                  this.alertService.successSwalToast('Antecedente Actualizado', 2000);
+                                  this.alertService.successSwalToast('Antecedente Actualizado', 1000);
                                   this.getRegistro();
                                 },
                                 error: (err: any) => {

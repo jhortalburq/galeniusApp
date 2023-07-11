@@ -34,7 +34,11 @@ const routes: Routes = [
         path: 'ficha_medica',
         loadChildren: () => import('../../pages/examenes/medico/medico.module').then( m => m.MedicoModule)
       },
-];
+      {
+        path: 'ekg',
+        loadChildren: () => import('../../pages/examenes/ekg/ekg.module').then( m => m.EkgModule)
+      },
+  ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

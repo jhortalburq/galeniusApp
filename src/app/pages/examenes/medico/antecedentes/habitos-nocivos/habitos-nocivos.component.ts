@@ -46,13 +46,12 @@ export class HabitosNocivosComponent {
 
   onSubmit() {
       this.disabled = true;
-      window.scroll(0,0);
   
       this.examenesService.updateHabitosNocivos(this.registros, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, 'oc', this.slug)
                           .subscribe({
                               next: (res: any) => {
                                 this.disabled = false;
-                                this.alertService.successSwalToast('Hábitos Actualizado', 2000);
+                                this.alertService.successSwalToast('Hábitos Actualizado', 1000);
                                 this.getRegistro();
                               },
                               error: (err: any) => {

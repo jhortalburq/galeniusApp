@@ -14,7 +14,7 @@
     <div class="form-row" *ngFor="let item of registros_detalle">
         <div class="col-sm-12">
             <div class="md-form form-sm">
-                <input mdbInput type="text" class="form-control form-control-sm" [(ngModel)]="item.descripcion">
+                <input mdbInput type="text" class="form-control form-control-sm" [(ngModel)]="item.descripcion"  (keyup.enter)="onSubmit()">
                 <label>{{ item.tipo_patologia }}</label>
             </div>
         </div>
@@ -25,7 +25,6 @@
 
     <div class="row">
         <div class="col-sm-12  d-flex justify-content-center">
-            <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
             <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Guardar</button>
         </div>
     </div>
