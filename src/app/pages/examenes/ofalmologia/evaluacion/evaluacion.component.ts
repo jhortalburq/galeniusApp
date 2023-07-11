@@ -8,7 +8,6 @@ import { BreadcrumbsService,
 } from '../../../../services/services.index';
 
 import { lastValueFrom } from 'rxjs';
-
 @Component({
   selector: 'app-evaluacion',
   templateUrl: './evaluacion.component.html',
@@ -18,13 +17,13 @@ export class EvaluacionComponent {
   @Output() submitChange = new EventEmitter();
   @Input() slug;
 
-  clave: string = 'emo';
+  clave: string = 'oftalmologia';
   programa: string = 'oc';
 
   registro: any = {};
 
-  diagnosticos = []
-  otros_diagnosticos = []
+  diagnosticos_izq = []
+  diagnosticos_der = []
   archivos = []
 
   disabled: boolean = false;
@@ -48,16 +47,16 @@ export class EvaluacionComponent {
       this.registro = await lastValueFrom(info$);
   }
 
-  async getRegistroDiagnosticos() {
-    const info$ = this.examenesService.getDiagnosticosFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.clave, this.programa, this.slug);
-    let _diagnosticos = await lastValueFrom(info$);
-    this.diagnosticos = _diagnosticos.results;
+  async getRegistroDiagnosticosIzq() {
+    const info$ = this.examenesService.getOfaltmoDiagnosticosIzqFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.clave, this.programa, this.slug);
+    let _diagnosticos_izq = await lastValueFrom(info$);
+    this.diagnosticos_izq = _diagnosticos_izq.results;
   }
 
-  async getRegistroOtrosDiagnosticos() {
-    const info$ = this.examenesService.getOtrosDiagnosticosFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.clave, this.programa, this.slug);
-    let _otros_diagnosticos = await lastValueFrom(info$);
-    this.otros_diagnosticos = _otros_diagnosticos.results;
+  async getRegistroDiagnosticosDer() {
+    const info$ = this.examenesService.getOfaltmoDiagnosticosDerFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.clave, this.programa, this.slug);
+    let _diagnosticos_der = await lastValueFrom(info$);
+    this.diagnosticos_der = _diagnosticos_der.results;
   }
 
   async getRegistroArchivos() {
@@ -66,12 +65,12 @@ export class EvaluacionComponent {
     this.archivos = _archivos.results;
   }
 
-  onSubmitDiagnostico(item: any) {
-    this.getRegistroDiagnosticos();
+  onSubmitDiagnosticoIzq(item: any) {
+    this.getRegistroDiagnosticosIzq();
   }
 
-  onSubmitOtroDiagnostico(item: any) {
-    this.getRegistroOtrosDiagnosticos();
+  onSubmitDiagnosticoDer(item: any) {
+    this.getRegistroDiagnosticosDer();
   }
 
   onSubmitArchivo(item: any) {
@@ -80,19 +79,17 @@ export class EvaluacionComponent {
 
   ngOnChanges() {
     this.getRegistro();
-    this.getRegistroDiagnosticos();
-    this.getRegistroOtrosDiagnosticos();
+    this.getRegistroDiagnosticosIzq();
+    this.getRegistroDiagnosticosDer();
     this.getRegistroArchivos();
   }
   
   regresar() {
-    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/ficha_medica/lista`;
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/${this.clave}/lista`;
     this.router.navigate([url]);
   }
 
- 
-
-  onSubmit() {
+   onSubmit() {
         this.disabled = true;
         window.scroll(0,0);
         console.log(this.registro);
@@ -102,7 +99,7 @@ export class EvaluacionComponent {
                                 next: (res: any) => {
                                   this.disabled = false;
                                   this.submitChange.emit(true);
-                                  this.alertService.successSwalToast('Ficha Médica Actualizada', 2000);
+                                  this.alertService.successSwalToast('Ficha Oftalmológica Actualizada', 2000);
                                 },
                                 error: (err: any) => {
                                   console.log('error')

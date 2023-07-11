@@ -42,6 +42,10 @@ const routes: Routes = [
         path: 'espirometria',
         loadChildren: () => import('../../pages/examenes/espirometria/espirometria.module').then( m => m.EspirometriaModule)
       },
+      {
+        path: 'oftalmologia',
+        loadChildren: () => import('../../pages/examenes/ofalmologia/ofalmologia.module').then( m => m.OfalmologiaModule)
+      },
   ];
 
 @NgModule({

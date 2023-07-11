@@ -18,9 +18,9 @@ export class ListaExamenesComponent {
   perPage: number = 15;
 
   programa = 'oc';
-  clave = 'espirometria';
-  title = 'ESPIROMETRIA';
-  examen: string = 'espirometria';
+  clave = 'oftalmologia';
+  title = 'OFTALMOLOGIA';
+  examen: string = 'oftalmologia';
 
   is_loading: boolean = false;
 

@@ -1,0 +1,439 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+<div class="container">
+
+        <!-- 
+        <div class="form-row mt-1">
+            <div class="col-sm-8">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="anamnesis" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.anamnesis"></textarea>
+                    <label for="anamnesis">Anamnesis</label>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">ANTECEDENTES</div>
+                
+            </div>
+        </div>
+
+        <div class="row mt-1">
+            <div class="col-sm-3" *ngFor="let item of registro.antecedentes let i = index">
+                <mdb-checkbox [(ngModel)]="item.padece"> {{ item.nombre_antecedente }}</mdb-checkbox> 
+            </div>
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">EVALUACIÓN</div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6">
+
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th style="vertical-align: middle;" rowspan="2" class="text-center">Agudeza Visual</th>
+                            <th colspan="2" class="text-center">Sin Corregir</th>
+                            <th colspan="2" class="text-center">Corregido</th>
+                        </tr>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">OD</th>
+                            <th class="text-center">OI</th>
+                            <th class="text-center">OD</th>
+                            <th class="text-center">OI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">Visión de Lejos</td>
+                            <td>
+                                <input mdbInput type="text" id="vision_lejos_der" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_lejos_der">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_lejos_izq" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_lejos_izq">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_lejos_der_corregido" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_lejos_der_corregido">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_lejos_izq_corregido" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_lejos_izq_corregido">                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%" class="text-center">Visión de Cerca</td>
+                            <td>
+                                <input mdbInput type="text" id="vision_cerca_der" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_cerca_der">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_cerca_izq" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_cerca_izq">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_cerca_der_corregido" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_cerca_der_corregido">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_cerca_izq_corregido" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_cerca_izq_corregido">                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%" class="text-center">Visión Binocular</td>
+                            <td>
+                                <input mdbInput type="text" id="vision_binocular_der" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_binocular_der">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_binocular_izq" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_binocular_izq">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_binocular_der_corregido" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_binocular_der_corregido">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="vision_binocular_izq_corregido" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_binocular_izq_corregido">                                
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th style="vertical-align: middle;" rowspan="2" class="text-center">Refracción</th>
+                            <th class="text-center">&nbsp;</th>
+                            <th style="vertical-align: middle;" rowspan="2" class="text-center">ESF</th>
+                            <th style="vertical-align: middle;" rowspan="2" class="text-center">CIL</th>
+                            <th style="vertical-align: middle;" rowspan="2" class="text-center">EJE</th>
+                            <th style="vertical-align: middle;" rowspan="2" class="text-center">DIP</th>
+                            <th style="vertical-align: middle;" rowspan="2" class="text-center">AV</th>
+                        </tr>
+
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">&nbsp;</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" width="30%" class="text-center">Visión de Lejos</td>
+                            <td class="text-center" style="width: 10%">OD</td>
+                            <td>
+                                <input mdbInput type="text" id="esf_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.esf_od">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="cil_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.cil_od">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="eje_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.eje_od">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="dip_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.dip_od">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="av_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.av_od">                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">OI</td>
+                            <td>
+                                <input mdbInput type="text" id="esf_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.esf_oi">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="cil_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.cil_oi">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="eje_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.eje_oi">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="dip_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.dip_oi">                                
+                            </td>
+                            <td>
+                                <input mdbInput type="text" id="av_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.av_oi">                                
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Examinación Ocular Externa</th>
+                            <th class="text-center">OD</th>
+                            <th class="text-center">OI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of registro.patologias">
+                            <td class="text-center">
+                                {{ item.nombre_patologia }}
+                            </td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="item.padece_od"> </mdb-checkbox> 
+                            </td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="item.padece_oi"> </mdb-checkbox> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center">Fondo de Ojo</th>
+                            <th class="text-center">OD</th>
+                            <th class="text-center">OI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of registro.fondo_ojo">
+                            <td class="text-center">
+                                {{ item.nombre_patologia }}
+                            </td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="item.padece_od"> </mdb-checkbox> 
+                            </td>
+
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="item.padece_oi"> </mdb-checkbox> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 col-xs-12">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th colspan="2" class="text-center">Campimetría por Confrontación</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th class="text-center" >Oído Derecho</th>
+                            <td  class="text-center">
+                                <input mdbInput type="text" id="campimetria_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.campimetria_od">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" >Oído Izquierdo</th>
+                            <td  class="text-center">
+                                <input mdbInput type="text" id="campimetria_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.campimetria_oi">
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+                <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th colspan="2" class="text-center">Tonometría</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th class="text-center" >Oído Derecho</th>
+                                <td  class="text-center">
+                                    <input mdbInput type="text" id="tonometria_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.tonometria_od">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" >Oído Izquierdo</th>
+                                <td  class="text-center">
+                                    <input mdbInput type="text" id="tonometria_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.tonometria_oi">
+                                </td>
+                            </tr>
+
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+                <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th colspan="2" class="text-center">Visión de Colores</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th class="text-center" >Oído Derecho</th>
+                                <td  class="text-center">
+                                    <input mdbInput type="text" id="vision_colores_od" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_colores_od">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" >Oído Izquierdo</th>
+                                <td  class="text-center">
+                                    <input mdbInput type="text" id="vision_colores_oi" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_colores_oi">
+                                </td>
+                            </tr>
+
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+
+                        <tr>
+                            <th style="vertical-align: middle" class="text-center">Visión de Profundidad (seg)</th>
+                            <td  class="text-center">
+                                <input mdbInput type="text" id="recuperacion" class="form-control form-control-sm text-center" [(ngModel)]="registro.recuperacion">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="vertical-align: middle" class="text-center">Visión Nocturna</th>
+                            <td  class="text-center">
+                                <input mdbInput type="text" id="vision_nocturna" class="form-control form-control-sm text-center" [(ngModel)]="registro.vision_nocturna">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="vertical-align: middle" class="text-center">Test Osdi (Detección Ojo Seco)</th>
+                            <td  class="text-center">
+                                <input mdbInput type="text" id="test_osdi" class="form-control form-control-sm text-center" [(ngModel)]="registro.test_osdi">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DIAGNÓSTICOS OJO IZQUIERDO (OI)</div>
+
+            </div>
+
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos_izq"
+            tipo="3"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnosticoIzq($event)"
+        >
+        </app-diagnosticos-fichas>
+
+        <div class="row mt-2">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DIAGNÓSTICOS OJO DERECHO (OD)</div>
+
+            </div>
+
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos_der"
+            tipo="4"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnosticoDer($event)"
+        >
+        </app-diagnosticos-fichas>
+        
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>              
+            </div>
+        </div>
+
+        <app-archivos-fichas
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendaciones"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>
