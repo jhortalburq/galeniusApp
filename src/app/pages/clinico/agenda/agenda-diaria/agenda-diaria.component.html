@@ -1,64 +1,63 @@
 <div class="row">
+
     <div class="col-sm-12 col-md-3">
         <div class="row">
             <div class="col-12">
                 <mdb-card>
-                    <mat-calendar [(selected)]="selected"></mat-calendar>
+                    <mat-calendar [(selected)]="selected" (selectedChange)="onSelectDate($event)"></mat-calendar>
                 </mdb-card>
             </div>    
         </div>
         <div class="row mt-3">
             <div class="col-12">
-                <mdb-card>
-
+                <form class="form-horizontal form-material" [formGroup]="registerForm">
+                    <mdb-card>
                         <mat-form-field class="mt-2 col-12">
                             <mat-label>Especialidad</mat-label>
-                            <mat-select>
-                            <mat-option *ngFor="let food of foods" [value]="food.value">
-                                {{food.viewValue}}
-                            </mat-option>
+                            <mat-select (selectionChange)="onSelectEspecialidad($event)" formControlName="especialidad">
+                                <mat-option *ngFor="let item of especialidades" [value]="item.id">
+                                    {{item.nombre | uppercase}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field class="col-12 mt-n3">
+                        <mat-form-field class="mt-n3 col-12">
                             <mat-label>Especialistas</mat-label>
-                            <mat-select [formControl]="toppings" multiple>
-                            <mat-select-trigger>
-                                {{toppings.value?.[0] || ''}}
-                                <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
-                                (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-                                </span>
-                            </mat-select-trigger>
-                            <mat-option *ngFor="let topping of toppingList" [value]="topping.value">{{topping.name}}</mat-option>
+                            <mat-select (selectionChange)="onSelectEspecialista($event)" formControlName="especialista">
+                                <mat-option *ngFor="let item of especialistas" [value]="item.id">
+                                    {{item.especialista | uppercase}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field class="col-12 mt-n3">
-                            <mat-label>Estados</mat-label>
-                            <mat-select>
-                            <mat-option *ngFor="let food of foods" [value]="food.value">
-                                {{food.viewValue}}
-                            </mat-option>
-                            </mat-select>
-                        </mat-form-field>
                 </mdb-card>
+                </form>
             </div>
         </div>
     </div>
 
     <div class="col-sm-12 col-md-9">
-        <mdb-card>
-            <mdb-card-body>
-                <full-calendar [options]="calendarOptions"></full-calendar>
-            </mdb-card-body>
-        </mdb-card>
+        <app-horario-detalle 
+                [changeDate]="changeDate"
+                [especialidad_id]="especialidad_id"
+                [especialista_id]="especialista_id"
+                (changeDateCalendar)="setNewDate($event)"
+                >
+        </app-horario-detalle>
     </div>
+    
 </div>
 
 
 
+
 <div class="fixed-action-btn" style="bottom: 5px; right: 24px;">
-    <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="openModal()">
+    <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="addCita()">
       <mdb-icon fas icon="plus" ></mdb-icon>
     </a>
+
+    <!-- <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="closeHorario()" *ngIf="add_horario">
+        <mdb-icon fas icon="close" ></mdb-icon>
+      </a>
+   -->
 </div>

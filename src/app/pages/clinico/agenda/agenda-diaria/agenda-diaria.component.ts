@@ -1,30 +1,16 @@
-import { Component, OnInit, ChangeDetectorRef, Renderer2 } from '@angular/core';
-import { MDBModalRef, MDBModalService } from '../../../../../../ng-uikit-pro-standard/src/public_api';
+import { Component, OnInit,  Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MDBModalRef, MDBModalService } from '../../../../../../ng-uikit-pro-standard/src/public_api';
 
-import { CalendarOptions } from '@fullcalendar/core';
-
-import dayGridPlugin from '@fullcalendar/daygrid';
-import listPlugin from '@fullcalendar/list';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-
-import esLocale from '@fullcalendar/core/locales/es';
+import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService, AlertService } from '../../../../services/services.index';
 
 import {
-  FormGroup,
   FormControl,
   Validators,
-  FormBuilder
+  FormGroup
 } from '@angular/forms';
 
 import { NuevaCitaComponent } from '../../citas/nueva-cita/nueva-cita.component';
-
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-agenda-diaria',
@@ -32,63 +18,96 @@ interface Food {
   styleUrls: ['./agenda-diaria.component.scss'],
 })
 export class AgendaDiariaComponent implements OnInit {
+ 
   selected = new Date();
-  toppings = new FormControl('');
+  changeDate: string = '';
   modalRef: MDBModalRef;
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+  registerForm: FormGroup;
+  especialista: FormControl;
+  especialidad: FormControl;
 
-  toppingList: Array<any> = [
-      {value: '1', name: 'First Group Option 1'},
-      {value: '2', name: 'First Group Option 2'},
-      {value: '3', name: 'Second Group Option 1'},
-      {value: '4', name: 'Second Group Option 2'},
-  ];
+  especialidad_id: number = 0;
+  especialista_id: number = 0;
 
-  constructor(public changeDetector: ChangeDetectorRef,
+  especialidades: any = [];
+  especialistas: any = [];
+  fecha: string = '';
+
+  events: any = [];
+
+  constructor(public breadcrumbService: BreadcrumbsService,
+              public mantenimientoService: MantenimientoService,
+              public horariosService: HorariosService,
               private modalService: MDBModalService,
               private renderer: Renderer2,
+              public sharedService: SharedService,
+              public alertService: AlertService,
               private router: Router) {
   }
 
   ngOnInit() {
+    this.breadcrumbService.title = 'AGENDA DE CITAS';
+    this.getEspecialidades();
+    this.createFormControls();
+    this.createForm();
+    this.changeDate = this.selected.toISOString();
+
   }
 
-  calendarOptions: CalendarOptions = {
-      // customButtons: {
-      //   myCustomButton1: {
-      //     text: 'DIA',
-      //     click: () => this.router.navigate(['/asistencial/agenda/diaria'])
-      //   },
-      //   myCustomButton2: {
-      //     text: 'SEMANA',
-      //     click: () => this.router.navigate(['/asistencial/agenda/semanal'])
-      //   }
-      // },
-      initialView: 'listDay',
-      plugins: [listPlugin, interactionPlugin, timeGridPlugin, dayGridPlugin],
-      height: 480,
-      locale: esLocale,
-      allDaySlot: false,
-      selectable: true,
-      selectMirror: true,
-      dayMaxEvents: true,
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'listDay,timeGridWeek,dayGridMonth'
-      },
-      events: [
-        { title: 'event 1', start: '2023-06-08T14:30:00', end: '2023-06-08T15:00:00'},
-        { title: 'event 2', start: '2023-06-08T16:30:00', end: '2023-06-08T17:00:00'},
-      ]
-  };
+  createFormControls() {
+    this.especialidad = new FormControl('', Validators.required);
+    this.especialista = new FormControl('', Validators.required);
+  }
 
-  openModal() {
+  createForm() {
+     this.registerForm = new FormGroup({
+      especialista: this.especialista,
+      especialidad: this.especialidad,
+     });
+  }
+
+  getEspecialidades() {
+    this.mantenimientoService.getEspecialidades(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
+                             .subscribe((response: any) => {
+                                 this.especialidades = response.results;
+                              });
+  }
+
+  getEspecialistas(especialidad: number) {
+    this.mantenimientoService.getEspecialistas(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, especialidad)
+                             .subscribe((response: any) => {
+                                this.especialistas = response;
+                              });
+  }
+
+  onSelectEspecialidad(item: any) {
+    this.especialista_id = 0;
+
+    this.registerForm.patchValue({
+        especialista: 0,
+    })
+    this.especialidad_id = item.value;
+    this.getEspecialistas(item.value);
+  }
+
+  onSelectEspecialista(item: any) {
+    this.especialista_id = item.value;
+  }
+
+  onSelectDate(item: any) {
+    this.changeDate = item.toISOString();
+  }
+
+  setNewDate(event: any) {
+    this.selected = event;
+  }
+
+  setHorario(success: boolean) {
+    console.log(success)
+  }
+
+  addCita() {
     this.modalRef = this.modalService.show(NuevaCitaComponent, {
                   backdrop: true,
                   keyboard: true,
