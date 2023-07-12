@@ -1,0 +1,14 @@
+<p>lista-examenes works!</p>
+<mdb-progress-bar *ngIf="is_loading" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+
+<app-lista-examenes-component 
+    [registros]="registros"
+    [page]="page"
+    [perPage]="perPage"
+    [total]="total"
+    [examen]="examen"
+    (nextPage)="onNext()"
+    (prevPage)="onPrev()"
+    (searchSubmit)="onSearchFilter($event)"
+></app-lista-examenes-component>

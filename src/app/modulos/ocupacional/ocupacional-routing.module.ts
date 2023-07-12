@@ -58,6 +58,10 @@ const routes: Routes = [
         path: 'radiologia',
         loadChildren: () => import('../../pages/examenes/radiologia/radiologia.module').then( m => m.RadiologiaModule)
       },
+      {
+        path: 'dermatologia',
+        loadChildren: () => import('../../pages/examenes/dermatologia/dermatologia.module').then( m => m.DermatologiaModule)
+      },
   ];
 
 @NgModule({

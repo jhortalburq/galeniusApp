@@ -1,0 +1,360 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="main_titulo">
+                    <h5>EVALUACIÓN DERMATOLÓGICA</h5>
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">I. MOTIVO DE EVALUACIÓN                                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <table class="table table-sm table-borderless">
+                    <tr>
+                        <td>
+                            <textarea mdbInput rows="4" type="text" id="motivo" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.motivo"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">II. EXAMEN FÍSICO
+                </div>
+                
+            </div>
+        </div>
+  
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="subtitulo_seccion">1. PIEL
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <table class="table table-sm table-borderless">
+
+                    <tr>
+                        <th colspan="2" class="text-left">1.1. ASPECTO GENERAL</th>
+                        <td style="width: 60%">
+                            <select2 [data]="options_aspectos_generales" [(ngModel)]="registro.aspecto_general">
+                            </select2>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="2" class="text-left">1.2. TIPO DE LESION</th>
+                        <td>
+                            <select2 [data]="options_tipo_lesion" [(ngModel)]="registro.tipo_lesion">
+                            </select2>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td></td>
+
+                        <td class="text-left">Lesiones primarias</td>
+                        <td>
+                            <select2 [data]="options_lesiones_primarias" [(ngModel)]="registro.lesiones_primarias">
+                            </select2>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td class="text-left">Lesiones secundarias</td>
+                        <td>
+                            <select2 [data]="options_lesiones_secundarias" [(ngModel)]="registro.lesiones_secundarias">
+                            </select2>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <th colspan="2" class="text-left">1.3. TOPOGRAFÍA</th>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+
+                        <td class="text-left">1.3.1. LOCALIZACIÓN</td>
+                        <td>
+                            <input mdbInput type="text" id="topografia_localizacion" class="form-control form-control-sm" [(ngModel)]="registro.topografia_localizacion">
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td></td>
+
+                        <td class="text-left">1.3.2. EXTENSIÓN</td>
+                        <td>
+                            <input mdbInput type="text" id="topografia_extension" class="form-control form-control-sm" [(ngModel)]="registro.topografia_extension">
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <th colspan="2"  class="text-left">1.4. MORFOLOGÍA</th>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+
+                        <td class="text-left">1.4.1. BORDES Y COLOR</td>
+                        <td>
+                            <input mdbInput type="text" id="morfologia_border_color" class="form-control form-control-sm" [(ngModel)]="registro.morfologia_border_color">
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td></td>
+
+                        <td class="text-left">1.4.2. SUPERFICIE Y ASPECTO</td>
+                        <td>
+                            <input mdbInput type="text" id="morfologia_superficie_aspecto" class="form-control form-control-sm" [(ngModel)]="registro.morfologia_superficie_aspecto">
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td></td>
+
+                        <td class="text-left">1.4.3. NÚMERO Y TAMAÑO</td>
+                        <td>
+                            <input mdbInput type="text" id="morfologia_numero_tamano" class="form-control form-control-sm" [(ngModel)]="registro.morfologia_numero_tamano">
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <th colspan="2"  class="text-left">1.5. EVOLUCIÓN</th>
+                        <td>
+                            <textarea rows="3" mdbInput type="text" id="evolucion" class="form-control form-control-sm" [(ngModel)]="registro.evolucion"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="2" class="text-left">1.6. SÍNTOMAS</th>
+                        <td>
+                            <select2 [data]="options_sintomas_choices" [(ngModel)]="registro.sintomas">
+                            </select2>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="2" class="text-left">1.7. OTRAS CARACTERÍSTICAS</th>
+                        <td>
+                            <textarea  rows="3" mdbInput type="text" id="otras_caracteristicas" class="form-control form-control-sm" [(ngModel)]="registro.otras_caracteristicas"></textarea>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+       </div>
+
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="subtitulo_seccion">2. ANEXOS
+
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <table class="table table-sm table-borderless">
+
+                    <tr>
+                        <th class="text-left">2.1. SISTEMA PILOSO</th>
+                        <td style="width: 80%">
+                            <input mdbInput type="text" id="sistema_piloso" class="form-control form-control-sm" [(ngModel)]="registro.sistema_piloso">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th class="text-left">2.2. UÑAS</th>
+                        <td>
+                            <input mdbInput type="text" id="unas" class="form-control form-control-sm" [(ngModel)]="registro.unas">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-left">2.3. GANGLIOS</th>
+                        <td>
+                            <input mdbInput type="text" id="ganglios" class="form-control form-control-sm" [(ngModel)]="registro.ganglios">
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+
+       </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="subtitulo_seccion">3. PRUEBAS COMPLEMENTARIAS
+
+
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <table class="table table-sm table-borderless">
+
+                    <tr>
+                        <th class="text-left">3.1. PRUEBA DE SENSIBILIDAD MUCOCUTANEA</th>
+                        <td style="width: 60%">
+                            <mdb-checkbox [(ngModel)]="registro.prueba_sensibilidad"></mdb-checkbox> 
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th class="text-left">3.2. LUZ DE WOOD</th>
+                        <mdb-checkbox [(ngModel)]="registro.luz_wood"></mdb-checkbox> 
+                    </tr>
+
+                    <tr>
+                        <th class="text-left">3.3. MANIOBRA DE NIKOLSKY</th>
+                        <mdb-checkbox [(ngModel)]="registro.maniobra_nikolsky"></mdb-checkbox> 
+                    </tr>
+
+                    <tr>
+                        <th class="text-left">3.4. OTROS</th>
+                        <td>
+                            <textarea rows="3" mdbInput type="text" id="otras_pruebas" class="form-control form-control-sm" [(ngModel)]="registro.otras_pruebas"></textarea>
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+
+       </div>
+
+
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">DIAGNÓSTICOS EVALUACIÓN</div>
+            </div>
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos"
+            tipo="1"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnostico($event)"
+        >
+        </app-diagnosticos-fichas>
+
+        
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>              
+            </div>
+        </div>
+
+        <app-archivos-fichas
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendaciones"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>

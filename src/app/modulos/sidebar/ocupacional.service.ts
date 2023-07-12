@@ -43,6 +43,7 @@ export class OcupacionalService {
       submenu: [
                     { titulo: 'Examen Ocupacional (EMO)', url: '/ocupacional/ficha_medica/lista' },
                     { titulo: 'Altura Estructural', url: '/ocupacional/altura-estructural/lista' },
+                    { titulo: 'Dermatología', url: '/ocupacional/dermatologia/lista' },
                     { titulo: 'EKG', url: '/ocupacional/ekg/lista' },
                     { titulo: 'Espirometría', url: '/ocupacional/espirometria/lista' },
                     { titulo: 'Ofalmología', url: '/ocupacional/oftalmologia/lista' },
