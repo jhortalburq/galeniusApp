@@ -217,6 +217,41 @@ export class SharedService {
     })
   }
 
+
+  subirFormatoPDFSucursal( archivo: File, data: any, id: number, organizacion_id: number) {
+
+    return new Promise ( ( resolve, reject ) => {
+        console.log(data)
+          let formData = new FormData();
+          let xhr = new XMLHttpRequest();
+
+          if (archivo) {
+            formData.append('logotipo', archivo, archivo.name );
+          }
+
+          formData.append("footer", data.footer);
+          formData.append("ubicacion_logo", data.ubicacion_logo);
+          formData.append("logo_w", data.logo_w);
+
+          xhr.onreadystatechange = () => {
+              if ( xhr.readyState === 4 ){
+                  if ( xhr.status === 201 ) {
+                      console.log('Imagen Subida');
+                      resolve( JSON.parse(xhr.response) );
+                  }else{
+                      console.log('Fallo en la subida');
+                      reject( JSON.parse(xhr.response) );
+                  }
+              }
+          }
+
+          xhr.open('PUT', `${environment.apiUrl}/api/v1/sucursales/${id}/set_formato_pdf?organizacion=${organizacion_id}`, true);
+          xhr.setRequestHeader("Authorization", `Bearer ${this._authService.getToken()}`);
+          xhr.send( formData );
+
+    })
+  }
+
   getValidateSunat(param: string) {
     return this.http.get(`${environment.apiUrl}/api/v1/validacion/sunat`,  {params: { 'query': param }})
                     .pipe(map( (res: any) => {

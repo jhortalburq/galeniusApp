@@ -18,7 +18,7 @@ export class LogoSucursalComponent {
   disabled: boolean = false;
 
   imagenSubir: File;
-  imageUrl: string | ArrayBuffer = "https://bulma.io/images/placeholders/480x480.png";
+  imageUrl: string | ArrayBuffer = "assets/img/image.png";
 
   constructor(
     public sharedService: SharedService,

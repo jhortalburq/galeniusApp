@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModulosComponent } from '../modulos/modulos.component';
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
@@ -18,6 +18,7 @@ import {
 })
 export class NavigationComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) public el: any;
+  @Input() clientX;
 
   modalRef: MDBModalRef;
 
@@ -91,6 +92,12 @@ export class NavigationComponent implements OnInit {
 
   }
 
+  ngOnChanges() {
+    console.log('ss')
+    if (this.clientX < 40 && this.breadcrumbService.flag_sidebar ) {
+      this.el.show();
+    }
+  }
   irInicio() {
     this.el.hide();
     this.router.navigate(['/']);

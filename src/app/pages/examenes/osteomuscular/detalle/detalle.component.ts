@@ -22,12 +22,14 @@ export class DetalleComponent {
   
   programa = 'oc';
   title = 'OSTEOMUSCULAR';
-
+  clave = 'osteomuscular';
+  
   constructor(
     public breadcrumbService: BreadcrumbsService,
     public admisionService: AdmisionService,
     public sharedService: SharedService,
     private route: ActivatedRoute,
+    public router: Router
 ) { }
 
   ngOnInit(): void {
@@ -47,5 +49,10 @@ export class DetalleComponent {
 
   irTab(number) {
     this.tab = number;
+  }
+
+  regresar() {
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/${this.clave}/lista`;
+    this.router.navigate([url]);
   }
 }

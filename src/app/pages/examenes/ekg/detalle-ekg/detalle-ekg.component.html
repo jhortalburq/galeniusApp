@@ -3,6 +3,10 @@
 
 <ul class="nav nav-tabs text-nowrap mt-3">
 
+    <li class="nav-item">
+        <a class="nav-link nav-back badge-danger" (click)="regresar()"><i class="fas fa-backward"></i> Regresar</a>
+    </li>
+
     <li class="nav-item ml-auto">
         <a class="nav-link" [class.active]="tab==1" (click)="irTab(1)"><i class="fas fa-binoculars"></i> Evaluación</a>
     </li>   

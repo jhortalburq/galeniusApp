@@ -21,12 +21,14 @@ export class DetalleComponent {
   orden: any = {};
   programa = 'oc';
   title = 'EXÁMENES MÉDICOS OCUPACIONALES';
+  clave = 'ficha_medica';
 
   constructor(
     public breadcrumbService: BreadcrumbsService,
     public admisionService: AdmisionService,
     public sharedService: SharedService,
     private route: ActivatedRoute,
+    public router: Router
 ) { }
 
   ngOnInit(): void {
@@ -50,5 +52,11 @@ export class DetalleComponent {
 
   updateResumenOrden(action: any) {
     this.getRegistro();
+  }
+
+
+  regresar() {
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/${this.clave}/lista`;
+    this.router.navigate([url]);
   }
 }

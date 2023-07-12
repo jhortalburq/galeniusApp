@@ -7,9 +7,11 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'EnlaceWeb';
+  title = 'Galenius';
 
   constructor() {
   }
+
+
 
 }

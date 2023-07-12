@@ -11,6 +11,8 @@ import { SidebarService, AsistencialService, OcupacionalService, MantenimientosS
 export class PagesComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) public el: any;
 
+  clientX: number = 200;
+
   constructor( public router: Router,
               public sidebarService: SidebarService,
               public asistencialService: AsistencialService,
@@ -27,7 +29,10 @@ export class PagesComponent implements OnInit {
     } else  if (this.router.url.includes("administrador")) {
       this.sidebarService.menu = this.mantenimientosService.menu;
     }
+  }
 
+  onMouseEnter(e: any) {
+    this.clientX = e.clientX;
   }
 
 }

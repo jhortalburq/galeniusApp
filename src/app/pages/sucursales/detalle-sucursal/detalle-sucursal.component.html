@@ -15,28 +15,6 @@
       </mdb-tab>
 
       <mdb-tab
-        heading="TURNOS ATENCIÓN"
-      >
-      <div class="row">
-        <div class="col-12">
-          <app-turnos-atencion [registro]="registro" (submitChange)="onEditSucursal($event)"></app-turnos-atencion>
-        </div>
-      </div>
-      </mdb-tab>
-
-      <mdb-tab
-        heading="USUARIOS"
-      >
-      <div class="row">
-        <div class="col-12">
-
-          ss
-        </div>
-      </div>
-      </mdb-tab>
-
-
-      <mdb-tab
         heading="LOGO DE SUCURSAL"
       >
       <div class="row">
@@ -46,13 +24,24 @@
       </div>
       </mdb-tab>
 
+
+      <mdb-tab
+        heading="TURNOS ATENCIÓN"
+      >
+      <div class="row">
+        <div class="col-12">
+          <app-turnos-atencion [registro]="registro" (submitChange)="onEditSucursal($event)"></app-turnos-atencion>
+        </div>
+      </div>
+      </mdb-tab>
+
+    
       <mdb-tab
         heading="FORMATO PDF"
       >
       <div class="row">
         <div class="col-12">
-
-          ss
+          <app-formato-pdf [registro]="registro" (submitChange)="onEditSucursal($event)"></app-formato-pdf>
         </div>
       </div>
       </mdb-tab>

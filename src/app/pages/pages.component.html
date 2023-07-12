@@ -1,11 +1,11 @@
 <!--Double navigation-->
 <header>
-  <app-navigation></app-navigation>
+  <app-navigation [clientX]="clientX"></app-navigation>
 </header>
 <!--/.Double navigation-->
 
 <!--Main Layout-->
-<main>
+<main (mousemove)="onMouseEnter($event)">
   <div class="container-fluid">
     <router-outlet></router-outlet>
   </div>

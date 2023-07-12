@@ -39,6 +39,7 @@ export class DetalleSucursalComponent implements OnInit {
       .subscribe({                                                                        
         next: (res: any) => {
           this.registro = res;
+          console.log(this.registro)
         }
       })
   }

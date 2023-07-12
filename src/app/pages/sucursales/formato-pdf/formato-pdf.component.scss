@@ -1,0 +1,46 @@
+
+.label{
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.titulo_seccion {
+    font-weight: bold;
+    color: #757575;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #757575;
+    margin-bottom: 25px;
+}
+
+.preview{
+    height: 55vh;
+    border: 1px solid #757575;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.logo_posicionado_1 {
+    display: inherit;
+    width: 30%;
+}
+
+.logo_posicionado_2 {
+    margin: 0 auto;
+    display: inherit;
+    width: 60%;
+    max-height: 30px;
+}
+
+.footer {
+    white-space: pre-wrap;
+    text-align: center;
+    font-size: 0.4rem;
+    border-top: 1px solid #757575;
+    top: 50vh;
+    position: absolute;
+    width: 85%;
+}
+
+.custom-control-label{
+    font-size: 0.8rem;
+}

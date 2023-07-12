@@ -22,12 +22,14 @@ export class DetalleEkgComponent {
   
   programa = 'oc';
   title = 'EKG';
-
+  clave = 'ekg';
+  
   constructor(
     public breadcrumbService: BreadcrumbsService,
     public admisionService: AdmisionService,
     public sharedService: SharedService,
     private route: ActivatedRoute,
+    public router: Router,
 ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,11 @@ export class DetalleEkgComponent {
                           })
                         }
 
+  regresar() {
+    let url = `/${this.breadcrumbService.modulo.toLowerCase()}/${this.clave}/lista`;
+    this.router.navigate([url]);
+  }
+                      
   irTab(number) {
     this.tab = number;
   }
