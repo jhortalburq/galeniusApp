@@ -23,7 +23,7 @@ const routes: Routes = [
           component: SeleccionarSucursalComponent
         },
         {
-          path: 'seleccionar-modulo',
+          path: 'seleccionar-modulo/:cm',
           component: SeleccionarModuloComponent
         },
         {

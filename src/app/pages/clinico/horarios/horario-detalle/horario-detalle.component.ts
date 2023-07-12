@@ -34,7 +34,9 @@ export class HorarioDetalleComponent {
 
   especialidades: any = [];
   especialistas: any = [];
+
   fecha: string = '';
+  fecha_fin: string = '';
 
   events: any = [];
 
@@ -50,11 +52,18 @@ export class HorarioDetalleComponent {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'listDay'
+        right: 'listDay,listWeek,timeGridWeek'
+      },
+      buttonText: {
+        listDay: 'Por Día',
+        listWeek: 'Semanal',
+        timeGridWeek: 'Tablero',
       },
       datesSet: (data => {
+        console.log(data)
           this.fecha = data.startStr.split('T')[0];
-          this.loadEvents(this.fecha);
+          this.fecha_fin = data.endStr.split('T')[0];
+          this.loadEvents(this.fecha, this.fecha_fin);
           this.changeDateEmit(new Date(data.startStr));
       }),
   };
@@ -87,8 +96,8 @@ export class HorarioDetalleComponent {
   //   console.log(currentDate); // result: current calendar start date
   // }
 
-  loadEvents(fecha: string) {
-    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha)
+  loadEvents(fecha: string, fecha_fin: string) {
+    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha, fecha_fin)
                         .subscribe({
                           next: (res: any) => {
                             this.events = res.results;

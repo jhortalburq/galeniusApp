@@ -1,0 +1,238 @@
+<mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+
+    <div class="container">
+
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="main_titulo">
+                    <h5>Ficha Lumbrosacra</h5>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="form-row mt-n2">
+    
+            <div class="col-sm-3">
+                <label class="mdb-main-label">Calidad Radiográfica</label>
+                <select2 
+                    [data]="options_calidad"
+                    placeholder="Seleccione Opción"
+                    [(ngModel)]="registro.calidad"
+                >
+                </select2>
+            </div>
+
+            <div class="col-sm-3">
+                <label class="mdb-main-label">Aspecto General</label>
+                <select2 
+                    [data]="options_aspecto"
+                    placeholder="Seleccione Opción"
+                    [(ngModel)]="registro.aspecto_general"
+                >
+                </select2>
+            </div>
+
+        </div>
+
+                            
+        <div class="row mt-4">
+
+            <div class="col-xs-12 col-sm-12">
+                
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr class="mdb-color darken-3 white-text">
+                            <th class="text-center" colspan="2">Alineación</th>
+                            <th class="text-center" colspan="2">Partes Óseas</th>
+                            <th class="text-center" colspan="2">Partes No Óseas</th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 25%">Curvas Fisiológicas</td>
+                            <td style="width: 5%" class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.curvas_fisiologicas"></mdb-checkbox> 
+                            </td>
+                            <td style="width: 25%">Cuerpos vertebrales: altura, contornos y trabeculacion </td>
+                            <td style="width: 5%" class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.cuerpo_vertebrales"></mdb-checkbox> 
+                            </td>
+                            <th style="width: 25%">Espacio Articulares</th>
+                            <td style="width: 5%"></td>
+                        </tr>
+                        <tr>
+                            <td>Líneas anteriores de los cuerpos vertebrales</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.lineas_anteriores"></mdb-checkbox> 
+                            </td>
+                            <td>Arco vertebral</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.arco_vertebral"></mdb-checkbox> 
+                            </td>
+                            <td>-Intervertebrales (Discales)</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.invertebrales"></mdb-checkbox> 
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Línea posterior de los cuerpos vertebrales </td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.lineas_posteriores"></mdb-checkbox> 
+                            </td>
+                            <td>-Pedículos</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.pediculos"></mdb-checkbox> 
+                            </td>
+                            <td>-Interapofisarios</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.interapofisarios"></mdb-checkbox> 
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Línea espinolaminar</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.linea_espinolaminar"></mdb-checkbox> 
+                            </td>
+                            <td>-Laminas</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.laminas"></mdb-checkbox> 
+                            </td>
+                            <th>Partes Blandas</th>
+                            <td class="text-center"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="2">Canal medular</td>
+                            <td rowspan="2" class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.canal_medular"></mdb-checkbox> 
+                            </td>
+                            <td>-Apófisis transversal</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.apofisis_transversal"></mdb-checkbox> 
+                            </td>
+                            <td rowspan="2">-Espacio y líneas grasas para vertebrales</td>
+                            <td rowspan="2" class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.lineas_grasas"></mdb-checkbox> 
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>-Apófisis Espinoza</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.apofisis_espinoza"></mdb-checkbox> 
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Línea de la apófisis espinosa </td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.linea_apofisis"></mdb-checkbox> 
+                            </td>
+                            <td>-Masas laterales y apófisis articulares</td>
+                            <td class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.masas_lateral"></mdb-checkbox> 
+                            </td>
+                            <td rowspan="2">-Espacios interespinosos, intertransverso, interlaminares y preodontoideo </td>
+                            <td rowspan="2" class="text-center">
+                                <mdb-checkbox [(ngModel)]="registro.otros_espacios"></mdb-checkbox> 
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">DIAGNÓSTICOS EVALUACIÓN</div>
+
+            </div>
+
+        </div>
+
+        <app-diagnosticos-fichas
+            [registros]="diagnosticos"
+            tipo="1"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitDiagnostico($event)"
+        >
+        </app-diagnosticos-fichas>
+
+        
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12">
+                <div class="titulo_seccion">ARCHIVOS DE LA EVALUACIÓN</div>              
+            </div>
+        </div>
+
+        <app-archivos-fichas
+            [registros]="archivos"
+            [programa]="programa"
+            [clave]="clave"
+            [slug]="slug"
+            (submitChange)="onSubmitArchivo($event)"
+        >
+        </app-archivos-fichas>
+
+        <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="titulo_seccion">CONCLUSIONES DE EVALUACIÓN</div>
+                
+            </div>
+
+        </div>
+
+        <div class="form-row mt-n2">
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="recomendaciones" class="md-textarea form-control" [(ngModel)]="registro.recomendacion"></textarea>
+                    <label for="recomendaciones">Recomendaciones</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="md-form form-sm">
+                    <textarea mdbInput type="text" id="conclusiones" class="md-textarea form-control form-control-sm" [(ngModel)]="registro.conclusiones"></textarea>
+                    <label for="conclusiones">Conclusiones</label>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-row mt-1">
+            <div class="col-sm-2">
+                <div class="md-form form-sm">
+                    <input mdbInput type="text" id="fecha_examen" class="form-control form-control-sm" [(ngModel)]="registro.fecha_orden" disabled>
+                    <label for="fecha_examen" class="">Fecha de Evaluación</label>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <label class="mdb-main-label">Médico Evaluador</label>
+                <select2 [data]="options_responsables" [(ngModel)]="registro.responsable">
+                </select2>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12  d-flex justify-content-center">
+                <button mdbBtn size="sm" type="cancel" color="danger" (click)="regresar()">Regresar</button>
+                <button mdbBtn size="sm" type="submit" (click)="onSubmit()" [disabled]="disabled" color="primary" class="waves-light" mdbWavesEffect>Continuar</button>
+            </div>
+        </div>
+</div>

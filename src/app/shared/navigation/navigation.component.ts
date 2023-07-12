@@ -87,13 +87,12 @@ export class NavigationComponent implements OnInit {
     this.sucursal_seleccionada = sucursal;
     this.alertService.successSwalToast(`${this.sucursal_seleccionada.razon_social}`, 1000);
 
-    this.router.navigate(['/seleccionar-modulo']);
+    this.router.navigate(['/seleccionar-modulo', this.sucursal_seleccionada.id]);
     this.el.hide();
 
   }
 
   ngOnChanges() {
-    console.log('ss')
     if (this.clientX < 40 && this.breadcrumbService.flag_sidebar ) {
       this.el.show();
     }

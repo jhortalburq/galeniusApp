@@ -43,9 +43,11 @@ export class OcupacionalService {
       submenu: [
                     { titulo: 'Examen Ocupacional (EMO)', url: '/ocupacional/ficha_medica/lista' },
                     { titulo: 'Altura Estructural', url: '/ocupacional/altura-estructural/lista' },
+                    { titulo: 'Anexo 7D', url: '/ocupacional/anexo-7D/lista' },
                     { titulo: 'Dermatología', url: '/ocupacional/dermatologia/lista' },
                     { titulo: 'EKG', url: '/ocupacional/ekg/lista' },
                     { titulo: 'Espirometría', url: '/ocupacional/espirometria/lista' },
+                    { titulo: 'Lumbrosacra', url: '/ocupacional/lumbrosacra/lista' },
                     { titulo: 'Ofalmología', url: '/ocupacional/oftalmologia/lista' },
                     { titulo: 'Osteomuscular', url: '/ocupacional/osteomuscular/lista' },
                     { titulo: 'Radiologia OIT', url: '/ocupacional/radiologia/lista' },

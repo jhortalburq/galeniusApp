@@ -18,15 +18,22 @@ export class MantenimientosService {
         // { titulo : 'Grupos', url: '/progress' },
       ]
     },
+    // {
+    //   titulo: 'USUARIOS',
+    //   icono: 'fa-user',
+    //   submenu: [
+    //     { titulo: 'Usuarios', url: '/administrador/usuarios/' },
+    //     { titulo : 'Tipo de Usuario', url: '/progress' },
+    //   ]
+    // },
     {
-      titulo: 'USUARIOS',
-      icono: 'fa-user',
+      titulo: 'EMPRESAS',
       submenu: [
-        { titulo: 'Usuarios', url: '/administrador/usuarios/' },
-        { titulo : 'Permisos', url: '/progress' },
-        { titulo : 'Grupos', url: '/progress' },
-      ]
-    },
+                    { titulo: 'Registro de Empresas', url: '/administrador/empresas/lista' },
+                    { titulo: 'Nueva Empresa', url: '/administrador/empresas/nuevo' },
+                    // { titulo: 'Registro Masivo', url: '/ocupacional/pacientes/nuevo' },
+               ]
+     },
     {
       titulo: 'ESPECIALISTAS',
       submenu: [  

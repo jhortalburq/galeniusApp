@@ -62,6 +62,14 @@ const routes: Routes = [
         path: 'dermatologia',
         loadChildren: () => import('../../pages/examenes/dermatologia/dermatologia.module').then( m => m.DermatologiaModule)
       },
+      {
+        path: 'anexo-7D',
+        loadChildren: () => import('../../pages/examenes/anexo7-d/anexo7-d.module').then( m => m.Anexo7DModule)
+      },
+      {
+        path: 'lumbrosacra',
+        loadChildren: () => import('../../pages/examenes/lumbrosacra/lumbrosacra.module').then( m => m.LumbrosacraModule)
+      },
   ];
 
 @NgModule({

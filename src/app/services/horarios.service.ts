@@ -15,8 +15,8 @@ export class HorariosService {
     private sharedService: SharedService) {
   }
 
-  getHorariosEspecialista(especialista_id: number, especialidad_id: number, empresa: number, cm: number, fecha: string) {
-    return this.http.get(`${environment.apiUrl}/api/v1/horarios/horarios-especialistas`, {params: { 'especialista': especialista_id, 'especialidad': especialidad_id, 'empresa': empresa, 'cm': cm, 'fecha': fecha}})
+  getHorariosEspecialista(especialista_id: number, especialidad_id: number, empresa: number, cm: number, fecha: string, fecha_fin: string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/horarios/horarios-especialistas`, {params: { 'especialista': especialista_id, 'especialidad': especialidad_id, 'empresa': empresa, 'cm': cm, 'fecha': fecha, 'fecha_fin': fecha_fin}})
                       .pipe(
                         map( (res: any) => {
                             return res;

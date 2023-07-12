@@ -1,6 +1,7 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit,  OnDestroy} from '@angular/core';
 import { SidebarService, BreadcrumbsService, SharedService, ProfileService } from '../../services/services.index';
-import { Router } from '@angular/router';
+
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-seleccionar-modulo',
@@ -13,30 +14,39 @@ export class SeleccionarModuloComponent {
   sucursal_seleccionada: any = {};
   modulos: any = [];
 
+  subscription: any;
+
   constructor(
         public sidebarService: SidebarService,
         public breadcrumbService: BreadcrumbsService,
         public sharedService: SharedService,
         public profileService: ProfileService,
         public router: Router,
-  ) { }
+        public route: ActivatedRoute
+        ) {
+          
+         }
 
   ngOnInit() {
-    this.sidebarService.menu = [];
-    this.breadcrumbService.title = 'SELECCIONE MÓDULO';
-    this.breadcrumbService.flag_dropdown_empresa = true;
-    this.breadcrumbService.flag_dropdown_sucursal = true;
-    this.breadcrumbService.flag_sidebar = false;
 
-    this.sharedService.getOrganizacionesUsuario().subscribe();
-    this.organizacion_seleccionada = this.sharedService.getOrganizacionActivaUsuario();
+    this.route.params.subscribe(routeParams => {
+        this.sidebarService.menu = [];
+        this.breadcrumbService.title = 'SELECCIONE MÓDULO';
+        this.breadcrumbService.flag_dropdown_empresa = true;
+        this.breadcrumbService.flag_dropdown_sucursal = true;
+        this.breadcrumbService.flag_sidebar = false;
+    
+        this.sharedService.getOrganizacionesUsuario().subscribe();
+        this.organizacion_seleccionada = this.sharedService.getOrganizacionActivaUsuario();
+    
+        if (this.organizacion_seleccionada) {
+          this.sharedService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
+          this.sucursal_seleccionada = this.sharedService.getSucursalActivo();
+        }
+    
+        this.getModulos();
+    });
 
-    if (this.organizacion_seleccionada) {
-      this.sharedService.getSucursalesOrganizacion(this.organizacion_seleccionada.id).subscribe();
-      this.sucursal_seleccionada = this.sharedService.getSucursalActivo();
-    }
-
-    this.getModulos();
   }
 
   irModulo(modulo: string) {
