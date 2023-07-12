@@ -6,7 +6,6 @@
     margin-bottom: 25px;
 }
 
-
 .main_titulo h5{
     font-weight: bold;
     color: #757575;
@@ -14,7 +13,7 @@
     margin-bottom: 25px;
     text-align: center;
 }
-  
+
 td,
 th{
     vertical-align: middle;
@@ -35,6 +34,21 @@ th{
     margin-bottom: 1rem;
 }
 
-tbody th{
-    text-align: left;
+.custom-control-label{
+    font-size: 0.7rem!important;
+}
+
+.label_radio{
+    font-size: 0.7rem!important;
+    opacity: 0.75;
+    font-weight: bold;
+    text-align: right;
+}
+
+.radio_option ul li{
+    font-size: 0.8rem;
+}
+
+.radio_option ul{
+    list-style-type: none;
 }

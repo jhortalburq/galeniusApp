@@ -70,6 +70,10 @@ const routes: Routes = [
         path: 'lumbrosacra',
         loadChildren: () => import('../../pages/examenes/lumbrosacra/lumbrosacra.module').then( m => m.LumbrosacraModule)
       },
+      {
+        path: 'audiometria',
+        loadChildren: () => import('../../pages/examenes/audiometria/audiometria.module').then( m => m.AudiometriaModule)
+      },
   ];
 
 @NgModule({
