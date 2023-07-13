@@ -11,8 +11,7 @@ export class AsistencialService {
       titulo: 'AGENDA',
       submenu: [
                 { titulo: 'Agenda Diaria', url: '/asistencial/agenda/diaria' },
-                // { titulo: 'Agenda por Especialista', url: '/asistencial/agenda/especialista' },
-                { titulo: 'Citas Programadas', url: '/asistencial/citas/citas-programadas' },
+                { titulo: 'Citas Programadas', url: '/asistencial/agenda/citas-programadas' },
                ]
    },
    {

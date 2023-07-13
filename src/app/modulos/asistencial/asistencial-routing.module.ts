@@ -15,10 +15,6 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/clinico/agenda/agenda.module').then( m => m.AgendaModule)
       },
       {
-        path: 'citas',
-        loadChildren: () => import('../../pages/clinico/citas/citas.module').then( m => m.CitasModule)
-      },
-      {
         path: 'horarios',
         loadChildren: () => import('../../pages/clinico/horarios/horarios.module').then( m => m.HorariosModule)
       },

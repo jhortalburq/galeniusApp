@@ -13,12 +13,14 @@ import { SharedModule } from '../../../shared/shared.module';
 
 import { Select2Module } from 'ng-select2-component';
 import { IngresarPagoComponent } from './ingresar-pago/ingresar-pago.component';
+import { CitasProgramadasComponent } from './citas-programadas/citas-programadas.component';
 
 @NgModule({
   declarations: [
     AgendaDiariaComponent,
     NuevoIngresoComponent,
     IngresarPagoComponent,
+    CitasProgramadasComponent,
   ],
   imports: [
     CommonModule,
