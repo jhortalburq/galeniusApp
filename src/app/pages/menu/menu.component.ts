@@ -34,8 +34,8 @@ export class MenuComponent {
           response.forEach( (user: any) => {
             if (user.is_superuser) {
               this.router.navigate(['/organizaciones'])
-            } else if (user.is_useruser) {
-              console.log('admin')
+            } else if (user.is_admin) {
+              this.router.navigate(['/seleccionar-sucursal'])
             } else if (user.is_useruser) {
               console.log('client')
             } else if (user.is_useruser) {

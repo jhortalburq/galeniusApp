@@ -14,12 +14,12 @@ export class AsistencialService {
                 { titulo: 'Citas Programadas', url: '/asistencial/agenda/citas-programadas' },
                ]
    },
-   {
-    titulo: 'CONSULTAS MÉDICAS',
-    submenu: [
-                  { titulo: 'Registro de Consultas', url: '/asistencial/consultas/consultas-medicas' },
-             ]
-   },
+  //  {
+  //   titulo: 'CONSULTAS MÉDICAS',
+  //   submenu: [
+  //                 { titulo: 'Registro de Consultas', url: '/asistencial/consultas/consultas-medicas' },
+  //            ]
+  //  },
    {
     titulo: 'ESPECIALISTAS',
     submenu: [  
