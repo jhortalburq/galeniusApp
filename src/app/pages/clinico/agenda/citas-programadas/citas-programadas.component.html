@@ -15,22 +15,36 @@
                           <tr mdbTableCol *ngFor="let registro of registros; let i = index">
                             <td class="text-center">{{ i + 1 }}</td>
                             
-                            <td >{{ registro.nombre_paciente }}</td>
-                            <td class="text-center">{{ registro.no_documento }}</td>
-
-                            <td class="text-center">{{ registro.edad }} años</td>
+                            <td style="width: 30%">
+                              {{ registro.nombre_paciente }}<br>
+                              <span>{{ registro.no_documento }}</span>
+                              <span class="edad">{{ registro.edad }} años</span>
+                            </td>
                             <td class="text-center">{{ registro.nombre_tipo_cita }}</td>
-                            <td class="text-center">{{ registro.nombre_especialista }}</td>
-                            <td class="text-center">{{ registro.nombre_especialidad }}</td>
+                            <td style="width: 30%">
+                              {{ registro.nombre_especialista }}<br>
+                              <span><mdb-badge [pill]="true" [primary]="true">{{ registro.nombre_especialidad | uppercase }}</mdb-badge></span>
+                            </td>
                             <td class="text-center">{{ registro.fecha }}</td>
                             <td class="text-center">{{ registro.hora }}</td>
-                            <td class="text-center">{{ registro.tipo_stado_pago }}</td>
-                            <td class="text-right">{{ registro.monto_pendiente }}</td>
-                            <td class="text-right">{{ registro.costo_total }}</td>
+                            <td class="text-center">{{ registro.hora_fin }}</td>
+                            <td class="text-center">
+                                <mdb-badge [danger]="true"  style="cursor: pointer" *ngIf="registro.status_pago == 1">
+                                  {{ registro.tipo_stado_pago }}
+                                </mdb-badge>
+                                <mdb-badge [info]="true"  style="cursor: pointer" *ngIf="registro.status_pago == 2">
+                                  {{ registro.tipo_stado_pago }}
+                                </mdb-badge>
+                                <mdb-badge [success]="true"  style="cursor: pointer" *ngIf="registro.status_pago == 3">
+                                  {{ registro.tipo_stado_pago }}
+                                </mdb-badge>
+                            </td>
+                            <td style="width: 10%;" class="text-right">{{ registro.costo_total | number:'1.2-2' }}</td>
+                            <td style="width: 10%;" class="text-right">{{ registro.monto_pendiente | number:'1.2-2' }}</td>
                             <td class="text-center">{{ registro.created | date: "dd/MM/yyyy, h:mm a" }}</td>
 
 
-                            <td style="width: 10%" class="text-center">
+                            <td style="width: 5%" class="text-center">
                                 <!-- <mdb-badge [danger]="true"  style="cursor: pointer">
                                   <mdb-icon fas icon="pencil-alt" ></mdb-icon> Editar
                                 </mdb-badge> -->
@@ -42,7 +56,7 @@
 
                         <tbody *ngIf="!registros.length">
                           <tr mdbTableCol >
-                            <td style="width: 115%" colspan="14">No se encontraron registros</td>
+                            <td style="width: 115%" colspan="11">No se encontraron registros</td>
                           </tr>
                         </tbody>
 

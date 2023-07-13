@@ -15,7 +15,7 @@
 
       <!--Search Form-->
       <li >
-        <button type="button" class="btn mdb-color darken-3 btn-block btn-sm white-text" (click)="openModal()">
+        <button type="button" class="btn mdb-color darken-3 btn-block btn-sm white-text" (click)="openModal()" *ngIf="sidebarService.menu.length">
           <b>{{ breadcrumbService.modulo }}</b>
         </button>
       </li>
@@ -32,11 +32,11 @@
               <mdb-accordion-item-body>
                   <ul *ngFor="let seccion of item.secciones">
                     <li class="seccion_titulo" *ngIf="seccion.submenu">{{ seccion.titulo }}</li>
-                    <li class="seccion_menu" *ngIf="!seccion.submenu"><a  (click)="sidenav.hide()" [routerLink]="seccion.url" routerLinkActive="active" >{{ seccion.titulo }}</a></li>
-                    <li class="seccion_menu" *ngFor="let submenu of seccion.submenu"><a  (click)="sidenav.hide()" [routerLink]="submenu.url" routerLinkActive="active" >{{ submenu.titulo }}</a></li>
+                    <li class="seccion_menu" *ngIf="!seccion.submenu"><a  (click)="hideNav()" [routerLink]="seccion.url" routerLinkActive="active" >{{ seccion.titulo }}</a></li>
+                    <li class="seccion_menu" *ngFor="let submenu of seccion.submenu"><a  (click)="hideNav()" [routerLink]="submenu.url" routerLinkActive="active" >{{ submenu.titulo }}</a></li>
                   </ul>
                   <ul>
-                    <li class="seccion_menu" *ngFor="let submenu of item.submenu"><a  (click)="sidenav.hide()" [routerLink]="submenu.url" routerLinkActive="active">{{ submenu.titulo }}</a></li>
+                    <li class="seccion_menu" *ngFor="let submenu of item.submenu"><a  (click)="hideNav()" [routerLink]="submenu.url" routerLinkActive="active">{{ submenu.titulo }}</a></li>
                   </ul>
               </mdb-accordion-item-body>
             </mdb-accordion-item>
@@ -46,7 +46,7 @@
       </li>
 
       <li>
-        <button type="button" class="btn btn-danger btn-block btn-sm white-text btn_regresar" (click)="irInicio()">
+        <button type="button" class="btn btn-danger btn-block btn-sm white-text btn_regresar" (click)="irInicio()" *ngIf="sidebarService.menu.length">
           <b>IR A INICIO</b>
         </button>
       </li>
@@ -63,7 +63,7 @@
 
     <navlinks class="navbar-container">
       <!-- SideNav slide-out button -->
-      <div class="float-left" *ngIf="breadcrumbService.flag_sidebar">
+      <div class="float-left" >
         <a (click)="sidenav.show()" class="button-collapse"><mdb-icon fas icon="bars"></mdb-icon></a>
       </div>
       <!--/. SideNav slide-out button -->

@@ -34,7 +34,7 @@ export class SeleccionarModuloComponent {
         this.breadcrumbService.title = 'SELECCIONE MÓDULO';
         this.breadcrumbService.flag_dropdown_empresa = true;
         this.breadcrumbService.flag_dropdown_sucursal = true;
-        this.breadcrumbService.flag_sidebar = false;
+        // this.breadcrumbService.flag_sidebar = false;
     
         this.sharedService.getOrganizacionesUsuario().subscribe();
         this.organizacion_seleccionada = this.sharedService.getOrganizacionActivaUsuario();

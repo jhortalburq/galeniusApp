@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModulosComponent } from '../modulos/modulos.component';
 import { MDBModalRef, MDBModalService } from '../../../../ng-uikit-pro-standard/src/public_api';
+import { BehaviorSubject } from 'rxjs';
 
 import {
   SidebarService,
@@ -20,6 +21,14 @@ export class NavigationComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) public el: any;
   @Input() clientX;
   @Input() clientY;
+  @HostListener('window:resize', ['$event'])
+
+  onResize(event) {
+    this.screenWidth$.next(event.target.innerWidth);
+  }
+  
+  screenWidth: number;
+  private screenWidth$ = new BehaviorSubject<number>(window.innerWidth);
 
   modalRef: MDBModalRef;
 
@@ -52,6 +61,12 @@ export class NavigationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.screenWidth$.subscribe(width => {
+      this.screenWidth = width;
+      console.log(this.screenWidth)
+    });
+
     this.currentUser = this.authService.currentUserValue;
     this.breadcrumbService.modulo = localStorage.getItem('last_modulo');
 
@@ -89,18 +104,26 @@ export class NavigationComponent implements OnInit {
     this.alertService.successSwalToast(`${this.sucursal_seleccionada.razon_social}`, 1000);
 
     this.router.navigate(['/seleccionar-modulo', this.sucursal_seleccionada.id]);
-    this.el.hide();
+    // this.el.hide();
 
   }
 
   ngOnChanges() {
-    if (this.clientX < 35 && this.breadcrumbService.flag_sidebar ) {
-      this.el.show();
-    }
+    // if (this.clientX < 35 ) {
+    //   this.el.show();
+    // }
   }
   irInicio() {
-    this.el.hide();
+    if (this.screenWidth <= 1440)  {
+      this.el.toggle();
+    }
+    
     this.router.navigate(['/']);
   }
   
+  hideNav() {
+    if (this.screenWidth <= 1440)  {
+      this.el.toggle();
+    }
+  }
 }

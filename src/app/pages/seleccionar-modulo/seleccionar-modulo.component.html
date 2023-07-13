@@ -1,6 +1,6 @@
 <div class="row d-flex justify-content-center align-items-center" *ngIf="sucursal_seleccionada">
 
-    <div class="col-md-2 col-xs-6 col-sm-3 menu_modulo" [ngClass]="modulo.background"  (click)="irModulo(modulo.nombre)" *ngFor="let modulo of modulos">
+    <div class="col-xs-6 col-sm-3 menu_modulo" [ngClass]="modulo.background"  (click)="irModulo(modulo.nombre)" *ngFor="let modulo of modulos">
       <a mdbBtn [floating]="true" size="sm"><mdb-icon fas [icon]="modulo.icono"></mdb-icon></a>
 
       <span class="white-text">{{ modulo.nombre | uppercase }}</span>

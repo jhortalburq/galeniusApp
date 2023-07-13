@@ -18,7 +18,7 @@ export class MenuComponent {
   ngOnInit() {
     this.sidebarService.menu = this.ocupacionalService.menu;
     this.breadcrumbService.setModuloName(this.modulo, true, 'ocupacional');
-    this.breadcrumbService.flag_sidebar = true;
+    // this.breadcrumbService.flag_sidebar = true;
     this.breadcrumbService.title = 'OCUPACIONAL';
   }
 }

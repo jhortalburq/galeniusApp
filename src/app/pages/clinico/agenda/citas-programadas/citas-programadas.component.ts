@@ -33,16 +33,14 @@ export class CitasProgramadasComponent implements OnInit{
   displayedColumns = [
     '',
     'Nombre Completo', 
-    'N° Documento',
-    'Edad', 
     'Tipo de Cita',
     'Especialista',
-    'Especialidad',
     'Fecha',
-    'Hora',
-    'Estado',
-    'Monto Pendiente',
+    'Hora Inicio',
+    'Hora Inicio',
+    'Pagado',
     'Costo Cita',
+    'Saldo',
     'Creado',
     ''
   ];

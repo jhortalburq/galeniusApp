@@ -48,7 +48,7 @@ export class OrganizacionesComponent {
     this.breadcrumbService.title = 'ORGANIZACIONES';
     this.breadcrumbService.flag_dropdown_empresa = false;
     this.breadcrumbService.flag_dropdown_sucursal = false;
-    this.breadcrumbService.flag_sidebar = false;
+    // this.breadcrumbService.flag_sidebar = false;
 
     this.sharedService.quitarOrganizacionActivaUsuario();
     this.sharedService.quitarSucursalActivo();
