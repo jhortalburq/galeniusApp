@@ -3,33 +3,28 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IngresarHorarioComponent } from './ingresar-horario/ingresar-horario.component';
-import { HorarioDetalleComponent } from './horario-detalle/horario-detalle.component';
+import { HorariosComponent } from './horarios/horarios.component';
 
 import { HorariosRoutingModule } from './horararios-routing.module';
 
 import { MDBBootstrapModulesPro } from '../../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../../material.module';
-import { FullCalendarModule } from '@fullcalendar/angular';
-import { HorariosComponent } from './horarios/horarios.component';
+import { SharedModule } from'../../../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     IngresarHorarioComponent,
-    HorarioDetalleComponent,
-    HorariosComponent
+    HorariosComponent,
   ],
   imports: [
     CommonModule,
     MDBBootstrapModulesPro,
     MaterialModule,
-    FullCalendarModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     HorariosRoutingModule
-  ],
-  exports: [
-    HorarioDetalleComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

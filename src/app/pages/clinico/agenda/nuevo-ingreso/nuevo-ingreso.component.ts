@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MDBModalRef } from '../../../../../../ng-uikit-pro-standard/src/public_api';
 
 import {
   SharedService,
@@ -17,17 +16,17 @@ import {
 } from '@angular/forms';
 
 import { Subject } from 'rxjs';
-
 @Component({
-  selector: 'app-nueva-cita',
-  templateUrl: './nueva-cita.component.html',
-  styleUrls: ['./nueva-cita.component.scss']
+  selector: 'app-nuevo-ingreso',
+  templateUrl: './nuevo-ingreso.component.html',
+  styleUrls: ['./nuevo-ingreso.component.scss']
 })
-export class NuevaCitaComponent implements OnInit {
+export class NuevoIngresoComponent {
   @Input() especialista_id;
   @Input() especialidad_id;
 
   maxResults = 10;
+  disabled: boolean = false;
 
   registerForm: FormGroup;
   paciente: FormControl;
@@ -44,12 +43,10 @@ export class NuevaCitaComponent implements OnInit {
 
   horarios: any = [];
 
-
   choices_tipos_pacientes: any = [];
   choices_tipos_citas: any = [];
 
   constructor(
-      public modalRef: MDBModalRef,
       public fb: FormBuilder,
       public mantenimientoService: MantenimientoService,
       public sharedService: SharedService,

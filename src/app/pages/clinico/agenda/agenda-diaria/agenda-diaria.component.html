@@ -37,27 +37,38 @@
     </div>
 
     <div class="col-sm-12 col-md-9">
-        <app-horario-detalle 
+        <app-calendar-events 
                 [changeDate]="changeDate"
                 [especialidad_id]="especialidad_id"
                 [especialista_id]="especialista_id"
                 (changeDateCalendar)="setNewDate($event)"
-                >
-        </app-horario-detalle>
+                [tipoAgenda]="2"
+                *ngIf="!add_cita">
+        </app-calendar-events>
+        <app-nuevo-ingreso
+                [changeDate]="changeDate"
+                [especialidad_id]="especialidad_id"
+                [especialista_id]="especialista_id"
+                (changeDateCalendar)="setNewDate($event)"
+                (submitHorario)="setIngreso($event)"
+                *ngIf="add_cita">
+        </app-nuevo-ingreso>
     </div>
     
 </div>
 
 
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
 
-
-<div class="fixed-action-btn" style="bottom: 5px; right: 24px;">
-    <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="addCita()">
-      <mdb-icon fas icon="plus" ></mdb-icon>
+    <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="fixed.toggle()">
+      <mdb-icon fas icon="pencil-alt" ></mdb-icon>
     </a>
-
-    <!-- <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="closeHorario()" *ngIf="add_horario">
-        <mdb-icon fas icon="close" ></mdb-icon>
-      </a>
-   -->
-</div>
+  
+    <div class="fixed_collapse" mdbCollapse="isCollapsed" #fixed="bs-collapse">
+      <a mdbBtn [floating]="true" color="red" class="waves-light" mdbWavesEffect><mdb-icon fas icon="star" (click)="fixed.toggle()"></mdb-icon></a>
+      <a mdbBtn [floating]="true" color="yellow" class="darken-1 waves-light" mdbWavesEffect><mdb-icon fas icon="user" (click)="fixed.toggle()"></mdb-icon></a>
+      <a mdbBtn [floating]="true" color="green" class="waves-light" mdbWavesEffect><mdb-icon fas icon="envelope" (click)="fixed.toggle()"></mdb-icon></a>
+      <a mdbBtn [floating]="true" color="blue" class="waves-light" mdbWavesEffect><mdb-icon fas icon="shopping-cart" (click)="fixed.toggle()"></mdb-icon></a>
+    </div>
+  
+  </div>

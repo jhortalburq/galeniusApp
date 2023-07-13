@@ -36,6 +36,10 @@ export class AgendaDiariaComponent implements OnInit {
 
   events: any = [];
 
+  add_cita: boolean = false;
+
+  isCollapsed: boolean = false;
+  
   constructor(public breadcrumbService: BreadcrumbsService,
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
@@ -86,7 +90,10 @@ export class AgendaDiariaComponent implements OnInit {
 
     this.registerForm.patchValue({
         especialista: 0,
-    })
+    });
+
+    this.add_cita = false;
+
     this.especialidad_id = item.value;
     this.getEspecialistas(item.value);
   }
@@ -103,29 +110,20 @@ export class AgendaDiariaComponent implements OnInit {
     this.selected = event;
   }
 
-  setHorario(success: boolean) {
+  setIngreso(success: any) {
     console.log(success)
   }
 
-  addCita() {
-    this.modalRef = this.modalService.show(NuevaCitaComponent, {
-                  backdrop: true,
-                  keyboard: true,
-                  focus: true,
-                  show: false,
-                  ignoreBackdropClick: false,
-                  class: 'modal-lg modal-dialog modal-notify modal-primary',
-                  animated: true,
-              });
-
-    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
-
-    this.modalRef.content.action.subscribe( (result: any) => {
-      if (result) {
-        // this.getData();
-        // this.filter = '';
-      }
-    });
+  closeHorario() {
+    this.add_cita = false;
   }
 
+  addCita() {
+    if (!this.especialista_id) {
+      this.alertService.warningSwal('Seleccione un Especialista', '')
+      this.add_cita = false;
+    } else {
+      this.add_cita = true;
+    }
+  }
 }

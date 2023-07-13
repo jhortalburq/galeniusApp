@@ -37,13 +37,14 @@
     </div>
 
     <div class="col-sm-12 col-md-9">
-        <app-horario-detalle 
+        <app-calendar-events 
                 [changeDate]="changeDate"
                 [especialidad_id]="especialidad_id"
                 [especialista_id]="especialista_id"
                 (changeDateCalendar)="setNewDate($event)"
+                [tipoAgenda]="1"
                 *ngIf="!add_horario">
-        </app-horario-detalle>
+        </app-calendar-events>
         <app-ingresar-horario 
                 [changeDate]="changeDate"
                 [especialidad_id]="especialidad_id"

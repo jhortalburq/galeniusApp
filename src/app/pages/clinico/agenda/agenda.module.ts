@@ -4,20 +4,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AgendaDiariaComponent } from './agenda-diaria/agenda-diaria.component';
 import { AgendaEspecialistaComponent } from './agenda-especialista/agenda-especialista.component';
+import { NuevoIngresoComponent } from './nuevo-ingreso/nuevo-ingreso.component';
 
 import { AgendaRoutingModule } from './agenda-routing.module';
 
-import { FullCalendarModule } from '@fullcalendar/angular';
-
 import { MDBBootstrapModulesPro } from '../../../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { MaterialModule } from '../../../material.module';
+import { SharedModule } from '../../../shared/shared.module';
 
-import { HorariosModule } from '../horarios/horarios.module';
+import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
   declarations: [
     AgendaDiariaComponent,
     AgendaEspecialistaComponent,
+    NuevoIngresoComponent,
   ],
   imports: [
     CommonModule,
@@ -25,9 +26,9 @@ import { HorariosModule } from '../horarios/horarios.module';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FullCalendarModule,
     AgendaRoutingModule,
-    HorariosModule
+    SharedModule,
+    Select2Module,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -11,19 +11,18 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import esLocale from '@fullcalendar/core/locales/es';
 
-import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService } from '../../../../services/services.index';
-
+import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService } from '../../../services/services.index';
 
 @Component({
-  selector: 'app-horario-detalle',
-  templateUrl: './horario-detalle.component.html',
-  styleUrls: ['./horario-detalle.component.scss']
+  selector: 'app-calendar-events',
+  templateUrl: './calendar-events.component.html',
+  styleUrls: ['./calendar-events.component.scss']
 })
-
-export class HorarioDetalleComponent {
+export class CalendarEventsComponent {
   @Input('changeDate') changeDate: string;
   @Input('especialidad_id') especialidad_id: number;
   @Input('especialista_id') especialista_id: number;
+  @Input('tipoAgenda') tipoAgenda: number;
 
   @Output() changeDateCalendar = new EventEmitter<string>();
 
@@ -84,6 +83,7 @@ export class HorarioDetalleComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.calendarComponent) {
+      console.log(this.tipoAgenda)
       this.calendarApi = this.calendarComponent.getApi();
       this.calendarApi.gotoDate(this.changeDate);
     }
@@ -97,15 +97,29 @@ export class HorarioDetalleComponent {
   // }
 
   loadEvents(fecha: string, fecha_fin: string) {
-    this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha, fecha_fin)
-                        .subscribe({
-                          next: (res: any) => {
-                            this.events = res.results;
-                            this.calendarOptions.events = this.events;
-                          },
-                          error: (err: any) => {
-                            console.log(err)
-                          }
-                        })
+    console.log(this.tipoAgenda);
+    if (this.tipoAgenda == 1) {
+      this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha, fecha_fin)
+      .subscribe({
+        next: (res: any) => {
+          this.events = res.results;
+          this.calendarOptions.events = this.events;
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      })
+    } else {
+      this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha, fecha_fin)
+      .subscribe({
+        next: (res: any) => {
+          this.events = res.results;
+          this.calendarOptions.events = this.events;
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      })
+    }
   }
 }

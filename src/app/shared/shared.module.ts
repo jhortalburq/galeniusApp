@@ -8,6 +8,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { MDBBootstrapModulesPro } from '../../../ng-uikit-pro-standard/src/lib/mdb.module';
 import { Select2Module } from 'ng-select2-component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { ModulosComponent } from './modulos/modulos.component';
 
@@ -19,6 +20,7 @@ import { CitasFiltroComponent } from './filtros/citas-filtro/citas-filtro.compon
 import { FiltroEspecialistaComponent } from './filtros/filtro-especialista/filtro-especialista.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { UbigeoComponent } from './components/ubigeo/ubigeo.component';
+import { CalendarEventsComponent } from './components/calendar-events/calendar-events.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { UbigeoComponent } from './components/ubigeo/ubigeo.component';
     PaginationComponent,
     CheckboxItemComponent,
     UbigeoComponent,
+    CalendarEventsComponent,
   ],
   exports: [
     NavigationComponent,
@@ -44,7 +47,8 @@ import { UbigeoComponent } from './components/ubigeo/ubigeo.component';
     CheckboxModulosComponent,
     CheckboxItemComponent,
     PaginationComponent,
-    UbigeoComponent
+    UbigeoComponent,
+    CalendarEventsComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +57,7 @@ import { UbigeoComponent } from './components/ubigeo/ubigeo.component';
     Select2Module,
     FormsModule,
     ReactiveFormsModule,
+    FullCalendarModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

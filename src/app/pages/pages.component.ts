@@ -12,6 +12,7 @@ export class PagesComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) public el: any;
 
   clientX: number = 200;
+  clientY: number = 200;
 
   constructor( public router: Router,
               public sidebarService: SidebarService,
@@ -33,6 +34,7 @@ export class PagesComponent implements OnInit {
 
   onMouseEnter(e: any) {
     this.clientX = e.clientX;
+    this.clientY = e.clientY;
   }
 
 }

@@ -19,6 +19,7 @@ import {
 export class NavigationComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) public el: any;
   @Input() clientX;
+  @Input() clientY;
 
   modalRef: MDBModalRef;
 
@@ -93,7 +94,7 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if (this.clientX < 40 && this.breadcrumbService.flag_sidebar ) {
+    if (this.clientX < 35 && this.breadcrumbService.flag_sidebar ) {
       this.el.show();
     }
   }
