@@ -16,6 +16,9 @@ import {
     FormBuilder
 } from '@angular/forms';
 
+import Swal from 'sweetalert2';
+
+
 import { Subject } from 'rxjs';
 @Component({
   selector: 'app-nuevo-ingreso',
@@ -27,7 +30,7 @@ export class NuevoIngresoComponent {
   @Input('especialidad_id') especialidad_id: number;
   @Input('especialista_id') especialista_id: number;
 
-  @Output() submitCita = new EventEmitter<boolean>();
+  @Output() submitCita = new EventEmitter<any>();
 
   maxResults = 10;
   disabled: boolean = false;
@@ -111,7 +114,11 @@ export class NuevoIngresoComponent {
   getTurnosDisponibles() {
       this.horariosService.getHorariosDisponiblesEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.changeDate.split('T')[0])
       .subscribe({
-          next: (res => this.horarios = res.results)
+          next: (res => {
+            this.horarios = res.results.map( (item: any) => {
+                return {...item, select: false}
+            })
+          })
       })
   }
 
@@ -124,6 +131,14 @@ export class NuevoIngresoComponent {
   }
 
   setHorario( horario_id: number ){
+    this.horarios = this.horarios.map( (item: any) => {
+      if (item.id == horario_id) {
+        return {...item, select: true}
+      } else {
+        return {...item, select: false}
+      }
+    })
+  
     this.registerForm.patchValue({
       horario: horario_id,
       especialidad: this.especialidad_id,
@@ -140,13 +155,29 @@ export class NuevoIngresoComponent {
                           .subscribe({
                             next: (res: any) => {
                               this.disabled = false;
-                              this.alertService.successSwalToast('Cita Registrada', 2000);
-                              this.submitCita.emit(true);
+                              Swal.fire({
+                                title: 'Cita Agendada',
+                                text: "Registar pago de la cita",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Si, Pagar',
+                                cancelButtonText: 'No'
+                              }).then((result) => {
+                                if (result.isConfirmed) {
+                                  this.alertService.successSwalToast('Cita Registrada', 2000);
+                                  this.submitCita.emit({cita: res.cita_id, pagar: true});
+                                } else {
+                                  this.alertService.successSwalToast('Cita Registrada', 2000);
+                                  this.submitCita.emit({cita: res.cita_id, pagar: false});
+                                }
+                              })
                               this.registerForm.reset();
                             },
                             error: (err: any) => {
                               console.log(err);
-                              this.submitCita.emit(false);
+                              this.submitCita.emit({cita: false, pagar: false});
                               this.disabled = false;
                             }
                           })

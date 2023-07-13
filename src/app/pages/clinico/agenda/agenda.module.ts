@@ -12,11 +12,13 @@ import { MaterialModule } from '../../../material.module';
 import { SharedModule } from '../../../shared/shared.module';
 
 import { Select2Module } from 'ng-select2-component';
+import { IngresarPagoComponent } from './ingresar-pago/ingresar-pago.component';
 
 @NgModule({
   declarations: [
     AgendaDiariaComponent,
     NuevoIngresoComponent,
+    IngresarPagoComponent,
   ],
   imports: [
     CommonModule,

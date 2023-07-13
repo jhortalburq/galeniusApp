@@ -10,7 +10,7 @@ import {
   FormGroup
 } from '@angular/forms';
 
-import { NuevaCitaComponent } from '../../citas/nueva-cita/nueva-cita.component';
+import { IngresarPagoComponent } from '../ingresar-pago/ingresar-pago.component';
 
 @Component({
   selector: 'app-agenda-diaria',
@@ -116,14 +116,22 @@ export class AgendaDiariaComponent implements OnInit {
     this.selected = event;
   }
 
-  setIngreso(success: any) {
-    console.log(success)
-    this.icon = 'calendar-alt';
-    this.enable_citas = true;
-    this.color = 'primary';
-    this.enable_horarios = false;
-    this.add_cita = false;
-    this.breadcrumbService.title = 'AGENDA DE CITAS';
+  setIngreso(item: any) {
+    console.log('ddddd', item);
+
+    if (item.pagar) {
+      this.modalPago(item.cita)
+    } else {
+      if (!item.cita) {
+        this.alertService.errorSwal('No se registro la cita', 'Cita');
+      }
+      this.icon = 'calendar-alt';
+      this.enable_citas = true;
+      this.color = 'primary';
+      this.enable_horarios = false;
+      this.add_cita = false;
+      this.breadcrumbService.title = 'AGENDA DE CITAS';
+    }
   }
 
   closeHorario() {
@@ -173,5 +181,31 @@ export class AgendaDiariaComponent implements OnInit {
       this.el.toggle();
       this.breadcrumbService.title = 'AGENDA DE CITAS';
     }
+  }
+
+  modalPago(cita_id): void {
+
+    this.modalRef = this.modalService.show(IngresarPagoComponent, {
+                  backdrop: true,
+                  keyboard: true,
+                  focus: true,
+                  show: false,
+                  ignoreBackdropClick: false,
+                  class: 'modal-dialog modal-notify modal-primary',
+                  animated: true,
+                  data: {
+                      cita_id: cita_id
+                  }
+              }
+    );
+
+    this.renderer.setStyle(document.querySelector('mdb-modal-container'), 'overflow-y', 'auto');
+
+    this.modalRef.content.action.subscribe( (result: any) => {
+
+      if (result) {
+        console.log('ddddd', result)
+      }
+    });
   }
 }

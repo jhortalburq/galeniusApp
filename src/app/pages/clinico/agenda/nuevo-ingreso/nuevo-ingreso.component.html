@@ -51,7 +51,7 @@
         
 
                         <div class="col-sm-6 horarios">
-                            <mdb-badge [primary]="true" (click)="setHorario(item.id)" *ngFor="let item of horarios">
+                            <mdb-badge [primary]="true" [ngClass]="{'select': item.select}" (click)="setHorario(item.id)" *ngFor="let item of horarios">
                                 <mdb-icon far icon="clock"></mdb-icon> {{ item.horario }}
                             </mdb-badge>
                         </div> 
