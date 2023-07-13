@@ -43,7 +43,15 @@
                 [especialista_id]="especialista_id"
                 (changeDateCalendar)="setNewDate($event)"
                 [tipoAgenda]="2"
-                *ngIf="!add_cita">
+                *ngIf="enable_citas">
+        </app-calendar-events>
+        <app-calendar-events 
+                [changeDate]="changeDate"
+                [especialidad_id]="especialidad_id"
+                [especialista_id]="especialista_id"
+                (changeDateCalendar)="setNewDate($event)"
+                [tipoAgenda]="1"
+                *ngIf="enable_horarios">
         </app-calendar-events>
         <app-nuevo-ingreso
                 [changeDate]="changeDate"
@@ -60,15 +68,14 @@
 
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
 
-    <a mdbBtn [floating]="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="fixed.toggle()">
-      <mdb-icon fas icon="pencil-alt" ></mdb-icon>
+    <a mdbBtn [floating]="true" size="lg" [color]="color" class="waves-light" mdbWavesEffect (click)="fixed.toggle()">
+      <mdb-icon fas [icon]="icon" ></mdb-icon>
     </a>
   
     <div class="fixed_collapse" mdbCollapse="isCollapsed" #fixed="bs-collapse">
-      <a mdbBtn [floating]="true" color="red" class="waves-light" mdbWavesEffect><mdb-icon fas icon="star" (click)="fixed.toggle()"></mdb-icon></a>
-      <a mdbBtn [floating]="true" color="yellow" class="darken-1 waves-light" mdbWavesEffect><mdb-icon fas icon="user" (click)="fixed.toggle()"></mdb-icon></a>
-      <a mdbBtn [floating]="true" color="green" class="waves-light" mdbWavesEffect><mdb-icon fas icon="envelope" (click)="fixed.toggle()"></mdb-icon></a>
-      <a mdbBtn [floating]="true" color="blue" class="waves-light" mdbWavesEffect><mdb-icon fas icon="shopping-cart" (click)="fixed.toggle()"></mdb-icon></a>
+      <a mdbBtn [floating]="true" color="secondary" class="darken-1 waves-light" mdbWavesEffect mdbTooltip="Horarios Disponibles" placement="left"  *ngIf="!enable_horarios"><mdb-icon fas icon="clipboard-list" (click)="verHorarios()" ></mdb-icon></a>
+      <a mdbBtn [floating]="true" color="indigo" class="waves-light" mdbWavesEffect mdbTooltip="Nueva Cita" placement="left" *ngIf="!add_cita"><mdb-icon fas icon="calendar-plus" (click)="addCita()" ></mdb-icon></a>
+      <a mdbBtn [floating]="true" color="primary" class="waves-light" mdbWavesEffect mdbTooltip="Ver Citas" placement="left" *ngIf="!enable_citas"><mdb-icon fas icon="calendar-alt" (click)="verCitas()" ></mdb-icon></a>
     </div>
   
   </div>

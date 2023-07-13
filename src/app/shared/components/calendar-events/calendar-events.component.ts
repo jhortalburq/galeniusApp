@@ -83,7 +83,6 @@ export class CalendarEventsComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.calendarComponent) {
-      console.log(this.tipoAgenda)
       this.calendarApi = this.calendarComponent.getApi();
       this.calendarApi.gotoDate(this.changeDate);
     }
@@ -97,7 +96,6 @@ export class CalendarEventsComponent {
   // }
 
   loadEvents(fecha: string, fecha_fin: string) {
-    console.log(this.tipoAgenda);
     if (this.tipoAgenda == 1) {
       this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha, fecha_fin)
       .subscribe({

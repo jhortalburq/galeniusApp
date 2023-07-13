@@ -18,7 +18,8 @@ import { NuevaCitaComponent } from '../../citas/nueva-cita/nueva-cita.component'
   styleUrls: ['./agenda-diaria.component.scss'],
 })
 export class AgendaDiariaComponent implements OnInit {
- 
+  @ViewChild('fixed', { static: true }) public el: any;
+
   selected = new Date();
   changeDate: string = '';
   modalRef: MDBModalRef;
@@ -37,9 +38,14 @@ export class AgendaDiariaComponent implements OnInit {
   events: any = [];
 
   add_cita: boolean = false;
+  enable_horarios: boolean = false;
+  enable_citas: boolean = true;
 
   isCollapsed: boolean = false;
-  
+
+  icon: string = 'cog';
+  color: string = 'red';
+
   constructor(public breadcrumbService: BreadcrumbsService,
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
@@ -94,6 +100,7 @@ export class AgendaDiariaComponent implements OnInit {
 
     this.add_cita = false;
 
+
     this.especialidad_id = item.value;
     this.getEspecialistas(item.value);
   }
@@ -124,6 +131,42 @@ export class AgendaDiariaComponent implements OnInit {
       this.add_cita = false;
     } else {
       this.add_cita = true;
+      this.enable_citas = false;
+      this.color = 'indigo';
+      this.icon = 'calendar-plus';
+      this.breadcrumbService.title = 'NUEVA CITA';
+      this.enable_horarios = false;
+      this.el.toggle();
+    }
+  }
+
+  verHorarios() {
+    if (!this.especialista_id) {
+      this.alertService.warningSwal('Seleccione un Especialista', '')
+      this.enable_horarios = false;
+    } else {
+      this.add_cita = false;
+      this.enable_horarios = true;
+      this.enable_citas = false;
+      this.icon = 'clipboard-list';
+      this.color = 'secondary';
+      this.breadcrumbService.title = 'HORARIOS DISPONIBLES';
+      this.el.toggle();
+    }
+  }
+
+  verCitas() {
+    if (!this.especialista_id) {
+      this.alertService.warningSwal('Seleccione un Especialista', '')
+      this.enable_citas = false;
+    } else {
+      this.add_cita = false;
+      this.enable_horarios = false;
+      this.icon = 'calendar-alt';
+      this.enable_citas = true;
+      this.color = 'primary';
+      this.el.toggle();
+      this.breadcrumbService.title = 'AGENDA DE CITAS';
     }
   }
 }
