@@ -188,7 +188,7 @@ export class AgendaDiariaComponent implements OnInit {
                   keyboard: true,
                   focus: true,
                   show: false,
-                  ignoreBackdropClick: false,
+                  ignoreBackdropClick: true,
                   class: 'modal-dialog modal-notify modal-primary',
                   animated: true,
                   data: {

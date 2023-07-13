@@ -54,7 +54,7 @@ export class IngresarPagoComponent {
 
   onSubmit() {
     this.disabled = true;
-
+    console.log(this.registro)
     this.citasService.registarPagoCita(this.registro, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.cita_id)
     .subscribe({
       next: (res: any) => {
@@ -65,7 +65,7 @@ export class IngresarPagoComponent {
       },
       error: (err: any) => {
         this.disabled = false;
-        this.notificationService.showError(JSON.stringify(err.error), '');
+        this.notificationService.showError('Ingrese montos correctos', 'Error Pago');
       }
     })
 
