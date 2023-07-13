@@ -1,6 +1,6 @@
 <div class="modal-content">
 
-    <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form class="form-horizontal form-material" >
 
       <div class="modal-header text-center">
         <p class="heading lead"><mdb-icon fas icon="plus"></mdb-icon> Registrar Pago</p>
@@ -9,12 +9,53 @@
         </button>
       </div>
       <div class="modal-body mx-3">
+        <mdb-progress-bar *ngIf="disabled" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
 
+        <div class="row mt-3">
 
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover table-bordered">
+                        <thead>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th></th>
+                                <th class="text-center">Concepto</th>
+                                <th class="text-center">Precio</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of registro.items; let i = index">
+                                <td class="text-center">{{ i + 1 }}</td>
+                                <td style="width: 60%">
+                                    <input mdbInput type="text" id="concepto_{{ i }}" class="form-control form-control-sm" name="concepto_{{ i }}" [(ngModel)]="item.concepto">
+                                </td>
+                                <td style="width: 30%">
+                                    <input mdbInput type="text" id="costo_{{ i }}" class="form-control form-control-sm"  name="costo_{{ i }}" [(ngModel)]="item.valor">
+                                </td>
+                                <td >
+                                    <mdb-badge [primary]="true"  style="cursor: pointer" (click)="addInline()" *ngIf="i == 0">
+                                        Añadir
+                                    </mdb-badge>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="mdb-color darken-3 white-text">
+                                <th></th>
+                                <th>Total</th>
+                                <th>{{ registro.total }}</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-      </div>
+    </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button mdbBtn size="sm" type="submit" [disabled]="!registerForm.valid" color="danger" class="waves-light" mdbWavesEffect>Grabar</button>
+        <button mdbBtn size="sm" type="submit" color="danger" [disabled]="disabled" class="waves-light" (click)="onSubmit()" mdbWavesEffect>Grabar</button>
       </div>
 
     </form>

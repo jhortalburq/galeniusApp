@@ -67,8 +67,8 @@ export class EditDiagnosticoComponent {
       this.mantenimientoService.editObjectMantenimiento('maestros/diagnosticos', this.registerForm.value, this.registro.id, this.sharedService.organizacion_seleccionada.id)
                               .subscribe({
                                 next: (response) => {
-                                  this.action.next(true);
                                   this.notificationService.showInfo('Registro editado' , this.registro.nombre);
+                                  this.action.next(true);
                                   this.modalRef.hide();
                                 },
                                 error:  err => {

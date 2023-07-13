@@ -252,8 +252,6 @@ export class DatosEmpresaComponent {
       
       this.sharedService.getValidateSunat(params.target.value).subscribe({
         next: (res: any) => {
-          console.log(res)
-          console.log(this.distrito_default)
           this.provincia_default = res.cod_provin
           this.distrito_default = res.ubigeo
 

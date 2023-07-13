@@ -86,7 +86,6 @@ export class EvaluacionComponent {
    onSubmit() {
         this.disabled = true;
         window.scroll(0,0);
-        console.log(this.registro);
 
         this.examenesService.updateEvaluacionFicha(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.programa, this.clave, this.slug, this.registro)
                             .subscribe({

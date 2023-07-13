@@ -275,7 +275,6 @@ export class NuevoEspecialistaComponent {
       
     this.sharedService.getValidateReniec(params.target.value).subscribe({
         next: (res: any) => {
-          console.log(res)
 
           this.registerForm.patchValue({
               nombres: res.nombres,

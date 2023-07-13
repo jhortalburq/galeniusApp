@@ -5,8 +5,9 @@ import {
   SharedService,
   MantenimientoService,
   PacientesService,
-  HorariosService
-  
+  CitasService,
+  AlertService,
+  NotificationsService,
 } from '../../../../services/services.index';
 
 import {
@@ -26,61 +27,51 @@ import { Subject } from 'rxjs';
 export class IngresarPagoComponent {
   @Input() cita_id;
 
-  maxResults = 10;
-
-  registerForm: FormGroup;
-  paciente: FormControl;
-  especialidad: FormControl;
-  especialista: FormControl;
-  tipo_cita: FormControl;
-  fecha: FormControl;
-  horario: FormControl;
+  disabled: boolean = false;
 
   action: Subject<any> = new Subject();
 
-  especialidades: any = [];
-  especialistas: any = [];
-
-  horarios: any = [];
-
-
-  choices_tipos_pacientes: any = [];
-  choices_tipos_citas: any = [];
+  registro = {
+                total: 0,
+                items: [
+                    {concepto: '', valor: ''}
+                ]
+             }
 
   constructor(
       public modalRef: MDBModalRef,
       public fb: FormBuilder,
       public mantenimientoService: MantenimientoService,
       public sharedService: SharedService,
-      public horariosService: HorariosService,
+      public citasService: CitasService,
+      public notificationService: NotificationsService,
+      public alertService: AlertService,
       public pacientesService: PacientesService,
   ) { }
 
   ngOnInit(): void {
-    this.createFormControls();
-    this.createForm();
-  }
-
-  createFormControls() {
-    this.paciente = new FormControl('', Validators.required);
-    this.especialidad = new FormControl('', Validators.required);
-    this.especialista = new FormControl('', Validators.required);
-    this.tipo_cita = new FormControl('', Validators.required);
-    this.fecha = new FormControl('', Validators.required);
-    this.horario = new FormControl('', Validators.required);
-  }
-
-  createForm() {
-     this.registerForm = new FormGroup({
-      paciente: this.paciente,
-      especialidad: this.especialidad,
-      especialista: this.especialista,
-      fecha: this.fecha,
-      tipo_cita: this.tipo_cita,
-      horario: this.horario,
-     });
   }
 
   onSubmit() {
+    this.disabled = true;
+
+    this.citasService.registarPagoCita(this.registro, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.cita_id)
+    .subscribe({
+      next: (res: any) => {
+        this.alertService.successSwalToast('Pago Registrado', 2000);
+        this.disabled = false;
+        this.action.next(true);
+        this.modalRef.hide();
+      },
+      error: (err: any) => {
+        this.disabled = false;
+        this.notificationService.showError(JSON.stringify(err.error), '');
+      }
+    })
+
+  }
+
+  addInline() {
+    this.registro.items.push({concepto: '', valor: ''})
   }
 }

@@ -26,8 +26,10 @@ export class CitasService {
 
   addCitaPaciente(registro: any, organizacion: number, cm: number) {
     registro['cm'] = cm;
-    console.log(registro)
     return this.http.post(`${environment.apiUrl}/api/v1/citas`, JSON.stringify(registro), {params: {'organizacion': organizacion, 'cm': cm}});
   }
 
+  registarPagoCita(registro: any, organizacion: number, cm: number, cita: number) {
+    return this.http.post(`${environment.apiUrl}/api/v1/citas/${ cita }/ingresar_pago`, JSON.stringify(registro), {params: {'organizacion': organizacion, 'cm': cm}});
+  }
 }

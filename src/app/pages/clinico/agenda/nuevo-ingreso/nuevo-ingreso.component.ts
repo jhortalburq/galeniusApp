@@ -107,7 +107,6 @@ export class NuevoIngresoComponent {
     return this.pacientesService.getPacientesForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, params)
           .subscribe((response: any) => {
              this.choices_tipos_pacientes = response.results;
-             console.log(this.choices_tipos_pacientes)
            });
   }
 
@@ -167,16 +166,15 @@ export class NuevoIngresoComponent {
                               }).then((result) => {
                                 if (result.isConfirmed) {
                                   this.alertService.successSwalToast('Cita Registrada', 2000);
-                                  this.submitCita.emit({cita: res.cita_id, pagar: true});
+                                  this.submitCita.emit({cita: res.id, pagar: true});
                                 } else {
                                   this.alertService.successSwalToast('Cita Registrada', 2000);
-                                  this.submitCita.emit({cita: res.cita_id, pagar: false});
+                                  this.submitCita.emit({cita: res.id, pagar: false});
                                 }
                               })
                               this.registerForm.reset();
                             },
                             error: (err: any) => {
-                              console.log(err);
                               this.submitCita.emit({cita: false, pagar: false});
                               this.disabled = false;
                             }

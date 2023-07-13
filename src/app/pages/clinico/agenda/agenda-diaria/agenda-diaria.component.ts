@@ -117,8 +117,6 @@ export class AgendaDiariaComponent implements OnInit {
   }
 
   setIngreso(item: any) {
-    console.log('ddddd', item);
-
     if (item.pagar) {
       this.modalPago(item.cita)
     } else {
@@ -204,7 +202,12 @@ export class AgendaDiariaComponent implements OnInit {
     this.modalRef.content.action.subscribe( (result: any) => {
 
       if (result) {
-        console.log('ddddd', result)
+        this.icon = 'calendar-alt';
+        this.enable_citas = true;
+        this.color = 'primary';
+        this.enable_horarios = false;
+        this.add_cita = false;
+        this.breadcrumbService.title = 'AGENDA DE CITAS';
       }
     });
   }

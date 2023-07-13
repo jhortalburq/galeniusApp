@@ -119,7 +119,6 @@ export class NuevaCitaComponent implements OnInit {
     return this.pacientesService.getPacientesForm(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, params)
           .subscribe((response: any) => {
              this.choices_tipos_pacientes = response.results;
-             console.log(this.choices_tipos_pacientes)
            });
 
   }
@@ -158,11 +157,8 @@ export class NuevaCitaComponent implements OnInit {
   }
 
   setHorario( horario_id: number ){
-    console.log(horario_id);
     this.registerForm.patchValue({
       horario: horario_id
     })
-
-    console.log(this.registerForm.value)
   }
 }
