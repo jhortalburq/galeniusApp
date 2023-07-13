@@ -26,3 +26,4 @@ export { ProtocolosService } from './protocolos.service';
 export { AdmisionService } from './admision.service';
 
 export { ExamenesService } from './examenes.service';
+export { CitasService } from './citas.service';

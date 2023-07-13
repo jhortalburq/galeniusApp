@@ -46,6 +46,9 @@ export class HorariosComponent {
     this.getEspecialidades();
     this.createFormControls();
     this.createForm();
+
+    // this.selected.setHours(this.selected.getHours() - 5);
+
     this.changeDate = this.selected.toISOString();
 
   }

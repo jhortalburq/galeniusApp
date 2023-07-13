@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import {
   SharedService,
   MantenimientoService,
   PacientesService,
-  HorariosService
-  
+  HorariosService,
+  AlertService,
+  CitasService,
 } from '../../../../services/services.index';
 
 import {
@@ -22,8 +23,11 @@ import { Subject } from 'rxjs';
   styleUrls: ['./nuevo-ingreso.component.scss']
 })
 export class NuevoIngresoComponent {
-  @Input() especialista_id;
-  @Input() especialidad_id;
+  @Input('changeDate') changeDate: string;
+  @Input('especialidad_id') especialidad_id: number;
+  @Input('especialista_id') especialista_id: number;
+
+  @Output() submitCita = new EventEmitter<boolean>();
 
   maxResults = 10;
   disabled: boolean = false;
@@ -33,8 +37,8 @@ export class NuevoIngresoComponent {
   especialidad: FormControl;
   especialista: FormControl;
   tipo_cita: FormControl;
-  fecha: FormControl;
   horario: FormControl;
+  motivo: FormControl;
 
   action: Subject<any> = new Subject();
 
@@ -52,14 +56,20 @@ export class NuevoIngresoComponent {
       public sharedService: SharedService,
       public horariosService: HorariosService,
       public pacientesService: PacientesService,
+      public citasService: CitasService,
+      public alertService: AlertService,
   ) { }
 
   ngOnInit(): void {
-    this.getEspecialidades();
     this.getTipoCitas();
+    this.getTurnosDisponibles();
     this.getChoicesPacientes();
     this.createFormControls();
     this.createForm();
+  }
+
+  ngOnChanges(){
+    this.getTurnosDisponibles();
   }
 
   createFormControls() {
@@ -67,8 +77,8 @@ export class NuevoIngresoComponent {
     this.especialidad = new FormControl('', Validators.required);
     this.especialista = new FormControl('', Validators.required);
     this.tipo_cita = new FormControl('', Validators.required);
-    this.fecha = new FormControl('', Validators.required);
     this.horario = new FormControl('', Validators.required);
+    this.motivo = new FormControl('');
   }
 
   createForm() {
@@ -76,33 +86,11 @@ export class NuevoIngresoComponent {
       paciente: this.paciente,
       especialidad: this.especialidad,
       especialista: this.especialista,
-      fecha: this.fecha,
       tipo_cita: this.tipo_cita,
       horario: this.horario,
+      motivo: this.motivo,
      });
   }
-
-  onSubmit() {
-  }
-
-  getEspecialidades() {
-    this.mantenimientoService.getEspecialidades(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
-                             .subscribe((response: any) => {
-                              for (let i = 0; i < response.results.length; i++) {
-                                  this.especialidades.push({value: response.results[i].id, label: response.results[i].nombre})
-                                }
-                              });
-  }
-
-  getEspecialistas(especialidad: number) {
-    this.mantenimientoService.getEspecialistas(this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, especialidad)
-                             .subscribe((response: any) => {
-                                    for (let i = 0; i < response.length; i++) {
-                                      this.especialistas.push({value: response[i].id, label: response[i].especialista})
-                                    }
-                              });
-  }
-
 
   _searchPaciente(item: any) {
     this.getChoicesPacientes(item.search)
@@ -118,32 +106,13 @@ export class NuevoIngresoComponent {
              this.choices_tipos_pacientes = response.results;
              console.log(this.choices_tipos_pacientes)
            });
-
   }
 
-  selectEspecialidad(item: any) {
-    if (item.value) {
-      this.getEspecialistas(item.value);
-    }
-  }
-
-  selectEspecialista(item: any) {
-    if (item.value) {
-        this.updateTurnos(this.registerForm.value.especialista, this.registerForm.value.fecha);
-    }
-  }
-
-  selectDate(e: any) {
-    this.updateTurnos(this.registerForm.value.especialista, this.registerForm.value.fecha);
-  }
-
-  updateTurnos(especialista, fecha) {
-    if (fecha && especialista) {
-      this.horariosService.getHorariosDisponiblesEspecialista(especialista, this.registerForm.value.especialidad, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha)
+  getTurnosDisponibles() {
+      this.horariosService.getHorariosDisponiblesEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, this.changeDate.split('T')[0])
       .subscribe({
           next: (res => this.horarios = res.results)
       })
-    }
   }
 
   getTipoCitas() {
@@ -155,11 +124,34 @@ export class NuevoIngresoComponent {
   }
 
   setHorario( horario_id: number ){
-    console.log(horario_id);
     this.registerForm.patchValue({
-      horario: horario_id
+      horario: horario_id,
+      especialidad: this.especialidad_id,
+      especialista: this.especialista_id,
     })
-
-    console.log(this.registerForm.value)
   }
+
+
+  onSubmit() {
+    if (this.registerForm.valid) {
+      this.disabled = true;
+
+      this.citasService.addCitaPaciente(this.registerForm.value, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id)
+                          .subscribe({
+                            next: (res: any) => {
+                              this.disabled = false;
+                              this.alertService.successSwalToast('Cita Registrada', 2000);
+                              this.submitCita.emit(true);
+                              this.registerForm.reset();
+                            },
+                            error: (err: any) => {
+                              console.log(err);
+                              this.submitCita.emit(false);
+                              this.disabled = false;
+                            }
+                          })
+
+    }
+  }
+
 }

@@ -2,27 +2,15 @@
     <div class="col-12">
         <mdb-card>
             <mdb-card-title>
-                <h5>Ingresar Horario</h5>
+                <h5>Registrar Cita</h5>
             </mdb-card-title>
             <mdb-card-body>
                 <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                   
-                    <div class="row mt-1">
         
-                        <div class="col-xs-6 col-sm-7" style="margin-top: -0.8rem">
-                            <label class="mdb-main-label">Especialidad</label>
-                            <select2 
-                                placeholder="Seleccione Especialidad"
-                                [data]="especialidades"
-                                formControlName="especialidad"
-                                noResultMessage="No existe resultados"
-                                maxResultsMessage="Escriba en el campo de búsqueda"
-                                (update)="selectEspecialidad($event)"
-                                >
-                            </select2>
-                        </div>
-        
-                        <div class="col-xs-6 col-sm-5" style="margin-top: -0.8rem">
+                    <div class="row">
+  
+                      
+                        <div class="col-sm-3" >
                             <label class="mdb-main-label">Tipo de Cita</label>
                             <select2 
                                 placeholder="Seleccione Tipo"
@@ -31,25 +19,8 @@
                                 >
                             </select2>
                         </div>
-                    </div>
-        
-                    <div class="row mt-4">
-                      
-                        <div class="col-sm-6">
-                            <label class="mdb-main-label">Especialista</label>
-                            <select2 
-                                placeholder="Seleccione Especialista"
-                                [data]="especialistas"
-                                formControlName="especialista"
-                                noResultMessage="No existe resultados"
-                                maxResultsMessage="Escriba en el campo de búsqueda"
-                                (update)="selectEspecialista($event)"
-                            >
-                            </select2>
-                        </div>
-                      
-                      
-                      <div class="col-sm-6">
+
+                      <div class="col-sm-5">
                           <label class="mdb-main-label">Paciente (*)</label>
                           <select2 
                               [data]="choices_tipos_pacientes"
@@ -71,34 +42,22 @@
         
                     <div class="form-row mt-4">
                          
-                         <div class="col-md-7 col-sm-12 col-xs-12">
+                         <div class="col-sm-6">
                               <div class="md-form form-sm form-group mt-1">
-                                <textarea type="text" id="form7" class="md-textarea form-control" mdbInput></textarea>
+                                <textarea type="text" id="form7" class="md-textarea form-control" formControlName="motivo" mdbInput></textarea>
                                 <label for="form7">Motivo</label>
                               </div>
                          </div>
         
-                    </div>
-        
-                  <div class="form-row ">
-                         <div class="col-sm-3">
-                              <div class="md-form form-sm">
-                                <input
-                                  type="date"
-                                  id="fecha"
-                                  class="form-control form-control-sm"
-                                  (change)="selectDate($event)"
-                                  formControlName="fecha"
-                                  mdbInput
-                                />
-                                <label for="fecha">Fecha de Cita</label>
-                            </div>
-                          </div>
-        
-                          <div class="col-sm-9">
-                            <mdb-badge (click)="setHorario(item.id)" [default]="true" *ngFor="let item of horarios">{{ item.horario }}</mdb-badge>
+
+                        <div class="col-sm-6 horarios">
+                            <mdb-badge [primary]="true" (click)="setHorario(item.id)" *ngFor="let item of horarios">
+                                <mdb-icon far icon="clock"></mdb-icon> {{ item.horario }}
+                            </mdb-badge>
                         </div> 
                     </div>
+
+                    <hr>
 
                     <div class="row mt-3">
                         <div class="col-sm-12 d-flex justify-content-center">

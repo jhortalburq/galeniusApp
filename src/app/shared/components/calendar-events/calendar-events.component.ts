@@ -11,7 +11,13 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import esLocale from '@fullcalendar/core/locales/es';
 
-import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService } from '../../../services/services.index';
+import { 
+  BreadcrumbsService, 
+  MantenimientoService, 
+  HorariosService, 
+  SharedService,
+  CitasService,
+} from '../../../services/services.index';
 
 @Component({
   selector: 'app-calendar-events',
@@ -28,8 +34,6 @@ export class CalendarEventsComponent {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent; 
   private calendarApi
-
-  selected = new Date();
 
   especialidades: any = [];
   especialistas: any = [];
@@ -59,7 +63,6 @@ export class CalendarEventsComponent {
         timeGridWeek: 'Tablero',
       },
       datesSet: (data => {
-        console.log(data)
           this.fecha = data.startStr.split('T')[0];
           this.fecha_fin = data.endStr.split('T')[0];
           this.loadEvents(this.fecha, this.fecha_fin);
@@ -71,6 +74,7 @@ export class CalendarEventsComponent {
               public mantenimientoService: MantenimientoService,
               public horariosService: HorariosService,
               public sharedService: SharedService,
+              public citasService: CitasService,
               private router: Router) {
   }
 
@@ -102,16 +106,18 @@ export class CalendarEventsComponent {
         next: (res: any) => {
           this.events = res.results;
           this.calendarOptions.events = this.events;
+          console.log(this.events)
         },
         error: (err: any) => {
           console.log(err)
         }
       })
     } else {
-      this.horariosService.getHorariosEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha, fecha_fin)
+      this.citasService.getCitasEspecialista(this.especialista_id, this.especialidad_id, this.sharedService.organizacion_seleccionada.id, this.sharedService.sucursal_seleccionada.id, fecha, fecha_fin)
       .subscribe({
         next: (res: any) => {
           this.events = res.results;
+          console.log(this.events)
           this.calendarOptions.events = this.events;
         },
         error: (err: any) => {

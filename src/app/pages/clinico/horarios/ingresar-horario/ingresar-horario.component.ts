@@ -1,5 +1,11 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { BreadcrumbsService, MantenimientoService, HorariosService, SharedService, AlertService } from '../../../../services/services.index';
+import { 
+  BreadcrumbsService, 
+  MantenimientoService, 
+  HorariosService, 
+  SharedService, 
+  AlertService,
+} from '../../../../services/services.index';
 
 import {
   FormGroup,

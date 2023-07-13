@@ -58,7 +58,7 @@
                 [especialidad_id]="especialidad_id"
                 [especialista_id]="especialista_id"
                 (changeDateCalendar)="setNewDate($event)"
-                (submitHorario)="setIngreso($event)"
+                (submitCita)="setIngreso($event)"
                 *ngIf="add_cita">
         </app-nuevo-ingreso>
     </div>
@@ -73,8 +73,8 @@
     </a>
   
     <div class="fixed_collapse" mdbCollapse="isCollapsed" #fixed="bs-collapse">
-      <a mdbBtn [floating]="true" color="secondary" class="darken-1 waves-light" mdbWavesEffect mdbTooltip="Horarios Disponibles" placement="left"  *ngIf="!enable_horarios"><mdb-icon fas icon="clipboard-list" (click)="verHorarios()" ></mdb-icon></a>
       <a mdbBtn [floating]="true" color="indigo" class="waves-light" mdbWavesEffect mdbTooltip="Nueva Cita" placement="left" *ngIf="!add_cita"><mdb-icon fas icon="calendar-plus" (click)="addCita()" ></mdb-icon></a>
+      <a mdbBtn [floating]="true" color="secondary" class="darken-1 waves-light" mdbWavesEffect mdbTooltip="Horarios Disponibles" placement="left"  *ngIf="!enable_horarios"><mdb-icon fas icon="clipboard-list" (click)="verHorarios()" ></mdb-icon></a>
       <a mdbBtn [floating]="true" color="primary" class="waves-light" mdbWavesEffect mdbTooltip="Ver Citas" placement="left" *ngIf="!enable_citas"><mdb-icon fas icon="calendar-alt" (click)="verCitas()" ></mdb-icon></a>
     </div>
   

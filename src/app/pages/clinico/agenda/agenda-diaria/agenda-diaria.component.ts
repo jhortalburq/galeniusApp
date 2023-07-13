@@ -43,8 +43,8 @@ export class AgendaDiariaComponent implements OnInit {
 
   isCollapsed: boolean = false;
 
-  icon: string = 'cog';
-  color: string = 'red';
+  icon: string = 'calendar-alt';
+  color: string = 'primary';
 
   constructor(public breadcrumbService: BreadcrumbsService,
               public mantenimientoService: MantenimientoService,
@@ -62,7 +62,6 @@ export class AgendaDiariaComponent implements OnInit {
     this.createFormControls();
     this.createForm();
     this.changeDate = this.selected.toISOString();
-
   }
 
   createFormControls() {
@@ -119,6 +118,12 @@ export class AgendaDiariaComponent implements OnInit {
 
   setIngreso(success: any) {
     console.log(success)
+    this.icon = 'calendar-alt';
+    this.enable_citas = true;
+    this.color = 'primary';
+    this.enable_horarios = false;
+    this.add_cita = false;
+    this.breadcrumbService.title = 'AGENDA DE CITAS';
   }
 
   closeHorario() {
